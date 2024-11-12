@@ -1,0 +1,229 @@
+﻿using CEntidades;
+using CEntidades.DTOs;
+using System;
+using System.Collections.Generic;
+using System.Data.Entity.Validation;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace CDatos
+{
+    public class RepositorioVenta
+    {
+        private string respuesta = "";
+        public void RegistrarVenta(Venta venta)
+        {
+            try
+            {
+                using (VentasCredimaxEntities db = new VentasCredimaxEntities())
+                {
+                    db.Venta.Add(venta);
+                    db.SaveChanges();
+
+                    if(venta.Cuotas > 0)
+                    {
+                        decimal montoPorCuota = (decimal)(venta.Precio / venta.Cuotas);
+                        List<Cuota> cuotas = new List<Cuota>();
+                        DateTime fechaVencimiento = (DateTime)venta.FechaDeInicio;
+
+                        // Determinar el incremento de la fecha basado en el FormaDePagoId
+                        int incrementoDias = 0;
+                        switch (venta.FormaDePagoId)
+                        {
+                            case 1: // Mensual
+                                incrementoDias = 30; 
+                                break;
+                            case 2: // Quincenal
+                                incrementoDias = 15;
+                                break;
+                            case 3: // Semanal
+                                incrementoDias = 7;
+                                break;
+                            default:
+                                incrementoDias = 0; 
+                                break;
+                        }
+
+                        for (int i = 1; i <= venta.Cuotas; i++)
+                        {
+                            // Calcular la fecha de vencimiento según la frecuencia
+                            if (venta.FormaDePagoId == 1) // Mensual
+                                fechaVencimiento = venta.FechaDeInicio.AddMonths(i);
+                            else
+                                fechaVencimiento = venta.FechaDeInicio.AddDays(incrementoDias * i);
+
+                            Cuota nuevaCuota = new Cuota
+                            {
+                                VentaId = venta.VentaId,
+                                MontoCuota = montoPorCuota,
+                                NumeroDeCuota = i,
+                                FechaProgramada = fechaVencimiento,
+                                Estado = "Pendiente"
+                            };
+
+                            cuotas.Add(nuevaCuota);
+                        }
+
+                        // Agregar las cuotas a la base de datos
+                        db.Cuota.AddRange(cuotas);
+                        db.SaveChanges();
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                respuesta = e.Message;
+            }
+        }
+        public List<VentaDTO> ListarVentas()
+        {
+            List<VentaDTO> ventas = null;
+            try
+            {
+                using (VentasCredimaxEntities db = new VentasCredimaxEntities())
+                {
+                    ventas = (from v in db.Venta
+                              join c in db.Cliente on v.ClientId equals c.ClientId
+                              join fp in db.FormaDePago on v.FormaDePagoId equals fp.FormaDePagoId
+                              where v.FechaAnulacion == null
+                              orderby v.FechaDeInicio descending
+                              select new VentaDTO
+                              {
+                                  VentaId = v.VentaId,
+                                  IdCliente = c.ClientId,
+                                  NombreCliente = c.Apellido+ " " + c.Nombre, // Nombre del cliente
+                                  Articulo = v.Articulo,
+                                  Talle = v.Talle,
+                                  FormaDePago = fp.Nombre,  // Nombre de la forma de pago
+                                  Precio = v.Precio,
+                                  Cuotas = v.Cuotas,
+                                  FechaDeInicio = v.FechaDeInicio,
+                                  FechaDeCancelacion = v.FechaDeCancelacion,
+                                  FechaAnulacion = v.FechaAnulacion
+                              }).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                // Manejar el error
+                respuesta = ex.Message;
+            }
+            return ventas;
+        }
+        public List<VentaDTO> FiltrarVentasPorCliente(string nombreApellidoCliente)
+        {
+            List<VentaDTO> ventas = null;
+            try
+            {
+                using (VentasCredimaxEntities db = new VentasCredimaxEntities())
+                {
+                    ventas = (from v in db.Venta
+                              join c in db.Cliente on v.ClientId equals c.ClientId
+                              join fp in db.FormaDePago on v.FormaDePagoId equals fp.FormaDePagoId
+                              where v.FechaAnulacion == null &&
+                                    (c.Apellido + " " + c.Nombre).Contains(nombreApellidoCliente) // Filtrar por nombre y apellido
+                              orderby v.FechaDeInicio descending
+                              select new VentaDTO
+                              {
+                                  VentaId = v.VentaId,
+                                  IdCliente = c.ClientId,
+                                  NombreCliente = c.Apellido + " " + c.Nombre,
+                                  Articulo = v.Articulo,
+                                  Talle = v.Talle,
+                                  FormaDePago = fp.Nombre,
+                                  Precio = v.Precio,
+                                  Cuotas = v.Cuotas,
+                                  FechaDeInicio = v.FechaDeInicio,
+                                  FechaDeCancelacion = v.FechaDeCancelacion,
+                                  FechaAnulacion = v.FechaAnulacion
+                              }).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                // Manejar el error
+                respuesta = ex.Message;
+            }
+            return ventas;
+        }
+        public List<VentaDTO> FiltrarVentasPorArticulo(string nombreArticulo)
+        {
+            List<VentaDTO> ventas = null;
+            try
+            {
+                using (VentasCredimaxEntities db = new VentasCredimaxEntities())
+                {
+                    ventas = (from v in db.Venta
+                              join c in db.Cliente on v.ClientId equals c.ClientId
+                              join fp in db.FormaDePago on v.FormaDePagoId equals fp.FormaDePagoId
+                              where v.FechaAnulacion == null &&
+                                    v.Articulo.Contains(nombreArticulo) // Filtrar por nombre del artículo
+                              orderby v.FechaDeInicio descending
+                              select new VentaDTO
+                              {
+                                  VentaId = v.VentaId,
+                                  IdCliente = c.ClientId,
+                                  NombreCliente = c.Apellido + " " + c.Nombre,
+                                  Articulo = v.Articulo,
+                                  Talle = v.Talle,
+                                  FormaDePago = fp.Nombre,
+                                  Precio = v.Precio,
+                                  Cuotas = v.Cuotas,
+                                  FechaDeInicio = v.FechaDeInicio,
+                                  FechaDeCancelacion = v.FechaDeCancelacion,
+                                  FechaAnulacion = v.FechaAnulacion
+                              }).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                // Manejar el error
+                respuesta = ex.Message;
+            }
+            return ventas;
+        }
+        public void ModificarVenta(Venta venta)
+        {
+            try
+            {
+                using (VentasCredimaxEntities db = new VentasCredimaxEntities())
+                {
+                    var editarVenta = db.Venta.FirstOrDefault(x => x.VentaId == venta.VentaId);
+                    editarVenta.ClientId = venta.ClientId;
+                    editarVenta.Articulo = venta.Articulo;
+                    editarVenta.Talle = venta.Talle;
+                    editarVenta.FormaDePagoId = venta.FormaDePagoId;
+                    editarVenta.FechaDeInicio = venta.FechaDeInicio;
+                    editarVenta.FechaDeCancelacion = venta.FechaDeCancelacion;
+                    editarVenta.Precio = venta.Precio;
+                    editarVenta.Cuotas = venta.Cuotas;
+             
+                    db.SaveChanges();
+                }
+            }
+            catch (Exception e)
+            {
+                respuesta = e.Message;
+            }
+        }
+        public void EliminarVenta(int id)
+        {
+            try
+            {
+                using (VentasCredimaxEntities db = new VentasCredimaxEntities())
+                {
+                    var venta = db.Venta.FirstOrDefault(x => x.VentaId == id);
+                    venta.FechaAnulacion = DateTime.Today;
+                    db.SaveChanges();
+                }
+            }
+            catch (Exception e)
+            {
+
+                respuesta = e.Message;
+            }
+        }
+
+    }
+}
