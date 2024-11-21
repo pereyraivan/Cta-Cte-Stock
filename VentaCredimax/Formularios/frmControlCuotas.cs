@@ -1,4 +1,5 @@
 ﻿using CEntidades;
+using CEntidades.DTOs;
 using CLogica;
 using System;
 using System.Collections.Generic;
@@ -32,7 +33,7 @@ namespace VentaCredimax.Formularios
             try
             {
               
-                List<Cuota> listaCuotas = _gestorCuotas.ObtenerCuotasPorVenta(VentaId);
+                List<CuotaDTO> listaCuotas = _gestorCuotas.ObtenerCuotasPorVenta(VentaId);
 
                 // Asignar la lista de cuotas al DataGridView
                 dgvCuotas.DataSource = listaCuotas;

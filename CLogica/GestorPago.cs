@@ -19,7 +19,7 @@ namespace CLogica
             if (cuota == null)
                 return "La cuota no existe.";
 
-            if (cuota.Estado == "Pagada")
+            if (cuota.Estado == true)
                 return "La cuota ya está pagada.";
 
             // Crear y registrar el pago
@@ -38,11 +38,11 @@ namespace CLogica
             // Actualizar estado de la cuota
             if (monto >= cuota.MontoCuota)
             {
-                cuota.Estado = "Pagada";
+                cuota.Estado = true;
             }
             else
             {
-                cuota.Estado = "Pendiente";
+                cuota.Estado = false;
             }
 
             _repositorioPago.ActualizarCuota(cuota);

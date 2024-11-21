@@ -13,7 +13,7 @@ namespace CLogica
     {
         private RepositorioCuotas _repositorioCuotas = new RepositorioCuotas();
 
-        public List<Cuota> ObtenerCuotasPorVenta(int ventaId)
+        public List<CuotaDTO> ObtenerCuotasPorVenta(int ventaId)
         {
             return _repositorioCuotas.ObtenerCuotasPorVenta(ventaId);
         }

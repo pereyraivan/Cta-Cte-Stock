@@ -24,7 +24,7 @@
           <Property Name="CuotaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="VentaId" Type="int" Nullable="false" />
           <Property Name="MontoCuota" Type="decimal" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="NumeroDeCuota" Type="int" />
+          <Property Name="NumeroDeCuota" Type="int" Nullable="false" />
           <Property Name="FechaProgramada" Type="datetime" Nullable="false" />
           <Property Name="FechaPago" Type="datetime" />
           <Property Name="Estado" Type="bit" />
@@ -130,10 +130,10 @@
           <Property Name="CuotaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="VentaId" Type="Int32" Nullable="false" />
           <Property Name="MontoCuota" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="NumeroDeCuota" Type="Int32" Nullable="false" />
           <Property Name="FechaProgramada" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Estado" Type="String" />
-          <Property Name="NumeroDeCuota" Type="Int32" />
           <Property Name="FechaPago" Type="DateTime" Precision="3" />
+          <Property Name="Estado" Type="Boolean" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -192,10 +192,10 @@
           <EntitySetMapping Name="Cuota">
             <EntityTypeMapping TypeName="VentasCredimaxModel.Cuota">
               <MappingFragment StoreEntitySet="Cuota">
-                <ScalarProperty Name="FechaPago" ColumnName="FechaPago" />
-                <ScalarProperty Name="NumeroDeCuota" ColumnName="NumeroDeCuota" />
                 <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="FechaPago" ColumnName="FechaPago" />
                 <ScalarProperty Name="FechaProgramada" ColumnName="FechaProgramada" />
+                <ScalarProperty Name="NumeroDeCuota" ColumnName="NumeroDeCuota" />
                 <ScalarProperty Name="MontoCuota" ColumnName="MontoCuota" />
                 <ScalarProperty Name="VentaId" ColumnName="VentaId" />
                 <ScalarProperty Name="CuotaId" ColumnName="CuotaId" />

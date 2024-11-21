@@ -59,7 +59,7 @@ namespace CDatos
                                 MontoCuota = montoPorCuota,
                                 NumeroDeCuota = i,
                                 FechaProgramada = fechaVencimiento,
-                                Estado = "Pendiente"
+                                Estado = false
                             };
 
                             cuotas.Add(nuevaCuota);

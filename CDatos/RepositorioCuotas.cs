@@ -24,7 +24,7 @@ namespace CDatos
                             MontoCuota = c.MontoCuota,
                             FechaProgramada = c.FechaProgramada.ToString("dd/MM/yyyy"),
                             FechaPago = c.FechaPago.HasValue ? c.FechaPago.Value.ToString("dd/MM/yyyy") : "No pagada",
-                            Estado = c.Estado ? "Pagada" : "Pendiente"
+                            Estado = (c.Estado ?? false) ? "Pagada" : "Pendiente"
                         }).ToList();
             }
         }
