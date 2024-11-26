@@ -39,7 +39,7 @@
             // 
             // dgvVentas
             // 
-            this.dgvVentas.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dgvVentas.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -57,31 +57,36 @@
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvVentas.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dgvVentas.Location = new System.Drawing.Point(12, 73);
+            this.dgvVentas.Location = new System.Drawing.Point(16, 90);
+            this.dgvVentas.Margin = new System.Windows.Forms.Padding(4);
             this.dgvVentas.Name = "dgvVentas";
+            this.dgvVentas.RowHeadersWidth = 51;
             this.dgvVentas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvVentas.Size = new System.Drawing.Size(1097, 431);
+            this.dgvVentas.Size = new System.Drawing.Size(1463, 530);
             this.dgvVentas.TabIndex = 30;
+            this.dgvVentas.DoubleClick += new System.EventHandler(this.dgvVentas_DoubleClick);
             // 
             // cbBuscarPor
             // 
             this.cbBuscarPor.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbBuscarPor.FormattingEnabled = true;
-            this.cbBuscarPor.ItemHeight = 20;
+            this.cbBuscarPor.ItemHeight = 25;
             this.cbBuscarPor.Items.AddRange(new object[] {
             "Cliente",
             "Articulo"});
-            this.cbBuscarPor.Location = new System.Drawing.Point(166, 20);
+            this.cbBuscarPor.Location = new System.Drawing.Point(221, 25);
+            this.cbBuscarPor.Margin = new System.Windows.Forms.Padding(4);
             this.cbBuscarPor.Name = "cbBuscarPor";
-            this.cbBuscarPor.Size = new System.Drawing.Size(247, 28);
+            this.cbBuscarPor.Size = new System.Drawing.Size(328, 33);
             this.cbBuscarPor.TabIndex = 33;
             // 
             // txtBuscar
             // 
             this.txtBuscar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBuscar.Location = new System.Drawing.Point(439, 22);
+            this.txtBuscar.Location = new System.Drawing.Point(585, 27);
+            this.txtBuscar.Margin = new System.Windows.Forms.Padding(4);
             this.txtBuscar.Name = "txtBuscar";
-            this.txtBuscar.Size = new System.Drawing.Size(644, 26);
+            this.txtBuscar.Size = new System.Drawing.Size(857, 30);
             this.txtBuscar.TabIndex = 34;
             this.txtBuscar.TextChanged += new System.EventHandler(this.txtBuscar_TextChanged);
             // 
@@ -89,21 +94,23 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(31, 21);
+            this.label5.Location = new System.Drawing.Point(41, 26);
+            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(117, 24);
+            this.label5.Size = new System.Drawing.Size(146, 29);
             this.label5.TabIndex = 35;
             this.label5.Text = "Buscar por:";
             // 
             // frmControlPagos
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1121, 516);
+            this.ClientSize = new System.Drawing.Size(1495, 635);
             this.Controls.Add(this.cbBuscarPor);
             this.Controls.Add(this.txtBuscar);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.dgvVentas);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frmControlPagos";
             this.Text = "Ventas activas";
             this.Load += new System.EventHandler(this.frmControlPagos_Load);

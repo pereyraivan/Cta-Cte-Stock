@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -65,6 +66,24 @@ namespace VentaCredimax.Formularios
                 dgvVentas.Columns["VentaId"].Visible = false;
                 dgvVentas.Columns["IdCliente"].Visible = false;
                 dgvVentas.Columns["FechaAnulacion"].Visible = false;
+            }
+        }
+
+        private void dgvVentas_DoubleClick(object sender, EventArgs e)
+        {
+            // Validar que haya una fila seleccionada
+            if (dgvVentas.CurrentRow != null)
+            {
+                // Obtener el ID de la venta desde la fila seleccionada
+                int ventaId = Convert.ToInt32(dgvVentas.CurrentRow.Cells["VentaId"].Value);
+
+                // Abrir el formulario frmControlCuotas pasando el ID de la venta
+                frmControlCuotas controlCuotas = new frmControlCuotas(ventaId);
+                controlCuotas.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Seleccione una fila válida antes de hacer doble clic.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
     }

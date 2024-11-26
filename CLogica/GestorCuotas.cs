@@ -17,5 +17,9 @@ namespace CLogica
         {
             return _repositorioCuotas.ObtenerCuotasPorVenta(ventaId);
         }
+        public bool RegistrarPago(int cuotaId)
+        {
+            return _repositorioCuotas.RegistrarPago(cuotaId);
+        }
     }
 }
