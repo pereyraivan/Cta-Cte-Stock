@@ -30,17 +30,12 @@ namespace VentaCredimax.Formularios
             CargarCuotas();
             EstiloDataGridView();
             PintarFilaPorEstado();
-            if (dgvCuotas.Rows.Count > 0)
-            {
-                dgvCuotas.SelectedRows[0].Selected = false;
-            }
-
+            
         }
         private void CargarCuotas()
         {
             List<CuotaDTO> cuotas = _gestorCuotas.ObtenerCuotasPorVenta(VentaId);
             dgvCuotas.DataSource = cuotas;
-
         }
         private void RegistrarPago()
         {
@@ -81,8 +76,8 @@ namespace VentaCredimax.Formularios
                 dgvCuotas.Columns["MontoCuota"].HeaderText = "Monto Cuota";
                 dgvCuotas.Columns["FechaProgramada"].HeaderText = "Vencimiento";
                 dgvCuotas.Columns["FechaPago"].HeaderText = "Fecha de Pago";
+               
             }
-
         }
 
         private void PintarFilaPorEstado()
@@ -114,6 +109,12 @@ namespace VentaCredimax.Formularios
                     }
                 }
             }
+        }
+
+        private void dgvCuotas_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            dgvCuotas.ClearSelection();
+            dgvCuotas.CurrentCell = null;
         }
     }
 }

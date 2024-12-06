@@ -59,81 +59,95 @@
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvClientes.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dgvClientes.Location = new System.Drawing.Point(12, 90);
+            this.dgvClientes.Location = new System.Drawing.Point(16, 101);
+            this.dgvClientes.Margin = new System.Windows.Forms.Padding(4);
             this.dgvClientes.Name = "dgvClientes";
+            this.dgvClientes.ReadOnly = true;
+            this.dgvClientes.RowHeadersWidth = 51;
             this.dgvClientes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvClientes.Size = new System.Drawing.Size(974, 334);
+            this.dgvClientes.Size = new System.Drawing.Size(1624, 421);
             this.dgvClientes.TabIndex = 30;
             this.dgvClientes.DoubleClick += new System.EventHandler(this.dgvClientes_DoubleClick);
             // 
             // btnSeleccionarCliente
             // 
-            this.btnSeleccionarCliente.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSeleccionarCliente.Location = new System.Drawing.Point(758, 434);
+            this.btnSeleccionarCliente.BackColor = System.Drawing.Color.Azure;
+            this.btnSeleccionarCliente.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSeleccionarCliente.Location = new System.Drawing.Point(1297, 538);
+            this.btnSeleccionarCliente.Margin = new System.Windows.Forms.Padding(4);
             this.btnSeleccionarCliente.Name = "btnSeleccionarCliente";
-            this.btnSeleccionarCliente.Size = new System.Drawing.Size(228, 49);
+            this.btnSeleccionarCliente.Size = new System.Drawing.Size(341, 96);
             this.btnSeleccionarCliente.TabIndex = 31;
             this.btnSeleccionarCliente.Text = "&Seleccionar Cliente";
-            this.btnSeleccionarCliente.UseVisualStyleBackColor = true;
+            this.btnSeleccionarCliente.UseVisualStyleBackColor = false;
             this.btnSeleccionarCliente.Click += new System.EventHandler(this.btnSeleccionarCliente_Click);
             // 
             // cbBuscarPor
             // 
-            this.cbBuscarPor.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbBuscarPor.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbBuscarPor.FormattingEnabled = true;
-            this.cbBuscarPor.ItemHeight = 20;
+            this.cbBuscarPor.ItemHeight = 29;
             this.cbBuscarPor.Items.AddRange(new object[] {
             "Apellido",
             "Nombre",
             "DNI"});
-            this.cbBuscarPor.Location = new System.Drawing.Point(168, 44);
+            this.cbBuscarPor.Location = new System.Drawing.Point(224, 29);
+            this.cbBuscarPor.Margin = new System.Windows.Forms.Padding(4);
             this.cbBuscarPor.Name = "cbBuscarPor";
-            this.cbBuscarPor.Size = new System.Drawing.Size(258, 28);
+            this.cbBuscarPor.Size = new System.Drawing.Size(343, 37);
             this.cbBuscarPor.TabIndex = 33;
             // 
             // txtBuscar
             // 
-            this.txtBuscar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBuscar.Location = new System.Drawing.Point(440, 46);
+            this.txtBuscar.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBuscar.Location = new System.Drawing.Point(587, 32);
+            this.txtBuscar.Margin = new System.Windows.Forms.Padding(4);
             this.txtBuscar.Name = "txtBuscar";
-            this.txtBuscar.Size = new System.Drawing.Size(520, 26);
+            this.txtBuscar.Size = new System.Drawing.Size(692, 34);
             this.txtBuscar.TabIndex = 34;
             this.txtBuscar.TextChanged += new System.EventHandler(this.txtBuscar_TextChanged);
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(43, 45);
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(53, 31);
+            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(117, 24);
+            this.label5.Size = new System.Drawing.Size(169, 32);
             this.label5.TabIndex = 35;
             this.label5.Text = "Buscar por:";
             // 
             // btnNuevoCliente
             // 
-            this.btnNuevoCliente.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnNuevoCliente.Location = new System.Drawing.Point(13, 434);
+            this.btnNuevoCliente.BackColor = System.Drawing.Color.Azure;
+            this.btnNuevoCliente.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnNuevoCliente.Location = new System.Drawing.Point(13, 538);
+            this.btnNuevoCliente.Margin = new System.Windows.Forms.Padding(4);
             this.btnNuevoCliente.Name = "btnNuevoCliente";
-            this.btnNuevoCliente.Size = new System.Drawing.Size(171, 49);
+            this.btnNuevoCliente.Size = new System.Drawing.Size(275, 96);
             this.btnNuevoCliente.TabIndex = 36;
             this.btnNuevoCliente.Text = "&Nuevo Cliente";
-            this.btnNuevoCliente.UseVisualStyleBackColor = true;
+            this.btnNuevoCliente.UseVisualStyleBackColor = false;
             this.btnNuevoCliente.Click += new System.EventHandler(this.btnNuevoCliente_Click);
             // 
             // frmSeleccionarCliente
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(998, 495);
+            this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.ClientSize = new System.Drawing.Size(1653, 650);
             this.Controls.Add(this.btnNuevoCliente);
             this.Controls.Add(this.cbBuscarPor);
             this.Controls.Add(this.txtBuscar);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.btnSeleccionarCliente);
             this.Controls.Add(this.dgvClientes);
+            this.Margin = new System.Windows.Forms.Padding(4);
+            this.MaximumSize = new System.Drawing.Size(1671, 697);
+            this.MinimumSize = new System.Drawing.Size(1671, 697);
             this.Name = "frmSeleccionarCliente";
-            this.Text = "frmSeleccionarCliente";
+            this.Text = "Seleccionar cliente";
             this.Load += new System.EventHandler(this.frmSeleccionarCliente_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvClientes)).EndInit();
             this.ResumeLayout(false);

@@ -20,6 +20,7 @@ namespace VentaCredimax.Formularios
             InitializeComponent();
             ListarVentas();
             OcultarColumnas();
+            EstiloDataGrid();
         }
 
         private void frmControlPagos_Load(object sender, EventArgs e)
@@ -66,6 +67,16 @@ namespace VentaCredimax.Formularios
                 dgvVentas.Columns["VentaId"].Visible = false;
                 dgvVentas.Columns["IdCliente"].Visible = false;
                 dgvVentas.Columns["FechaAnulacion"].Visible = false;
+            }
+        }
+        private void EstiloDataGrid()
+        {
+            if (dgvVentas.Rows.Count > 0)
+            {
+                dgvVentas.Columns["NombreCliente"].HeaderText = "Nombre Cliente";
+                dgvVentas.Columns["FormaDePago"].HeaderText = "Frecuencia de pago";
+                dgvVentas.Columns["FechaDeInicio"].HeaderText = "Fecha compra";
+                dgvVentas.Columns["FechaDeCancelacion"].HeaderText = "Cancelacion compra";
             }
         }
 
