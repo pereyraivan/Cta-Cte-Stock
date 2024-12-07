@@ -17,7 +17,7 @@ namespace VentaCredimax
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmControlPagos());
+            Application.Run(new frmMenu());
         }
     }
 }
