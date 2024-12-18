@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMenu));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pTituloSistema = new System.Windows.Forms.Panel();
             this.pMenuLateral = new System.Windows.Forms.Panel();
             this.pSubMenuInformes = new System.Windows.Forms.Panel();
@@ -186,7 +186,7 @@
             this.btnGestionPagos.Name = "btnGestionPagos";
             this.btnGestionPagos.Size = new System.Drawing.Size(265, 93);
             this.btnGestionPagos.TabIndex = 6;
-            this.btnGestionPagos.Text = "&Gestion \r\nPagos";
+            this.btnGestionPagos.Text = "Gestion \r\nPagos";
             this.btnGestionPagos.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnGestionPagos.UseVisualStyleBackColor = true;
             this.btnGestionPagos.Click += new System.EventHandler(this.btnGestionPagos_Click);
@@ -211,7 +211,7 @@
             this.btnGestionCliente.Name = "btnGestionCliente";
             this.btnGestionCliente.Size = new System.Drawing.Size(265, 93);
             this.btnGestionCliente.TabIndex = 4;
-            this.btnGestionCliente.Text = "&  Gestion \r\nCliente\r\n";
+            this.btnGestionCliente.Text = "Gestion \r\nClientes";
             this.btnGestionCliente.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnGestionCliente.UseVisualStyleBackColor = true;
             this.btnGestionCliente.Click += new System.EventHandler(this.btnGestionCliente_Click);
@@ -252,7 +252,7 @@
             this.btnNuevaVenta.Name = "btnNuevaVenta";
             this.btnNuevaVenta.Size = new System.Drawing.Size(265, 93);
             this.btnNuevaVenta.TabIndex = 0;
-            this.btnNuevaVenta.Text = "Nueva \r\nVenta";
+            this.btnNuevaVenta.Text = "Gestion \r\nVentas";
             this.btnNuevaVenta.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnNuevaVenta.UseVisualStyleBackColor = true;
             this.btnNuevaVenta.Click += new System.EventHandler(this.btnNuevaVenta_Click);
@@ -306,28 +306,27 @@
             // 
             this.dgvVentasMenu.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvVentasMenu.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.LightSkyBlue;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvVentasMenu.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.LightSkyBlue;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvVentasMenu.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvVentasMenu.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.LightSkyBlue;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvVentasMenu.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.LightSkyBlue;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvVentasMenu.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvVentasMenu.Location = new System.Drawing.Point(27, 86);
             this.dgvVentasMenu.Name = "dgvVentasMenu";
             this.dgvVentasMenu.ReadOnly = true;
             this.dgvVentasMenu.RowHeadersWidth = 51;
-            this.dgvVentasMenu.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvVentasMenu.Size = new System.Drawing.Size(1200, 651);
             this.dgvVentasMenu.TabIndex = 36;
             this.dgvVentasMenu.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvVentasMenu_CellDoubleClick);

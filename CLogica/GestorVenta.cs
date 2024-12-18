@@ -21,9 +21,20 @@ namespace CLogica
         {
             return _repositorioVenta.ListarVentas();
         }
+        public List<VentaDTO> ListarVentasMenu()
+        {
+            return _repositorioVenta.ListarVentasMenu();
+        }
         public void ModificarVenta(Venta venta)
         {
-            _repositorioVenta.ModificarVenta(venta);
+            try
+            {
+                _repositorioVenta.ModificarVenta(venta);
+            }
+            catch (InvalidOperationException ex)
+            {
+                throw; 
+            }
         }
         public void EliminarVenta(int id)
         {

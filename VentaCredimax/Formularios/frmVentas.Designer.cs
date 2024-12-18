@@ -131,6 +131,7 @@
             this.cbFormaPago.Name = "cbFormaPago";
             this.cbFormaPago.Size = new System.Drawing.Size(250, 34);
             this.cbFormaPago.TabIndex = 4;
+            this.cbFormaPago.SelectedIndexChanged += new System.EventHandler(this.cbFormaPago_SelectedIndexChanged);
             // 
             // label3
             // 
@@ -235,7 +236,6 @@
             this.cbBuscarPor.Name = "cbBuscarPor";
             this.cbBuscarPor.Size = new System.Drawing.Size(279, 34);
             this.cbBuscarPor.TabIndex = 9;
-            this.cbBuscarPor.SelectedIndexChanged += new System.EventHandler(this.cbBuscarPor_SelectedIndexChanged);
             // 
             // txtBuscar
             // 
@@ -255,7 +255,6 @@
             this.label5.Size = new System.Drawing.Size(134, 26);
             this.label5.TabIndex = 32;
             this.label5.Text = "Buscar por:";
-            this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
             // errorProvider1
             // 
@@ -338,7 +337,7 @@
             this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button2.Location = new System.Drawing.Point(340, 166);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(181, 39);
+            this.button2.Size = new System.Drawing.Size(194, 45);
             this.button2.TabIndex = 40;
             this.button2.Text = "&Calcular cuotas";
             this.button2.UseVisualStyleBackColor = false;

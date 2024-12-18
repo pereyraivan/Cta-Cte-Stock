@@ -1,4 +1,5 @@
-﻿using CLogica;
+﻿using CEntidades.DTOs;
+using CLogica;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,10 +17,14 @@ namespace VentaCredimax.Formularios
         private GestorVenta _gestorVenta = new GestorVenta();
         public frmMenu()
         {
-            InitializeComponent();
+            InitializeComponent();           
+        }
+        private void frmMenu_Load(object sender, EventArgs e)
+        {
             ListarVentas();
             OcultarColumnas();
             EstiloDataGrid();
+            FormatearFilas();
         }
 
         private void btnGestionCliente_Click(object sender, EventArgs e)
@@ -35,7 +40,7 @@ namespace VentaCredimax.Formularios
 
         private void btnInformeCuotas_Click(object sender, EventArgs e)
         {
-            pSubMenuInformes.Visible=false;
+            pSubMenuInformes.Visible = false;
         }
 
         private void btnInformeVentas_Click(object sender, EventArgs e)
@@ -43,13 +48,9 @@ namespace VentaCredimax.Formularios
             pSubMenuInformes.Visible = false;
         }
 
-        private void frmMenu_Load(object sender, EventArgs e)
-        {
-
-        }
         private void ListarVentas()
         {
-            dgvVentasMenu.DataSource = _gestorVenta.ListarVentas();
+            dgvVentasMenu.DataSource = _gestorVenta.ListarVentasMenu();
             OcultarColumnas();
         }
         private void FiltrarVentasPorCliente()
@@ -87,6 +88,7 @@ namespace VentaCredimax.Formularios
                 dgvVentasMenu.Columns["VentaId"].Visible = false;
                 dgvVentasMenu.Columns["IdCliente"].Visible = false;
                 dgvVentasMenu.Columns["FechaAnulacion"].Visible = false;
+                dgvVentasMenu.Columns["CuotasVencidas"].Visible = false;
             }
         }
         private void EstiloDataGrid()
@@ -126,8 +128,22 @@ namespace VentaCredimax.Formularios
 
         private void btnGestionPagos_Click(object sender, EventArgs e)
         {
-            frmControlPagos controlPagos = new frmControlPagos();   
+            frmControlPagos controlPagos = new frmControlPagos();
             controlPagos.ShowDialog();
+        }
+        private void FormatearFilas()
+        {
+            if (dgvVentasMenu.Rows.Count > 0)
+            {
+                foreach (DataGridViewRow row in dgvVentasMenu.Rows)
+                {
+                    var venta = row.DataBoundItem as VentaDTO;
+                    if (venta != null && venta.CuotasVencidas)
+                    {
+                        row.DefaultCellStyle.BackColor = Color.LightCoral;
+                    }
+                }
+            }
         }
     }
 }

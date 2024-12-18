@@ -29,8 +29,7 @@ namespace VentaCredimax.Formularios
         {
             CargarCuotas();
             EstiloDataGridView();
-            PintarFilaPorEstado();
-            
+            PintarFilaPorEstado();           
         }
         private void CargarCuotas()
         {
@@ -42,6 +41,21 @@ namespace VentaCredimax.Formularios
             if (dgvCuotas.CurrentRow == null)
             {
                 MessageBox.Show("Seleccione una cuota para registrar el pago.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Obtener el número de la cuota seleccionada
+            int numeroCuotaSeleccionada = Convert.ToInt32(dgvCuotas.CurrentRow.Cells["NumeroDeCuota"].Value);
+            int ventaId = Convert.ToInt32(dgvCuotas.CurrentRow.Cells["VentaId"].Value);
+            List<CuotaDTO> cuotas = _gestorCuotas.ObtenerCuotasPorVenta(ventaId);
+            
+            bool hayCuotasAnterioresPendientes = cuotas
+            .Where(c => c.NumeroDeCuota < numeroCuotaSeleccionada)
+            .Any(c => c.Estado != "Pagada"); // Estado = false significa pendiente
+
+            if (hayCuotasAnterioresPendientes)
+            {
+                MessageBox.Show("Tiene cuotas anteriores pendientes de pago.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -65,6 +79,7 @@ namespace VentaCredimax.Formularios
         private void button1_Click(object sender, EventArgs e)
         {
             RegistrarPago();
+            PintarFilaPorEstado();
         }
         private void EstiloDataGridView()
         {

@@ -144,9 +144,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Reportes\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\CEntidades\CEntidades.csproj">
       <Project>{1cc06d7a-8fef-40d7-b0f6-eb48264dd390}</Project>

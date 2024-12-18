@@ -24,5 +24,7 @@ namespace CEntidades
         public Nullable<System.DateTime> FechaAnulacion { get; set; }
         public Nullable<decimal> Precio { get; set; }
         public Nullable<int> Cuotas { get; set; }
+
+        public virtual ICollection<Cuota> CuotasVenta { get; set; }
     }
 }

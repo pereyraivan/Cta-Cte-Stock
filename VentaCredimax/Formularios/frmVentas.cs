@@ -16,6 +16,7 @@ namespace VentaCredimax.Formularios
     public partial class frmVentas : Form
     {
         private string id = null;
+        private bool esModificacion;
         GestorCliente _gestorCliente = new GestorCliente();
         GestorVenta _gestorVenta = new GestorVenta();
         public frmVentas()
@@ -121,6 +122,8 @@ namespace VentaCredimax.Formularios
         }
         private void LimpiarCampos()
         {
+            cbFormaPago.SelectedIndexChanged -= cbFormaPago_SelectedIndexChanged;
+
             cbSeleccionCliente.SelectedIndex = -1;
             txtArticulo.Text = "";
             txtTalle.Text = "";
@@ -129,6 +132,8 @@ namespace VentaCredimax.Formularios
             txtCuotas.Text = "";
             dtFechaVenta.Value = DateTime.Now;
             dtpFechaCancelacion.Value = DateTime.Now;
+
+            cbFormaPago.SelectedIndexChanged += cbFormaPago_SelectedIndexChanged;
         }
         private void ListarVentas()
         {
@@ -167,29 +172,40 @@ namespace VentaCredimax.Formularios
 
                 id = dgvVentas.CurrentRow.Cells["VentaId"].Value.ToString();
             }
+            esModificacion = true;
         }
         private void ModificarVenta()
         {
             if (cbSeleccionCliente.Text != "" && txtArticulo.Text != "")
             {
-                var venta = new Venta();
-                venta.VentaId = Convert.ToInt32(id);
-                venta.ClientId = (int)cbSeleccionCliente.SelectedValue;
-                venta.Articulo = txtArticulo.Text;
-                venta.FormaDePagoId = (int)cbFormaPago.SelectedValue;
-                venta.Talle = string.IsNullOrEmpty(txtTalle.Text)? (int?)null : Convert.ToInt32(txtTalle.Text);
-                venta.Precio = string.IsNullOrEmpty(txtPrecio.Text)?(decimal?)null: Convert.ToDecimal(txtPrecio.Text);
-                venta.Cuotas = Convert.ToInt32(txtCuotas.Text);
-                venta.FechaDeInicio = dtFechaVenta.Value;
-                venta.FechaDeCancelacion = dtpFechaCancelacion.Value;
-                venta.FechaAnulacion = null;
+                try
+                {
+                    var venta = new Venta();
+                    venta.VentaId = Convert.ToInt32(id);
+                    venta.ClientId = (int)cbSeleccionCliente.SelectedValue;
+                    venta.Articulo = txtArticulo.Text;
+                    venta.FormaDePagoId = (int)cbFormaPago.SelectedValue;
+                    venta.Talle = string.IsNullOrEmpty(txtTalle.Text) ? (int?)null : Convert.ToInt32(txtTalle.Text);
+                    venta.Precio = string.IsNullOrEmpty(txtPrecio.Text) ? (decimal?)null : Convert.ToDecimal(txtPrecio.Text);
+                    venta.Cuotas = Convert.ToInt32(txtCuotas.Text);
+                    venta.FechaDeInicio = dtFechaVenta.Value;
+                    venta.FechaDeCancelacion = dtpFechaCancelacion.Value;
+                    venta.FechaAnulacion = null;
+                
+             
+                    _gestorVenta.ModificarVenta(venta);
+                    MessageBox.Show("Operación Exitosa", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    errorProvider1.Clear();
+                    btnEditarVenta.Enabled = false;
+                    button1.Enabled = true;
 
-                _gestorVenta.ModificarVenta(venta);
-                MessageBox.Show("Operación Exitosa", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                errorProvider1.Clear();
-                btnEditarVenta.Enabled = false;
-                button1.Enabled = true;
+                 }
+                catch (InvalidOperationException ex)
+                {
+                    MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
+
             else
             {
                 if (cbSeleccionCliente.Text == "")
@@ -251,6 +267,14 @@ namespace VentaCredimax.Formularios
         }
         private void CalcularFechaFinalizacionPago()
         {
+            if (cbFormaPago.SelectedItem == null || string.IsNullOrWhiteSpace(cbFormaPago.SelectedItem.ToString()))
+            {
+                return;  // No hacer nada si el ComboBox está vacío
+            }
+            if (string.IsNullOrWhiteSpace(txtCuotas.Text) || string.IsNullOrWhiteSpace(txtPrecio.Text))
+            {
+                return;
+            }
             // Obtener la fecha de venta
             DateTime fechaVenta = dtFechaVenta.Value;
 
@@ -259,6 +283,11 @@ namespace VentaCredimax.Formularios
             if (!int.TryParse(txtCuotas.Text, out cantidadCuotas))
             {
                 MessageBox.Show("Introduce una cantidad de cuotas válida.");
+                return;
+            }
+            if (cbFormaPago.SelectedItem == null)
+            {
+                MessageBox.Show("Selecciona una frecuencia de pago válida.");
                 return;
             }
 
@@ -289,9 +318,7 @@ namespace VentaCredimax.Formularios
 
             dtpFechaCancelacion.Value = fechaFinalizacionPago;
 
-
         }
-
         private void txtCuotas_Leave(object sender, EventArgs e)
         {
             CalcularFechaFinalizacionPago();
@@ -302,7 +329,6 @@ namespace VentaCredimax.Formularios
             btnEditarVenta.Enabled = false;
             button1.Enabled = true;
         }
-
         private void frmVentas_Load(object sender, EventArgs e)
         {
 
@@ -339,14 +365,13 @@ namespace VentaCredimax.Formularios
             Buscar();
         }
 
-        private void cbBuscarPor_SelectedIndexChanged(object sender, EventArgs e)
+        private void cbFormaPago_SelectedIndexChanged(object sender, EventArgs e)
         {
-
-        }
-
-        private void label5_Click(object sender, EventArgs e)
-        {
-
+            if (esModificacion && cbFormaPago.SelectedItem != null)
+            {
+                CalcularFechaFinalizacionPago();
+            }
+            esModificacion = false;
         }
     }
 }

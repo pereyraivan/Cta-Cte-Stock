@@ -111,6 +111,44 @@ namespace CDatos
             }
             return ventas;
         }
+        public List<VentaDTO> ListarVentasMenu()
+        {
+            List<VentaDTO> ventas = null;
+            try
+            {
+                using (VentasCredimaxEntities db = new VentasCredimaxEntities())
+                {
+                    ventas = (from v in db.Venta
+                              join c in db.Cliente on v.ClientId equals c.ClientId
+                              join fp in db.FormaDePago on v.FormaDePagoId equals fp.FormaDePagoId
+                              where v.FechaAnulacion == null
+                              select new VentaDTO
+                              {
+                                  VentaId = v.VentaId,
+                                  IdCliente = c.ClientId,
+                                  NombreCliente = c.Apellido + " " + c.Nombre,
+                                  Articulo = v.Articulo,
+                                  Talle = v.Talle,
+                                  FormaDePago = fp.Nombre,
+                                  Precio = v.Precio,
+                                  Cuotas = v.Cuotas,
+                                  FechaDeInicio = v.FechaDeInicio,
+                                  FechaDeCancelacion = v.FechaDeCancelacion,
+                                  FechaAnulacion = v.FechaAnulacion,
+                                  CuotasVencidas = db.Cuota.Any(cuota => cuota.VentaId == v.VentaId && cuota.FechaProgramada < DateTime.Now && cuota.FechaPago == null)
+                              })
+                          .OrderByDescending(v => v.CuotasVencidas)
+                          .ThenByDescending(v => v.FechaDeInicio)
+                          .ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                // Manejar el error
+                respuesta = ex.Message;
+            }
+            return ventas;
+        }
         public List<VentaDTO> FiltrarVentasPorCliente(string nombreApellidoCliente)
         {
             List<VentaDTO> ventas = null;
@@ -190,6 +228,72 @@ namespace CDatos
                 using (VentasCredimaxEntities db = new VentasCredimaxEntities())
                 {
                     var editarVenta = db.Venta.FirstOrDefault(x => x.VentaId == venta.VentaId);
+                    // Comparar los valores relevantes
+                    bool editarTablaCuotas = editarVenta.Cuotas != venta.Cuotas
+                                             || editarVenta.Precio != venta.Precio
+                                             || editarVenta.FormaDePagoId != venta.FormaDePagoId;
+                    // Eliminar cuotas existentes solo si no hay cuotas pagadas
+                    bool tieneCuotaPagada = db.Cuota.Any(c => c.VentaId == venta.VentaId && c.Estado == true);
+
+                    if (tieneCuotaPagada)
+                    {
+                        throw new InvalidOperationException("No se puede modificar la venta porque tiene una o varias cuotas pagadas.");
+                    }
+
+                    if (editarTablaCuotas)
+                    {
+                       
+                        // Eliminar cuotas existentes
+                        var cuotasExistentes = db.Cuota.Where(c => c.VentaId == venta.VentaId);
+                        db.Cuota.RemoveRange(cuotasExistentes);
+
+                        // Recalcular y agregar nuevas cuotas
+                        decimal montoPorCuota = (decimal)(venta.Precio / venta.Cuotas);
+                        List<Cuota> nuevasCuotas = new List<Cuota>();
+                        DateTime fechaVencimiento = (DateTime)venta.FechaDeInicio;
+
+                        int incrementoDias = 0;
+                        switch (venta.FormaDePagoId)
+                        {
+                            case 1: // Mensual
+                                incrementoDias = 30;
+                                break;
+                            case 2: // Quincenal
+                                incrementoDias = 15;
+                                break;
+                            case 3: // Semanal
+                                incrementoDias = 7;
+                                break;
+                            default:
+                                incrementoDias = 0;
+                                break;
+                        }
+
+                        for (int i = 1; i <= venta.Cuotas; i++)
+                        {
+                            // Calcular la fecha de vencimiento según la frecuencia
+                            if (venta.FormaDePagoId == 1) // Mensual
+                                fechaVencimiento = venta.FechaDeInicio.AddMonths(i);
+                            else
+                                fechaVencimiento = venta.FechaDeInicio.AddDays(incrementoDias * i);
+
+                            Cuota nuevaCuota = new Cuota
+                            {
+                                VentaId = venta.VentaId,
+                                MontoCuota = montoPorCuota,
+                                NumeroDeCuota = i,
+                                FechaProgramada = fechaVencimiento,
+                                Estado = false
+                            };
+                            nuevasCuotas.Add(nuevaCuota);
+                        }
+                        // Agregar las cuotas a la base de datos
+                        db.Cuota.AddRange(nuevasCuotas);
+                        db.SaveChanges();
+
+                    }
+
+                    //var editarVenta = db.Venta.FirstOrDefault(x => x.VentaId == venta.VentaId);
                     editarVenta.ClientId = venta.ClientId;
                     editarVenta.Articulo = venta.Articulo;
                     editarVenta.Talle = venta.Talle;
@@ -201,6 +305,10 @@ namespace CDatos
              
                     db.SaveChanges();
                 }
+            }
+            catch(InvalidOperationException ex)
+            {
+                throw;
             }
             catch (Exception e)
             {

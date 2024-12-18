@@ -10,15 +10,16 @@ namespace CEntidades.DTOs
     {
         public int VentaId { get; set; }
         public int IdCliente { get; set; }
-        public string NombreCliente { get; set; } // Nombre en lugar de ClientId
+        public string NombreCliente { get; set; } 
         public string Articulo { get; set; }
         public int? Talle { get; set; }
-        public string FormaDePago { get; set; } // Nombre en lugar de FormaDePagoId
+        public string FormaDePago { get; set; } 
         public decimal? Precio { get; set; }
         public int? Cuotas { get; set; }
         public DateTime? FechaDeInicio { get; set; }
         public DateTime? FechaDeCancelacion { get; set; }
         public DateTime? FechaAnulacion { get; set; }
+        public bool CuotasVencidas { get; set; }  
 
     }
 }
