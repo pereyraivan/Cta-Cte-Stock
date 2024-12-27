@@ -61,6 +61,9 @@
           <Property Name="Precio" Type="decimal" Precision="18" Scale="2" />
           <Property Name="Cuotas" Type="int" />
         </EntityType>
+        <Function Name="ReciboDePago" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="VentaId" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="VentasCredimaxModelStoreContainer">
           <EntitySet Name="Cliente" EntityType="Self.Cliente" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Cuota" EntityType="Self.Cuota" Schema="dbo" store:Type="Tables" />
@@ -78,6 +81,9 @@
           <EntitySet Name="Pago" EntityType="VentasCredimaxModel.Pago" />
           <EntitySet Name="Venta" EntityType="VentasCredimaxModel.Venta" />
           <EntitySet Name="Cuota" EntityType="VentasCredimaxModel.Cuota" />
+          <FunctionImport Name="ReciboDePago" ReturnType="Collection(VentasCredimaxModel.ReciboDePago_Result)">
+          <Parameter Name="VentaId" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="Cliente">
           <Key>
@@ -135,6 +141,19 @@
           <Property Name="FechaPago" Type="DateTime" Precision="3" />
           <Property Name="Estado" Type="Boolean" />
         </EntityType>
+        <ComplexType Name="ReciboDePago_Result">
+          <Property Type="Int32" Name="VentaId" Nullable="false" />
+          <Property Type="DateTime" Name="FechaPago" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Apellido" Nullable="false" MaxLength="50" />
+          <Property Type="Decimal" Name="MontoCuota" Nullable="false" Precision="18" Scale="2" />
+          <Property Type="String" Name="Articulo" Nullable="false" MaxLength="150" />
+          <Property Type="Int32" Name="Talle" Nullable="true" />
+          <Property Type="Int32" Name="NumeroDeCuota" Nullable="false" />
+          <Property Type="Decimal" Name="TotalPagado" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="Decimal" Name="SaldoRestante" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="Int32" Name="CuotasPendientes" Nullable="true" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -202,6 +221,23 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="ReciboDePago" FunctionName="VentasCredimaxModel.Store.ReciboDePago">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="VentasCredimaxModel.ReciboDePago_Result">
+                <ScalarProperty Name="VentaId" ColumnName="VentaId" />
+                <ScalarProperty Name="FechaPago" ColumnName="FechaPago" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+                <ScalarProperty Name="MontoCuota" ColumnName="MontoCuota" />
+                <ScalarProperty Name="Articulo" ColumnName="Articulo" />
+                <ScalarProperty Name="Talle" ColumnName="Talle" />
+                <ScalarProperty Name="NumeroDeCuota" ColumnName="NumeroDeCuota" />
+                <ScalarProperty Name="TotalPagado" ColumnName="TotalPagado" />
+                <ScalarProperty Name="SaldoRestante" ColumnName="SaldoRestante" />
+                <ScalarProperty Name="CuotasPendientes" ColumnName="CuotasPendientes" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -219,7 +255,7 @@
         <DesignerProperty Name="EnablePluralization" Value="false" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
-        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->

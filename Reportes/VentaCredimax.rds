@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RptDataSource xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="VentaCredimax">
+  <ConnectionProperties>
+    <Extension>SQL</Extension>
+    <ConnectString>Data Source=LAPTOP-12PBLRHA\SQLEXPRESS;Initial Catalog=VentasCredimax</ConnectString>
+  </ConnectionProperties>
+  <DataSourceID>928476b5-5f61-41f2-92d3-8353e6d0c213</DataSourceID>
+</RptDataSource>

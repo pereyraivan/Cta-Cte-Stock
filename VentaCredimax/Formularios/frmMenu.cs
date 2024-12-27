@@ -21,10 +21,12 @@ namespace VentaCredimax.Formularios
         }
         private void frmMenu_Load(object sender, EventArgs e)
         {
+            
+            cbOrdenarPor.SelectedIndex = 0;
             ListarVentas();
             OcultarColumnas();
             EstiloDataGrid();
-            FormatearFilas();
+            FormatearFilas();   
         }
 
         private void btnGestionCliente_Click(object sender, EventArgs e)
@@ -50,8 +52,18 @@ namespace VentaCredimax.Formularios
 
         private void ListarVentas()
         {
-            dgvVentasMenu.DataSource = _gestorVenta.ListarVentasMenu();
+            string criterioSeleccionado = "";
+            if (cbOrdenarPor.Items.Count > 0)
+            {
+                criterioSeleccionado = cbOrdenarPor.SelectedItem.ToString();
+            }
+            else
+            {
+                MessageBox.Show("Por favor, seleccione un criterio de ordenación.");
+            }
+            dgvVentasMenu.DataSource = _gestorVenta.ListarVentasMenu(criterioSeleccionado);
             OcultarColumnas();
+            FormatearFilas();
         }
         private void FiltrarVentasPorCliente()
         {
@@ -144,6 +156,11 @@ namespace VentaCredimax.Formularios
                     }
                 }
             }
+        }
+
+        private void cbOrdenarPor_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ListarVentas();
         }
     }
 }

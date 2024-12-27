@@ -10,19 +10,19 @@
 namespace CEntidades
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Venta
+    public partial class ReciboDePago_Result
     {
         public int VentaId { get; set; }
-        public int ClientId { get; set; }
+        public Nullable<System.DateTime> FechaPago { get; set; }
+        public string Nombre { get; set; }
+        public string Apellido { get; set; }
+        public decimal MontoCuota { get; set; }
         public string Articulo { get; set; }
         public Nullable<int> Talle { get; set; }
-        public int FormaDePagoId { get; set; }
-        public System.DateTime FechaDeInicio { get; set; }
-        public Nullable<System.DateTime> FechaDeCancelacion { get; set; }
-        public Nullable<System.DateTime> FechaAnulacion { get; set; }
-        public Nullable<decimal> Precio { get; set; }
-        public Nullable<int> Cuotas { get; set; }
+        public int NumeroDeCuota { get; set; }
+        public Nullable<decimal> TotalPagado { get; set; }
+        public Nullable<decimal> SaldoRestante { get; set; }
+        public Nullable<int> CuotasPendientes { get; set; }
     }
 }

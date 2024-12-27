@@ -21,9 +21,9 @@ namespace CLogica
         {
             return _repositorioVenta.ListarVentas();
         }
-        public List<VentaDTO> ListarVentasMenu()
+        public List<VentaDTO> ListarVentasMenu(string criterioOrden)
         {
-            return _repositorioVenta.ListarVentasMenu();
+            return _repositorioVenta.ListarVentasMenu(criterioOrden);
         }
         public void ModificarVenta(Venta venta)
         {

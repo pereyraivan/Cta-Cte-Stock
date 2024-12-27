@@ -9,11 +9,13 @@
 
 namespace CDatos
 {
-    using CEntidades;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
+    using CEntidades;
+
     public partial class VentasCredimaxEntities : DbContext
     {
         public VentasCredimaxEntities()
@@ -31,5 +33,14 @@ namespace CDatos
         public virtual DbSet<Pago> Pago { get; set; }
         public virtual DbSet<Venta> Venta { get; set; }
         public virtual DbSet<Cuota> Cuota { get; set; }
+    
+        public virtual ObjectResult<ReciboDePago_Result> ReciboDePago(Nullable<int> ventaId)
+        {
+            var ventaIdParameter = ventaId.HasValue ?
+                new ObjectParameter("VentaId", ventaId) :
+                new ObjectParameter("VentaId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReciboDePago_Result>("ReciboDePago", ventaIdParameter);
+        }
     }
 }

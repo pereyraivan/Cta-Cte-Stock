@@ -67,6 +67,7 @@ namespace VentaCredimax.Formularios
                 dgvVentas.Columns["VentaId"].Visible = false;
                 dgvVentas.Columns["IdCliente"].Visible = false;
                 dgvVentas.Columns["FechaAnulacion"].Visible = false;
+                dgvVentas.Columns["CuotasVencidas"].Visible = false;
             }
         }
         private void EstiloDataGrid()

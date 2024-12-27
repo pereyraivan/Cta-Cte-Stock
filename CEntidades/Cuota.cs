@@ -21,7 +21,5 @@ namespace CEntidades
         public System.DateTime FechaProgramada { get; set; }
         public Nullable<System.DateTime> FechaPago { get; set; }
         public Nullable<bool> Estado { get; set; }
-
-        public virtual Venta Venta { get; set; }
     }
 }

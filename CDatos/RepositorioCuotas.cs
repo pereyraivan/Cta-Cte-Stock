@@ -50,9 +50,27 @@ namespace CDatos
                     {
                         cuota.Estado = true; // Marcar como pagada
                         cuota.FechaPago = DateTime.Now; // Registrar la fecha de pago
+
+                        db.SaveChanges();
+
+                        int ventaId = cuota.VentaId;
+                        bool todasCuotasPagadas = db.Cuota
+                            .Where(c => c.VentaId == ventaId)
+                            .All(c => c.Estado == true); // Todas las cuotas tienen Estado = true (pagadas)
+
+                        if (todasCuotasPagadas)
+                        {
+                            // Buscar la venta asociada y establecer la fecha de anulación
+                            Venta venta = db.Venta.FirstOrDefault(v => v.VentaId == ventaId);
+                            if (venta != null)
+                            {
+                                venta.FechaAnulacion = cuota.FechaPago; // Fecha de anulación con la fecha del último pago
+                                db.SaveChanges();
+                            }
+                        }
                     }
 
-                    db.SaveChanges();
+                   
                     return true;
                 }
             }

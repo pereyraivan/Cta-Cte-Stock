@@ -111,7 +111,7 @@ namespace CDatos
             }
             return ventas;
         }
-        public List<VentaDTO> ListarVentasMenu()
+        public List<VentaDTO> ListarVentasMenu(string criterioOrden)
         {
             List<VentaDTO> ventas = null;
             try
@@ -137,9 +137,28 @@ namespace CDatos
                                   FechaAnulacion = v.FechaAnulacion,
                                   CuotasVencidas = db.Cuota.Any(cuota => cuota.VentaId == v.VentaId && cuota.FechaProgramada < DateTime.Now && cuota.FechaPago == null)
                               })
-                          .OrderByDescending(v => v.CuotasVencidas)
-                          .ThenByDescending(v => v.FechaDeInicio)
-                          .ToList();
+                              .ToList();
+                    switch (criterioOrden.Trim())
+                    {
+                        case "Cuotas Vencidas":
+                            ventas = ventas
+                                .OrderByDescending(v => v.CuotasVencidas)
+                                .ThenByDescending(v => v.FechaDeInicio)
+                                .ToList();
+                            break;
+
+                        case "Fecha":
+                            ventas = ventas
+                                .OrderByDescending(v => v.FechaDeInicio)
+                                .ToList();
+                            break;
+
+                        default:
+                            ventas = ventas
+                                .OrderByDescending(v => v.FechaDeInicio)
+                                .ToList();
+                            break;
+                    }
                 }
             }
             catch (Exception ex)
