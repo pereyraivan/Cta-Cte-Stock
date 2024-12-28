@@ -7,9 +7,9 @@
     </am:CreatedBy>
     <am:UpdatedBy>
       <am:Name>SSDTRS</am:Name>
-      <am:Version>17.11.35327.3</am:Version>
+      <am:Version>17.12.35527.113</am:Version>
     </am:UpdatedBy>
-    <am:LastModifiedTimestamp>2024-12-27T03:20:57.8843721Z</am:LastModifiedTimestamp>
+    <am:LastModifiedTimestamp>2024-12-27T23:35:51.4520835Z</am:LastModifiedTimestamp>
   </am:AuthoringMetadata>
   <df:DefaultFontFamily>Segoe UI</df:DefaultFontFamily>
   <AutoRefresh>0</AutoRefresh>
@@ -446,7 +446,21 @@ Private Function ConvertirParteEntera(ByVal numero As Long, ByVal unidades() As 
         Return If(numero = 100, "cien", centenas(numero \ 100)) &amp; If((numero Mod 100) &gt; 0, " " &amp; ConvertirParteEntera(numero Mod 100, unidades, decenas, especiales, centenas), "")
     End If
     If numero &lt; 1000000 Then
-        Return ConvertirParteEntera(numero \ 1000, unidades, decenas, especiales, centenas) &amp; " mil" &amp; If((numero Mod 1000) &gt; 0, " " &amp; ConvertirParteEntera(numero Mod 1000, unidades, decenas, especiales, centenas), "")
+        ' ✅ Corrección definitiva para "un mil"
+        Dim miles As Long = numero \ 1000
+        Dim resto As Long = numero Mod 1000
+        Dim textoMiles As String = ""
+
+        If miles = 1 Then
+            textoMiles = "un mil"
+        ElseIf miles Mod 10 = 1 And miles &lt; 100 Then
+            ' Si termina en 1 (ej. 71,428)
+            textoMiles = ConvertirParteEntera(miles, unidades, decenas, especiales, centenas).Replace("uno", "un") &amp; " mil"
+        Else
+            textoMiles = ConvertirParteEntera(miles, unidades, decenas, especiales, centenas) &amp; " mil"
+        End If
+
+        Return textoMiles &amp; If(resto &gt; 0, " " &amp; ConvertirParteEntera(resto, unidades, decenas, especiales, centenas), "")
     End If
     If numero &lt; 1000000000 Then
         Return ConvertirParteEntera(numero \ 1000000, unidades, decenas, especiales, centenas) &amp; " millones" &amp; If((numero Mod 1000000) &gt; 0, " " &amp; ConvertirParteEntera(numero Mod 1000000, unidades, decenas, especiales, centenas), "")
