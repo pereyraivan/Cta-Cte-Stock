@@ -24,5 +24,6 @@ namespace CEntidades
         public Nullable<decimal> TotalPagado { get; set; }
         public Nullable<decimal> SaldoRestante { get; set; }
         public Nullable<int> CuotasPendientes { get; set; }
+        public string NumeroRecibo { get; set; }
     }
 }

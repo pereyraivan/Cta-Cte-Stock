@@ -46,6 +46,16 @@
           <Property Name="FechaDePago" Type="date" Nullable="false" />
           <Property Name="FechaAnulacion" Type="datetime" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'VentasCredimax.dbo.ReciboControl' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ReciboControl">
+          <Key>
+            <PropertyRef Name="Serie" />
+            <PropertyRef Name="NumeroSecuencial" />
+          </Key>
+          <Property Name="Serie" Type="int" Nullable="false" />
+          <Property Name="NumeroSecuencial" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Venta">
           <Key>
             <PropertyRef Name="VentaId" />
@@ -70,6 +80,12 @@
           <EntitySet Name="FormaDePago" EntityType="Self.FormaDePago" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Pago" EntityType="Self.Pago" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Venta" EntityType="Self.Venta" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReciboControl" EntityType="Self.ReciboControl" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ReciboControl].[Serie] AS [Serie], 
+    [ReciboControl].[NumeroSecuencial] AS [NumeroSecuencial]
+    FROM [dbo].[ReciboControl] AS [ReciboControl]</DefiningQuery>
+          </EntitySet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -81,8 +97,9 @@
           <EntitySet Name="Pago" EntityType="VentasCredimaxModel.Pago" />
           <EntitySet Name="Venta" EntityType="VentasCredimaxModel.Venta" />
           <EntitySet Name="Cuota" EntityType="VentasCredimaxModel.Cuota" />
+          <EntitySet Name="ReciboControl" EntityType="VentasCredimaxModel.ReciboControl" />
           <FunctionImport Name="ReciboDePago" ReturnType="Collection(VentasCredimaxModel.ReciboDePago_Result)">
-          <Parameter Name="VentaId" Mode="In" Type="Int32" />
+            <Parameter Name="VentaId" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <EntityType Name="Cliente">
@@ -141,6 +158,14 @@
           <Property Name="FechaPago" Type="DateTime" Precision="3" />
           <Property Name="Estado" Type="Boolean" />
         </EntityType>
+        <EntityType Name="ReciboControl">
+          <Key>
+            <PropertyRef Name="Serie" />
+            <PropertyRef Name="NumeroSecuencial" />
+          </Key>
+          <Property Name="Serie" Type="Int32" Nullable="false" />
+          <Property Name="NumeroSecuencial" Type="Int32" Nullable="false" />
+        </EntityType>
         <ComplexType Name="ReciboDePago_Result">
           <Property Type="Int32" Name="VentaId" Nullable="false" />
           <Property Type="DateTime" Name="FechaPago" Nullable="true" Precision="23" />
@@ -153,6 +178,7 @@
           <Property Type="Decimal" Name="TotalPagado" Nullable="true" Precision="38" Scale="2" />
           <Property Type="Decimal" Name="SaldoRestante" Nullable="true" Precision="38" Scale="2" />
           <Property Type="Int32" Name="CuotasPendientes" Nullable="true" />
+          <Property Type="String" Name="NumeroRecibo" Nullable="true" MaxLength="13" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -221,6 +247,14 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="ReciboControl">
+            <EntityTypeMapping TypeName="VentasCredimaxModel.ReciboControl">
+              <MappingFragment StoreEntitySet="ReciboControl">
+                <ScalarProperty Name="NumeroSecuencial" ColumnName="NumeroSecuencial" />
+                <ScalarProperty Name="Serie" ColumnName="Serie" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="ReciboDePago" FunctionName="VentasCredimaxModel.Store.ReciboDePago">
             <ResultMapping>
               <ComplexTypeMapping TypeName="VentasCredimaxModel.ReciboDePago_Result">
@@ -235,6 +269,7 @@
                 <ScalarProperty Name="TotalPagado" ColumnName="TotalPagado" />
                 <ScalarProperty Name="SaldoRestante" ColumnName="SaldoRestante" />
                 <ScalarProperty Name="CuotasPendientes" ColumnName="CuotasPendientes" />
+                <ScalarProperty Name="NumeroRecibo" ColumnName="NumeroRecibo" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

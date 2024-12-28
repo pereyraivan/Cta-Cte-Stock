@@ -9,7 +9,7 @@
       <am:Name>SSDTRS</am:Name>
       <am:Version>17.12.35527.113</am:Version>
     </am:UpdatedBy>
-    <am:LastModifiedTimestamp>2024-12-27T23:35:51.4520835Z</am:LastModifiedTimestamp>
+    <am:LastModifiedTimestamp>2024-12-28T05:15:51.1768715Z</am:LastModifiedTimestamp>
   </am:AuthoringMetadata>
   <df:DefaultFontFamily>Segoe UI</df:DefaultFontFamily>
   <AutoRefresh>0</AutoRefresh>
@@ -81,6 +81,10 @@
           <DataField>CuotasPendientes</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
+        <Field Name="NumeroRecibo">
+          <DataField>NumeroRecibo</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
       </Fields>
     </DataSet>
   </DataSets>
@@ -88,92 +92,6 @@
     <ReportSection>
       <Body>
         <ReportItems>
-          <Image Name="Image1">
-            <Source>Embedded</Source>
-            <Value>Designer</Value>
-            <Sizing>FitProportional</Sizing>
-            <Top>0.28787cm</Top>
-            <Left>0.76412cm</Left>
-            <Height>2.32021cm</Height>
-            <Width>2.32021cm</Width>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-            </Style>
-          </Image>
-          <Textbox Name="Textbox1">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>RECIBO N°:</Value>
-                    <Style />
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>0.52599cm</Top>
-            <Left>8.27828cm</Left>
-            <Height>0.62646cm</Height>
-            <Width>2.89278cm</Width>
-            <ZIndex>1</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Textbox Name="Textbox2">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value />
-                    <Style />
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Textbox2</rd:DefaultName>
-            <Top>0.55245cm</Top>
-            <Left>11.34745cm</Left>
-            <Height>0.6cm</Height>
-            <Width>4.24625cm</Width>
-            <ZIndex>2</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Line Name="Line1">
-            <Top>2.85433cm</Top>
-            <Left>0.65828cm</Left>
-            <Height>0cm</Height>
-            <Width>14.93542cm</Width>
-            <ZIndex>3</ZIndex>
-            <Style>
-              <Border>
-                <Style>Solid</Style>
-              </Border>
-            </Style>
-          </Line>
           <Textbox Name="Textbox3">
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
@@ -183,6 +101,7 @@
                   <TextRun>
                     <Value>Recibi de:</Value>
                     <Style>
+                      <FontFamily>Arial</FontFamily>
                       <FontSize>12pt</FontSize>
                     </Style>
                   </TextRun>
@@ -193,11 +112,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox3</rd:DefaultName>
-            <Top>3.30412cm</Top>
+            <Top>0.44662cm</Top>
             <Left>0.79057cm</Left>
             <Height>0.6cm</Height>
             <Width>1.97626cm</Width>
-            <ZIndex>4</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -219,6 +137,7 @@
                     <Value>=IIF(IsNothing(Fields!Apellido.Value), "", Fields!Apellido.Value) &amp; 
   IIF(IsNothing(Fields!Nombre.Value), "", ", " &amp; Fields!Nombre.Value)</Value>
                     <Style>
+                      <FontFamily>Arial</FontFamily>
                       <FontSize>12pt</FontSize>
                     </Style>
                   </TextRun>
@@ -227,41 +146,11 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Apellido1</rd:DefaultName>
-            <Top>3.30412cm</Top>
+            <Top>0.44662cm</Top>
             <Left>2.83739cm</Left>
             <Height>0.6cm</Height>
             <Width>12.75631cm</Width>
-            <ZIndex>5</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Textbox Name="FechaPago">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>=First(Fields!FechaPago.Value, "DataSet1")</Value>
-                    <Style />
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>FechaPago</rd:DefaultName>
-            <Top>1.32884cm</Top>
-            <Left>11.34745cm</Left>
-            <Height>0.6cm</Height>
-            <Width>4.24625cm</Width>
-            <ZIndex>6</ZIndex>
+            <ZIndex>1</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -281,6 +170,7 @@
                   <TextRun>
                     <Value>="La cantidad de: " &amp; Format(Fields!MontoCuota.Value, "#,#0.00") &amp; " (" &amp; Code.NumeroALetras(Fields!MontoCuota.Value) &amp; ")"</Value>
                     <Style>
+                      <FontFamily>Arial</FontFamily>
                       <FontSize>12pt</FontSize>
                       <Format>'$'#,0.00;('$'#,0.00)</Format>
                     </Style>
@@ -290,15 +180,16 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>TotalPagado</rd:DefaultName>
-            <Top>4.10873cm</Top>
+            <Top>1.25123cm</Top>
             <Left>0.79057cm</Left>
             <Height>0.6cm</Height>
             <Width>14.80313cm</Width>
-            <ZIndex>7</ZIndex>
+            <ZIndex>2</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
+              <VerticalAlign>Middle</VerticalAlign>
               <PaddingLeft>2pt</PaddingLeft>
               <PaddingRight>2pt</PaddingRight>
               <PaddingTop>2pt</PaddingTop>
@@ -313,8 +204,9 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Por concepto de:</Value>
+                    <Value EvaluationMode="Constant">Por concepto de:</Value>
                     <Style>
+                      <FontFamily>Arial</FontFamily>
                       <FontSize>12pt</FontSize>
                     </Style>
                   </TextRun>
@@ -325,11 +217,11 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox3</rd:DefaultName>
-            <Top>4.90964cm</Top>
+            <Top>2.05214cm</Top>
             <Left>0.76412cm</Left>
             <Height>0.6cm</Height>
             <Width>3.27272cm</Width>
-            <ZIndex>8</ZIndex>
+            <ZIndex>3</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -348,8 +240,9 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!Articulo.Value, "DataSet1")</Value>
+                    <Value>="Pago de la Cuota N° " &amp; Fields!NumeroDeCuota.Value &amp; " correspondiente a la venta del artículo: '" &amp; Fields!Articulo.Value &amp; "'"</Value>
                     <Style>
+                      <FontFamily>Arial</FontFamily>
                       <FontSize>12pt</FontSize>
                     </Style>
                   </TextRun>
@@ -358,11 +251,81 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Articulo</rd:DefaultName>
-            <Top>4.92866cm</Top>
+            <Top>2.07116cm</Top>
             <Left>4.17724cm</Left>
             <Height>0.6cm</Height>
             <Width>11.41646cm</Width>
-            <ZIndex>9</ZIndex>
+            <ZIndex>4</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <VerticalAlign>Middle</VerticalAlign>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox6">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Observaciones:</Value>
+                    <Style>
+                      <FontFamily>Arial</FontFamily>
+                      <FontSize>12pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox3</rd:DefaultName>
+            <Top>2.88079cm</Top>
+            <Left>0.76412cm</Left>
+            <Height>0.6cm</Height>
+            <Width>3.27272cm</Width>
+            <ZIndex>5</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <VerticalAlign>Middle</VerticalAlign>
+              <PaddingLeft>1pt</PaddingLeft>
+              <PaddingRight>1pt</PaddingRight>
+              <PaddingTop>1pt</PaddingTop>
+              <PaddingBottom>1pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="SaldoRestante">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>="Quedan " &amp; Fields!CuotasPendientes.Value &amp; " cuotas pendientes y un saldo de $" &amp; 
+Format(Fields!SaldoRestante.Value, "N2")</Value>
+                    <Style>
+                      <FontSize>12pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>SaldoRestante</rd:DefaultName>
+            <Top>2.88079cm</Top>
+            <Left>4.17724cm</Left>
+            <Height>0.6cm</Height>
+            <Width>11.41646cm</Width>
+            <ZIndex>6</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -383,6 +346,123 @@
       </Body>
       <Width>6.5in</Width>
       <Page>
+        <PageHeader>
+          <Height>2.32833cm</Height>
+          <PrintOnFirstPage>true</PrintOnFirstPage>
+          <PrintOnLastPage>true</PrintOnLastPage>
+          <ReportItems>
+            <Textbox Name="Textbox1">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>RECIBO DE PAGO</Value>
+                      <Style>
+                        <FontFamily>Arial</FontFamily>
+                        <FontSize>18pt</FontSize>
+                        <FontWeight>Bold</FontWeight>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox1</rd:DefaultName>
+              <Top>0.63182cm</Top>
+              <Left>0.79057cm</Left>
+              <Height>1.02333cm</Height>
+              <Width>5.90903cm</Width>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="FechaPago">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=Format(Today(), "dd/MM/yyyy")</Value>
+                      <Style>
+                        <FontFamily>Arial</FontFamily>
+                        <FontSize>12pt</FontSize>
+                        <Format>d</Format>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>FechaPago</rd:DefaultName>
+              <Top>1.33942cm</Top>
+              <Left>11.34745cm</Left>
+              <Height>0.67938cm</Height>
+              <Width>4.24625cm</Width>
+              <ZIndex>1</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <VerticalAlign>Middle</VerticalAlign>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="NumeroRecibo">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>="N°: " &amp; First(Fields!NumeroRecibo.Value, "DataSet1")</Value>
+                      <Style>
+                        <FontSize>12pt</FontSize>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>NumeroRecibo</rd:DefaultName>
+              <Top>0.63182cm</Top>
+              <Left>11.34745cm</Left>
+              <Height>0.6cm</Height>
+              <Width>4.24625cm</Width>
+              <ZIndex>2</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+          </ReportItems>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+            <BottomBorder>
+              <Color>Black</Color>
+              <Style>Solid</Style>
+              <Width>1pt</Width>
+            </BottomBorder>
+          </Style>
+        </PageHeader>
         <PageHeight>29.7cm</PageHeight>
         <PageWidth>21cm</PageWidth>
         <LeftMargin>2cm</LeftMargin>
@@ -759,6 +839,7 @@ lLRRQAUUUUABpKWkoAKKKKACiiigAooooAKKKKAClFJS0AFFFFABRRRQAUUUUAFJS0UAJRRRQAUUUUAL
 AJS0UUAFFFFABRRRQAlFLSUAKKKKKAFFFAopgMFOpBS1IBRRRTAKKKKAEpaMUUAFFFGaBBRRmjNABRRmjNABRRmjNABRRRQAUUZozQAUUZpKACiiigYUUUUAFFFFAC0UlFAC0lFFAhaKSigBaKKKACijNGaACijNGaACiijNAwoozRQIKKSigYtFJRQIWiiigAoozRmgAoozRmgAoozRmgAoozRmgAooooGFFFGaACijNFAgoozRmgAoozRQMKKKM0AFFFJQIKKKKAClpKKAFooozQAUUZozQAUUZozQAUUZozQAUUZozQAUUZpKACiiigAooooAKKKKBhRRRQIKWkooAWikpc0AFFGaM0AFFGaM0AFFGaKAEooooAKWkooAWiikoAWiiigAoozRmgAoozRmgAoozRQAUUlFAC0UlFAxaKBRQAopaQUUwGilpSpU4IxRSASilooASiiigAxRRS0AJRS0UAJRilooATFFLRQISjFFFABijFFLQMSilooATFGKKKADFGKKKADFGKKKACiiigQYooooAMUUUtMBKMUtFIBKKWigYlFLRQAlFLRQAlFLRQAmKMUtJQAYooooAMUYopaBCUUtFAxKKWigQlFLRQAlFLijFACUUuKMUAJRS4oxQAlFLRQAlFLRQMSilooASilooASilooASilooATFGKWigBMUUtFAhMUYpaKBiUUtFAhKKWigBKKWigYlFLRQAlGKWigBMUYpaKAExRilooATFGKWigQmKMUtFACYoxS0UAJRS0UAJRS0UDEopaKBCUUtFAxMUYpaKAExRilooATFGKWigQmKMUtJQMMUUUUAFFFLQAlFLRQAmKMUtJQAYoxRRQAUUUUALRRS0Af/2Q==</ImageData>
     </EmbeddedImage>
   </EmbeddedImages>
+  <Language>es-ES</Language>
   <rd:ReportUnitType>Cm</rd:ReportUnitType>
   <rd:ReportID>d841dc90-e695-4feb-bc38-a8803a6ad24f</rd:ReportID>
 </Report>
