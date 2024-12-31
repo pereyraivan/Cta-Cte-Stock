@@ -73,6 +73,7 @@ warning 6002: The table/view 'VentasCredimax.dbo.ReciboControl' does not have a 
         </EntityType>
         <Function Name="ReciboDePago" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="VentaId" Type="int" Mode="In" />
+          <Parameter Name="NumeroDeCuota" Type="int" Mode="In" />
         </Function>
         <EntityContainer Name="VentasCredimaxModelStoreContainer">
           <EntitySet Name="Cliente" EntityType="Self.Cliente" Schema="dbo" store:Type="Tables" />
@@ -100,6 +101,7 @@ warning 6002: The table/view 'VentasCredimax.dbo.ReciboControl' does not have a 
           <EntitySet Name="ReciboControl" EntityType="VentasCredimaxModel.ReciboControl" />
           <FunctionImport Name="ReciboDePago" ReturnType="Collection(VentasCredimaxModel.ReciboDePago_Result)">
             <Parameter Name="VentaId" Mode="In" Type="Int32" />
+            <Parameter Name="NumeroDeCuota" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <EntityType Name="Cliente">
@@ -168,7 +170,7 @@ warning 6002: The table/view 'VentasCredimax.dbo.ReciboControl' does not have a 
         </EntityType>
         <ComplexType Name="ReciboDePago_Result">
           <Property Type="Int32" Name="VentaId" Nullable="false" />
-          <Property Type="DateTime" Name="FechaPago" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="FechaPago" Nullable="false" Precision="23" />
           <Property Type="String" Name="Nombre" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="Apellido" Nullable="false" MaxLength="50" />
           <Property Type="Decimal" Name="MontoCuota" Nullable="false" Precision="18" Scale="2" />

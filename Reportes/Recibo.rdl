@@ -9,7 +9,7 @@
       <am:Name>SSDTRS</am:Name>
       <am:Version>17.12.35527.113</am:Version>
     </am:UpdatedBy>
-    <am:LastModifiedTimestamp>2024-12-28T05:15:51.1768715Z</am:LastModifiedTimestamp>
+    <am:LastModifiedTimestamp>2024-12-31T12:41:55.4990940Z</am:LastModifiedTimestamp>
   </am:AuthoringMetadata>
   <df:DefaultFontFamily>Segoe UI</df:DefaultFontFamily>
   <AutoRefresh>0</AutoRefresh>
@@ -31,6 +31,10 @@
         <QueryParameters>
           <QueryParameter Name="@VentaId">
             <Value>=Parameters!VentaId.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@NumeroDeCuota">
+            <Value>=Parameters!NumeroDeCuota.Value</Value>
+            <rd:UserDefined>true</rd:UserDefined>
           </QueryParameter>
         </QueryParameters>
         <CommandType>StoredProcedure</CommandType>
@@ -101,7 +105,8 @@
                   <TextRun>
                     <Value>Recibi de:</Value>
                     <Style>
-                      <FontFamily>Arial</FontFamily>
+                      <FontStyle>Italic</FontStyle>
+                      <FontFamily>Berlin Sans FB</FontFamily>
                       <FontSize>12pt</FontSize>
                     </Style>
                   </TextRun>
@@ -115,7 +120,7 @@
             <Top>0.44662cm</Top>
             <Left>0.79057cm</Left>
             <Height>0.6cm</Height>
-            <Width>1.97626cm</Width>
+            <Width>2.16147cm</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -137,7 +142,7 @@
                     <Value>=IIF(IsNothing(Fields!Apellido.Value), "", Fields!Apellido.Value) &amp; 
   IIF(IsNothing(Fields!Nombre.Value), "", ", " &amp; Fields!Nombre.Value)</Value>
                     <Style>
-                      <FontFamily>Arial</FontFamily>
+                      <FontFamily>berlin Sans FB</FontFamily>
                       <FontSize>12pt</FontSize>
                     </Style>
                   </TextRun>
@@ -147,14 +152,19 @@
             </Paragraphs>
             <rd:DefaultName>Apellido1</rd:DefaultName>
             <Top>0.44662cm</Top>
-            <Left>2.83739cm</Left>
+            <Left>3.12843cm</Left>
             <Height>0.6cm</Height>
-            <Width>12.75631cm</Width>
+            <Width>12.8886cm</Width>
             <ZIndex>1</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
+              <BottomBorder>
+                <Color>Black</Color>
+                <Style>Solid</Style>
+                <Width>1pt</Width>
+              </BottomBorder>
               <PaddingLeft>2pt</PaddingLeft>
               <PaddingRight>2pt</PaddingRight>
               <PaddingTop>2pt</PaddingTop>
@@ -168,9 +178,9 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>="La cantidad de: " &amp; Format(Fields!MontoCuota.Value, "#,#0.00") &amp; " (" &amp; Code.NumeroALetras(Fields!MontoCuota.Value) &amp; ")"</Value>
+                    <Value>="$" &amp; Format(Fields!MontoCuota.Value, "#,#0.00") &amp; " (" &amp; Code.NumeroALetras(Fields!MontoCuota.Value) &amp; ")"</Value>
                     <Style>
-                      <FontFamily>Arial</FontFamily>
+                      <FontFamily>berlin Sans FB</FontFamily>
                       <FontSize>12pt</FontSize>
                       <Format>'$'#,0.00;('$'#,0.00)</Format>
                     </Style>
@@ -180,15 +190,20 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>TotalPagado</rd:DefaultName>
-            <Top>1.25123cm</Top>
-            <Left>0.79057cm</Left>
-            <Height>0.6cm</Height>
-            <Width>14.80313cm</Width>
+            <Top>1.38176cm</Top>
+            <Left>4.0633cm</Left>
+            <Height>0.62822cm</Height>
+            <Width>11.95373cm</Width>
             <ZIndex>2</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
+              <BottomBorder>
+                <Color>Black</Color>
+                <Style>Solid</Style>
+                <Width>1pt</Width>
+              </BottomBorder>
               <VerticalAlign>Middle</VerticalAlign>
               <PaddingLeft>2pt</PaddingLeft>
               <PaddingRight>2pt</PaddingRight>
@@ -206,7 +221,8 @@
                   <TextRun>
                     <Value EvaluationMode="Constant">Por concepto de:</Value>
                     <Style>
-                      <FontFamily>Arial</FontFamily>
+                      <FontStyle>Italic</FontStyle>
+                      <FontFamily>berlin Sans FB</FontFamily>
                       <FontSize>12pt</FontSize>
                     </Style>
                   </TextRun>
@@ -217,10 +233,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox3</rd:DefaultName>
-            <Top>2.05214cm</Top>
+            <Top>2.38866cm</Top>
             <Left>0.76412cm</Left>
             <Height>0.6cm</Height>
-            <Width>3.27272cm</Width>
+            <Width>3.37855cm</Width>
             <ZIndex>3</ZIndex>
             <Style>
               <Border>
@@ -242,7 +258,7 @@
                   <TextRun>
                     <Value>="Pago de la Cuota N° " &amp; Fields!NumeroDeCuota.Value &amp; " correspondiente a la venta del artículo: '" &amp; Fields!Articulo.Value &amp; "'"</Value>
                     <Style>
-                      <FontFamily>Arial</FontFamily>
+                      <FontFamily>berlin Sans FB</FontFamily>
                       <FontSize>12pt</FontSize>
                     </Style>
                   </TextRun>
@@ -251,15 +267,18 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Articulo</rd:DefaultName>
-            <Top>2.07116cm</Top>
-            <Left>4.17724cm</Left>
-            <Height>0.6cm</Height>
-            <Width>11.41646cm</Width>
+            <Top>2.34512cm</Top>
+            <Left>4.31906cm</Left>
+            <Height>0.64354cm</Height>
+            <Width>11.69797cm</Width>
             <ZIndex>4</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
+              <BottomBorder>
+                <Style>Solid</Style>
+              </BottomBorder>
               <VerticalAlign>Middle</VerticalAlign>
               <PaddingLeft>2pt</PaddingLeft>
               <PaddingRight>2pt</PaddingRight>
@@ -276,7 +295,8 @@
                   <TextRun>
                     <Value>Observaciones:</Value>
                     <Style>
-                      <FontFamily>Arial</FontFamily>
+                      <FontStyle>Italic</FontStyle>
+                      <FontFamily>berlin Sans FB</FontFamily>
                       <FontSize>12pt</FontSize>
                     </Style>
                   </TextRun>
@@ -287,10 +307,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox3</rd:DefaultName>
-            <Top>2.88079cm</Top>
+            <Top>3.38879cm</Top>
             <Left>0.76412cm</Left>
-            <Height>0.6cm</Height>
-            <Width>3.27272cm</Width>
+            <Height>0.62646cm</Height>
+            <Width>3.12279cm</Width>
             <ZIndex>5</ZIndex>
             <Style>
               <Border>
@@ -313,6 +333,7 @@
                     <Value>="Quedan " &amp; Fields!CuotasPendientes.Value &amp; " cuotas pendientes y un saldo de $" &amp; 
 Format(Fields!SaldoRestante.Value, "N2")</Value>
                     <Style>
+                      <FontFamily>berlin Sans FB</FontFamily>
                       <FontSize>12pt</FontSize>
                     </Style>
                   </TextRun>
@@ -321,33 +342,154 @@ Format(Fields!SaldoRestante.Value, "N2")</Value>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>SaldoRestante</rd:DefaultName>
-            <Top>2.88079cm</Top>
-            <Left>4.17724cm</Left>
-            <Height>0.6cm</Height>
-            <Width>11.41646cm</Width>
+            <Top>3.35555cm</Top>
+            <Left>4.0633cm</Left>
+            <Height>0.6597cm</Height>
+            <Width>11.97208cm</Width>
             <ZIndex>6</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
+              <BottomBorder>
+                <Style>Solid</Style>
+              </BottomBorder>
+              <VerticalAlign>Middle</VerticalAlign>
               <PaddingLeft>2pt</PaddingLeft>
               <PaddingRight>2pt</PaddingRight>
               <PaddingTop>2pt</PaddingTop>
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
+          <Textbox Name="Textbox7">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>TOTAL:</Value>
+                    <Style>
+                      <FontFamily>Arial</FontFamily>
+                      <FontSize>16pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox3</rd:DefaultName>
+            <Top>4.86368cm</Top>
+            <Left>8.44426cm</Left>
+            <Height>0.78521cm</Height>
+            <Width>2.14472cm</Width>
+            <ZIndex>7</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <VerticalAlign>Middle</VerticalAlign>
+              <PaddingLeft>1pt</PaddingLeft>
+              <PaddingRight>1pt</PaddingRight>
+              <PaddingTop>1pt</PaddingTop>
+              <PaddingBottom>1pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="MontoCuota">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>="$ " &amp; Format(Sum(Fields!MontoCuota.Value, "DataSet1"), "#,##0.00")</Value>
+                    <Style>
+                      <FontSize>18pt</FontSize>
+                      <Format>#,0.00;(#,0.00)</Format>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>MontoCuota</rd:DefaultName>
+            <Top>4.73668cm</Top>
+            <Left>10.76537cm</Left>
+            <Height>0.82105cm</Height>
+            <Width>5.25166cm</Width>
+            <ZIndex>8</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+              <BackgroundColor>WhiteSmoke</BackgroundColor>
+              <VerticalAlign>Middle</VerticalAlign>
+              <PaddingLeft>1pt</PaddingLeft>
+              <PaddingRight>1pt</PaddingRight>
+              <PaddingTop>1pt</PaddingTop>
+              <PaddingBottom>1pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox4">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>La cantidad de:</Value>
+                    <Style>
+                      <FontStyle>Italic</FontStyle>
+                      <FontFamily>berlin Sans FB</FontFamily>
+                      <FontSize>12pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox3</rd:DefaultName>
+            <Top>1.40998cm</Top>
+            <Left>0.79057cm</Left>
+            <Height>0.6cm</Height>
+            <Width>3.09634cm</Width>
+            <ZIndex>9</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <VerticalAlign>Middle</VerticalAlign>
+              <PaddingLeft>1pt</PaddingLeft>
+              <PaddingRight>1pt</PaddingRight>
+              <PaddingTop>1pt</PaddingTop>
+              <PaddingBottom>1pt</PaddingBottom>
+            </Style>
+          </Textbox>
         </ReportItems>
-        <Height>4.05208in</Height>
+        <Height>2.45833in</Height>
         <Style>
           <Border>
-            <Style>None</Style>
+            <Style>Solid</Style>
           </Border>
+          <BottomBorder>
+            <Style>Dashed</Style>
+          </BottomBorder>
+          <LeftBorder>
+            <Style>Dashed</Style>
+          </LeftBorder>
+          <RightBorder>
+            <Style>Dashed</Style>
+          </RightBorder>
         </Style>
       </Body>
       <Width>6.5in</Width>
       <Page>
         <PageHeader>
-          <Height>2.32833cm</Height>
+          <Height>2.3363cm</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
@@ -361,8 +503,9 @@ Format(Fields!SaldoRestante.Value, "N2")</Value>
                       <Value>RECIBO DE PAGO</Value>
                       <Style>
                         <FontFamily>Arial</FontFamily>
-                        <FontSize>18pt</FontSize>
+                        <FontSize>20pt</FontSize>
                         <FontWeight>Bold</FontWeight>
+                        <Color>DarkBlue</Color>
                       </Style>
                     </TextRun>
                   </TextRuns>
@@ -370,14 +513,15 @@ Format(Fields!SaldoRestante.Value, "N2")</Value>
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox1</rd:DefaultName>
-              <Top>0.63182cm</Top>
+              <Top>0.58949cm</Top>
               <Left>0.79057cm</Left>
-              <Height>1.02333cm</Height>
-              <Width>5.90903cm</Width>
+              <Height>1.12916cm</Height>
+              <Width>7.15257cm</Width>
               <Style>
                 <Border>
                   <Style>None</Style>
                 </Border>
+                <VerticalAlign>Middle</VerticalAlign>
                 <PaddingLeft>2pt</PaddingLeft>
                 <PaddingRight>2pt</PaddingRight>
                 <PaddingTop>2pt</PaddingTop>
@@ -391,11 +535,11 @@ Format(Fields!SaldoRestante.Value, "N2")</Value>
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>=Format(Today(), "dd/MM/yyyy")</Value>
+                      <Value>=Format(Today())</Value>
                       <Style>
                         <FontFamily>Arial</FontFamily>
                         <FontSize>12pt</FontSize>
-                        <Format>d</Format>
+                        <Format>D</Format>
                       </Style>
                     </TextRun>
                   </TextRuns>
@@ -403,10 +547,10 @@ Format(Fields!SaldoRestante.Value, "N2")</Value>
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>FechaPago</rd:DefaultName>
-              <Top>1.33942cm</Top>
+              <Top>1.49817cm</Top>
               <Left>11.34745cm</Left>
               <Height>0.67938cm</Height>
-              <Width>4.24625cm</Width>
+              <Width>4.66958cm</Width>
               <ZIndex>1</ZIndex>
               <Style>
                 <Border>
@@ -429,6 +573,7 @@ Format(Fields!SaldoRestante.Value, "N2")</Value>
                       <Value>="N°: " &amp; First(Fields!NumeroRecibo.Value, "DataSet1")</Value>
                       <Style>
                         <FontSize>12pt</FontSize>
+                        <FontWeight>Bold</FontWeight>
                       </Style>
                     </TextRun>
                   </TextRuns>
@@ -438,8 +583,8 @@ Format(Fields!SaldoRestante.Value, "N2")</Value>
               <rd:DefaultName>NumeroRecibo</rd:DefaultName>
               <Top>0.63182cm</Top>
               <Left>11.34745cm</Left>
-              <Height>0.6cm</Height>
-              <Width>4.24625cm</Width>
+              <Height>0.72524cm</Height>
+              <Width>4.66958cm</Width>
               <ZIndex>2</ZIndex>
               <Style>
                 <Border>
@@ -454,13 +599,17 @@ Format(Fields!SaldoRestante.Value, "N2")</Value>
           </ReportItems>
           <Style>
             <Border>
-              <Style>None</Style>
-            </Border>
-            <BottomBorder>
-              <Color>Black</Color>
               <Style>Solid</Style>
-              <Width>1pt</Width>
-            </BottomBorder>
+            </Border>
+            <TopBorder>
+              <Style>Dashed</Style>
+            </TopBorder>
+            <LeftBorder>
+              <Style>Dashed</Style>
+            </LeftBorder>
+            <RightBorder>
+              <Style>Dashed</Style>
+            </RightBorder>
           </Style>
         </PageHeader>
         <PageHeight>29.7cm</PageHeight>
@@ -479,6 +628,10 @@ Format(Fields!SaldoRestante.Value, "N2")</Value>
       <DataType>Integer</DataType>
       <Prompt>Venta Id</Prompt>
     </ReportParameter>
+    <ReportParameter Name="NumeroDeCuota">
+      <DataType>Integer</DataType>
+      <Prompt>NumeroDeCuota</Prompt>
+    </ReportParameter>
   </ReportParameters>
   <ReportParametersLayout>
     <GridLayoutDefinition>
@@ -490,61 +643,74 @@ Format(Fields!SaldoRestante.Value, "N2")</Value>
           <RowIndex>0</RowIndex>
           <ParameterName>VentaId</ParameterName>
         </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>1</ColumnIndex>
+          <RowIndex>0</RowIndex>
+          <ParameterName>NumeroDeCuota</ParameterName>
+        </CellDefinition>
       </CellDefinitions>
     </GridLayoutDefinition>
   </ReportParametersLayout>
   <Code>Public Function NumeroALetras(ByVal numero As Decimal) As String  
-    Dim unidades() As String = {"", "uno", "dos", "tres", "cuatro", "cinco", "seis", "siete", "ocho", "nueve"}  
-    Dim decenas() As String = {"", "diez", "veinte", "treinta", "cuarenta", "cincuenta", "sesenta", "setenta", "ochenta", "noventa"}  
-    Dim especiales() As String = {"diez", "once", "doce", "trece", "catorce", "quince", "dieciséis", "diecisiete", "dieciocho", "diecinueve"}  
-    Dim centenas() As String = {"", "cien", "doscientos", "trescientos", "cuatrocientos", "quinientos", "seiscientos", "setecientos", "ochocientos", "novecientos"}
-
-    ' Dividir parte entera y decimal
     Dim parteEntera As Long = Math.Floor(numero)
     Dim parteDecimal As Integer = CInt(Math.Round((numero - parteEntera) * 100))
 
-    ' Convertir la parte entera
-    Dim resultado As String = ConvertirParteEntera(parteEntera, unidades, decenas, especiales, centenas)
+    Dim resultado As String = ConvertirNumero(parteEntera).Trim()
 
-    ' Añadir la parte decimal como centavos
     If parteDecimal &gt; 0 Then
-        resultado &amp;= " con " &amp; ConvertirParteEntera(parteDecimal, unidades, decenas, especiales, centenas) &amp; " centavos"
+        resultado &amp;= " con " &amp; ConvertirNumero(parteDecimal) &amp; " centavos"
     Else
         resultado &amp;= " con cero centavos"
     End If
 
-    Return resultado  
+    Return Char.ToUpper(resultado(0)) &amp; resultado.Substring(1)
 End Function  
 
-Private Function ConvertirParteEntera(ByVal numero As Long, ByVal unidades() As String, ByVal decenas() As String, ByVal especiales() As String, ByVal centenas() As String) As String  
+Private Function ConvertirNumero(ByVal numero As Long) As String
     If numero = 0 Then Return "cero"
+    If numero = 100 Then Return "cien"
+
+    Dim unidades() As String = {"", "uno", "dos", "tres", "cuatro", "cinco", "seis", "siete", "ocho", "nueve"}
+    Dim decenas() As String = {"", "diez", "veinte", "treinta", "cuarenta", "cincuenta", "sesenta", "setenta", "ochenta", "noventa"}
+    Dim especiales() As String = {"diez", "once", "doce", "trece", "catorce", "quince", "dieciséis", "diecisiete", "dieciocho", "diecinueve"}
+    Dim centenas() As String = {"", "ciento", "doscientos", "trescientos", "cuatrocientos", "quinientos", "seiscientos", "setecientos", "ochocientos", "novecientos"}
+
     If numero &lt; 10 Then Return unidades(numero)
     If numero &lt; 20 Then Return especiales(numero - 10)
-    If numero &lt; 30 Then Return "veinti" &amp; unidades(numero Mod 10) ' Corrección aquí para números 21-29
+    If numero &lt; 30 Then Return "veinti" &amp; unidades(numero Mod 10)
     If numero &lt; 100 Then Return decenas(numero \ 10) &amp; If((numero Mod 10) &gt; 0, " y " &amp; unidades(numero Mod 10), "")
-    If numero &lt; 1000 Then
-        Return If(numero = 100, "cien", centenas(numero \ 100)) &amp; If((numero Mod 100) &gt; 0, " " &amp; ConvertirParteEntera(numero Mod 100, unidades, decenas, especiales, centenas), "")
-    End If
+    If numero &lt; 1000 Then Return centenas(numero \ 100) &amp; If((numero Mod 100) &gt; 0, " " &amp; ConvertirNumero(numero Mod 100), "")
+
     If numero &lt; 1000000 Then
-        ' ✅ Corrección definitiva para "un mil"
         Dim miles As Long = numero \ 1000
         Dim resto As Long = numero Mod 1000
         Dim textoMiles As String = ""
 
         If miles = 1 Then
-            textoMiles = "un mil"
-        ElseIf miles Mod 10 = 1 And miles &lt; 100 Then
-            ' Si termina en 1 (ej. 71,428)
-            textoMiles = ConvertirParteEntera(miles, unidades, decenas, especiales, centenas).Replace("uno", "un") &amp; " mil"
+            textoMiles = "mil"
+        ElseIf miles Mod 10 = 1 AndAlso miles &lt;&gt; 11 Then
+            textoMiles = ConvertirNumero(miles).Replace("uno", "un") &amp; " mil"
         Else
-            textoMiles = ConvertirParteEntera(miles, unidades, decenas, especiales, centenas) &amp; " mil"
+            textoMiles = ConvertirNumero(miles) &amp; " mil"
         End If
 
-        Return textoMiles &amp; If(resto &gt; 0, " " &amp; ConvertirParteEntera(resto, unidades, decenas, especiales, centenas), "")
+        Return textoMiles &amp; If(resto &gt; 0, " " &amp; ConvertirNumero(resto), "")
     End If
+
     If numero &lt; 1000000000 Then
-        Return ConvertirParteEntera(numero \ 1000000, unidades, decenas, especiales, centenas) &amp; " millones" &amp; If((numero Mod 1000000) &gt; 0, " " &amp; ConvertirParteEntera(numero Mod 1000000, unidades, decenas, especiales, centenas), "")
+        Dim millones As Long = numero \ 1000000
+        Dim resto As Long = numero Mod 1000000
+        Dim textoMillones As String = ""
+
+        If millones = 1 Then
+            textoMillones = "un millón"
+        Else
+            textoMillones = ConvertirNumero(millones) &amp; " millones"
+        End If
+
+        Return textoMillones &amp; If(resto &gt; 0, " " &amp; ConvertirNumero(resto), "")
     End If
+
     Return numero.ToString()
 End Function</Code>
   <EmbeddedImages>
@@ -839,7 +1005,7 @@ lLRRQAUUUUABpKWkoAKKKKACiiigAooooAKKKKAClFJS0AFFFFABRRRQAUUUUAFJS0UAJRRRQAUUUUAL
 AJS0UUAFFFFABRRRQAlFLSUAKKKKKAFFFAopgMFOpBS1IBRRRTAKKKKAEpaMUUAFFFGaBBRRmjNABRRmjNABRRmjNABRRRQAUUZozQAUUZpKACiiigYUUUUAFFFFAC0UlFAC0lFFAhaKSigBaKKKACijNGaACijNGaACiijNAwoozRQIKKSigYtFJRQIWiiigAoozRmgAoozRmgAoozRmgAoozRmgAooooGFFFGaACijNFAgoozRmgAoozRQMKKKM0AFFFJQIKKKKAClpKKAFooozQAUUZozQAUUZozQAUUZozQAUUZozQAUUZpKACiiigAooooAKKKKBhRRRQIKWkooAWikpc0AFFGaM0AFFGaM0AFFGaKAEooooAKWkooAWiikoAWiiigAoozRmgAoozRmgAoozRQAUUlFAC0UlFAxaKBRQAopaQUUwGilpSpU4IxRSASilooASiiigAxRRS0AJRS0UAJRilooATFFLRQISjFFFABijFFLQMSilooATFGKKKADFGKKKADFGKKKACiiigQYooooAMUUUtMBKMUtFIBKKWigYlFLRQAlFLRQAlFLRQAmKMUtJQAYooooAMUYopaBCUUtFAxKKWigQlFLRQAlFLijFACUUuKMUAJRS4oxQAlFLRQAlFLRQMSilooASilooASilooASilooATFGKWigBMUUtFAhMUYpaKBiUUtFAhKKWigBKKWigYlFLRQAlGKWigBMUYpaKAExRilooATFGKWigQmKMUtFACYoxS0UAJRS0UAJRS0UDEopaKBCUUtFAxMUYpaKAExRilooATFGKWigQmKMUtJQMMUUUUAFFFLQAlFLRQAmKMUtJQAYoxRRQAUUUUALRRS0Af/2Q==</ImageData>
     </EmbeddedImage>
   </EmbeddedImages>
-  <Language>es-ES</Language>
+  <Language>es-AR</Language>
   <rd:ReportUnitType>Cm</rd:ReportUnitType>
   <rd:ReportID>d841dc90-e695-4feb-bc38-a8803a6ad24f</rd:ReportID>
 </Report>

@@ -131,6 +131,40 @@ namespace VentaCredimax.Formularios
             dgvCuotas.ClearSelection();
             dgvCuotas.CurrentCell = null;
         }
+
+        private void btnImprimirComprobante_Click(object sender, EventArgs e)
+        {
+            if (dgvCuotas.CurrentRow == null)
+            {
+                MessageBox.Show("Seleccione una cuota para imprimir el recibo.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            // Obtener datos de la cuota seleccionada
+            int ventaId = Convert.ToInt32(dgvCuotas.CurrentRow.Cells["VentaId"].Value);
+            int numeroCuota = Convert.ToInt32(dgvCuotas.CurrentRow.Cells["NumeroDeCuota"].Value);
+            bool estadoPagado = Convert.ToBoolean(dgvCuotas.CurrentRow.Cells["Estado"].Value);
+
+            if (!estadoPagado)
+            {
+                MessageBox.Show("No se puede imprimir el recibo porque la cuota no está pagada.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            MostrarReporte(ventaId, numeroCuota);
+        }
+
+        private void MostrarReporte(int ventaId, int numeroCuota)
+        {
+            try
+            {
+                // Crear formulario de reporte
+                frmReportReciboDePago frmReporte = new frmReportReciboDePago(ventaId, numeroCuota);
+                frmReporte.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al mostrar el reporte: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }
 

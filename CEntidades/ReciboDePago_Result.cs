@@ -14,7 +14,7 @@ namespace CEntidades
     public partial class ReciboDePago_Result
     {
         public int VentaId { get; set; }
-        public Nullable<System.DateTime> FechaPago { get; set; }
+        public System.DateTime FechaPago { get; set; }
         public string Nombre { get; set; }
         public string Apellido { get; set; }
         public decimal MontoCuota { get; set; }
