@@ -142,9 +142,9 @@ namespace VentaCredimax.Formularios
             // Obtener datos de la cuota seleccionada
             int ventaId = Convert.ToInt32(dgvCuotas.CurrentRow.Cells["VentaId"].Value);
             int numeroCuota = Convert.ToInt32(dgvCuotas.CurrentRow.Cells["NumeroDeCuota"].Value);
-            bool estadoPagado = Convert.ToBoolean(dgvCuotas.CurrentRow.Cells["Estado"].Value);
+            string estado = dgvCuotas.CurrentRow.Cells["Estado"].Value?.ToString();
 
-            if (!estadoPagado)
+            if (estado == "Pendiente")
             {
                 MessageBox.Show("No se puede imprimir el recibo porque la cuota no está pagada.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;

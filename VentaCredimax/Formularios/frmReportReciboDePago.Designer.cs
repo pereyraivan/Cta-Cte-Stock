@@ -33,11 +33,13 @@
             // 
             // rvReciboDePago
             // 
-            this.rvReciboDePago.Location = new System.Drawing.Point(2, 2);
+            this.rvReciboDePago.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rvReciboDePago.Location = new System.Drawing.Point(0, 0);
             this.rvReciboDePago.Name = "rvReciboDePago";
             this.rvReciboDePago.ProcessingMode = Microsoft.Reporting.WinForms.ProcessingMode.Remote;
             this.rvReciboDePago.ServerReport.BearerToken = null;
-            this.rvReciboDePago.Size = new System.Drawing.Size(823, 544);
+            this.rvReciboDePago.ServerReport.ReportPath = "Reportes/Recibo";
+            this.rvReciboDePago.Size = new System.Drawing.Size(823, 546);
             this.rvReciboDePago.TabIndex = 0;
             // 
             // frmReportReciboDePago

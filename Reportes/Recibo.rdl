@@ -9,7 +9,7 @@
       <am:Name>SSDTRS</am:Name>
       <am:Version>17.12.35527.113</am:Version>
     </am:UpdatedBy>
-    <am:LastModifiedTimestamp>2024-12-31T12:41:55.4990940Z</am:LastModifiedTimestamp>
+    <am:LastModifiedTimestamp>2025-01-07T03:38:18.1328815Z</am:LastModifiedTimestamp>
   </am:AuthoringMetadata>
   <df:DefaultFontFamily>Segoe UI</df:DefaultFontFamily>
   <AutoRefresh>0</AutoRefresh>
@@ -470,7 +470,7 @@ Format(Fields!SaldoRestante.Value, "N2")</Value>
             </Style>
           </Textbox>
         </ReportItems>
-        <Height>2.45833in</Height>
+        <Height>2.58333in</Height>
         <Style>
           <Border>
             <Style>Solid</Style>
@@ -535,7 +535,7 @@ Format(Fields!SaldoRestante.Value, "N2")</Value>
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>=Format(Today())</Value>
+                      <Value>=Format(Today(), "dddd, dd 'de' MMMM 'de' yyyy")</Value>
                       <Style>
                         <FontFamily>Arial</FontFamily>
                         <FontSize>12pt</FontSize>
@@ -548,9 +548,9 @@ Format(Fields!SaldoRestante.Value, "N2")</Value>
               </Paragraphs>
               <rd:DefaultName>FechaPago</rd:DefaultName>
               <Top>1.49817cm</Top>
-              <Left>11.34745cm</Left>
+              <Left>10.39495cm</Left>
               <Height>0.67938cm</Height>
-              <Width>4.66958cm</Width>
+              <Width>5.62208cm</Width>
               <ZIndex>1</ZIndex>
               <Style>
                 <Border>
@@ -582,9 +582,9 @@ Format(Fields!SaldoRestante.Value, "N2")</Value>
               </Paragraphs>
               <rd:DefaultName>NumeroRecibo</rd:DefaultName>
               <Top>0.63182cm</Top>
-              <Left>11.34745cm</Left>
+              <Left>10.39495cm</Left>
               <Height>0.72524cm</Height>
-              <Width>4.66958cm</Width>
+              <Width>5.62208cm</Width>
               <ZIndex>2</ZIndex>
               <Style>
                 <Border>
@@ -614,10 +614,10 @@ Format(Fields!SaldoRestante.Value, "N2")</Value>
         </PageHeader>
         <PageHeight>29.7cm</PageHeight>
         <PageWidth>21cm</PageWidth>
-        <LeftMargin>2cm</LeftMargin>
-        <RightMargin>2cm</RightMargin>
-        <TopMargin>2cm</TopMargin>
-        <BottomMargin>2cm</BottomMargin>
+        <LeftMargin>1cm</LeftMargin>
+        <RightMargin>1cm</RightMargin>
+        <TopMargin>1.5cm</TopMargin>
+        <BottomMargin>1.5cm</BottomMargin>
         <ColumnSpacing>0.13cm</ColumnSpacing>
         <Style />
       </Page>
