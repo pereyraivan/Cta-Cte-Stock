@@ -47,12 +47,17 @@ namespace VentaCredimax.Formularios
             // Obtener el número de la cuota seleccionada
             int numeroCuotaSeleccionada = Convert.ToInt32(dgvCuotas.CurrentRow.Cells["NumeroDeCuota"].Value);
             int ventaId = Convert.ToInt32(dgvCuotas.CurrentRow.Cells["VentaId"].Value);
+            string estadoCuota = dgvCuotas.CurrentRow.Cells["Estado"].Value.ToString();
             List<CuotaDTO> cuotas = _gestorCuotas.ObtenerCuotasPorVenta(ventaId);
             
             bool hayCuotasAnterioresPendientes = cuotas
             .Where(c => c.NumeroDeCuota < numeroCuotaSeleccionada)
             .Any(c => c.Estado != "Pagada"); // Estado = false significa pendiente
-
+            if(estadoCuota == "Pagada")
+            {
+                MessageBox.Show("La cuota ya se encuentra pagada.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             if (hayCuotasAnterioresPendientes)
             {
                 MessageBox.Show("Tiene cuotas anteriores pendientes de pago.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -134,14 +139,20 @@ namespace VentaCredimax.Formularios
 
         private void btnImprimirComprobante_Click(object sender, EventArgs e)
         {
+            int ventaId = Convert.ToInt32(dgvCuotas.CurrentRow.Cells["VentaId"].Value);
+            int numeroCuota = Convert.ToInt32(dgvCuotas.CurrentRow.Cells["NumeroDeCuota"].Value);
+            MostrarReporte(ventaId, numeroCuota);
+        }
+
+        private void MostrarReporte(int ventaId, int numeroCuota)
+        {
             if (dgvCuotas.CurrentRow == null)
             {
                 MessageBox.Show("Seleccione una cuota para imprimir el recibo.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
             // Obtener datos de la cuota seleccionada
-            int ventaId = Convert.ToInt32(dgvCuotas.CurrentRow.Cells["VentaId"].Value);
-            int numeroCuota = Convert.ToInt32(dgvCuotas.CurrentRow.Cells["NumeroDeCuota"].Value);
+         
             string estado = dgvCuotas.CurrentRow.Cells["Estado"].Value?.ToString();
 
             if (estado == "Pendiente")
@@ -149,16 +160,11 @@ namespace VentaCredimax.Formularios
                 MessageBox.Show("No se puede imprimir el recibo porque la cuota no está pagada.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            MostrarReporte(ventaId, numeroCuota);
-        }
-
-        private void MostrarReporte(int ventaId, int numeroCuota)
-        {
             try
             {
                 // Crear formulario de reporte
                 frmReportReciboDePago frmReporte = new frmReportReciboDePago(ventaId, numeroCuota);
-                frmReporte.ShowDialog();
+                //frmReporte.ShowDialog();
             }
             catch (Exception ex)
             {

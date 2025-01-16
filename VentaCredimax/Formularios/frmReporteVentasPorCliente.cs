@@ -12,46 +12,44 @@ using System.Windows.Forms;
 
 namespace VentaCredimax.Formularios
 {
-    public partial class frmReportReciboDePago : Form
+    public partial class frmReporteVentasPorCliente : Form
     {
-        private int _ventaId;
-        private int _numeroCuota;
-        public frmReportReciboDePago(int ventaId, int numCuota)
+        private int _ClientId;
+        public frmReporteVentasPorCliente(int clientId)
         {
             InitializeComponent();
-            this._ventaId = ventaId;
-            this._numeroCuota = numCuota;
-            imprimirReciboPdf();
+            _ClientId = clientId;
+            imprimirHistorialVentaPorClientePdf();
         }
 
-        private void frmReportReciboDePago_Load(object sender, EventArgs e)
+        private void frmReporteVentasPorCliente_Load(object sender, EventArgs e)
         {
-            
+
+            this.rvHistorialVentasPorCliente.RefreshReport();
         }
-        private void imprimirReciboPdf()
+        private void imprimirHistorialVentaPorClientePdf()
         {
             try
             {
                 // Configurar en modo remoto (Server Report)
-                rvReciboDePago.ProcessingMode = ProcessingMode.Remote;
-                rvReciboDePago.ServerReport.ReportServerUrl = new Uri("http://localhost/reportserver");
-                rvReciboDePago.ServerReport.ReportPath = "/Reportes/Recibo";
+                rvHistorialVentasPorCliente.ProcessingMode = ProcessingMode.Remote;
+                rvHistorialVentasPorCliente.ServerReport.ReportServerUrl = new Uri("http://localhost/reportserver");
+                rvHistorialVentasPorCliente.ServerReport.ReportPath = "/Reportes/VentasPorCliente";
 
                 // Pasar parámetros al reporte
                 ReportParameter[] parametros = new ReportParameter[]
                 {
-                new ReportParameter("VentaId", _ventaId.ToString()),
-                new ReportParameter("NumeroDeCuota", _numeroCuota.ToString())
+                     new ReportParameter("ClientId", _ClientId.ToString()),
                 };
 
-                rvReciboDePago.ServerReport.SetParameters(parametros);
+                rvHistorialVentasPorCliente.ServerReport.SetParameters(parametros);
 
                 // Renderizar el reporte en formato PDF
                 string mimeType, encoding, fileNameExtension;
                 string[] streams;
                 Warning[] warnings;
 
-                byte[] pdfBytes = rvReciboDePago.ServerReport.Render(
+                byte[] pdfBytes = rvHistorialVentasPorCliente.ServerReport.Render(
                     "PDF", // Formato de exportación
                     null,  // Configuración del dispositivo
                     out mimeType,
@@ -61,7 +59,7 @@ namespace VentaCredimax.Formularios
                     out warnings);
 
                 // Guardar el PDF en un archivo temporal
-                string tempFilePath = Path.Combine(Path.GetTempPath(), "ReporteRecibo.pdf");
+                string tempFilePath = Path.Combine(Path.GetTempPath(), "VentasPorCliente.pdf");
                 File.WriteAllBytes(tempFilePath, pdfBytes);
 
                 // Abrir el PDF automáticamente
@@ -75,7 +73,7 @@ namespace VentaCredimax.Formularios
             {
                 MessageBox.Show($"Error al cargar el reporte: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            this.rvReciboDePago.RefreshReport();
+            this.rvHistorialVentasPorCliente.RefreshReport();
         }
     }
 }

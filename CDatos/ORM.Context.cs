@@ -47,5 +47,23 @@ namespace CDatos
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReciboDePago_Result>("ReciboDePago", ventaIdParameter, numeroDeCuotaParameter);
         }
+    
+        public virtual ObjectResult<sp_GetVentasByClientId_Result> sp_GetVentasByClientId(Nullable<int> clientId)
+        {
+            var clientIdParameter = clientId.HasValue ?
+                new ObjectParameter("ClientId", clientId) :
+                new ObjectParameter("ClientId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetVentasByClientId_Result>("sp_GetVentasByClientId", clientIdParameter);
+        }
+    
+        public virtual ObjectResult<ComprobanteDePago_Result> ComprobanteDePago(Nullable<int> ventaId)
+        {
+            var ventaIdParameter = ventaId.HasValue ?
+                new ObjectParameter("VentaId", ventaId) :
+                new ObjectParameter("VentaId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ComprobanteDePago_Result>("ComprobanteDePago", ventaIdParameter);
+        }
     }
 }
