@@ -19,7 +19,9 @@ namespace CEntidades.DTOs
         public DateTime? FechaDeInicio { get; set; }
         public DateTime? FechaDeCancelacion { get; set; }
         public DateTime? FechaAnulacion { get; set; }
-        public bool CuotasVencidas { get; set; }  
+        public bool CuotasVencidas { get; set; }
+        public int? Cantidad { get; set; }
+        public decimal? Total { get; set; }
 
     }
 }

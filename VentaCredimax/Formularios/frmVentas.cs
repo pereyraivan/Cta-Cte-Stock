@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -78,25 +79,36 @@ namespace VentaCredimax.Formularios
         }
         private void RegistrarVenta()
         {
+            decimal precio;
+            int cantidad;
             if (cbSeleccionCliente.Text != "" || txtArticulo.Text != "")
             {
                 var venta = new Venta();
-                
+
                 venta.ClientId = (int)cbSeleccionCliente.SelectedValue;
                 venta.Articulo = txtArticulo.Text;
-                venta.Talle = string.IsNullOrEmpty(txtTalle.Text)? (int?)null :  Convert.ToInt32(txtTalle.Text);
+                venta.Talle = string.IsNullOrEmpty(txtTalle.Text) ? (int?)null : Convert.ToInt32(txtTalle.Text);
                 FormaDePago formaDePagoSeleccionada = (FormaDePago)cbFormaPago.SelectedItem;
                 venta.FormaDePagoId = (int)formaDePagoSeleccionada;
                 venta.Precio = Convert.ToDecimal(txtPrecio.Text);
                 venta.Cuotas = Convert.ToInt32(txtCuotas.Text);
-                venta.FechaDeInicio = dtFechaVenta.Value;
-                venta.FechaDeCancelacion = dtFechaVenta.Value;
+                venta.FechaDeInicio = DateTime.Now;
+                venta.FechaDeCancelacion = DateTime.Now;
+                venta.Cantidad=Convert.ToInt32( txtCantidad.Text);
+                if (decimal.TryParse(txtPrecio.Text, out precio) && int.TryParse(txtCantidad.Text, out cantidad))
+                {
+                    venta.Total = precio * cantidad;
+                }
+                else
+                {
+                    MessageBox.Show("Por favor, ingresa valores válidos en los campos de precio y cantidad.");
+                }
                 venta.FechaAnulacion = null;
 
                 _gestorVenta.RegistrarVenta(venta);
                 MessageBox.Show("Operación Exitosa", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 errorProvider1.Clear();
-            }     
+            }
             {
                 if (cbSeleccionCliente.Text == "")
 
@@ -130,8 +142,9 @@ namespace VentaCredimax.Formularios
             cbFormaPago.SelectedIndex = -1;
             txtPrecio.Text = "";
             txtCuotas.Text = "";
-            dtFechaVenta.Value = DateTime.Now;
             dtpFechaCancelacion.Value = DateTime.Now;
+            txtCantidad.Text = "";
+            lblTotal.Text = "";
 
             cbFormaPago.SelectedIndexChanged += cbFormaPago_SelectedIndexChanged;
         }
@@ -143,13 +156,13 @@ namespace VentaCredimax.Formularios
         }
         private void OcultarColumnas()
         {
-            if(dgvVentas.Rows.Count > 0)
+            if (dgvVentas.Rows.Count > 0)
             {
                 dgvVentas.Columns["VentaId"].Visible = false;
                 dgvVentas.Columns["IdCliente"].Visible = false;
                 dgvVentas.Columns["FechaAnulacion"].Visible = false;
                 dgvVentas.Columns["CuotasVencidas"].Visible = false;
-            }       
+            }
         }
         private void dgvVentas_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -168,7 +181,8 @@ namespace VentaCredimax.Formularios
                 cbFormaPago.Text = dgvVentas.CurrentRow.Cells["FormaDePago"].Value?.ToString();
                 txtPrecio.Text = dgvVentas.CurrentRow.Cells["Precio"].Value?.ToString();
                 txtCuotas.Text = dgvVentas.CurrentRow.Cells["Cuotas"].Value?.ToString();
-                dtFechaVenta.Value = DateTime.Parse(dgvVentas.CurrentRow.Cells["FechaDeInicio"].Value?.ToString() ?? DateTime.Now.ToString());
+                txtCantidad.Text = dgvVentas.CurrentRow.Cells["Cantidad"].Value?.ToString();
+                lblTotal.Text = dgvVentas.CurrentRow.Cells["Total"].Value?.ToString();
                 dtpFechaCancelacion.Value = DateTime.Parse(dgvVentas.CurrentRow.Cells["FechaDeCancelacion"].Value?.ToString() ?? DateTime.Now.ToString());
 
                 id = dgvVentas.CurrentRow.Cells["VentaId"].Value.ToString();
@@ -189,18 +203,20 @@ namespace VentaCredimax.Formularios
                     venta.Talle = string.IsNullOrEmpty(txtTalle.Text) ? (int?)null : Convert.ToInt32(txtTalle.Text);
                     venta.Precio = string.IsNullOrEmpty(txtPrecio.Text) ? (decimal?)null : Convert.ToDecimal(txtPrecio.Text);
                     venta.Cuotas = Convert.ToInt32(txtCuotas.Text);
-                    venta.FechaDeInicio = dtFechaVenta.Value;
+                    venta.Cantidad = Convert.ToInt32(txtCantidad.Text);
+                    venta.Total = Convert.ToDecimal(lblTotal.Text);
+                    venta.FechaDeInicio = DateTime.Now;
                     venta.FechaDeCancelacion = dtpFechaCancelacion.Value;
                     venta.FechaAnulacion = null;
-                
-             
+
+
                     _gestorVenta.ModificarVenta(venta);
                     MessageBox.Show("Operación Exitosa", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     errorProvider1.Clear();
                     btnEditarVenta.Enabled = false;
                     button1.Enabled = true;
 
-                 }
+                }
                 catch (InvalidOperationException ex)
                 {
                     MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -260,7 +276,8 @@ namespace VentaCredimax.Formularios
             dgvVentas.Columns["FechaDeInicio"].HeaderText = "Fecha Venta";
             dgvVentas.Columns["FechaDeCancelacion"].HeaderText = "Cancelación pagos";
             dgvVentas.Columns["Precio"].DefaultCellStyle.Format = "N2";
-        }    
+            dgvVentas.Columns["Total"].DefaultCellStyle.Format = "N2";
+        }
         private void button2_Click(object sender, EventArgs e)
         {
             frmCalcularCuotas frmCalcularCuotas = new frmCalcularCuotas();
@@ -277,7 +294,7 @@ namespace VentaCredimax.Formularios
                 return;
             }
             // Obtener la fecha de venta
-            DateTime fechaVenta = dtFechaVenta.Value;
+            DateTime fechaVenta = DateTime.Now;
 
             // Obtener la cantidad de cuotas
             int cantidadCuotas;
@@ -330,11 +347,6 @@ namespace VentaCredimax.Formularios
             btnEditarVenta.Enabled = false;
             button1.Enabled = true;
         }
-        private void frmVentas_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void button3_Click(object sender, EventArgs e)
         {
             CancelarVenta();
@@ -368,11 +380,43 @@ namespace VentaCredimax.Formularios
 
         private void cbFormaPago_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (esModificacion && cbFormaPago.SelectedItem != null)
+            if (txtCuotas.Text != "" && cbFormaPago.SelectedItem != null)
             {
                 CalcularFechaFinalizacionPago();
             }
             esModificacion = false;
+        }
+        private decimal CalcularTotal()
+        {
+            decimal precio = 0;
+            int cantidad;
+            decimal total = 0;
+            if (decimal.TryParse(txtPrecio.Text, out precio) && int.TryParse(txtCantidad.Text, out cantidad))
+            {
+                total = precio * cantidad;
+            }
+            return total;
+        }
+
+        private void frmVentas_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtCantidad_Leave(object sender, EventArgs e)
+        {
+            if(txtPrecio.Text != "" && txtCantidad.Text != "")
+            {
+               lblTotal.Text = CalcularTotal().ToString("N2");
+            }          
+        }
+
+        private void txtPrecio_Leave(object sender, EventArgs e)
+        {
+            if (txtPrecio.Text != "" && txtCantidad.Text != "")
+            {
+                lblTotal.Text = CalcularTotal().ToString("N2");
+            }
         }
     }
 }

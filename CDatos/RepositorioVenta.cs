@@ -100,6 +100,8 @@ namespace CDatos
                                   Cuotas = v.Cuotas,
                                   FechaDeInicio = v.FechaDeInicio,
                                   FechaDeCancelacion = v.FechaDeCancelacion,
+                                  Cantidad = v.Cantidad,
+                                  Total = v.Total,
                                   FechaAnulacion = v.FechaAnulacion
                               }).ToList();
                 }
@@ -135,6 +137,8 @@ namespace CDatos
                                   FechaDeInicio = v.FechaDeInicio,
                                   FechaDeCancelacion = v.FechaDeCancelacion,
                                   FechaAnulacion = v.FechaAnulacion,
+                                  Cantidad = v.Cantidad,
+                                  Total = v.Total,
                                   CuotasVencidas = db.Cuota.Any(cuota => cuota.VentaId == v.VentaId && cuota.FechaProgramada < DateTime.Now && cuota.FechaPago == null)
                               })
                               .ToList();
@@ -193,6 +197,8 @@ namespace CDatos
                                   Cuotas = v.Cuotas,
                                   FechaDeInicio = v.FechaDeInicio,
                                   FechaDeCancelacion = v.FechaDeCancelacion,
+                                  Cantidad = v.Cantidad,
+                                  Total = v.Total,
                                   FechaAnulacion = v.FechaAnulacion
                               }).ToList();
                 }
@@ -229,6 +235,8 @@ namespace CDatos
                                   Cuotas = v.Cuotas,
                                   FechaDeInicio = v.FechaDeInicio,
                                   FechaDeCancelacion = v.FechaDeCancelacion,
+                                  Cantidad = v.Cantidad,
+                                  Total = v.Total,
                                   FechaAnulacion = v.FechaAnulacion
                               }).ToList();
                 }
@@ -321,6 +329,8 @@ namespace CDatos
                     editarVenta.FechaDeCancelacion = venta.FechaDeCancelacion;
                     editarVenta.Precio = venta.Precio;
                     editarVenta.Cuotas = venta.Cuotas;
+                    editarVenta.Cantidad = venta.Cantidad;
+                    editarVenta.Total = venta.Total;
              
                     db.SaveChanges();
                 }

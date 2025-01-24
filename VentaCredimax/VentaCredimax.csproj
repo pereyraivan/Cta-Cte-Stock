@@ -87,6 +87,12 @@
     <Compile Include="Formularios\frmCliente.Designer.cs">
       <DependentUpon>frmCliente.cs</DependentUpon>
     </Compile>
+    <Compile Include="Formularios\frmComprobanteDeVenta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\frmComprobanteDeVenta.Designer.cs">
+      <DependentUpon>frmComprobanteDeVenta.cs</DependentUpon>
+    </Compile>
     <Compile Include="Formularios\frmControlCuotas.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -137,6 +143,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\frmCliente.resx">
       <DependentUpon>frmCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\frmComprobanteDeVenta.resx">
+      <DependentUpon>frmComprobanteDeVenta.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\frmControlCuotas.resx">
       <DependentUpon>frmControlCuotas.cs</DependentUpon>

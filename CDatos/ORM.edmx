@@ -70,6 +70,8 @@ warning 6002: The table/view 'VentasCredimax.dbo.ReciboControl' does not have a 
           <Property Name="FechaAnulacion" Type="datetime" />
           <Property Name="Precio" Type="decimal" Precision="18" Scale="2" />
           <Property Name="Cuotas" Type="int" />
+          <Property Name="Cantidad" Type="int" />
+          <Property Name="Total" Type="decimal" Precision="18" Scale="2" />
         </EntityType>
         <Function Name="ComprobanteDePago" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="VentaId" Type="int" Mode="In" />
@@ -159,6 +161,8 @@ warning 6002: The table/view 'VentasCredimax.dbo.ReciboControl' does not have a 
           <Property Name="FechaAnulacion" Type="DateTime" Precision="3" />
           <Property Name="Precio" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="Cuotas" Type="Int32" />
+          <Property Name="Cantidad" Type="Int32" />
+          <Property Name="Total" Type="Decimal" Precision="18" Scale="2" />
         </EntityType>
         <EntityType Name="Cuota">
           <Key>
@@ -229,6 +233,8 @@ warning 6002: The table/view 'VentasCredimax.dbo.ReciboControl' does not have a 
           <Property Type="Int32" Name="Talle" Nullable="true" />
           <Property Type="DateTime" Name="FechaDeInicio" Nullable="false" />
           <Property Type="Decimal" Name="Precio" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Int32" Name="Cantidad" Nullable="true" />
+          <Property Type="Decimal" Name="Total" Nullable="true" Precision="18" Scale="2" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -271,6 +277,8 @@ warning 6002: The table/view 'VentasCredimax.dbo.ReciboControl' does not have a 
           <EntitySetMapping Name="Venta">
             <EntityTypeMapping TypeName="VentasCredimaxModel.Venta">
               <MappingFragment StoreEntitySet="Venta">
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
                 <ScalarProperty Name="Cuotas" ColumnName="Cuotas" />
                 <ScalarProperty Name="Precio" ColumnName="Precio" />
                 <ScalarProperty Name="FechaAnulacion" ColumnName="FechaAnulacion" />
@@ -364,6 +372,8 @@ warning 6002: The table/view 'VentasCredimax.dbo.ReciboControl' does not have a 
                 <ScalarProperty Name="Talle" ColumnName="Talle" />
                 <ScalarProperty Name="FechaDeInicio" ColumnName="FechaDeInicio" />
                 <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

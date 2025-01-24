@@ -24,5 +24,7 @@ namespace CEntidades
         public Nullable<int> Talle { get; set; }
         public System.DateTime FechaDeInicio { get; set; }
         public Nullable<decimal> Precio { get; set; }
+        public Nullable<int> Cantidad { get; set; }
+        public Nullable<decimal> Total { get; set; }
     }
 }
