@@ -17,9 +17,13 @@ namespace CLogica
         {
             _repositorioVenta.RegistrarVenta(venta);
         }
-        public List<VentaDTO> ListarVentas()
+        public List<VentaDTO> ListarVentas(string criterioOrden)
         {
-            return _repositorioVenta.ListarVentas();
+            return _repositorioVenta.ListarVentas(criterioOrden);
+        }
+        public List<VentaDTO> ListarVentasFormularioVentas(string criterioOrden)
+        {
+            return _repositorioVenta.ListarVentas(criterioOrden).Where(x => x.FechaAnulacion == null).ToList();
         }
         public List<VentaDTO> ListarVentasMenu(string criterioOrden)
         {

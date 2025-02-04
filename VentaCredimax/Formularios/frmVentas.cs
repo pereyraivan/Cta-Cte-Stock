@@ -23,12 +23,7 @@ namespace VentaCredimax.Formularios
         public frmVentas()
         {
             InitializeComponent();
-            CargarComboCliente();
-            CargarFormaDePagoComboBox();
-            ListarVentas();
-            OcultarColumnas();
-            FormatoColumnasDataGrid();
-            btnEditarVenta.Enabled = false;
+           
         }
         private void btnBuscarCliente_Click(object sender, EventArgs e)
         {
@@ -93,7 +88,7 @@ namespace VentaCredimax.Formularios
                 venta.Precio = Convert.ToDecimal(txtPrecio.Text);
                 venta.Cuotas = Convert.ToInt32(txtCuotas.Text);
                 venta.FechaDeInicio = DateTime.Now;
-                venta.FechaDeCancelacion = DateTime.Now;
+                venta.FechaDeCancelacion = dtpFechaCancelacion.Value;
                 venta.Cantidad=Convert.ToInt32( txtCantidad.Text);
                 if (decimal.TryParse(txtPrecio.Text, out precio) && int.TryParse(txtCantidad.Text, out cantidad))
                 {
@@ -150,7 +145,7 @@ namespace VentaCredimax.Formularios
         }
         private void ListarVentas()
         {
-            dgvVentas.DataSource = _gestorVenta.ListarVentas();
+            dgvVentas.DataSource = _gestorVenta.ListarVentasFormularioVentas(txtBuscar.Text);
             FormatoColumnasDataGrid();
 
         }
@@ -277,6 +272,7 @@ namespace VentaCredimax.Formularios
             dgvVentas.Columns["FechaDeCancelacion"].HeaderText = "Cancelación pagos";
             dgvVentas.Columns["Precio"].DefaultCellStyle.Format = "N2";
             dgvVentas.Columns["Total"].DefaultCellStyle.Format = "N2";
+            dgvVentas.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
         }
         private void button2_Click(object sender, EventArgs e)
         {
@@ -361,6 +357,11 @@ namespace VentaCredimax.Formularios
         }
         private void Buscar()
         {
+            if (cbBuscarPor.SelectedItem == null)
+            {
+                MessageBox.Show("Debe seleccionar un criterio de búsqueda.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             string selectedValue = cbBuscarPor.SelectedItem.ToString();
             switch (selectedValue)
             {
@@ -400,7 +401,12 @@ namespace VentaCredimax.Formularios
 
         private void frmVentas_Load(object sender, EventArgs e)
         {
-
+            CargarComboCliente();
+            CargarFormaDePagoComboBox();
+            ListarVentas();
+            OcultarColumnas();
+            FormatoColumnasDataGrid();
+            btnEditarVenta.Enabled = false;
         }
 
         private void txtCantidad_Leave(object sender, EventArgs e)
@@ -417,6 +423,32 @@ namespace VentaCredimax.Formularios
             {
                 lblTotal.Text = CalcularTotal().ToString("N2");
             }
+        }
+
+        private void MostrarReporteComprobanteDeVenta(int ventaId)
+        {
+            if (dgvVentas.CurrentRow == null)
+            {
+                MessageBox.Show("Seleccione una cuota para imprimir el recibo.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+           
+            try
+            {
+                // Crear formulario de reporte
+                frmComprobanteDeVenta frmReporte = new frmComprobanteDeVenta(ventaId);
+                //frmReporte.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al mostrar el reporte: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnImprimirVenta_Click(object sender, EventArgs e)
+        {
+            int ventaId = Convert.ToInt32(dgvVentas.CurrentRow.Cells["VentaId"].Value);
+            MostrarReporteComprobanteDeVenta(ventaId);
         }
     }
 }

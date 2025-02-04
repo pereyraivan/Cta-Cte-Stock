@@ -9,7 +9,7 @@
       <am:Name>SSDTRS</am:Name>
       <am:Version>17.12.35527.113</am:Version>
     </am:UpdatedBy>
-    <am:LastModifiedTimestamp>2025-01-24T03:53:29.4452622Z</am:LastModifiedTimestamp>
+    <am:LastModifiedTimestamp>2025-01-25T01:09:58.0283932Z</am:LastModifiedTimestamp>
   </am:AuthoringMetadata>
   <df:DefaultFontFamily>Segoe UI</df:DefaultFontFamily>
   <AutoRefresh>0</AutoRefresh>
@@ -473,6 +473,7 @@
                     <Style>
                       <FontFamily>Berlin Sans FB</FontFamily>
                       <FontSize>16pt</FontSize>
+                      <Format>#,0.00;(#,0.00)</Format>
                     </Style>
                   </TextRun>
                 </TextRuns>

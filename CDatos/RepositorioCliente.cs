@@ -145,7 +145,7 @@ namespace CDatos
                 clientes = db.Cliente.AsQueryable().Where(x => x.Nombre.ToLower().Contains(nombre)
                            && x.Apellido.ToLower().Contains(apellido)
                            && x.DNI == numDoc
-                           && x.FechaAnulacion != null).ToList();
+                           && x.FechaAnulacion == null).ToList();
             }
             return clientes;
         }

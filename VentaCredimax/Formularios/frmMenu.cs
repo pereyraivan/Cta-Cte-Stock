@@ -70,6 +70,8 @@ namespace VentaCredimax.Formularios
             dgvVentasMenu.DataSource = _gestorVenta.ListarVentasMenu(criterioSeleccionado);
             OcultarColumnas();
             FormatearFilas();
+            EstiloDataGrid();
+            
         }
         private void FiltrarVentasPorCliente()
         {
@@ -82,7 +84,12 @@ namespace VentaCredimax.Formularios
             OcultarColumnas();
         }
         private void Buscar()
-        {
+       {
+            if (cbBuscarPor.SelectedItem == null)
+            {
+                MessageBox.Show("Debe seleccionar un criterio de búsqueda.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             string selectedValue = cbBuscarPor.SelectedItem.ToString();
             switch (selectedValue)
             {
@@ -138,6 +145,7 @@ namespace VentaCredimax.Formularios
         private void btnNuevaVenta_Click(object sender, EventArgs e)
         {
             frmVentas venta = new frmVentas();
+            venta.FormClosed += (s, args) => ListarVentas(); // Refresca la lista al cerrar el formulario
             venta.ShowDialog();
         }
         private void btnGestionPagos_Click(object sender, EventArgs e)
@@ -233,6 +241,16 @@ namespace VentaCredimax.Formularios
             {
                 MessageBox.Show($"Error al generar el reporte: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void btnSeleccionarVenta_Click(object sender, EventArgs e)
+        {
+            ListarVentas();
+        }
+
+        private void cbBuscarPor_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -76,7 +76,7 @@ namespace CDatos
                 respuesta = e.Message;
             }
         }
-        public List<VentaDTO> ListarVentas()
+        public List<VentaDTO> ListarVentas(string criterioOrden)
         {
             List<VentaDTO> ventas = null;
             try
@@ -86,7 +86,6 @@ namespace CDatos
                     ventas = (from v in db.Venta
                               join c in db.Cliente on v.ClientId equals c.ClientId
                               join fp in db.FormaDePago on v.FormaDePagoId equals fp.FormaDePagoId
-                              where v.FechaAnulacion == null
                               orderby v.FechaDeInicio descending
                               select new VentaDTO
                               {
@@ -102,8 +101,31 @@ namespace CDatos
                                   FechaDeCancelacion = v.FechaDeCancelacion,
                                   Cantidad = v.Cantidad,
                                   Total = v.Total,
-                                  FechaAnulacion = v.FechaAnulacion
+                                  FechaAnulacion = v.FechaAnulacion,
+                                  CuotasVencidas = db.Cuota.Any(cuota => cuota.VentaId == v.VentaId && cuota.FechaProgramada < DateTime.Now && cuota.FechaPago == null)
                               }).ToList();
+
+                    switch (criterioOrden.Trim())
+                    {
+                        case "Cuotas Vencidas":
+                            ventas = ventas
+                                .OrderByDescending(v => v.CuotasVencidas)
+                                .ThenByDescending(v => v.FechaDeInicio)
+                                .ToList();
+                            break;
+
+                        case "Fecha":
+                            ventas = ventas
+                                .OrderByDescending(v => v.FechaDeInicio)
+                                .ToList();
+                            break;
+
+                        default:
+                            ventas = ventas
+                                .OrderByDescending(v => v.FechaDeInicio)
+                                .ToList();
+                            break;
+                    }
                 }
             }
             catch (Exception ex)
@@ -182,8 +204,7 @@ namespace CDatos
                     ventas = (from v in db.Venta
                               join c in db.Cliente on v.ClientId equals c.ClientId
                               join fp in db.FormaDePago on v.FormaDePagoId equals fp.FormaDePagoId
-                              where v.FechaAnulacion == null &&
-                                    (c.Apellido + " " + c.Nombre).Contains(nombreApellidoCliente) // Filtrar por nombre y apellido
+                              where (c.Apellido + " " + c.Nombre).Contains(nombreApellidoCliente) // Filtrar por nombre y apellido
                               orderby v.FechaDeInicio descending
                               select new VentaDTO
                               {
@@ -220,8 +241,7 @@ namespace CDatos
                     ventas = (from v in db.Venta
                               join c in db.Cliente on v.ClientId equals c.ClientId
                               join fp in db.FormaDePago on v.FormaDePagoId equals fp.FormaDePagoId
-                              where v.FechaAnulacion == null &&
-                                    v.Articulo.Contains(nombreArticulo) // Filtrar por nombre del artículo
+                              where v.Articulo.Contains(nombreArticulo) // Filtrar por nombre del artículo
                               orderby v.FechaDeInicio descending
                               select new VentaDTO
                               {

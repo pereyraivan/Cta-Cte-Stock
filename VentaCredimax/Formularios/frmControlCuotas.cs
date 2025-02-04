@@ -21,10 +21,8 @@ namespace VentaCredimax.Formularios
         {
             InitializeComponent();
             VentaId = ventaId;
-            //dgvCuotas.CellFormatting += new DataGridViewCellFormattingEventHandler(dgvCuotas_CellFormatting);
-            
+            //dgvCuotas.CellFormatting += new DataGridViewCellFormattingEventHandler(dgvCuotas_CellFormatting);         
         }
-
         private void frmControlCuotas_Load(object sender, EventArgs e)
         {
             CargarCuotas();
@@ -139,11 +137,18 @@ namespace VentaCredimax.Formularios
 
         private void btnImprimirComprobante_Click(object sender, EventArgs e)
         {
-            int ventaId = Convert.ToInt32(dgvCuotas.CurrentRow.Cells["VentaId"].Value);
-            int numeroCuota = Convert.ToInt32(dgvCuotas.CurrentRow.Cells["NumeroDeCuota"].Value);
-            MostrarReporte(ventaId, numeroCuota);
+            if (dgvCuotas.CurrentRow == null)
+            {
+                MessageBox.Show("Seleccione una cuota para registrar el pago.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            else
+            {
+                int ventaId = Convert.ToInt32(dgvCuotas.CurrentRow.Cells["VentaId"].Value);
+                int numeroCuota = Convert.ToInt32(dgvCuotas.CurrentRow.Cells["NumeroDeCuota"].Value);
+                MostrarReporte(ventaId, numeroCuota);
+            }         
         }
-
         private void MostrarReporte(int ventaId, int numeroCuota)
         {
             if (dgvCuotas.CurrentRow == null)
@@ -171,6 +176,7 @@ namespace VentaCredimax.Formularios
                 MessageBox.Show($"Error al mostrar el reporte: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
     }
 }
 

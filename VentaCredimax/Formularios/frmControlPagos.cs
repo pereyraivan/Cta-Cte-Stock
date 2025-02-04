@@ -1,4 +1,6 @@
-﻿using CLogica;
+﻿using CEntidades;
+using CEntidades.DTOs;
+using CLogica;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,19 +20,31 @@ namespace VentaCredimax.Formularios
         public frmControlPagos()
         {
             InitializeComponent();
-            ListarVentas();
-            OcultarColumnas();
-            EstiloDataGrid();
         }
 
         private void frmControlPagos_Load(object sender, EventArgs e)
         {
-
+            cbOrdenarPor.SelectedIndex = 0;
+            ListarVentas();
+            OcultarColumnas();
+            EstiloDataGrid();
+            PintarFilas();
         }
         private void ListarVentas()
         {
-            dgvVentas.DataSource = _gestorVenta.ListarVentas();
+            string criterioSeleccionado = "";
+            if (cbOrdenarPor.Items.Count > 0)
+            {
+                criterioSeleccionado = cbOrdenarPor.SelectedItem.ToString();
+            }
+            else
+            {
+                MessageBox.Show("Por favor, seleccione un criterio de ordenación.");
+            }
+            dgvVentas.DataSource = _gestorVenta.ListarVentas(criterioSeleccionado);
             OcultarColumnas();
+            EstiloDataGrid();
+            PintarFilas();
         }
         private void FiltrarVentasPorCliente()
         {
@@ -44,16 +58,23 @@ namespace VentaCredimax.Formularios
         }
         private void Buscar()
         {
-            string selectedValue = cbBuscarPor.SelectedItem.ToString();
-            switch (selectedValue)
+            if(cbBuscarPor.SelectedIndex == -1)
             {
-                case "Cliente":
-                    FiltrarVentasPorCliente();
-                    break;
-                case "Articulo":
-                    FiltrarVentasPorArticulo();
-                    break;
+                MessageBox.Show("Por favor, seleccione un tipo de busqueda.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+            else
+            {
+                string selectedValue = cbBuscarPor.SelectedItem.ToString();
+                switch (selectedValue)
+                {
+                    case "Cliente":
+                        FiltrarVentasPorCliente();
+                        break;
+                    case "Articulo":
+                        FiltrarVentasPorArticulo();
+                        break;
+                }
+            }        
         }
 
         private void txtBuscar_TextChanged(object sender, EventArgs e)
@@ -91,12 +112,54 @@ namespace VentaCredimax.Formularios
 
                 // Abrir el formulario frmControlCuotas pasando el ID de la venta
                 frmControlCuotas controlCuotas = new frmControlCuotas(ventaId);
+                controlCuotas.FormClosed += (s, args) => ListarVentas();
                 controlCuotas.ShowDialog();
             }
             else
             {
                 MessageBox.Show("Seleccione una fila válida antes de hacer doble clic.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+        }
+
+        private void btnSeleccionarVenta_Click(object sender, EventArgs e)
+        {
+            // Validar que haya una fila seleccionada
+            if (dgvVentas.CurrentRow != null)
+            {
+                // Obtener el ID de la venta desde la fila seleccionada
+                int ventaId = Convert.ToInt32(dgvVentas.CurrentRow.Cells["VentaId"].Value);
+
+                // Abrir el formulario frmControlCuotas pasando el ID de la venta
+                frmControlCuotas controlCuotas = new frmControlCuotas(ventaId);
+                controlCuotas.FormClosed += (s, args) => ListarVentas();
+                controlCuotas.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Seleccione una fila válida antes de hacer doble clic.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+        private void PintarFilas()
+        {
+            if (dgvVentas.Rows.Count > 0)
+            {
+                foreach (DataGridViewRow row in dgvVentas.Rows)
+                {
+                    var venta = row.DataBoundItem as VentaDTO;
+                    if (venta != null && venta.CuotasVencidas)
+                    {
+                        row.DefaultCellStyle.BackColor = Color.LightCoral;
+                    }
+                    else if (venta != null && venta.FechaAnulacion != null)
+                    {
+                        row.DefaultCellStyle.BackColor = Color.LightGreen;
+                    }
+                }
+            }
+        }
+        private void cbOrdenarPor_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ListarVentas();
         }
     }
 }

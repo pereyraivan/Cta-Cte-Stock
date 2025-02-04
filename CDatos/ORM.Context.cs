@@ -14,7 +14,8 @@ namespace CDatos
     using System.Data.Entity.Infrastructure;
     using System.Data.Entity.Core.Objects;
     using System.Linq;
-    
+    using CEntidades;
+
     public partial class VentasCredimaxEntities : DbContext
     {
         public VentasCredimaxEntities()
@@ -34,19 +35,6 @@ namespace CDatos
         public virtual DbSet<Cuota> Cuota { get; set; }
         public virtual DbSet<ReciboControl> ReciboControl { get; set; }
     
-        public virtual ObjectResult<ReciboDePago_Result> ReciboDePago(Nullable<int> ventaId, Nullable<int> numeroDeCuota)
-        {
-            var ventaIdParameter = ventaId.HasValue ?
-                new ObjectParameter("VentaId", ventaId) :
-                new ObjectParameter("VentaId", typeof(int));
-    
-            var numeroDeCuotaParameter = numeroDeCuota.HasValue ?
-                new ObjectParameter("NumeroDeCuota", numeroDeCuota) :
-                new ObjectParameter("NumeroDeCuota", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReciboDePago_Result>("ReciboDePago", ventaIdParameter, numeroDeCuotaParameter);
-        }
-    
         public virtual ObjectResult<sp_GetVentasByClientId_Result> sp_GetVentasByClientId(Nullable<int> clientId)
         {
             var clientIdParameter = clientId.HasValue ?
@@ -63,6 +51,19 @@ namespace CDatos
                 new ObjectParameter("VentaId", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ComprobanteDePago_Result>("ComprobanteDePago", ventaIdParameter);
+        }
+    
+        public virtual ObjectResult<ReciboDePago_Result> ReciboDePago(Nullable<int> ventaId, Nullable<int> numeroDeCuota)
+        {
+            var ventaIdParameter = ventaId.HasValue ?
+                new ObjectParameter("VentaId", ventaId) :
+                new ObjectParameter("VentaId", typeof(int));
+    
+            var numeroDeCuotaParameter = numeroDeCuota.HasValue ?
+                new ObjectParameter("NumeroDeCuota", numeroDeCuota) :
+                new ObjectParameter("NumeroDeCuota", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReciboDePago_Result>("ReciboDePago", ventaIdParameter, numeroDeCuotaParameter);
         }
     }
 }
