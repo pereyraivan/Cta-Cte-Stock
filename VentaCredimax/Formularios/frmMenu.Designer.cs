@@ -30,8 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMenu));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pTituloSistema = new System.Windows.Forms.Panel();
             this.pMenuLateral = new System.Windows.Forms.Panel();
             this.pSubMenuInformes = new System.Windows.Forms.Panel();
@@ -49,15 +49,14 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btnNuevaVenta = new System.Windows.Forms.Button();
             this.panel7 = new System.Windows.Forms.Panel();
+            this.btnActualizarVentas = new System.Windows.Forms.Button();
             this.cbOrdenarPor = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.cbBuscarPor = new System.Windows.Forms.ComboBox();
             this.txtBuscar = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.dgvVentasMenu = new System.Windows.Forms.DataGridView();
-            this.btnActualizarVentas = new System.Windows.Forms.Button();
             this.TTAyudaMenu = new System.Windows.Forms.ToolTip(this.components);
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.pMenuLateral.SuspendLayout();
             this.pSubMenuInformes.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -152,6 +151,7 @@
             this.btnInformeCuotas.TabIndex = 9;
             this.btnInformeCuotas.Text = "&Cuotas";
             this.btnInformeCuotas.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.TTAyudaMenu.SetToolTip(this.btnInformeCuotas, "Seleccione una venta ");
             this.btnInformeCuotas.UseVisualStyleBackColor = true;
             this.btnInformeCuotas.Click += new System.EventHandler(this.btnInformeCuotas_Click);
             // 
@@ -265,7 +265,6 @@
             // 
             // panel7
             // 
-            this.panel7.Controls.Add(this.toolStrip1);
             this.panel7.Controls.Add(this.btnActualizarVentas);
             this.panel7.Controls.Add(this.cbOrdenarPor);
             this.panel7.Controls.Add(this.label1);
@@ -279,6 +278,20 @@
             this.panel7.Size = new System.Drawing.Size(1258, 743);
             this.panel7.TabIndex = 3;
             // 
+            // btnActualizarVentas
+            // 
+            this.btnActualizarVentas.BackColor = System.Drawing.Color.Azure;
+            this.btnActualizarVentas.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnActualizarVentas.BackgroundImage")));
+            this.btnActualizarVentas.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnActualizarVentas.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnActualizarVentas.Location = new System.Drawing.Point(1160, 16);
+            this.btnActualizarVentas.Name = "btnActualizarVentas";
+            this.btnActualizarVentas.Size = new System.Drawing.Size(63, 53);
+            this.btnActualizarVentas.TabIndex = 42;
+            this.TTAyudaMenu.SetToolTip(this.btnActualizarVentas, "Actualizar Ventas");
+            this.btnActualizarVentas.UseVisualStyleBackColor = false;
+            this.btnActualizarVentas.Click += new System.EventHandler(this.btnSeleccionarVenta_Click);
+            // 
             // cbOrdenarPor
             // 
             this.cbOrdenarPor.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -287,7 +300,7 @@
             this.cbOrdenarPor.Items.AddRange(new object[] {
             "Fecha ",
             "Cuotas Vencidas "});
-            this.cbOrdenarPor.Location = new System.Drawing.Point(923, 26);
+            this.cbOrdenarPor.Location = new System.Drawing.Point(892, 26);
             this.cbOrdenarPor.Name = "cbOrdenarPor";
             this.cbOrdenarPor.Size = new System.Drawing.Size(214, 34);
             this.cbOrdenarPor.TabIndex = 41;
@@ -297,7 +310,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(773, 30);
+            this.label1.Location = new System.Drawing.Point(742, 30);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(146, 26);
             this.label1.TabIndex = 40;
@@ -313,7 +326,7 @@
             "Articulo"});
             this.cbBuscarPor.Location = new System.Drawing.Point(166, 26);
             this.cbBuscarPor.Name = "cbBuscarPor";
-            this.cbBuscarPor.Size = new System.Drawing.Size(214, 34);
+            this.cbBuscarPor.Size = new System.Drawing.Size(157, 34);
             this.cbBuscarPor.TabIndex = 37;
             this.cbBuscarPor.SelectedIndexChanged += new System.EventHandler(this.cbBuscarPor_SelectedIndexChanged);
             // 
@@ -321,7 +334,7 @@
             // 
             this.txtBuscar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtBuscar.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBuscar.Location = new System.Drawing.Point(389, 27);
+            this.txtBuscar.Location = new System.Drawing.Point(333, 27);
             this.txtBuscar.Name = "txtBuscar";
             this.txtBuscar.Size = new System.Drawing.Size(369, 32);
             this.txtBuscar.TabIndex = 38;
@@ -341,23 +354,23 @@
             // 
             this.dgvVentasMenu.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgvVentasMenu.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.LightSkyBlue;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvVentasMenu.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.LightSkyBlue;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvVentasMenu.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvVentasMenu.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.LightSkyBlue;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvVentasMenu.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.LightSkyBlue;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvVentasMenu.DefaultCellStyle = dataGridViewCellStyle4;
             this.dgvVentasMenu.Location = new System.Drawing.Point(27, 86);
             this.dgvVentasMenu.Name = "dgvVentasMenu";
             this.dgvVentasMenu.ReadOnly = true;
@@ -365,28 +378,6 @@
             this.dgvVentasMenu.Size = new System.Drawing.Size(1200, 651);
             this.dgvVentasMenu.TabIndex = 36;
             this.dgvVentasMenu.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvVentasMenu_CellDoubleClick);
-            // 
-            // btnActualizarVentas
-            // 
-            this.btnActualizarVentas.BackColor = System.Drawing.Color.Azure;
-            this.btnActualizarVentas.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnActualizarVentas.BackgroundImage")));
-            this.btnActualizarVentas.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnActualizarVentas.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnActualizarVentas.Location = new System.Drawing.Point(1172, 24);
-            this.btnActualizarVentas.Name = "btnActualizarVentas";
-            this.btnActualizarVentas.Size = new System.Drawing.Size(50, 48);
-            this.btnActualizarVentas.TabIndex = 42;
-            this.TTAyudaMenu.SetToolTip(this.btnActualizarVentas, "Actualizar Ventas");
-            this.btnActualizarVentas.UseVisualStyleBackColor = false;
-            this.btnActualizarVentas.Click += new System.EventHandler(this.btnSeleccionarVenta_Click);
-            // 
-            // toolStrip1
-            // 
-            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(1258, 25);
-            this.toolStrip1.TabIndex = 43;
-            this.toolStrip1.Text = "toolStrip1";
             // 
             // frmMenu
             // 
@@ -438,7 +429,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox cbOrdenarPor;
         private System.Windows.Forms.Button btnActualizarVentas;
-        private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolTip TTAyudaMenu;
     }
 }

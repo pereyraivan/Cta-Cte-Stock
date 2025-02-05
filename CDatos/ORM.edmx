@@ -83,6 +83,10 @@ warning 6002: The table/view 'VentasCredimax.dbo.ReciboControl' does not have a 
         <Function Name="sp_GetVentasByClientId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ClientId" Type="int" Mode="In" />
         </Function>
+        <Function Name="sp_ReporteVentas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="FechaDesde" Type="date" Mode="In" />
+          <Parameter Name="FechaHasta" Type="date" Mode="In" />
+        </Function>
         <EntityContainer Name="VentasCredimaxModelStoreContainer">
           <EntitySet Name="Cliente" EntityType="Self.Cliente" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Cuota" EntityType="Self.Cuota" Schema="dbo" store:Type="Tables" />
@@ -116,6 +120,10 @@ warning 6002: The table/view 'VentasCredimax.dbo.ReciboControl' does not have a 
           <FunctionImport Name="ReciboDePago" ReturnType="Collection(VentasCredimaxModel.ReciboDePago_Result)">
             <Parameter Name="VentaId" Mode="In" Type="Int32" />
             <Parameter Name="NumeroDeCuota" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_ReporteVentas" ReturnType="Collection(VentasCredimaxModel.sp_ReporteVentas_Result)">
+            <Parameter Name="FechaDesde" Mode="In" Type="DateTime" />
+            <Parameter Name="FechaHasta" Mode="In" Type="DateTime" />
           </FunctionImport>
         </EntityContainer>
         <EntityType Name="Cliente">
@@ -235,6 +243,21 @@ warning 6002: The table/view 'VentasCredimax.dbo.ReciboControl' does not have a 
           <Property Type="Decimal" Name="SaldoRestante" Nullable="true" Precision="38" Scale="2" />
           <Property Type="Int32" Name="CuotasPendientes" Nullable="true" />
           <Property Type="String" Name="NumeroRecibo" Nullable="true" MaxLength="13" />
+        </ComplexType>
+        <ComplexType Name="sp_ReporteVentas_Result">
+          <Property Type="Int32" Name="VentaId" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Apellido" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="DNI" Nullable="true" />
+          <Property Type="String" Name="Articulo" Nullable="false" MaxLength="150" />
+          <Property Type="Int32" Name="Talle" Nullable="true" />
+          <Property Type="DateTime" Name="FechaDeVanta" Nullable="false" />
+          <Property Type="Decimal" Name="Precio" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Int32" Name="Cuotas" Nullable="true" />
+          <Property Type="Int32" Name="Cantidad" Nullable="true" />
+          <Property Type="String" Name="Nombre1" Nullable="false" MaxLength="30" />
+          <Property Type="Decimal" Name="Total" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="String" Name="Estado" Nullable="false" MaxLength="42" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -374,6 +397,25 @@ warning 6002: The table/view 'VentasCredimax.dbo.ReciboControl' does not have a 
                 <ScalarProperty Name="SaldoRestante" ColumnName="SaldoRestante" />
                 <ScalarProperty Name="CuotasPendientes" ColumnName="CuotasPendientes" />
                 <ScalarProperty Name="NumeroRecibo" ColumnName="NumeroRecibo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_ReporteVentas" FunctionName="VentasCredimaxModel.Store.sp_ReporteVentas">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="VentasCredimaxModel.sp_ReporteVentas_Result">
+                <ScalarProperty Name="VentaId" ColumnName="VentaId" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+                <ScalarProperty Name="DNI" ColumnName="DNI" />
+                <ScalarProperty Name="Articulo" ColumnName="Articulo" />
+                <ScalarProperty Name="Talle" ColumnName="Talle" />
+                <ScalarProperty Name="FechaDeVanta" ColumnName="FechaDeVanta" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="Cuotas" ColumnName="Cuotas" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="Nombre1" ColumnName="Nombre1" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

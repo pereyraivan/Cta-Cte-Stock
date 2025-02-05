@@ -117,6 +117,12 @@
     <Compile Include="Formularios\frmReporteVentasPorCliente.Designer.cs">
       <DependentUpon>frmReporteVentasPorCliente.cs</DependentUpon>
     </Compile>
+    <Compile Include="Formularios\frmReporteVentasPorFecha.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\frmReporteVentasPorFecha.Designer.cs">
+      <DependentUpon>frmReporteVentasPorFecha.cs</DependentUpon>
+    </Compile>
     <Compile Include="Formularios\frmReportReciboDePago.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -158,6 +164,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\frmReporteVentasPorCliente.resx">
       <DependentUpon>frmReporteVentasPorCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\frmReporteVentasPorFecha.resx">
+      <DependentUpon>frmReporteVentasPorFecha.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\frmReportReciboDePago.resx">
       <DependentUpon>frmReportReciboDePago.cs</DependentUpon>

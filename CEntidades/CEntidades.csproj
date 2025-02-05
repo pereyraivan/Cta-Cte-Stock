@@ -74,6 +74,9 @@
     <Compile Include="sp_GetVentasByClientId_Result.cs">
       <DependentUpon>ORM.tt</DependentUpon>
     </Compile>
+    <Compile Include="sp_ReporteVentas_Result.cs">
+      <DependentUpon>ORM.tt</DependentUpon>
+    </Compile>
     <Compile Include="Venta.cs">
       <DependentUpon>ORM.tt</DependentUpon>
     </Compile>
