@@ -23,7 +23,7 @@ namespace CEntidades
         public Nullable<decimal> Precio { get; set; }
         public Nullable<int> Cuotas { get; set; }
         public Nullable<int> Cantidad { get; set; }
-        public string Nombre1 { get; set; }
+        public string FormaDePago { get; set; }
         public Nullable<decimal> Total { get; set; }
         public string Estado { get; set; }
     }

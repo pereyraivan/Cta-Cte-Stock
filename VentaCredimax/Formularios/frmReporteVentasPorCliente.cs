@@ -24,7 +24,6 @@ namespace VentaCredimax.Formularios
 
         private void frmReporteVentasPorCliente_Load(object sender, EventArgs e)
         {
-
             this.rvHistorialVentasPorCliente.RefreshReport();
         }
         private void imprimirHistorialVentaPorClientePdf()

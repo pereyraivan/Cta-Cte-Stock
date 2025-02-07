@@ -54,6 +54,8 @@ namespace VentaCredimax.Formularios
         private void btnInformeVentas_Click(object sender, EventArgs e)
         {
             pSubMenuInformes.Visible = false;
+            frmReporteVentasPorFecha frmReporteVentasPorFecha = new frmReporteVentasPorFecha();
+            frmReporteVentasPorFecha.ShowDialog();
         }
 
         private void ListarVentas()

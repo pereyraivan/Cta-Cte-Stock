@@ -14,7 +14,8 @@ namespace CDatos
     using System.Data.Entity.Infrastructure;
     using System.Data.Entity.Core.Objects;
     using System.Linq;
-    
+    using CEntidades;
+
     public partial class VentasCredimaxEntities : DbContext
     {
         public VentasCredimaxEntities()

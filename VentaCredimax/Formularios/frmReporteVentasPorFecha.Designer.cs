@@ -33,16 +33,16 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.btnImprimirComprobante = new System.Windows.Forms.Button();
-            this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
+            this.rvInformeVentas = new Microsoft.Reporting.WinForms.ReportViewer();
             this.SuspendLayout();
             // 
             // dtpDesde
             // 
-            this.dtpDesde.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtpDesde.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpDesde.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpDesde.Location = new System.Drawing.Point(230, 47);
             this.dtpDesde.Name = "dtpDesde";
-            this.dtpDesde.Size = new System.Drawing.Size(200, 20);
+            this.dtpDesde.Size = new System.Drawing.Size(183, 20);
             this.dtpDesde.TabIndex = 0;
             // 
             // dtpHasta
@@ -84,21 +84,22 @@
             this.btnImprimirComprobante.TabIndex = 38;
             this.btnImprimirComprobante.Text = "&Imprimir ventas";
             this.btnImprimirComprobante.UseVisualStyleBackColor = false;
+            this.btnImprimirComprobante.Click += new System.EventHandler(this.btnImprimirComprobante_Click);
             // 
-            // reportViewer1
+            // rvInformeVentas
             // 
-            this.reportViewer1.Location = new System.Drawing.Point(1, 109);
-            this.reportViewer1.Name = "reportViewer1";
-            this.reportViewer1.ServerReport.BearerToken = null;
-            this.reportViewer1.Size = new System.Drawing.Size(1318, 584);
-            this.reportViewer1.TabIndex = 39;
+            this.rvInformeVentas.Location = new System.Drawing.Point(1, 109);
+            this.rvInformeVentas.Name = "rvInformeVentas";
+            this.rvInformeVentas.ServerReport.BearerToken = null;
+            this.rvInformeVentas.Size = new System.Drawing.Size(1318, 584);
+            this.rvInformeVentas.TabIndex = 39;
             // 
             // frmReporteVentasPorFecha
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1319, 692);
-            this.Controls.Add(this.reportViewer1);
+            this.Controls.Add(this.rvInformeVentas);
             this.Controls.Add(this.btnImprimirComprobante);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label5);
@@ -119,6 +120,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnImprimirComprobante;
-        private Microsoft.Reporting.WinForms.ReportViewer reportViewer1;
+        private Microsoft.Reporting.WinForms.ReportViewer rvInformeVentas;
     }
 }
