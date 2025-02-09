@@ -136,10 +136,13 @@
         VgAAAABJRU5ErkJggg==
 </value>
   </data>
+  <metadata name="TTAyudaMenu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
   <data name="btnInformeCuotas.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAA
-        5QAAAOUBj+WbPAAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAANXSURBVFhHzZZd
+        5AAAAOQBXaJ52AAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAANXSURBVFhHzZZd
         iIxhFMfXIuQ7n4kLTLHGbLMfM2ubaFK7yoV1YVBKCaUoJWHXlpQ2NyhR2AspJS425WbLhY8LkiJfF/K5
         Ejd2fW5YFr//u2dmJ+87786Omcm//r3Pe855zjnP85znoyRXVFdXN1RVVbUkEomhJiouCN4If1dWVp4r
         ahIKVlFRscBm4EkyCVSlfRYFAkGXEOws/KCgfzMajc6WHcmsjkQic5xO+QAjXUiAKxaoV22CNCHfSPu1
@@ -157,9 +160,6 @@
         3xxQUvIHZxjusEvReM0AAAAASUVORK5CYII=
 </value>
   </data>
-  <metadata name="TTAyudaMenu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
   <data name="btnInformes.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAB
@@ -321,9 +321,6 @@
         P87EsceiX+I5AAAAAElFTkSuQmCC
 </value>
   </data>
-  <metadata name="TTAyudaMenu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
   <data name="btnActualizarVentas.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAB

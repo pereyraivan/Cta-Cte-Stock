@@ -134,6 +134,7 @@
             this.btnInformeVentas.TabIndex = 10;
             this.btnInformeVentas.Text = "&Ventas";
             this.btnInformeVentas.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.TTAyudaMenu.SetToolTip(this.btnInformeVentas, "Imprime ventas por fechas ");
             this.btnInformeVentas.UseVisualStyleBackColor = true;
             this.btnInformeVentas.Click += new System.EventHandler(this.btnInformeVentas_Click);
             // 
@@ -151,7 +152,7 @@
             this.btnInformeCuotas.TabIndex = 9;
             this.btnInformeCuotas.Text = "&Cuotas";
             this.btnInformeCuotas.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.TTAyudaMenu.SetToolTip(this.btnInformeCuotas, "Seleccione una venta ");
+            this.TTAyudaMenu.SetToolTip(this.btnInformeCuotas, "Seleccione una venta para imprimir el historial del cliente.");
             this.btnInformeCuotas.UseVisualStyleBackColor = true;
             this.btnInformeCuotas.Click += new System.EventHandler(this.btnInformeCuotas_Click);
             // 
@@ -194,6 +195,7 @@
             this.btnGestionPagos.TabIndex = 6;
             this.btnGestionPagos.Text = "Gestion \r\nPagos";
             this.btnGestionPagos.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.TTAyudaMenu.SetToolTip(this.btnGestionPagos, "Gestionar pagos de clientes ");
             this.btnGestionPagos.UseVisualStyleBackColor = true;
             this.btnGestionPagos.Click += new System.EventHandler(this.btnGestionPagos_Click);
             // 
@@ -219,6 +221,7 @@
             this.btnGestionCliente.TabIndex = 4;
             this.btnGestionCliente.Text = "Gestion \r\nClientes";
             this.btnGestionCliente.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.TTAyudaMenu.SetToolTip(this.btnGestionCliente, "Alta, Baja y modificacion de clientes");
             this.btnGestionCliente.UseVisualStyleBackColor = true;
             this.btnGestionCliente.Click += new System.EventHandler(this.btnGestionCliente_Click);
             // 
@@ -260,6 +263,7 @@
             this.btnNuevaVenta.TabIndex = 0;
             this.btnNuevaVenta.Text = "Gestion \r\nVentas";
             this.btnNuevaVenta.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.TTAyudaMenu.SetToolTip(this.btnNuevaVenta, "Alta , Baja y modificacion de ventas");
             this.btnNuevaVenta.UseVisualStyleBackColor = true;
             this.btnNuevaVenta.Click += new System.EventHandler(this.btnNuevaVenta_Click);
             // 
@@ -300,9 +304,9 @@
             this.cbOrdenarPor.Items.AddRange(new object[] {
             "Fecha ",
             "Cuotas Vencidas "});
-            this.cbOrdenarPor.Location = new System.Drawing.Point(892, 26);
+            this.cbOrdenarPor.Location = new System.Drawing.Point(944, 26);
             this.cbOrdenarPor.Name = "cbOrdenarPor";
-            this.cbOrdenarPor.Size = new System.Drawing.Size(214, 34);
+            this.cbOrdenarPor.Size = new System.Drawing.Size(185, 34);
             this.cbOrdenarPor.TabIndex = 41;
             this.cbOrdenarPor.SelectedIndexChanged += new System.EventHandler(this.cbOrdenarPor_SelectedIndexChanged);
             // 
@@ -310,11 +314,11 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(742, 30);
+            this.label1.Location = new System.Drawing.Point(721, 30);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(146, 26);
+            this.label1.Size = new System.Drawing.Size(223, 26);
             this.label1.TabIndex = 40;
-            this.label1.Text = "Ordenar por:";
+            this.label1.Text = "Ordenar ventas por:";
             // 
             // cbBuscarPor
             // 

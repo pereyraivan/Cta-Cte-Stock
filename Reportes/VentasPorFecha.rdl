@@ -9,7 +9,7 @@
       <am:Name>SSDTRS</am:Name>
       <am:Version>17.12.35527.113</am:Version>
     </am:UpdatedBy>
-    <am:LastModifiedTimestamp>2025-02-07T00:11:34.7476422Z</am:LastModifiedTimestamp>
+    <am:LastModifiedTimestamp>2025-02-09T04:28:29.5525766Z</am:LastModifiedTimestamp>
   </am:AuthoringMetadata>
   <df:DefaultFontFamily>Segoe UI</df:DefaultFontFamily>
   <AutoRefresh>0</AutoRefresh>
@@ -106,7 +106,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>VENTAS POR FECHA </Value>
+                    <Value>REPORTE DE VENTAS</Value>
                     <Style>
                       <FontSize>18pt</FontSize>
                       <FontWeight>Bold</FontWeight>
@@ -119,7 +119,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>0.84349cm</Top>
+            <Top>0.52599cm</Top>
             <Height>0.94396cm</Height>
             <Width>20.45167cm</Width>
             <Style>
@@ -983,7 +983,7 @@
               </TablixMembers>
             </TablixRowHierarchy>
             <DataSetName>VentasPorFecha</DataSetName>
-            <Top>3.46287cm</Top>
+            <Top>2.82787cm</Top>
             <Left>0.3175cm</Left>
             <Height>1.2cm</Height>
             <Width>19.84313cm</Width>
@@ -994,6 +994,41 @@
               </Border>
             </Style>
           </Tablix>
+          <Textbox Name="Textbox5">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>="Impresión de ventas desde el " &amp; Format(Parameters!FechaDesde.Value, "dd/MM/yyyy") &amp; " hasta el " &amp; Format(Parameters!FechaHasta.Value, "dd/MM/yyyy")</Value>
+                    <Style>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox5</rd:DefaultName>
+            <Top>1.84891cm</Top>
+            <Left>0.3175cm</Left>
+            <Height>0.62646cm</Height>
+            <Width>13.49755cm</Width>
+            <ZIndex>2</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <BackgroundColor>#e7e7e7</BackgroundColor>
+              <VerticalAlign>Middle</VerticalAlign>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
         </ReportItems>
         <Height>4.4375in</Height>
         <Style />

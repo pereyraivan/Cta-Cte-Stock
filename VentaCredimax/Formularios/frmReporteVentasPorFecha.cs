@@ -54,7 +54,7 @@ namespace VentaCredimax.Formularios
                 // Configurar en modo remoto (Server Report)
                 rvInformeVentas.ProcessingMode = ProcessingMode.Remote;
                 rvInformeVentas.ServerReport.ReportServerUrl = new Uri("http://localhost/reportserver");
-                rvInformeVentas.ServerReport.ReportPath = "/Reportes/Recibo";
+                rvInformeVentas.ServerReport.ReportPath = "/Reportes/VentasPorFecha";
 
                 // Pasar parámetros al reporte
                 ReportParameter[] parametros = new ReportParameter[]
