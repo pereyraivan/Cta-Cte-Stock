@@ -62,6 +62,7 @@
             this.lblTotal = new System.Windows.Forms.Label();
             this.ttAyuda = new System.Windows.Forms.ToolTip(this.components);
             this.btnImprimirVenta = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVentas)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
@@ -131,11 +132,10 @@
             // 
             this.cbFormaPago.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbFormaPago.FormattingEnabled = true;
-            this.cbFormaPago.Location = new System.Drawing.Point(130, 264);
+            this.cbFormaPago.Location = new System.Drawing.Point(252, 264);
             this.cbFormaPago.Name = "cbFormaPago";
-            this.cbFormaPago.Size = new System.Drawing.Size(316, 34);
+            this.cbFormaPago.Size = new System.Drawing.Size(230, 34);
             this.cbFormaPago.TabIndex = 6;
-            this.cbFormaPago.Text = "Frecuencia Pago";
             this.cbFormaPago.SelectedIndexChanged += new System.EventHandler(this.cbFormaPago_SelectedIndexChanged);
             // 
             // btnBuscarCliente
@@ -395,12 +395,23 @@
             this.btnImprimirVenta.UseVisualStyleBackColor = false;
             this.btnImprimirVenta.Click += new System.EventHandler(this.btnImprimirVenta_Click);
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(8, 267);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(228, 26);
+            this.label3.TabIndex = 47;
+            this.label3.Text = "Frecuencia de pago:";
+            // 
             // frmVentas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.ClientSize = new System.Drawing.Size(1620, 600);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.btnImprimirVenta);
             this.Controls.Add(this.lblTotal);
             this.Controls.Add(this.label11);
@@ -471,5 +482,6 @@
         private System.Windows.Forms.Label lblTotal;
         private System.Windows.Forms.ToolTip ttAyuda;
         private System.Windows.Forms.Button btnImprimirVenta;
+        private System.Windows.Forms.Label label3;
     }
 }

@@ -17,13 +17,13 @@ namespace CLogica
         {
             _repositorioVenta.RegistrarVenta(venta);
         }
-        public List<VentaDTO> ListarVentas(string criterioOrden)
+        public List<VentaDTO> ListarVentas(string criterioOrden, bool mostrarTodas)
         {
-            return _repositorioVenta.ListarVentas(criterioOrden);
+            return _repositorioVenta.ListarVentas(criterioOrden, mostrarTodas);
         }
         public List<VentaDTO> ListarVentasFormularioVentas(string criterioOrden)
         {
-            return _repositorioVenta.ListarVentas(criterioOrden).Where(x => x.FechaAnulacion == null).ToList();
+            return _repositorioVenta.ListarVentas(criterioOrden, false).Where(x => x.FechaAnulacion == null).ToList();
         }
         public List<VentaDTO> ListarVentasMenu(string criterioOrden)
         {

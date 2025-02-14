@@ -373,12 +373,10 @@ namespace VentaCredimax.Formularios
                     break;
             }
         }
-
         private void txtBuscar_TextChanged(object sender, EventArgs e)
         {
             Buscar();
         }
-
         private void cbFormaPago_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (txtCuotas.Text != "" && cbFormaPago.SelectedItem != null)
@@ -398,7 +396,6 @@ namespace VentaCredimax.Formularios
             }
             return total;
         }
-
         private void frmVentas_Load(object sender, EventArgs e)
         {
             CargarComboCliente();

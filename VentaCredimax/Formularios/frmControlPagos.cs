@@ -32,6 +32,7 @@ namespace VentaCredimax.Formularios
         }
         private void ListarVentas()
         {
+            bool mostrarTodas = cbTodasVentas.Checked;
             string criterioSeleccionado = "";
             if (cbOrdenarPor.Items.Count > 0)
             {
@@ -41,7 +42,7 @@ namespace VentaCredimax.Formularios
             {
                 MessageBox.Show("Por favor, seleccione un criterio de ordenación.");
             }
-            dgvVentas.DataSource = _gestorVenta.ListarVentas(criterioSeleccionado);
+            dgvVentas.DataSource = _gestorVenta.ListarVentas(criterioSeleccionado, mostrarTodas);
             OcultarColumnas();
             EstiloDataGrid();
             PintarFilas();
@@ -158,6 +159,16 @@ namespace VentaCredimax.Formularios
             }
         }
         private void cbOrdenarPor_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ListarVentas();
+        }
+
+        private void dgvVentas_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void cbTodasVentas_CheckedChanged(object sender, EventArgs e)
         {
             ListarVentas();
         }

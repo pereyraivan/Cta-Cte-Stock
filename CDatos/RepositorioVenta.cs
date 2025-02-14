@@ -76,7 +76,7 @@ namespace CDatos
                 respuesta = e.Message;
             }
         }
-        public List<VentaDTO> ListarVentas(string criterioOrden)
+        public List<VentaDTO> ListarVentas(string criterioOrden, bool mostrarTodas)
         {
             List<VentaDTO> ventas = null;
             try
@@ -86,6 +86,7 @@ namespace CDatos
                     ventas = (from v in db.Venta
                               join c in db.Cliente on v.ClientId equals c.ClientId
                               join fp in db.FormaDePago on v.FormaDePagoId equals fp.FormaDePagoId
+                              where mostrarTodas || v.FechaAnulacion == null
                               orderby v.FechaDeInicio descending
                               select new VentaDTO
                               {
@@ -278,6 +279,7 @@ namespace CDatos
                     // Comparar los valores relevantes
                     bool editarTablaCuotas = editarVenta.Cuotas != venta.Cuotas
                                              || editarVenta.Precio != venta.Precio
+                                             || editarVenta.Total != venta.Total
                                              || editarVenta.FormaDePagoId != venta.FormaDePagoId;
                     // Eliminar cuotas existentes solo si no hay cuotas pagadas
                     bool tieneCuotaPagada = db.Cuota.Any(c => c.VentaId == venta.VentaId && c.Estado == true);
@@ -295,7 +297,7 @@ namespace CDatos
                         db.Cuota.RemoveRange(cuotasExistentes);
 
                         // Recalcular y agregar nuevas cuotas
-                        decimal montoPorCuota = (decimal)(venta.Precio / venta.Cuotas);
+                        decimal montoPorCuota = (decimal)(venta.Total / venta.Cuotas);
                         List<Cuota> nuevasCuotas = new List<Cuota>();
                         DateTime fechaVencimiento = (DateTime)venta.FechaDeInicio;
 
