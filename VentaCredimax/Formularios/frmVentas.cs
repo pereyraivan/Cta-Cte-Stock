@@ -18,6 +18,7 @@ namespace VentaCredimax.Formularios
     {
         private string id = null;
         private bool esModificacion;
+        private int idCliente;
         GestorCliente _gestorCliente = new GestorCliente();
         GestorVenta _gestorVenta = new GestorVenta();
         public frmVentas()
@@ -39,9 +40,10 @@ namespace VentaCredimax.Formularios
         }
         private void CargarComboCliente()
         {
-            cbSeleccionCliente.DataSource = _gestorCliente.CargarComboCliente();
+            cbSeleccionCliente.DataSource = null; // Limpiar antes de asignar nuevos datos
             cbSeleccionCliente.DisplayMember = "NombreCompleto"; // Muestra Apellido, Nombre (DNI)
-            cbSeleccionCliente.ValueMember = "IdCliente"; // Para identificar al cliente seleccionado
+            cbSeleccionCliente.ValueMember = "IdCliente"; // Identificador real del cliente
+            cbSeleccionCliente.DataSource = _gestorCliente.CargarComboCliente();
         }
         public void ClienteSeleccionado(string nombreCliente, string apellidoCliente, int idClienteSeleccionado, int dni)
         {
@@ -167,17 +169,18 @@ namespace VentaCredimax.Formularios
                 button1.Enabled = false;
 
                 // Obtener el ID del cliente de la venta seleccionada en el DataGridView
-                int idCliente = (int)dgvVentas.CurrentRow.Cells["IdCliente"].Value;
+                idCliente = (int)dgvVentas.CurrentRow.Cells["IdCliente"].Value;
+
                 // Asignar el valor al ComboBox
                 cbSeleccionCliente.SelectedValue = idCliente;
                 cbSeleccionCliente.Text = dgvVentas.CurrentRow.Cells["NombreCliente"].Value?.ToString();
                 txtArticulo.Text = dgvVentas.CurrentRow.Cells["Articulo"].Value?.ToString();
                 txtTalle.Text = dgvVentas.CurrentRow.Cells["Talle"].Value?.ToString();
                 cbFormaPago.Text = dgvVentas.CurrentRow.Cells["FormaDePago"].Value?.ToString();
-                txtPrecio.Text = dgvVentas.CurrentRow.Cells["Precio"].Value?.ToString();
+                txtPrecio.Text = Convert.ToDecimal(dgvVentas.CurrentRow.Cells["Precio"].Value).ToString("N2", new System.Globalization.CultureInfo("es-AR"));
                 txtCuotas.Text = dgvVentas.CurrentRow.Cells["Cuotas"].Value?.ToString();
                 txtCantidad.Text = dgvVentas.CurrentRow.Cells["Cantidad"].Value?.ToString();
-                lblTotal.Text = dgvVentas.CurrentRow.Cells["Total"].Value?.ToString();
+                lblTotal.Text = Convert.ToDecimal(dgvVentas.CurrentRow.Cells["Total"].Value).ToString("N2", new System.Globalization.CultureInfo("es-AR"));
                 dtpFechaCancelacion.Value = DateTime.Parse(dgvVentas.CurrentRow.Cells["FechaDeCancelacion"].Value?.ToString() ?? DateTime.Now.ToString());
 
                 id = dgvVentas.CurrentRow.Cells["VentaId"].Value.ToString();
@@ -192,7 +195,7 @@ namespace VentaCredimax.Formularios
                 {
                     var venta = new Venta();
                     venta.VentaId = Convert.ToInt32(id);
-                    venta.ClientId = (int)cbSeleccionCliente.SelectedValue;
+                    venta.ClientId = idCliente;
                     venta.Articulo = txtArticulo.Text;
                     venta.FormaDePagoId = (int)cbFormaPago.SelectedValue;
                     venta.Talle = string.IsNullOrEmpty(txtTalle.Text) ? (int?)null : Convert.ToInt32(txtTalle.Text);

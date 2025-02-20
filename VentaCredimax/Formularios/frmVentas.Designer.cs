@@ -97,7 +97,7 @@
             this.txtArticulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtArticulo.Location = new System.Drawing.Point(130, 90);
             this.txtArticulo.Name = "txtArticulo";
-            this.txtArticulo.Size = new System.Drawing.Size(352, 32);
+            this.txtArticulo.Size = new System.Drawing.Size(409, 32);
             this.txtArticulo.TabIndex = 3;
             // 
             // label1
