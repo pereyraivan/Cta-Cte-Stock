@@ -46,9 +46,16 @@ namespace VentaCredimax.Formularios
         private void btnInformeCuotas_Click(object sender, EventArgs e)
         {
             // Obtener el IdCliente de la columna "IdCliente"
-            int idCliente = Convert.ToInt32(dgvVentasMenu.CurrentRow.Cells["IdCliente"].Value);
-            pSubMenuInformes.Visible = false;
-            ImprimirHistorialVentasPorCliente(idCliente);
+            int idCliente = Convert.ToInt32(dgvVentasMenu?.CurrentRow?.Cells["IdCliente"]?.Value);
+            if (idCliente > 0)
+            {
+                pSubMenuInformes.Visible = false;
+                ImprimirHistorialVentasPorCliente(idCliente);
+            }
+            else
+            {
+                MessageBox.Show("Por favor, seleccione una venta del cliente para generar su historial de reporte.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         private void btnInformeVentas_Click(object sender, EventArgs e)
@@ -178,7 +185,7 @@ namespace VentaCredimax.Formularios
             // Verificar si hay una fila seleccionada en el DataGridView
             if (dgvVentasMenu.CurrentRow == null)
             {
-                MessageBox.Show("Seleccione una venta del cliente del cual desea imprimir el historial para generar el reporte.",
+                MessageBox.Show("Por favor, seleccione una venta del cliente para generar su historial de reporte.",
                                 "Aviso",
                                 MessageBoxButtons.OK,
                                 MessageBoxIcon.Warning);

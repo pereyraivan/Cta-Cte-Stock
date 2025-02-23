@@ -372,16 +372,38 @@ namespace CDatos
             {
                 using (VentasCredimaxEntities db = new VentasCredimaxEntities())
                 {
+                    EliminarCuotasPorIdVenta(id);
                     var venta = db.Venta.FirstOrDefault(x => x.VentaId == id);
                     venta.FechaAnulacion = DateTime.Today;
                     db.SaveChanges();
                 }
+
             }
             catch (Exception e)
             {
 
                 respuesta = e.Message;
             }
+        }
+        public void EliminarCuotasPorIdVenta(int ventaId)
+        {
+            using (VentasCredimaxEntities db = new VentasCredimaxEntities())
+            {
+                try
+                {
+                    var cuotas = db.Cuota.Where(c => c.VentaId == ventaId).ToList();
+                    foreach (var c in cuotas)
+                    {
+                        c.Estado = true;
+                    }
+                    db.SaveChanges() ;
+                }
+                catch(Exception e)
+                {
+
+                }
+               
+            }         
         }
 
     }

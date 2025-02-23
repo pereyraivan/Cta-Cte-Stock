@@ -9,7 +9,7 @@
       <am:Name>SSDTRS</am:Name>
       <am:Version>17.12.35527.113</am:Version>
     </am:UpdatedBy>
-    <am:LastModifiedTimestamp>2025-01-25T01:09:58.0283932Z</am:LastModifiedTimestamp>
+    <am:LastModifiedTimestamp>2025-02-23T02:51:18.7465894Z</am:LastModifiedTimestamp>
   </am:AuthoringMetadata>
   <df:DefaultFontFamily>Segoe UI</df:DefaultFontFamily>
   <AutoRefresh>0</AutoRefresh>
@@ -594,7 +594,7 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox2</rd:DefaultName>
-              <Top>2.07642cm</Top>
+              <Top>2.01292cm</Top>
               <Left>0.89641cm</Left>
               <Height>0.6cm</Height>
               <Width>1.73271cm</Width>
@@ -628,7 +628,7 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox2</rd:DefaultName>
-              <Top>2.74462cm</Top>
+              <Top>2.68112cm</Top>
               <Left>0.89641cm</Left>
               <Height>0.6cm</Height>
               <Width>1.89499cm</Width>
@@ -662,7 +662,7 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox2</rd:DefaultName>
-              <Top>3.41282cm</Top>
+              <Top>3.34932cm</Top>
               <Left>0.89641cm</Left>
               <Height>0.6cm</Height>
               <Width>1.89499cm</Width>
@@ -697,9 +697,9 @@
               </Paragraphs>
               <rd:DefaultName>Textbox2</rd:DefaultName>
               <Top>1.40821cm</Top>
-              <Left>10.94729cm</Left>
+              <Left>9.99479cm</Left>
               <Height>0.6cm</Height>
-              <Width>1.38699cm</Width>
+              <Width>1.42579cm</Width>
               <ZIndex>5</ZIndex>
               <Style>
                 <Border>
@@ -734,7 +734,7 @@
               <Top>1.39136cm</Top>
               <Left>2.86901cm</Left>
               <Height>0.6cm</Height>
-              <Width>7.73571cm</Width>
+              <Width>7.06223cm</Width>
               <ZIndex>6</ZIndex>
               <Style>
                 <Border>
@@ -766,10 +766,10 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>DNI</rd:DefaultName>
-              <Top>2.0828cm</Top>
+              <Top>2.0193cm</Top>
               <Left>2.86901cm</Left>
               <Height>0.6cm</Height>
-              <Width>7.71758cm</Width>
+              <Width>7.06223cm</Width>
               <ZIndex>7</ZIndex>
               <Style>
                 <Border>
@@ -802,10 +802,10 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Telefono</rd:DefaultName>
-              <Top>2.76013cm</Top>
+              <Top>2.69663cm</Top>
               <Left>2.86901cm</Left>
               <Height>0.6cm</Height>
-              <Width>7.55178cm</Width>
+              <Width>7.06223cm</Width>
               <ZIndex>8</ZIndex>
               <Style>
                 <Border>
@@ -837,7 +837,7 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Direccion</rd:DefaultName>
-              <Top>3.44452cm</Top>
+              <Top>3.34927cm</Top>
               <Left>2.86901cm</Left>
               <Height>0.6cm</Height>
               <Width>13.91236cm</Width>
@@ -873,9 +873,9 @@
               </Paragraphs>
               <rd:DefaultName>Textbox11</rd:DefaultName>
               <Top>1.40821cm</Top>
-              <Left>12.40836cm</Left>
+              <Left>11.45586cm</Left>
               <Height>0.6cm</Height>
-              <Width>5.37538cm</Width>
+              <Width>6.96674cm</Width>
               <ZIndex>10</ZIndex>
               <Style>
                 <Border>

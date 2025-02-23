@@ -145,10 +145,10 @@
             // cbTodasVentas
             // 
             this.cbTodasVentas.AutoSize = true;
-            this.cbTodasVentas.Font = new System.Drawing.Font("Microsoft JhengHei UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbTodasVentas.Location = new System.Drawing.Point(782, 598);
+            this.cbTodasVentas.Font = new System.Drawing.Font("Microsoft JhengHei UI", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbTodasVentas.Location = new System.Drawing.Point(764, 598);
             this.cbTodasVentas.Name = "cbTodasVentas";
-            this.cbTodasVentas.Size = new System.Drawing.Size(414, 30);
+            this.cbTodasVentas.Size = new System.Drawing.Size(429, 32);
             this.cbTodasVentas.TabIndex = 44;
             this.cbTodasVentas.Text = "Mostrar ventas canceladas y anuladas";
             this.toolTip1.SetToolTip(this.cbTodasVentas, "Muestra las ventas canceladas o anuladas");
@@ -169,6 +169,8 @@
             this.Controls.Add(this.txtBuscar);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.dgvVentas);
+            this.MaximumSize = new System.Drawing.Size(1230, 679);
+            this.MinimumSize = new System.Drawing.Size(1230, 679);
             this.Name = "frmControlPagos";
             this.Text = "Ventas activas";
             this.Load += new System.EventHandler(this.frmControlPagos_Load);

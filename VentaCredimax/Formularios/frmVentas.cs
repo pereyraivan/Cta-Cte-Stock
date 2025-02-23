@@ -24,7 +24,7 @@ namespace VentaCredimax.Formularios
         public frmVentas()
         {
             InitializeComponent();
-           
+
         }
         private void btnBuscarCliente_Click(object sender, EventArgs e)
         {
@@ -78,45 +78,52 @@ namespace VentaCredimax.Formularios
         {
             decimal precio;
             int cantidad;
-            if (cbSeleccionCliente.Text != "" || txtArticulo.Text != "")
-            {
-                var venta = new Venta();
 
-                venta.ClientId = (int)cbSeleccionCliente.SelectedValue;
-                venta.Articulo = txtArticulo.Text;
-                venta.Talle = string.IsNullOrEmpty(txtTalle.Text) ? (int?)null : Convert.ToInt32(txtTalle.Text);
-                FormaDePago formaDePagoSeleccionada = (FormaDePago)cbFormaPago.SelectedItem;
-                venta.FormaDePagoId = (int)formaDePagoSeleccionada;
-                venta.Precio = Convert.ToDecimal(txtPrecio.Text);
-                venta.Cuotas = Convert.ToInt32(txtCuotas.Text);
-                venta.FechaDeInicio = DateTime.Now;
-                venta.FechaDeCancelacion = dtpFechaCancelacion.Value;
-                venta.Cantidad=Convert.ToInt32( txtCantidad.Text);
-                if (decimal.TryParse(txtPrecio.Text, out precio) && int.TryParse(txtCantidad.Text, out cantidad))
-                {
-                    venta.Total = precio * cantidad;
-                }
-                else
-                {
-                    MessageBox.Show("Por favor, ingresa valores válidos en los campos de precio y cantidad.");
-                }
-                venta.FechaAnulacion = null;
-
-                _gestorVenta.RegistrarVenta(venta);
-                MessageBox.Show("Operación Exitosa", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                errorProvider1.Clear();
-            }
+            if (cbSeleccionCliente.Text == "" || txtArticulo.Text == "" || txtPrecio.Text == "" || txtCantidad.Text == "" || txtCuotas.Text == "")
             {
                 if (cbSeleccionCliente.Text == "")
-
-                {
                     errorProvider1.SetError(cbSeleccionCliente, "Campo obligatorio");
-                }
                 if (txtArticulo.Text == "")
-                {
                     errorProvider1.SetError(txtArticulo, "Campo obligatorio");
-                }
+                if (txtPrecio.Text == "")
+                    errorProvider1.SetError(txtPrecio, "Campo obligatorio");
+                if (txtCantidad.Text == "")
+                    errorProvider1.SetError(txtCantidad, "Campo obligatorio");
+                if (txtCuotas.Text == "")
+                    errorProvider1.SetError(txtCuotas, "Campo obligatorio");
+
+                return; // Si hay campos vacíos, no se ejecuta el resto del código
             }
+
+            var venta = new Venta();
+
+            venta.ClientId = (int)cbSeleccionCliente.SelectedValue;
+            venta.Articulo = txtArticulo.Text;
+            venta.Talle = string.IsNullOrEmpty(txtTalle.Text) ? (int?)null : Convert.ToInt32(txtTalle.Text);
+            FormaDePago formaDePagoSeleccionada = (FormaDePago)cbFormaPago.SelectedItem;
+            venta.FormaDePagoId = (int)formaDePagoSeleccionada;
+            venta.Precio = Convert.ToDecimal(txtPrecio.Text);
+            venta.Cuotas = Convert.ToInt32(txtCuotas.Text);
+            venta.FechaDeInicio = DateTime.Now;
+            venta.FechaDeCancelacion = dtpFechaCancelacion.Value;
+            venta.Cantidad = Convert.ToInt32(txtCantidad.Text);
+            if (decimal.TryParse(txtPrecio.Text, out precio) && int.TryParse(txtCantidad.Text, out cantidad))
+            {
+                venta.Total = precio * cantidad;
+            }
+            else
+            {
+                MessageBox.Show("Por favor, ingresa valores válidos en los campos de precio y cantidad.");
+            }
+            venta.FechaAnulacion = null;
+
+            _gestorVenta.RegistrarVenta(venta);
+            MessageBox.Show("Operación Exitosa", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            LimpiarCampos();
+            ListarVentas();
+            errorProvider1.Clear();
+
+
         }
         private void CargarFormaDePagoComboBox()
         {
@@ -126,7 +133,6 @@ namespace VentaCredimax.Formularios
         private void button1_Click(object sender, EventArgs e)
         {
             RegistrarVenta();
-            LimpiarCampos();
             ListarVentas();
         }
         private void LimpiarCampos()
@@ -243,7 +249,7 @@ namespace VentaCredimax.Formularios
         {
             if (dgvVentas.SelectedRows.Count > 0)
             {
-                var preguntar = MessageBox.Show("¿Realmente desea eliminar el registro?", "Aviso", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                var preguntar = MessageBox.Show("Al eliminar esta venta, se cancelarán todas las cuotas pendientes asociadas. ¿Desea continuar?", "Aviso", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (preguntar == DialogResult.Yes)
                 {
                     id = dgvVentas.CurrentRow.Cells["VentaId"].Value.ToString();
@@ -411,10 +417,10 @@ namespace VentaCredimax.Formularios
 
         private void txtCantidad_Leave(object sender, EventArgs e)
         {
-            if(txtPrecio.Text != "" && txtCantidad.Text != "")
+            if (txtPrecio.Text != "" && txtCantidad.Text != "")
             {
-               lblTotal.Text = CalcularTotal().ToString("N2");
-            }          
+                lblTotal.Text = CalcularTotal().ToString("N2");
+            }
         }
 
         private void txtPrecio_Leave(object sender, EventArgs e)
@@ -432,7 +438,7 @@ namespace VentaCredimax.Formularios
                 MessageBox.Show("Seleccione una cuota para imprimir el recibo.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-           
+
             try
             {
                 // Crear formulario de reporte
