@@ -65,7 +65,7 @@
             this.dgvClientes.ReadOnly = true;
             this.dgvClientes.RowHeadersWidth = 51;
             this.dgvClientes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvClientes.Size = new System.Drawing.Size(1624, 421);
+            this.dgvClientes.Size = new System.Drawing.Size(1530, 421);
             this.dgvClientes.TabIndex = 30;
             this.dgvClientes.DoubleClick += new System.EventHandler(this.dgvClientes_DoubleClick);
             // 
@@ -73,7 +73,7 @@
             // 
             this.btnSeleccionarCliente.BackColor = System.Drawing.Color.Azure;
             this.btnSeleccionarCliente.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSeleccionarCliente.Location = new System.Drawing.Point(1297, 538);
+            this.btnSeleccionarCliente.Location = new System.Drawing.Point(1205, 541);
             this.btnSeleccionarCliente.Margin = new System.Windows.Forms.Padding(4);
             this.btnSeleccionarCliente.Name = "btnSeleccionarCliente";
             this.btnSeleccionarCliente.Size = new System.Drawing.Size(341, 96);
@@ -136,7 +136,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.ClientSize = new System.Drawing.Size(1653, 650);
+            this.ClientSize = new System.Drawing.Size(1566, 650);
             this.Controls.Add(this.btnNuevoCliente);
             this.Controls.Add(this.cbBuscarPor);
             this.Controls.Add(this.txtBuscar);
@@ -144,8 +144,6 @@
             this.Controls.Add(this.btnSeleccionarCliente);
             this.Controls.Add(this.dgvClientes);
             this.Margin = new System.Windows.Forms.Padding(4);
-            this.MaximumSize = new System.Drawing.Size(1671, 697);
-            this.MinimumSize = new System.Drawing.Size(1671, 697);
             this.Name = "frmSeleccionarCliente";
             this.Text = "Seleccionar cliente";
             this.Load += new System.EventHandler(this.frmSeleccionarCliente_Load);
