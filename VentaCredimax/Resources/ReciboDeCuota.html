@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recibo de Pago</title>
+    <style>
+        body {
+            background-color: white;
+            padding: 1rem;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            max-width: 42rem;
+            margin: 0 auto;
+            border: 1px solid black;
+            padding: 1rem;
+        }
+
+        .header {
+            display: flex;
+            margin-bottom: 1rem;
+        }
+
+        .header h1 {
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-align: center;
+            color: #1D4ED8;
+            margin-bottom: 1rem;
+         }
+
+        .header-right {
+            text-align: right;
+        }
+
+        .header-right p {
+            font-size: 0.875rem;
+            margin: 0;
+            font-weight: bold;
+        }
+
+        .divider {
+            border-top: 1px solid black;
+            margin-bottom: 1rem;
+        }
+
+        .section {
+            margin-bottom: 1rem;
+        }
+
+        .section p {
+            font-weight: bold;
+            margin-bottom: 0.2rem;
+        }
+       
+        .section div {
+            border: 1px solid black;
+            padding: 0.5rem;
+        }
+       
+        .section div p {
+            font-size: 0.875rem;
+            margin: 0;
+        }
+
+        .total {
+            text-align: right;
+        }
+
+        .total p {
+            font-weight: bold;
+            font-size: 1rem;
+            margin-right: 1rem;
+            text-align: right;
+        }
+
+        .total div {
+            border: 1px solid black;
+            padding: 0.5rem;
+        }
+
+        .total div p {
+            font-size: 0.875rem;
+            margin: 0;
+        }
+        .num-recibo {
+            display: block; /* Cada div en su propia línea */
+            width: 35%; /* Ocupa la mitad del ancho de la pantalla */
+            text-align: right; /* Alinea el texto dentro del div */
+            border: 1px solid #000; /* Agrega un borde */
+            padding: 5px 10px; /* Espaciado interno */
+            margin-left: auto; /* Empuja el div hacia la derecha */
+            margin-bottom: 5px; /* Espaciado entre los elementos */
+            box-sizing: border-box; /* Asegura que el padding no afecte el ancho total */
+        }
+        .fecha-pago {
+            display: block; /* Cada div en su propia línea */
+            width: 35%; /* Ocupa la mitad del ancho de la pantalla */
+            text-align: right; /* Alinea el texto dentro del div */
+            border: 1px solid #000; /* Agrega un borde */
+            padding: 5px 10px; /* Espaciado interno */
+            margin-left: auto; /* Empuja el div hacia la derecha */
+            margin-bottom: 5px; /* Espaciado entre los elementos */
+            box-sizing: border-box; /* Asegura que el padding no afecte el ancho total */
+        }
+        .monto-cuota {
+            width: 35%; /* Ocupa la mitad del ancho de la pantalla */
+            text-align: right; /* Alinea el texto dentro del div */
+            border: 1px solid #000; /* Agrega un borde */
+            padding: 5px 10px; /* Espaciado interno */
+            margin-left: auto; /* Empuja el div hacia la derecha */
+            margin-bottom: 5px; /* Espaciado entre los elementos */
+            box-sizing: border-box; /* Asegura que el padding no afecte el ancho total */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>RECIBO DE PAGO</h1>
+            <div class="header-right">
+                <div class="num-recibo">
+                    <p>N°: @numero_recibo</p>
+                </div>
+                <div class="fecha-pago">
+                    <p>@fecha</p>
+                </div>
+            </div>
+        </div>
+        <div class="divider"></div>
+        <div class="section">
+            <p>Recibí de:</p>
+            <div>
+                <p>@nombre @apellido</p>
+            </div>
+        </div>
+        <div class="section">
+            <p>La cantidad de:</p>
+            <div>
+                <p>$ @monto_cuota</p>
+            </div>
+        </div>
+        <div class="section">
+            <p>Por concepto de:</p>
+            <div>
+                <p>Pago de la Cuota N°: @numero_cuota correspondiente a la venta del artículo: @articulo</p>
+            </div>
+        </div>
+        <div class="section">
+            <p>Observaciones:</p>
+            <div>
+                <p>Quedan: @cuotas_pendientes cuotas pendientes y un saldo de $ @saldo_restante</p>
+            </div>
+        </div>
+        <div class="total">
+            <p>TOTAL:</p>
+            <div class="monto-cuota">
+                <p>$ @monto_cuota</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

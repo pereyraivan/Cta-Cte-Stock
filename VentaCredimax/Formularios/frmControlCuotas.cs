@@ -1,14 +1,13 @@
 ﻿using CEntidades;
 using CEntidades.DTOs;
 using CLogica;
+using DinkToPdf;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace VentaCredimax.Formularios
@@ -17,6 +16,7 @@ namespace VentaCredimax.Formularios
     {
         private int VentaId;
         private GestorCuotas _gestorCuotas = new GestorCuotas();
+        private GestorReportes _gestorReportes = new GestorReportes();
         public frmControlCuotas(int ventaId)
         {
             InitializeComponent();
@@ -27,7 +27,7 @@ namespace VentaCredimax.Formularios
         {
             CargarCuotas();
             EstiloDataGridView();
-            PintarFilaPorEstado();           
+            PintarFilaPorEstado();
         }
         private void CargarCuotas()
         {
@@ -47,11 +47,11 @@ namespace VentaCredimax.Formularios
             int ventaId = Convert.ToInt32(dgvCuotas.CurrentRow.Cells["VentaId"].Value);
             string estadoCuota = dgvCuotas.CurrentRow.Cells["Estado"].Value.ToString();
             List<CuotaDTO> cuotas = _gestorCuotas.ObtenerCuotasPorVenta(ventaId);
-            
+
             bool hayCuotasAnterioresPendientes = cuotas
             .Where(c => c.NumeroDeCuota < numeroCuotaSeleccionada)
             .Any(c => c.Estado != "Pagada"); // Estado = false significa pendiente
-            if(estadoCuota == "Pagada")
+            if (estadoCuota == "Pagada")
             {
                 MessageBox.Show("La cuota ya se encuentra pagada.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -94,7 +94,7 @@ namespace VentaCredimax.Formularios
                 dgvCuotas.Columns["MontoCuota"].HeaderText = "Monto Cuota";
                 dgvCuotas.Columns["FechaProgramada"].HeaderText = "Vencimiento";
                 dgvCuotas.Columns["FechaPago"].HeaderText = "Fecha de Pago";
-               
+
             }
         }
 
@@ -137,46 +137,79 @@ namespace VentaCredimax.Formularios
 
         private void btnImprimirComprobante_Click(object sender, EventArgs e)
         {
-            if (dgvCuotas.CurrentRow == null)
-            {
-                MessageBox.Show("Seleccione una cuota para registrar el pago.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-            else
-            {
-                int ventaId = Convert.ToInt32(dgvCuotas.CurrentRow.Cells["VentaId"].Value);
-                int numeroCuota = Convert.ToInt32(dgvCuotas.CurrentRow.Cells["NumeroDeCuota"].Value);
-                MostrarReporte(ventaId, numeroCuota);
-            }         
+            ImprimirReporteComprobantePago();
         }
-        private void MostrarReporte(int ventaId, int numeroCuota)
+        private void ImprimirReporteComprobantePago()
         {
             if (dgvCuotas.CurrentRow == null)
             {
                 MessageBox.Show("Seleccione una cuota para imprimir el recibo.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            // Obtener datos de la cuota seleccionada
-         
-            string estado = dgvCuotas.CurrentRow.Cells["Estado"].Value?.ToString();
 
+            string estado = dgvCuotas.CurrentRow.Cells["Estado"].Value?.ToString();
             if (estado == "Pendiente")
             {
                 MessageBox.Show("No se puede imprimir el recibo porque la cuota no está pagada.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            try
+
+            int ventaId = Convert.ToInt32(dgvCuotas.CurrentRow.Cells["VentaId"].Value);
+            int numeroCuota = Convert.ToInt32(dgvCuotas.CurrentRow.Cells["NumeroDeCuota"].Value);
+            List<ReciboDePago_Result> listaReciboPago = _gestorReportes.DatosReciboDePago(ventaId, numeroCuota);
+
+            if (listaReciboPago.Any())
             {
-                // Crear formulario de reporte
-                frmReportReciboDePago frmReporte = new frmReportReciboDePago(ventaId, numeroCuota);
-                //frmReporte.ShowDialog();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error al mostrar el reporte: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                // Cargar la plantilla HTML
+                string textoHtml = Properties.Resources.ReciboDeCuota.ToString();
+                textoHtml = textoHtml.Replace("@numero_recibo", listaReciboPago.FirstOrDefault().NumeroRecibo);
+                textoHtml = textoHtml.Replace("@fecha", listaReciboPago.FirstOrDefault().FechaPago.ToString("dd/MM/yyyy"));
+                textoHtml = textoHtml.Replace("@nombre", listaReciboPago.FirstOrDefault().Nombre);
+                textoHtml = textoHtml.Replace("@apellido", listaReciboPago.FirstOrDefault().Apellido);
+
+                decimal montoCuota = listaReciboPago.FirstOrDefault().MontoCuota;
+                string montoCuotaFormateado = string.Format("{0:#,##0.00}", montoCuota).Replace(",", "X").Replace(".", ",").Replace("X", ".");
+                textoHtml = textoHtml.Replace("@monto_cuota", montoCuotaFormateado);
+
+                textoHtml = textoHtml.Replace("@numero_cuota", listaReciboPago.FirstOrDefault().NumeroDeCuota.ToString());
+                textoHtml = textoHtml.Replace("@articulo", listaReciboPago.FirstOrDefault().Articulo);
+                textoHtml = textoHtml.Replace("@cuotas_pendientes", listaReciboPago.FirstOrDefault().CuotasPendientes.ToString());
+
+                decimal saldoRestante = listaReciboPago.FirstOrDefault().SaldoRestante.Value;
+                string saldoRestanteFormateado = string.Format("{0:#,##0.00}", saldoRestante).Replace(",", "X").Replace(".", ",").Replace("X", ".");
+                textoHtml = textoHtml.Replace("@saldo_restante", saldoRestanteFormateado);
+
+                SaveFileDialog saveFile = new SaveFileDialog();
+                saveFile.FileName = $"ReciboDeCuota_{listaReciboPago.FirstOrDefault().NumeroRecibo}.pdf";
+                saveFile.Filter = "Pdf Files|*.pdf";
+
+                if (saveFile.ShowDialog() == DialogResult.OK)
+                {
+                    var pdfDocument = new HtmlToPdfDocument()
+                    {
+                        GlobalSettings = new GlobalSettings
+                        {
+                            ColorMode = ColorMode.Color,
+                            Orientation = DinkToPdf.Orientation.Portrait,
+                            PaperSize = PaperKind.A4,
+                            Out = saveFile.FileName // Ruta de salida
+                        },
+                        Objects = {
+                    new ObjectSettings
+                    {
+                        HtmlContent = textoHtml,
+                        WebSettings = { DefaultEncoding = "utf-8" }
+                    }
+                }
+                    };
+
+                    var converter = new BasicConverter(new PdfTools());
+                    converter.Convert(pdfDocument);
+
+                    MessageBox.Show("Documento Generado", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
             }
         }
-
     }
 }
 

@@ -1,6 +1,7 @@
 ﻿using CEntidades;
 using CEntidades.DTOs;
 using CLogica;
+using DinkToPdf;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -21,6 +22,7 @@ namespace VentaCredimax.Formularios
         private int idCliente;
         GestorCliente _gestorCliente = new GestorCliente();
         GestorVenta _gestorVenta = new GestorVenta();
+        private GestorReportes _gestorReportes = new GestorReportes();
         public frmVentas()
         {
             InitializeComponent();
@@ -431,30 +433,78 @@ namespace VentaCredimax.Formularios
             }
         }
 
-        private void MostrarReporteComprobanteDeVenta(int ventaId)
+        private void ImprimirReporteComprobanteDeVenta(int ventaId)
+        {
+            
+            List<ComprobanteDePago_Result> listaComprobanteDeVenta = _gestorReportes.DatosComprobanteDeVenta(ventaId);
+
+            if (listaComprobanteDeVenta.Any())
+            {
+                // Cargar la plantilla HTML
+                string textoHtml = Properties.Resources.ComprobanteDeVenta.ToString();
+
+                textoHtml = textoHtml.Replace("@nombre", listaComprobanteDeVenta.FirstOrDefault().Nombre);
+                textoHtml = textoHtml.Replace("@apellido", listaComprobanteDeVenta.FirstOrDefault().Apellido);
+                textoHtml = textoHtml.Replace("@fecha", listaComprobanteDeVenta.FirstOrDefault().FechaDeInicio.ToString("dd/MM/yyyy"));
+                textoHtml = textoHtml.Replace("@dni", listaComprobanteDeVenta.FirstOrDefault().DNI.ToString());
+                textoHtml = textoHtml.Replace("@telefono", listaComprobanteDeVenta.FirstOrDefault().Telefono);
+                textoHtml = textoHtml.Replace("@direccion", listaComprobanteDeVenta.FirstOrDefault().Direccion);
+
+                //tabla
+                textoHtml = textoHtml.Replace("@cantidad", listaComprobanteDeVenta.FirstOrDefault().Cantidad.ToString());
+                textoHtml = textoHtml.Replace("@articulo", listaComprobanteDeVenta.FirstOrDefault().Articulo);
+                textoHtml = textoHtml.Replace("@talle", listaComprobanteDeVenta.FirstOrDefault().Talle.ToString());          
+
+                decimal precio = listaComprobanteDeVenta.FirstOrDefault().Precio.Value;
+                string montoPrecioFormateado = string.Format("{0:#,##0.00}", precio).Replace(",", "X").Replace(".", ",").Replace("X", ".");
+                textoHtml = textoHtml.Replace("@precio", montoPrecioFormateado);
+
+                decimal total = listaComprobanteDeVenta.FirstOrDefault().Total.Value;
+                string totalFormateado = string.Format("{0:#,##0.00}", total).Replace(",", "X").Replace(".", ",").Replace("X", ".");
+                textoHtml = textoHtml.Replace("@total", totalFormateado);
+
+                SaveFileDialog saveFile = new SaveFileDialog();
+                saveFile.FileName = $"Venta_{listaComprobanteDeVenta.FirstOrDefault().Nombre + listaComprobanteDeVenta.FirstOrDefault().Apellido}.pdf";
+                saveFile.Filter = "Pdf Files|*.pdf";
+
+                if (saveFile.ShowDialog() == DialogResult.OK)
+                {
+                    var pdfDocument = new HtmlToPdfDocument()
+                    {
+                        GlobalSettings = new GlobalSettings
+                        {
+                            ColorMode = ColorMode.Color,
+                            Orientation = DinkToPdf.Orientation.Portrait,
+                            PaperSize = PaperKind.A4,
+                            Out = saveFile.FileName // Ruta de salida
+                        },
+                        Objects = {
+                    new ObjectSettings
+                    {
+                        HtmlContent = textoHtml,
+                        WebSettings = { DefaultEncoding = "utf-8" }
+                    }
+                }
+                    };
+
+                    var converter = new BasicConverter(new PdfTools());
+                    converter.Convert(pdfDocument);
+
+                    MessageBox.Show("Documento Generado", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+
+        }
+
+        private void btnImprimirVenta_Click(object sender, EventArgs e)
         {
             if (dgvVentas.CurrentRow == null)
             {
                 MessageBox.Show("Seleccione una cuota para imprimir el recibo.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-
-            try
-            {
-                // Crear formulario de reporte
-                frmComprobanteDeVenta frmReporte = new frmComprobanteDeVenta(ventaId);
-                //frmReporte.ShowDialog();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error al mostrar el reporte: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void btnImprimirVenta_Click(object sender, EventArgs e)
-        {
             int ventaId = Convert.ToInt32(dgvVentas.CurrentRow.Cells["VentaId"].Value);
-            MostrarReporteComprobanteDeVenta(ventaId);
+            ImprimirReporteComprobanteDeVenta(ventaId);
         }
     }
 }
