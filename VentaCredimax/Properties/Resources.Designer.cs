@@ -64,35 +64,28 @@ namespace VentaCredimax.Properties {
         ///   Looks up a localized string similar to &lt;!DOCTYPE html&gt;
         ///&lt;html&gt;
         ///&lt;head&gt;
-        ///  &lt;title&gt;Comprobante de Venta&lt;/title&gt;
-        ///  &lt;style&gt;
-        ///    body {
-        ///      font-family: sans-serif;
-        ///      background-color: #f0f0f0; /* Gris claro */
-        ///    }
+        ///    &lt;title&gt;Comprobante de Venta&lt;/title&gt;
+        ///    &lt;style&gt;
+        ///        body {
+        ///            font-family: Arial, sans-serif;
+        ///        }
         ///
-        ///    .header {
-        ///      margin-bottom: 20px;
-        ///    }
+        ///        .container {
+        ///            max-width: 42rem;
+        ///            margin: 0 auto;
+        ///            border: 1px solid black;
+        ///            padding: 1rem;
+        ///            padding-bottom: 4px;
+        ///        }
         ///
-        ///    .header p {
-        ///      margin: 5px 0;
-        ///    }
+        ///        .header {
+        ///            margin-bottom: 20px;
+        ///        }
         ///
-        ///    table {
-        ///      width: 100%;
-        ///      border-collapse: collapse;
-        ///    }
-        ///
-        ///    th, td {
-        ///      border: 1px solid #ddd;
-        ///      padding: 8px;
-        ///      text-align: left;
-        ///    }
-        ///
-        ///    th {
-        ///      background-color: #f2f2f2;
-        ///    } [rest of string was truncated]&quot;;.
+        ///        .header h1 {
+        ///            color: #1D4ED8;
+        ///            text-align: center;
+        ///       [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string ComprobanteDeVenta {
             get {
@@ -101,23 +94,64 @@ namespace VentaCredimax.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;html lang=&quot;en&quot;&gt;
+        ///   Looks up a localized string similar to &lt;!DOCTYPE html&gt;
+        ///&lt;html lang=&quot;es&quot;&gt;
         ///&lt;head&gt;
         ///    &lt;meta charset=&quot;UTF-8&quot;&gt;
         ///    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
         ///    &lt;title&gt;Recibo de Pago&lt;/title&gt;
-        ///    &lt;script src=&quot;https://cdn.tailwindcss.com&quot;&gt;&lt;/script&gt;
-        ///&lt;/head&gt;
-        ///&lt;body class=&quot;bg-white p-4&quot;&gt;
-        ///    &lt;div class=&quot;max-w-2xl mx-auto border border-black p-4&quot;&gt;
-        ///        &lt;div class=&quot;flex justify-between items-center mb-4&quot;&gt;
-        ///            &lt;h1 class=&quot;text-2xl font-bold text-blue-700&quot;&gt;RECIBO DE PAGO&lt;/h1&gt;
-        ///            &lt;div class=&quot;text-right&quot;&gt;
-        ///              [rest of string was truncated]&quot;;.
+        ///    &lt;style&gt;
+        ///        body {
+        ///            background-color: white;
+        ///            padding: 1rem;
+        ///            font-family: Arial, sans-serif;
+        ///        }
+        ///
+        ///        .container {
+        ///            max-width: 42rem;
+        ///            margin: 0 auto;
+        ///            border: 1px solid black;
+        ///            padding: 1rem;
+        ///        }
+        ///
+        ///        .header  [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string ReciboDeCuota {
             get {
                 return ResourceManager.GetString("ReciboDeCuota", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;!DOCTYPE html&gt;
+        ///&lt;html&gt;
+        ///&lt;head&gt;
+        ///    &lt;title&gt;Comprobante de Venta&lt;/title&gt;
+        ///    &lt;style&gt;
+        ///        body {
+        ///            font-family: Arial, sans-serif;
+        ///        }
+        ///
+        ///        .container {
+        ///            max-width: 42rem;
+        ///            margin: 0 auto;
+        ///            border: 1px solid black;
+        ///            padding: 1rem;
+        ///            padding-bottom: 4px;
+        ///        }
+        ///
+        ///        .header {
+        ///            margin-bottom: 20px;
+        ///        }
+        ///
+        ///        .header h1 {
+        ///            color: #1D4ED8;
+        ///            text-align: center;
+        ///       [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string VentasPorCliente {
+            get {
+                return ResourceManager.GetString("VentasPorCliente", resourceCulture);
             }
         }
     }

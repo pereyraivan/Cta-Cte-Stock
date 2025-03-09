@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Comprobante de Venta</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            margin: 0 auto;
+            border: 1px solid black;
+            padding: 5px;
+        }
+
+        .header {
+            margin-bottom: 20px;
+            padding: 10px;
+        }
+
+        .header h1 {
+            color: #1D4ED8;
+            text-align: center;
+            font-size: 23px;
+        }
+
+        .header p {
+            margin-bottom: 12px;
+            margin-top: 12px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .total {
+            text-align: right;
+            margin-top: 30px
+        }
+
+        .total p {
+            font-weight: bold;
+            font-size: 25px;
+        }
+
+        .cliente-fecha {
+            width: 100%; /* Ocupa todo el ancho disponible */
+            text-align: left; /* Asegura que el cliente est� a la izquierda */
+            height: 20px;
+            margin-bottom: 12px;
+        }
+
+        .cliente-fecha p {
+            display: inline-block; /* Hace que est�n en la misma l�nea */
+            margin: 0; /* Evita espacios innecesarios */
+        }
+
+        .cliente-fecha .fecha {
+            float: right; /* Mueve la fecha a la derecha */
+        }
+      
+        .divider {
+            border-top: 1px solid black;
+            margin-bottom: 1rem;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>HISTORIAL DE VENTAS</h1>
+            <div class="divider"></div>
+            <div class="cliente-fecha">
+                <p>Cliente: @nombre @apellido</p>
+                <p class="fecha">Fecha: @fecha-venta</p>
+            </div>
+            <p>DNI: @dni</p>
+            <p>Telefono: @telefono</p>
+            <p>Direccion: @direccion</p>
+        </div>
+        <div class="divider"></div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Articulo</th>
+                    <th>Precio</th>
+                    <th>Cuotas</th>
+                    <th>Fecha Venta</th> 
+                    <th>N° Cuota</th>
+                    <th>Monto Cuota</th>
+                    <th>Fecha Pago Cuota</th>
+                </tr>
+            </thead>
+            <tbody>
+                @filasTabla
+            </tbody>          
+        </table>
+    </div>
+</body>
+</html>

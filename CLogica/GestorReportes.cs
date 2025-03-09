@@ -20,5 +20,9 @@ namespace CLogica
         {
             return _repositorioReporte.DatosComprobanteDeVenta(IdVenta);
         }
+        public List<sp_GetVentasByClientId_Result> DatosVentasPorCliente(int IdCliente)
+        {
+            return _repositorioReporte.DatosVentasPorCliente(IdCliente);
+        }
     }
 }

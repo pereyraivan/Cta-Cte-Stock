@@ -464,7 +464,7 @@ namespace VentaCredimax.Formularios
                 textoHtml = textoHtml.Replace("@total", totalFormateado);
 
                 SaveFileDialog saveFile = new SaveFileDialog();
-                saveFile.FileName = $"Venta_{listaComprobanteDeVenta.FirstOrDefault().Nombre + listaComprobanteDeVenta.FirstOrDefault().Apellido}.pdf";
+                saveFile.FileName = $"comprobante-venta-{listaComprobanteDeVenta.FirstOrDefault().Nombre + listaComprobanteDeVenta.FirstOrDefault().Apellido + listaComprobanteDeVenta.FirstOrDefault().Articulo}.pdf";
                 saveFile.Filter = "Pdf Files|*.pdf";
 
                 if (saveFile.ShowDialog() == DialogResult.OK)

@@ -59,7 +59,24 @@ namespace CDatos
             }
             catch (Exception ex)
             {
-                throw new Exception("Error al obtener los datos del recibo de pago", ex);
+                throw new Exception("Error al obtener los datos del comprobante de venta", ex);
+            }
+        }
+        public List<sp_GetVentasByClientId_Result> DatosVentasPorCliente(int IdCliente)
+        {
+            try
+            {
+                using (VentasCredimaxEntities db = new VentasCredimaxEntities())
+                {
+                    return db.Database.SqlQuery<sp_GetVentasByClientId_Result>(
+                        "EXEC sp_GetVentasByClientId @ClientId",
+                        new SqlParameter("@ClientId", IdCliente)
+                        ).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener los datos del comprobante ventas por cliente", ex);
             }
         }
     }

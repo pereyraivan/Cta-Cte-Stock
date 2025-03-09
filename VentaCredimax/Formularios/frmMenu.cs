@@ -1,6 +1,8 @@
 ﻿using CEntidades;
 using CEntidades.DTOs;
 using CLogica;
+using DinkToPdf;
+using Microsoft.Extensions.Logging;
 using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
@@ -18,6 +20,7 @@ namespace VentaCredimax.Formularios
     public partial class frmMenu : Form
     {
         private GestorVenta _gestorVenta = new GestorVenta();
+        private GestorReportes _gestorReportes = new GestorReportes();
         public frmMenu()
         {
             InitializeComponent();           
@@ -82,16 +85,19 @@ namespace VentaCredimax.Formularios
             EstiloDataGrid();
             
         }
+
         private void FiltrarVentasPorCliente()
         {
             dgvVentasMenu.DataSource = _gestorVenta.FiltrarVentasPorCliente(txtBuscar.Text);
             OcultarColumnas();
         }
+
         private void FiltrarVentasPorArticulo()
         {
             dgvVentasMenu.DataSource = _gestorVenta.FiltrarVentasPorArticulo(txtBuscar.Text);
             OcultarColumnas();
         }
+
         private void Buscar()
        {
             if (cbBuscarPor.SelectedItem == null)
@@ -110,10 +116,12 @@ namespace VentaCredimax.Formularios
                     break;
             }
         }
+
         private void txtBuscar_TextChanged(object sender, EventArgs e)
         {
             Buscar();
         }
+
         private void OcultarColumnas()
         {
             if (dgvVentasMenu.Rows.Count > 0)
@@ -124,6 +132,7 @@ namespace VentaCredimax.Formularios
                 dgvVentasMenu.Columns["CuotasVencidas"].Visible = false;
             }
         }
+
         private void EstiloDataGrid()
         {
             if (dgvVentasMenu.Rows.Count > 0)
@@ -134,6 +143,7 @@ namespace VentaCredimax.Formularios
                 dgvVentasMenu.Columns["FechaDeCancelacion"].HeaderText = "Cancelacion compra";
             }
         }
+
         private void dgvVentasMenu_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             // Validar que haya una fila seleccionada
@@ -151,17 +161,20 @@ namespace VentaCredimax.Formularios
                 MessageBox.Show("Seleccione una fila válida antes de hacer doble clic.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
+
         private void btnNuevaVenta_Click(object sender, EventArgs e)
         {
             frmVentas venta = new frmVentas();
             venta.FormClosed += (s, args) => ListarVentas(); // Refresca la lista al cerrar el formulario
             venta.ShowDialog();
         }
+
         private void btnGestionPagos_Click(object sender, EventArgs e)
         {
             frmControlPagos controlPagos = new frmControlPagos();
             controlPagos.ShowDialog();
         }
+
         private void FormatearFilas()
         {
             if (dgvVentasMenu.Rows.Count > 0)
@@ -176,10 +189,12 @@ namespace VentaCredimax.Formularios
                 }
             }
         }
+
         private void cbOrdenarPor_SelectedIndexChanged(object sender, EventArgs e)
         {
             ListarVentas();
         }
+
         private void ImprimirHistorialVentasPorCliente(int clientId)
         {
             // Verificar si hay una fila seleccionada en el DataGridView
@@ -192,63 +207,71 @@ namespace VentaCredimax.Formularios
                 return;
             }
 
-            try
-            {
-                // Crear formulario de reporte
-                frmReporteVentasPorCliente frmReporteVentasPorCliente = new frmReporteVentasPorCliente(clientId);
-                //frmReporte.ShowDialog();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error al mostrar el reporte: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            
-        }
-        private void GenerarReporteHirtorialClientePDF(int idCliente)
-        {
-            try
-            {
-                // Crear instancia de LocalReport
-                LocalReport report = new LocalReport();
+            List<sp_GetVentasByClientId_Result> listaVentasPorCliente = _gestorReportes.DatosVentasPorCliente(clientId);
 
-                // Establecer la ruta del archivo RDLC
-                string reportPath = @"C:\Users\perey\OneDrive\Escritorio\VentasCred\Reportes\VentasPorCliente.rdl";
+            if (listaVentasPorCliente.Any())
+            {
+                // Cargar la plantilla HTML
+                string textoHtml = Properties.Resources.VentasPorCliente.ToString();
 
-                if (!File.Exists(reportPath))
+                textoHtml = textoHtml.Replace("@nombre", listaVentasPorCliente.FirstOrDefault().NombreCliente);
+                textoHtml = textoHtml.Replace("@apellido", listaVentasPorCliente.FirstOrDefault().ApellidoCliente);
+                textoHtml = textoHtml.Replace("@dni", listaVentasPorCliente.FirstOrDefault().DNICliente.ToString());
+                textoHtml = textoHtml.Replace("@direccion", listaVentasPorCliente.FirstOrDefault().DireccionCliente);
+                textoHtml = textoHtml.Replace("@telefono", listaVentasPorCliente.FirstOrDefault().TelefonoCliente);
+
+                // Generar las filas de la tabla agrupando por VentaId
+                string filasTabla = string.Join("", listaVentasPorCliente
+                    .GroupBy(v => v.VentaId) // Agrupar por VentaId
+                    .SelectMany(grupo => grupo.Select((venta, index) => $@"
+                    <tr>
+                        {(index == 0 ? $"<td rowspan='{grupo.Count()}'>{venta.Articulo}</td>" : "")}
+                        {(index == 0 ? $"<td rowspan='{grupo.Count()}'>{string.Format("{0:#,##0.00}", venta.Precio).Replace(",", "X").Replace(".", ",").Replace("X", ".")}</td>" : "")}
+                        {(index == 0 ? $"<td rowspan='{grupo.Count()}'>{venta.Cuotas}</td>" : "")}                   
+                        <td>{venta.FechaDeVenta.ToString("dd/MM/yyyy")}</td>
+                        <td>{venta.NumeroDeCuota}</td>
+                        <td>{string.Format("{0:#,##0.00}", venta.MontoCuota).Replace(",", "X").Replace(".", ",").Replace("X", ".")}</td>
+                        <td>{(venta.FechaQuePagoCuota.HasValue ? venta.FechaQuePagoCuota.Value.ToString("dd/MM/yyyy") : "")}</td>
+                    </tr>")));
+
+                // Reemplazar en la plantilla HTML
+                textoHtml = textoHtml.Replace("@filasTabla", filasTabla);
+
+                textoHtml = textoHtml.Replace("@talle", listaVentasPorCliente.FirstOrDefault().Talle.ToString());         
+                textoHtml = textoHtml.Replace("@fecha-cancelacion-cuota", listaVentasPorCliente.FirstOrDefault()?.FechaCancelacionCuotas?.ToString("dd/MM/yyyy") ?? "");
+                textoHtml = textoHtml.Replace("@fecha-programada-cuota", listaVentasPorCliente.FirstOrDefault()?.FechaProgramadaDeCuota.ToString("dd/MM/yyyy"));
+                textoHtml = textoHtml.Replace("@fecha-venta", listaVentasPorCliente.FirstOrDefault()?.FechaDeVenta.ToString("dd/MM/yyyy"));
+                textoHtml = textoHtml.Replace("@frecuencia-pago", listaVentasPorCliente.FirstOrDefault().Nombre.ToString());
+
+                SaveFileDialog saveFile = new SaveFileDialog();
+                saveFile.FileName = $"VentasPorCliente_{listaVentasPorCliente.FirstOrDefault().NombreCliente + listaVentasPorCliente.FirstOrDefault().ApellidoCliente}.pdf";
+                saveFile.Filter = "Pdf Files|*.pdf";
+
+                if (saveFile.ShowDialog() == DialogResult.OK)
                 {
-                    MessageBox.Show("No se encontró el archivo del reporte en la ruta especificada.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
+                    var pdfDocument = new HtmlToPdfDocument()
+                    {
+                        GlobalSettings = new GlobalSettings
+                        {
+                            ColorMode = ColorMode.Color,
+                            Orientation = DinkToPdf.Orientation.Portrait,
+                            PaperSize = PaperKind.A4,
+                            Out = saveFile.FileName // Ruta de salida
+                        },
+                        Objects = {
+                    new ObjectSettings
+                    {
+                        HtmlContent = textoHtml,
+                        WebSettings = { DefaultEncoding = "utf-8" }
+                    }
                 }
+                    };
 
-                report.ReportPath = reportPath;
+                    var converter = new BasicConverter(new PdfTools());
+                    converter.Convert(pdfDocument);
 
-                // Configurar el parámetro IdCliente
-                ReportParameter parametroIdCliente = new ReportParameter("ClientId", idCliente.ToString());
-                report.SetParameters(parametroIdCliente);
-
-                // Renderizar el reporte a PDF
-                string mimeType, encoding, fileNameExtension;
-                Warning[] warnings;
-                string[] streamIds;
-                byte[] pdfBytes = report.Render(
-                    "PDF", null, out mimeType, out encoding, out fileNameExtension, out streamIds, out warnings);
-
-                // Guardar el PDF en una ubicación temporal
-                string tempFilePath = Path.Combine(Path.GetTempPath(), "VentasPorCliente.pdf");
-                File.WriteAllBytes(tempFilePath, pdfBytes);
-
-                // Abrir el PDF automáticamente
-                System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
-                {
-                    FileName = tempFilePath,
-                    UseShellExecute = true
-                });
-
-                MessageBox.Show("El reporte se generó correctamente y se abrió como PDF.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error al generar el reporte: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Documento Generado", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
             }
         }
 
@@ -257,14 +280,5 @@ namespace VentaCredimax.Formularios
             ListarVentas();
         }
 
-        private void cbBuscarPor_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }
