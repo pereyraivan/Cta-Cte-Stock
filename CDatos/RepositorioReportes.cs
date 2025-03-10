@@ -79,5 +79,24 @@ namespace CDatos
                 throw new Exception("Error al obtener los datos del comprobante ventas por cliente", ex);
             }
         }
+
+        public List<sp_ReporteVentas_Result> DatosVentasPorFecha(DateTime FechaDesde, DateTime FechaHasta)
+        {
+            try
+            {
+                using (VentasCredimaxEntities db = new VentasCredimaxEntities())
+                {
+                    return db.Database.SqlQuery<sp_ReporteVentas_Result>(
+                        "EXEC sp_ReporteVentas @FechaDesde, @FechaHasta",
+                        new SqlParameter("@FechaDesde", FechaDesde),
+                        new SqlParameter("@FechaHasta", FechaHasta)
+                        ).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener los datos del comprobante ventas por cliente", ex);
+            }
+        }
     }
 }

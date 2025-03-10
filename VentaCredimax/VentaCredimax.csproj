@@ -430,6 +430,7 @@
     <None Include="Resources\ComprobanteDeVenta.html" />
     <None Include="Resources\ReciboDeCuota.html" />
     <None Include="Resources\VentasPorCliente.html" />
+    <None Include="Resources\VentasPorFecha.html" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

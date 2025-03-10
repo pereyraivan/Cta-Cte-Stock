@@ -244,7 +244,7 @@ namespace VentaCredimax.Formularios
                 textoHtml = textoHtml.Replace("@frecuencia-pago", listaVentasPorCliente.FirstOrDefault().Nombre.ToString());
 
                 SaveFileDialog saveFile = new SaveFileDialog();
-                saveFile.FileName = $"VentasPorCliente_{listaVentasPorCliente.FirstOrDefault().NombreCliente + listaVentasPorCliente.FirstOrDefault().ApellidoCliente}.pdf";
+                saveFile.FileName = $"ventas-por-cliente_{listaVentasPorCliente.FirstOrDefault().NombreCliente + listaVentasPorCliente.FirstOrDefault().ApellidoCliente}-{DateTime.Now}.pdf";
                 saveFile.Filter = "Pdf Files|*.pdf";
 
                 if (saveFile.ShowDialog() == DialogResult.OK)

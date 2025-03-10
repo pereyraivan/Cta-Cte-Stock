@@ -1,4 +1,7 @@
-﻿using Microsoft.Reporting.WinForms;
+﻿using CEntidades;
+using CLogica;
+using DinkToPdf;
+using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,6 +17,7 @@ namespace VentaCredimax.Formularios
 {
     public partial class frmReporteVentasPorFecha : Form
     {
+        GestorReportes _gestorReportes = new GestorReportes();
         public frmReporteVentasPorFecha()
         {
             InitializeComponent();
@@ -21,7 +25,7 @@ namespace VentaCredimax.Formularios
 
         private void frmReporteVentasPorFecha_Load(object sender, EventArgs e)
         {
-            this.rvInformeVentas.RefreshReport();
+            
         }
 
         private void btnImprimirComprobante_Click(object sender, EventArgs e)
@@ -43,58 +47,69 @@ namespace VentaCredimax.Formularios
                 else
                 {
                     imprimirReporteVentasPdf(fechaDesde, fechaHasta);
-                }
-                
+                }          
             }
         }
         private void imprimirReporteVentasPdf(DateTime fechaDesde , DateTime fechaHasta)
         {
-            try
+            List<sp_ReporteVentas_Result> listaVentasPorFecha = _gestorReportes.DatosVentasPorFecha(fechaDesde, fechaHasta);
+
+            if (listaVentasPorFecha.Any())
             {
-                // Configurar en modo remoto (Server Report)
-                rvInformeVentas.ProcessingMode = ProcessingMode.Remote;
-                rvInformeVentas.ServerReport.ReportServerUrl = new Uri("http://localhost/reportserver");
-                rvInformeVentas.ServerReport.ReportPath = "/Reportes/VentasPorFecha";
+                // Cargar la plantilla HTML
+                string textoHtml = Properties.Resources.VentasPorFecha.ToString();
 
-                // Pasar parámetros al reporte
-                ReportParameter[] parametros = new ReportParameter[]
+                textoHtml = textoHtml.Replace("@fecha-desde", fechaDesde.ToString("dd/MM/yyyy"));
+                textoHtml = textoHtml.Replace("@fecha-hasta", fechaHasta.ToString("dd/MM/yyyy"));
+                // Generar las filas de la tabla agrupando por VentaId
+                string filasTabla = string.Join("", listaVentasPorFecha.Select(venta => $@"
+                <tr>
+                    <td>{venta.FechaDeVanta:dd/MM/yyyy}</td>
+                    <td>{venta.Nombre} {venta.Apellido}</td>
+                    <td>{venta.DNI}</td>
+                    <td>{venta.Articulo}</td>
+                    <td>{venta.Precio?.ToString("#,##0.00").Replace(",", "X").Replace(".", ",").Replace("X", ".")}</td>
+                    <td>{venta.Talle}</td>
+                    <td>{venta.Cantidad}</td>
+                    <td>{venta.FormaDePago}</td>
+                    <td>{venta.Cuotas}</td>                
+                    <td>{venta.Total?.ToString("#,##0.00").Replace(",", "X").Replace(".", ",").Replace("X", ".")}</td>
+                    <td>{venta.Estado}</td>
+                </tr>"));
+
+                // Reemplazar en la plantilla HTML
+                textoHtml = textoHtml.Replace("@filasTabla", filasTabla);
+
+                SaveFileDialog saveFile = new SaveFileDialog();
+                saveFile.FileName = $"ventas-por-fecha-{fechaDesde:yyyyMMdd}-{fechaHasta:yyyyMMdd}.pdf";
+                saveFile.Filter = "Pdf Files|*.pdf";
+
+                if (saveFile.ShowDialog() == DialogResult.OK)
                 {
-                new ReportParameter("FechaDesde", fechaDesde.ToString()),
-                new ReportParameter("FechaHasta", fechaHasta.ToString())
-                };
+                    var pdfDocument = new HtmlToPdfDocument()
+                    {
+                        GlobalSettings = new GlobalSettings
+                        {
+                            ColorMode = ColorMode.Color,
+                            Orientation = DinkToPdf.Orientation.Portrait,
+                            PaperSize = PaperKind.A4,
+                            Out = saveFile.FileName // Ruta de salida
+                        },
+                        Objects = {
+                    new ObjectSettings
+                    {
+                        HtmlContent = textoHtml,
+                        WebSettings = { DefaultEncoding = "utf-8" }
+                    }
+                }
+                    };
 
-                rvInformeVentas.ServerReport.SetParameters(parametros);
+                    var converter = new BasicConverter(new PdfTools());
+                    converter.Convert(pdfDocument);
 
-                // Renderizar el reporte en formato PDF
-                string mimeType, encoding, fileNameExtension;
-                string[] streams;
-                Warning[] warnings;
-
-                byte[] pdfBytes = rvInformeVentas.ServerReport.Render(
-                    "PDF", // Formato de exportación
-                    null,  // Configuración del dispositivo
-                    out mimeType,
-                    out encoding,
-                    out fileNameExtension,
-                    out streams,
-                    out warnings);
-
-                // Guardar el PDF en un archivo temporal
-                string tempFilePath = Path.Combine(Path.GetTempPath(), "ReporteInformeVentas.pdf");
-                File.WriteAllBytes(tempFilePath, pdfBytes);
-
-                // Abrir el PDF automáticamente
-                System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo()
-                {
-                    FileName = tempFilePath,
-                    UseShellExecute = true
-                });
+                    MessageBox.Show("Documento Generado", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error al cargar el reporte: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            this.rvInformeVentas.RefreshReport();
         }
     }
 }

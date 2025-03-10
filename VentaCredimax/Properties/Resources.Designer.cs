@@ -126,32 +126,69 @@ namespace VentaCredimax.Properties {
         ///   Looks up a localized string similar to &lt;!DOCTYPE html&gt;
         ///&lt;html&gt;
         ///&lt;head&gt;
-        ///    &lt;title&gt;Comprobante de Venta&lt;/title&gt;
+        ///    &lt;title&gt;ventas por cliente&lt;/title&gt;
         ///    &lt;style&gt;
         ///        body {
         ///            font-family: Arial, sans-serif;
         ///        }
         ///
         ///        .container {
-        ///            max-width: 42rem;
         ///            margin: 0 auto;
         ///            border: 1px solid black;
-        ///            padding: 1rem;
-        ///            padding-bottom: 4px;
+        ///            padding: 5px;
         ///        }
         ///
         ///        .header {
-        ///            margin-bottom: 20px;
+        ///            padding: 10px;
         ///        }
         ///
         ///        .header h1 {
         ///            color: #1D4ED8;
         ///            text-align: center;
-        ///       [rest of string was truncated]&quot;;.
+        ///            font-size: 23px;
+        ///        }
+        ///
+        ///        .header p {
+        ///            marg [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string VentasPorCliente {
             get {
                 return ResourceManager.GetString("VentasPorCliente", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;!DOCTYPE html&gt;
+        ///&lt;html&gt;
+        ///&lt;head&gt;
+        ///    &lt;title&gt;ventas por fecha&lt;/title&gt;
+        ///    &lt;style&gt;
+        ///        body {
+        ///            font-family: Arial, sans-serif;
+        ///        }
+        ///
+        ///        .container {
+        ///            margin: 0 auto;
+        ///            border: 1px solid black;
+        ///            padding: 5px;
+        ///        }
+        ///
+        ///        .header {
+        ///            padding: 10px;
+        ///        }
+        ///
+        ///        .header h1 {
+        ///            color: #1D4ED8;
+        ///            text-align: center;
+        ///            font-size: 23px;
+        ///        }
+        ///
+        ///        .header p {
+        ///            margin [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string VentasPorFecha {
+            get {
+                return ResourceManager.GetString("VentasPorFecha", resourceCulture);
             }
         }
     }

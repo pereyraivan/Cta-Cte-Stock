@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>ventas por cliente</title>
+    <title>ventas por fecha</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -32,6 +32,7 @@
         table {
             width: 100%;
             border-collapse: collapse;
+            font-size: 14px;
         }
 
         th, td {
@@ -80,27 +81,27 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>HISTORIAL DE VENTAS</h1>
+            <h1>VENTAS POR FECHA</h1>
             <div class="divider"></div>
             <div class="cliente-fecha">
-                <p>Cliente: @nombre @apellido</p>
-                <p class="fecha">Fecha: @fecha-venta</p>
-            </div>
-            <p>DNI: @dni</p>
-            <p>Telefono: @telefono</p>
-            <p>Direccion: @direccion</p>
+                <p>Impresión de ventas desde el @fecha-desde hasta el @fecha-hasta</p>
+            </div>        
         </div>
         <div class="divider"></div>
         <table>
             <thead>
                 <tr>
-                    <th>Articulo</th>
+                    <th>Fecha Venta</th>
+                    <th>Nombre</th>
+                    <th>DNI</th>
+                    <th>Articulo</th> 
                     <th>Precio</th>
+                    <th>Talle</th>
+                    <th>Cant.</th>
+                    <th>Frecuencia Pago</th>
                     <th>Cuotas</th>
-                    <th>Fecha Venta</th> 
-                    <th>N° Cuota</th>
-                    <th>Monto Cuota</th>
-                    <th>Fecha Pago Cuota</th>
+                    <th>Total</th>
+                    <th>Estado</th>
                 </tr>
             </thead>
             <tbody>
