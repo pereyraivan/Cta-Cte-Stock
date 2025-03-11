@@ -180,7 +180,7 @@ namespace VentaCredimax.Formularios
                 textoHtml = textoHtml.Replace("@saldo_restante", saldoRestanteFormateado);
 
                 SaveFileDialog saveFile = new SaveFileDialog();
-                saveFile.FileName = $"ReciboDeCuota_{listaReciboPago.FirstOrDefault().NumeroRecibo}.pdf";
+                saveFile.FileName = $"recibo-cuota-{listaReciboPago.FirstOrDefault().NumeroRecibo}.pdf";
                 saveFile.Filter = "Pdf Files|*.pdf";
 
                 if (saveFile.ShowDialog() == DialogResult.OK)

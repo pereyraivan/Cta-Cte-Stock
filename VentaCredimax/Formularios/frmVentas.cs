@@ -124,8 +124,6 @@ namespace VentaCredimax.Formularios
             LimpiarCampos();
             ListarVentas();
             errorProvider1.Clear();
-
-
         }
         private void CargarFormaDePagoComboBox()
         {

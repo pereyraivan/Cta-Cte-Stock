@@ -1,6 +1,6 @@
 ﻿namespace VentaCredimax.Formularios
 {
-    partial class frmReporteVentasPorFecha
+    partial class frmVentasPorFecha
     {
         /// <summary>
         /// Required designer variable.
@@ -87,7 +87,7 @@
             this.btnImprimirComprobante.UseVisualStyleBackColor = false;
             this.btnImprimirComprobante.Click += new System.EventHandler(this.btnImprimirComprobante_Click);
             // 
-            // frmReporteVentasPorFecha
+            // frmVentasPorFecha
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -97,8 +97,8 @@
             this.Controls.Add(this.label5);
             this.Controls.Add(this.dtpHasta);
             this.Controls.Add(this.dtpDesde);
-            this.Name = "frmReporteVentasPorFecha";
-            this.Text = "frmReporteVentasPorFecha";
+            this.Name = "frmVentasPorFecha";
+            this.Text = "Ventas por fecha";
             this.Load += new System.EventHandler(this.frmReporteVentasPorFecha_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

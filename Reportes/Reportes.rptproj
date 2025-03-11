@@ -51,11 +51,5 @@
   <ItemGroup>
     <DataSource Include="VentaCredimax.rds" />
   </ItemGroup>
-  <ItemGroup>
-    <Report Include="ComprobanteDeVenta.rdl" />
-    <Report Include="Recibo.rdl" />
-    <Report Include="VentasPorCliente.rdl" />
-    <Report Include="VentasPorFecha.rdl" />
-  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Reporting Services\Microsoft.ReportingServices.MSBuilder.targets" />
 </Project>

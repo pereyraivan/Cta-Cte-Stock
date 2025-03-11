@@ -64,7 +64,7 @@ namespace VentaCredimax.Formularios
         private void btnInformeVentas_Click(object sender, EventArgs e)
         {
             pSubMenuInformes.Visible = false;
-            frmReporteVentasPorFecha frmReporteVentasPorFecha = new frmReporteVentasPorFecha();
+            frmVentasPorFecha frmReporteVentasPorFecha = new frmVentasPorFecha();
             frmReporteVentasPorFecha.ShowDialog();
         }
 
@@ -244,7 +244,7 @@ namespace VentaCredimax.Formularios
                 textoHtml = textoHtml.Replace("@frecuencia-pago", listaVentasPorCliente.FirstOrDefault().Nombre.ToString());
 
                 SaveFileDialog saveFile = new SaveFileDialog();
-                saveFile.FileName = $"ventas-por-cliente_{listaVentasPorCliente.FirstOrDefault().NombreCliente + listaVentasPorCliente.FirstOrDefault().ApellidoCliente}-{DateTime.Now}.pdf";
+                saveFile.FileName = $"ventas-por-cliente_{listaVentasPorCliente.FirstOrDefault().NombreCliente + listaVentasPorCliente.FirstOrDefault().ApellidoCliente}-{DateTime.Now.ToString("dd_MM_yyyy")}.pdf";
                 saveFile.Filter = "Pdf Files|*.pdf";
 
                 if (saveFile.ShowDialog() == DialogResult.OK)

@@ -306,12 +306,6 @@
     <Compile Include="Formularios\frmCliente.Designer.cs">
       <DependentUpon>frmCliente.cs</DependentUpon>
     </Compile>
-    <Compile Include="Formularios\frmComprobanteDeVenta.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Formularios\frmComprobanteDeVenta.Designer.cs">
-      <DependentUpon>frmComprobanteDeVenta.cs</DependentUpon>
-    </Compile>
     <Compile Include="Formularios\frmControlCuotas.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -330,23 +324,11 @@
     <Compile Include="Formularios\frmMenu.Designer.cs">
       <DependentUpon>frmMenu.cs</DependentUpon>
     </Compile>
-    <Compile Include="Formularios\frmReporteVentasPorCliente.cs">
+    <Compile Include="Formularios\frmVentasPorFecha.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Formularios\frmReporteVentasPorCliente.Designer.cs">
-      <DependentUpon>frmReporteVentasPorCliente.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Formularios\frmReporteVentasPorFecha.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Formularios\frmReporteVentasPorFecha.Designer.cs">
-      <DependentUpon>frmReporteVentasPorFecha.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Formularios\frmReportReciboDePago.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Formularios\frmReportReciboDePago.Designer.cs">
-      <DependentUpon>frmReportReciboDePago.cs</DependentUpon>
+    <Compile Include="Formularios\frmVentasPorFecha.Designer.cs">
+      <DependentUpon>frmVentasPorFecha.cs</DependentUpon>
     </Compile>
     <Compile Include="Formularios\frmVentas.cs">
       <SubType>Form</SubType>
@@ -369,9 +351,6 @@
     <EmbeddedResource Include="Formularios\frmCliente.resx">
       <DependentUpon>frmCliente.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Formularios\frmComprobanteDeVenta.resx">
-      <DependentUpon>frmComprobanteDeVenta.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Formularios\frmControlCuotas.resx">
       <DependentUpon>frmControlCuotas.cs</DependentUpon>
     </EmbeddedResource>
@@ -381,14 +360,8 @@
     <EmbeddedResource Include="Formularios\frmMenu.resx">
       <DependentUpon>frmMenu.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Formularios\frmReporteVentasPorCliente.resx">
-      <DependentUpon>frmReporteVentasPorCliente.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Formularios\frmReporteVentasPorFecha.resx">
-      <DependentUpon>frmReporteVentasPorFecha.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Formularios\frmReportReciboDePago.resx">
-      <DependentUpon>frmReportReciboDePago.cs</DependentUpon>
+    <EmbeddedResource Include="Formularios\frmVentasPorFecha.resx">
+      <DependentUpon>frmVentasPorFecha.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\frmVentas.resx">
       <DependentUpon>frmVentas.cs</DependentUpon>

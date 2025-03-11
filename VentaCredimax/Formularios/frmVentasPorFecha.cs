@@ -16,10 +16,10 @@ using System.Windows.Forms;
 
 namespace VentaCredimax.Formularios
 {
-    public partial class frmReporteVentasPorFecha : Form
+    public partial class frmVentasPorFecha : Form
     {
         GestorReportes _gestorReportes = new GestorReportes();
-        public frmReporteVentasPorFecha()
+        public frmVentasPorFecha()
         {
             InitializeComponent();
         }
