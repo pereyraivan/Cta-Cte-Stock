@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -59,8 +60,8 @@ namespace VentaCredimax.Formularios
                 // Cargar la plantilla HTML
                 string textoHtml = Properties.Resources.VentasPorFecha.ToString();
 
-                textoHtml = textoHtml.Replace("@fecha-desde", fechaDesde.ToString("dd/MM/yyyy"));
-                textoHtml = textoHtml.Replace("@fecha-hasta", fechaHasta.ToString("dd/MM/yyyy"));
+                textoHtml = textoHtml.Replace("@fecha-desde", fechaDesde.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture));
+                textoHtml = textoHtml.Replace("@fecha-hasta", fechaHasta.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture));
                 // Generar las filas de la tabla agrupando por VentaId
                 string filasTabla = string.Join("", listaVentasPorFecha.Select(venta => $@"
                 <tr>
@@ -81,7 +82,7 @@ namespace VentaCredimax.Formularios
                 textoHtml = textoHtml.Replace("@filasTabla", filasTabla);
 
                 SaveFileDialog saveFile = new SaveFileDialog();
-                saveFile.FileName = $"ventas-por-fecha-{fechaDesde:yyyyMMdd}-{fechaHasta:yyyyMMdd}.pdf";
+                saveFile.FileName = $"ventas-por-fecha-{fechaDesde:dd_MM_yyyy}-{fechaHasta:dd_MM_yyyy}.pdf";
                 saveFile.Filter = "Pdf Files|*.pdf";
 
                 if (saveFile.ShowDialog() == DialogResult.OK)
