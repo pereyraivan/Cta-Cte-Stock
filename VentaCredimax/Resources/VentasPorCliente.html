@@ -35,13 +35,17 @@
         }
 
         th, td {
-            border: 1px solid #ddd;
+            border: 1px solid rgb(51, 51, 51);
             padding: 8px;
             text-align: left;
         }
 
+        td rowspan {
+        border: 1px solid black; /* Borde explícito para celdas con rowspan */
+        }
+
         th {
-            background-color: #f2f2f2;
+            background-color: rgb(230, 230, 230);
         }
 
         .total {
@@ -98,7 +102,7 @@
                     <th>Precio</th>
                     <th>Cuotas</th>
                     <th>Fecha Venta</th> 
-                    <th>N° Cuota</th>
+                    <th>Nro. Cuota</th>
                     <th>Monto Cuota</th>
                     <th>Fecha Pago Cuota</th>
                 </tr>

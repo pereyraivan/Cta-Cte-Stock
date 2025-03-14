@@ -456,31 +456,20 @@ namespace VentaCredimax.Formularios
                 textoHtml = textoHtml.Replace("@total", totalFormateado);
 
                 SaveFileDialog saveFile = new SaveFileDialog();
-                saveFile.FileName = $"comprobante-venta-{listaComprobanteDeVenta.FirstOrDefault().Nombre + listaComprobanteDeVenta.FirstOrDefault().Apellido + listaComprobanteDeVenta.FirstOrDefault().Articulo}.pdf";
+                saveFile.FileName = $"comprobante-venta-{listaComprobanteDeVenta.FirstOrDefault().Nombre +'-'+ listaComprobanteDeVenta.FirstOrDefault().Apellido +'-'+ listaComprobanteDeVenta.FirstOrDefault().Articulo}.pdf";
                 saveFile.Filter = "Pdf Files|*.pdf";
 
                 if (saveFile.ShowDialog() == DialogResult.OK)
                 {
-                    var pdfDocument = new HtmlToPdfDocument()
-                    {
-                        GlobalSettings = new GlobalSettings
-                        {
-                            ColorMode = ColorMode.Color,
-                            Orientation = DinkToPdf.Orientation.Portrait,
-                            PaperSize = PaperKind.A4,
-                            Out = saveFile.FileName // Ruta de salida
-                        },
-                        Objects = {
-                    new ObjectSettings
-                    {
-                        HtmlContent = textoHtml,
-                        WebSettings = { DefaultEncoding = "utf-8" }
-                    }
-                }
-                    };
+                    // Crear el conversor de HTML a PDF
+                    SelectPdf.HtmlToPdf converter = new SelectPdf.HtmlToPdf();
 
-                    var converter = new BasicConverter(new PdfTools());
-                    converter.Convert(pdfDocument);
+                    // Convertir el HTML a PDF
+                    SelectPdf.PdfDocument doc = converter.ConvertHtmlString(textoHtml);
+
+                    // Guardar el PDF
+                    doc.Save(saveFile.FileName);
+                    doc.Close();
 
                     MessageBox.Show("Documento Generado", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }

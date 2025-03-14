@@ -21,6 +21,8 @@
         .header {
             display: flex;
             margin-bottom: 1rem;
+            flex-direction: column;
+            flex-wrap:wrap;
         }
 
         .header h1 {
@@ -67,6 +69,8 @@
 
         .total {
             text-align: right;
+            border: 1px solid black;
+            padding: 0.5rem;
         }
 
         .total p {
@@ -74,17 +78,10 @@
             font-size: 1rem;
             margin-right: 1rem;
             text-align: right;
-        }
-
-        .total div {
-            border: 1px solid black;
-            padding: 0.5rem;
-        }
-
-        .total div p {
             font-size: 0.875rem;
             margin: 0;
-        }
+        }     
+
         .num-recibo {
             display: block; /* Cada div en su propia línea */
             width: 35%; /* Ocupa la mitad del ancho de la pantalla */

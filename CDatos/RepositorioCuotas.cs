@@ -3,8 +3,6 @@ using CEntidades.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CDatos
 {
@@ -76,7 +74,7 @@ namespace CDatos
             }
             catch (Exception ex)
             {
-                return false;
+                return false;         
             }
         }
     }

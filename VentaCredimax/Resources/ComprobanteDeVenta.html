@@ -29,6 +29,10 @@
             margin-bottom: 12px;
             margin-top: 12px;
         }
+        .divider {
+            border-top: 1px solid black;
+            margin-bottom: 1rem;
+        }
 
         table {
             width: 100%;
@@ -57,13 +61,13 @@
 
         .cliente-fecha {
             width: 100%; /* Ocupa todo el ancho disponible */
-            text-align: left; /* Asegura que el cliente esté a la izquierda */
+            text-align: left; /* Asegura que el cliente estï¿½ a la izquierda */
             height: 20px;
             margin-bottom: 12px;
         }
 
         .cliente-fecha p {
-            display: inline-block; /* Hace que estén en la misma línea */
+            display: inline-block; /* Hace que estï¿½n en la misma lï¿½nea */
             margin: 0; /* Evita espacios innecesarios */
         }
 
@@ -71,10 +75,7 @@
             float: right; /* Mueve la fecha a la derecha */
         }
       
-        .divider {
-            border-top: 1px solid black;
-            margin-bottom: 1rem;
-        }
+      
 
     </style>
 </head>
@@ -82,6 +83,7 @@
     <div class="container">
         <div class="header">
             <h1>COMPROBANTE DE VENTA</h1>
+            <div class="divider"></div>
             <div class="cliente-fecha">
                 <p>Cliente: @nombre @apellido</p>
                 <p class="fecha">Fecha: @fecha</p>
