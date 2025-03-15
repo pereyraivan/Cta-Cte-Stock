@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyDescription("control de cuentas corrientes")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("iepereyra")]
-[assembly: AssemblyProduct("VentaCredimax")]
+[assembly: AssemblyProduct("Control-C")]
 [assembly: AssemblyCopyright("Copyright ©  2024")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
