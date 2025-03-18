@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMenu));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMenu));
             this.pTituloSistema = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.pMenuLateral = new System.Windows.Forms.Panel();
@@ -58,6 +58,7 @@
             this.dgvVentasMenu = new System.Windows.Forms.DataGridView();
             this.TTAyudaMenu = new System.Windows.Forms.ToolTip(this.components);
             this.panel8 = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
             this.pTituloSistema.SuspendLayout();
             this.pMenuLateral.SuspendLayout();
             this.pSubMenuInformes.SuspendLayout();
@@ -69,6 +70,7 @@
             // pTituloSistema
             // 
             this.pTituloSistema.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(52)))), ((int)(((byte)(108)))));
+            this.pTituloSistema.Controls.Add(this.button1);
             this.pTituloSistema.Controls.Add(this.label2);
             this.pTituloSistema.Dock = System.Windows.Forms.DockStyle.Top;
             this.pTituloSistema.Location = new System.Drawing.Point(0, 0);
@@ -384,7 +386,7 @@
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvVentasMenu.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvVentasMenu.Location = new System.Drawing.Point(13, 10);
-            this.dgvVentasMenu.Margin = new System.Windows.Forms.Padding(10, 10, 10, 10);
+            this.dgvVentasMenu.Margin = new System.Windows.Forms.Padding(10);
             this.dgvVentasMenu.Name = "dgvVentasMenu";
             this.dgvVentasMenu.ReadOnly = true;
             this.dgvVentasMenu.RowHeadersWidth = 51;
@@ -401,6 +403,25 @@
             this.panel8.Size = new System.Drawing.Size(1034, 599);
             this.panel8.TabIndex = 37;
             // 
+            // button1
+            // 
+            this.button1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button1.BackgroundImage")));
+            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button1.Dock = System.Windows.Forms.DockStyle.Right;
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Highlight;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("OCR A Extended", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.ForeColor = System.Drawing.SystemColors.ActiveCaption;
+            this.button1.Location = new System.Drawing.Point(1207, 0);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 54);
+            this.button1.TabIndex = 10;
+            this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.TTAyudaMenu.SetToolTip(this.button1, "Seleccione una venta para imprimir el historial del cliente.");
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // frmMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -411,7 +432,7 @@
             this.Controls.Add(this.pMenuLateral);
             this.Controls.Add(this.pTituloSistema);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "frmMenu";
             this.Text = "Menu";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
@@ -456,5 +477,6 @@
         private System.Windows.Forms.ToolTip TTAyudaMenu;
         private System.Windows.Forms.Panel panel8;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button button1;
     }
 }

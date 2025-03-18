@@ -264,5 +264,9 @@ namespace VentaCredimax.Formularios
             ListarVentas();
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            ListarVentas();
+        }
     }
 }
