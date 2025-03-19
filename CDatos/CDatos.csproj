@@ -63,7 +63,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RepositorioCliente.cs" />
     <Compile Include="RepositorioCuotas.cs" />
-    <Compile Include="RepositorioPago.cs" />
     <Compile Include="RepositorioReportes.cs" />
     <Compile Include="RepositorioVenta.cs" />
   </ItemGroup>

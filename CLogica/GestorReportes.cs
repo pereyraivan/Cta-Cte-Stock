@@ -25,5 +25,9 @@ namespace CLogica
         {
             return _repositorioReporte.DatosVentasPorFecha(fechaDesde,fechaHasta);
         }
+        public List<sp_DetalleDeVenta_Result> DatosDetalleDeVenta(int IdVenta)
+        {
+            return _repositorioReporte.DatosDetalleDeVenta(IdVenta);
+        }
     }
 }

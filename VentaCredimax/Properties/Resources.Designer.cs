@@ -95,6 +95,41 @@ namespace VentaCredimax.Properties {
         
         /// <summary>
         ///   Looks up a localized string similar to &lt;!DOCTYPE html&gt;
+        ///&lt;html&gt;
+        ///&lt;head&gt;
+        ///    &lt;title&gt;ventas por cliente&lt;/title&gt;
+        ///    &lt;style&gt;
+        ///        body {
+        ///            font-family: Arial, sans-serif;
+        ///        }
+        ///
+        ///        .container {
+        ///            margin: 0 auto;
+        ///            border: 1px solid black;
+        ///            padding: 5px;
+        ///        }
+        ///
+        ///        .header {
+        ///            padding: 10px;
+        ///        }
+        ///
+        ///        .header h1 {
+        ///            color: #1D4ED8;
+        ///            text-align: center;
+        ///            font-size: 23px;
+        ///        }
+        ///
+        ///        .header p {
+        ///            marg [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string DetalleDeVenta {
+            get {
+                return ResourceManager.GetString("DetalleDeVenta", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;!DOCTYPE html&gt;
         ///&lt;html lang=&quot;es&quot;&gt;
         ///&lt;head&gt;
         ///    &lt;meta charset=&quot;UTF-8&quot;&gt;

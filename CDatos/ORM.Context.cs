@@ -30,10 +30,10 @@ namespace CDatos
     
         public virtual DbSet<Cliente> Cliente { get; set; }
         public virtual DbSet<FormaDePago> FormaDePago { get; set; }
-        public virtual DbSet<Pago> Pago { get; set; }
         public virtual DbSet<Venta> Venta { get; set; }
         public virtual DbSet<Cuota> Cuota { get; set; }
         public virtual DbSet<ReciboControl> ReciboControl { get; set; }
+        public virtual DbSet<Configuracion> Configuracion { get; set; }
     
         public virtual ObjectResult<sp_GetVentasByClientId_Result> sp_GetVentasByClientId(Nullable<int> clientId)
         {
@@ -77,6 +77,15 @@ namespace CDatos
                 new ObjectParameter("FechaHasta", typeof(System.DateTime));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_ReporteVentas_Result>("sp_ReporteVentas", fechaDesdeParameter, fechaHastaParameter);
+        }
+    
+        public virtual ObjectResult<sp_DetalleDeVenta_Result> sp_DetalleDeVenta(Nullable<int> ventaId)
+        {
+            var ventaIdParameter = ventaId.HasValue ?
+                new ObjectParameter("VentaId", ventaId) :
+                new ObjectParameter("VentaId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_DetalleDeVenta_Result>("sp_DetalleDeVenta", ventaIdParameter);
         }
     }
 }

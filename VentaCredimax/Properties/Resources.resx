@@ -121,6 +121,9 @@
   <data name="ComprobanteDeVenta" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ComprobanteDeVenta.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
+  <data name="DetalleDeVenta" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DetalleDeVenta.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
   <data name="ReciboDeCuota" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ReciboDeCuota.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>

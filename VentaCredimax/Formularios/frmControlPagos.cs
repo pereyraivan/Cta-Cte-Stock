@@ -17,6 +17,7 @@ namespace VentaCredimax.Formularios
     public partial class frmControlPagos : Form
     {
         private GestorVenta _gestorVenta = new GestorVenta();
+        private GestorReportes _gestorReportes = new GestorReportes();
         public frmControlPagos()
         {
             InitializeComponent();
@@ -59,7 +60,7 @@ namespace VentaCredimax.Formularios
         }
         private void Buscar()
         {
-            if(cbBuscarPor.SelectedIndex == -1)
+            if (cbBuscarPor.SelectedIndex == -1)
             {
                 MessageBox.Show("Por favor, seleccione un tipo de busqueda.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
@@ -75,7 +76,7 @@ namespace VentaCredimax.Formularios
                         FiltrarVentasPorArticulo();
                         break;
                 }
-            }        
+            }
         }
 
         private void txtBuscar_TextChanged(object sender, EventArgs e)
@@ -163,14 +164,94 @@ namespace VentaCredimax.Formularios
             ListarVentas();
         }
 
-        private void dgvVentas_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
         private void cbTodasVentas_CheckedChanged(object sender, EventArgs e)
         {
             ListarVentas();
+        }
+
+        private void btnImpDetalleDeVenta_Click(object sender, EventArgs e)
+        {
+
+            // Obtener el IdCliente de la columna "IdCliente"
+            int IdVenta = Convert.ToInt32(dgvVentas?.CurrentRow?.Cells["VentaId"]?.Value);
+            if (IdVenta > 0)
+            {
+              
+                ImprimirDetalleDeVenta(IdVenta);
+            }
+            else
+            {
+                MessageBox.Show("Por favor, seleccione una venta para ver su detalle.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
+        }
+        private void ImprimirDetalleDeVenta(int IdVenta)
+        {
+            // Verificar si hay una fila seleccionada en el DataGridView
+            if (dgvVentas.CurrentRow == null)
+            {
+                MessageBox.Show("Por favor, seleccione una venta para ver su detalle.",
+                                "Aviso",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning);
+                return;
+            }
+
+            List<sp_DetalleDeVenta_Result> listaDetalleDeVenta = _gestorReportes.DatosDetalleDeVenta(IdVenta);
+
+            if (listaDetalleDeVenta.Any())
+            {
+                // Cargar la plantilla HTML
+                string textoHtml = Properties.Resources.DetalleDeVenta.ToString();
+
+                textoHtml = textoHtml.Replace("@nombre", listaDetalleDeVenta.FirstOrDefault().NombreCliente);
+                textoHtml = textoHtml.Replace("@apellido", listaDetalleDeVenta.FirstOrDefault().ApellidoCliente);
+                textoHtml = textoHtml.Replace("@dni", listaDetalleDeVenta.FirstOrDefault().DNICliente.ToString());
+                textoHtml = textoHtml.Replace("@direccion", listaDetalleDeVenta.FirstOrDefault().DireccionCliente);
+                textoHtml = textoHtml.Replace("@telefono", listaDetalleDeVenta.FirstOrDefault().TelefonoCliente);
+
+                // Generar las filas de la tabla agrupando por VentaId
+                string filasTabla = string.Join("", listaDetalleDeVenta
+                    .GroupBy(v => v.VentaId) // Agrupar por VentaId
+                    .SelectMany(grupo => grupo.Select((venta, index) => $@"
+                    <tr>
+                        {(index == 0 ? $"<td rowspan='{grupo.Count()}'>{venta.Articulo}</td>" : "")}
+                        {(index == 0 ? $"<td rowspan='{grupo.Count()}'>{string.Format("{0:#,##0.00}", venta.Precio).Replace(",", "X").Replace(".", ",").Replace("X", ".")}</td>" : "")}
+                        {(index == 0 ? $"<td rowspan='{grupo.Count()}'>{venta.Cuotas}</td>" : "")}                   
+                        <td>{venta.FechaDeVenta.ToString("dd/MM/yyyy")}</td>
+                        <td>{venta.NumeroDeCuota}</td>
+                        <td>{string.Format("{0:#,##0.00}", venta.MontoCuota).Replace(",", "X").Replace(".", ",").Replace("X", ".")}</td>
+                        <td>{(venta.FechaQuePagoCuota.HasValue ? venta.FechaQuePagoCuota.Value.ToString("dd/MM/yyyy") : "")}</td>
+                    </tr>")));
+
+                // Reemplazar en la plantilla HTML
+                textoHtml = textoHtml.Replace("@filasTabla", filasTabla);
+
+                textoHtml = textoHtml.Replace("@talle", listaDetalleDeVenta.FirstOrDefault().Talle.ToString());
+                textoHtml = textoHtml.Replace("@fecha-cancelacion-cuota", listaDetalleDeVenta.FirstOrDefault()?.FechaCancelacionCuotas?.ToString("dd/MM/yyyy") ?? "");
+                textoHtml = textoHtml.Replace("@fecha-programada-cuota", listaDetalleDeVenta.FirstOrDefault()?.FechaProgramadaDeCuota.ToString("dd/MM/yyyy"));
+                textoHtml = textoHtml.Replace("@fecha-venta", listaDetalleDeVenta.FirstOrDefault()?.FechaDeVenta.ToString("dd/MM/yyyy"));
+                textoHtml = textoHtml.Replace("@frecuencia-pago", listaDetalleDeVenta.FirstOrDefault().FormaDePago.ToString());
+
+                SaveFileDialog saveFile = new SaveFileDialog();
+                saveFile.FileName = $"detalle-de-venta_{listaDetalleDeVenta.FirstOrDefault().NombreCliente + listaDetalleDeVenta.FirstOrDefault().ApellidoCliente}-{DateTime.Now.ToString("dd_MM_yyyy")}.pdf";
+                saveFile.Filter = "Pdf Files|*.pdf";
+
+                if (saveFile.ShowDialog() == DialogResult.OK)
+                {
+                    // Crear el conversor de HTML a PDF
+                    SelectPdf.HtmlToPdf converter = new SelectPdf.HtmlToPdf();
+
+                    // Convertir el HTML a PDF
+                    SelectPdf.PdfDocument doc = converter.ConvertHtmlString(textoHtml);
+
+                    // Guardar el PDF
+                    doc.Save(saveFile.FileName);
+                    doc.Close();
+
+                    MessageBox.Show("Documento Generado", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
         }
     }
 }

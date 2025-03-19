@@ -96,5 +96,21 @@ namespace CDatos
                 throw new Exception("Error al obtener los datos del comprobante ventas por cliente", ex);
             }
         }
+        public List<sp_DetalleDeVenta_Result> DatosDetalleDeVenta(int IdVenta)
+        {
+            try
+            {
+                using (VentasCredimaxEntities db = new VentasCredimaxEntities())
+                {
+                    return db.Database.SqlQuery<sp_DetalleDeVenta_Result>(
+                        "EXEC sp_DetalleDeVenta @VentaId",
+                        new SqlParameter("@VentaId", IdVenta)).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener los datos del comprobante ventas por cliente", ex);
+            }
+        }
     }
 }

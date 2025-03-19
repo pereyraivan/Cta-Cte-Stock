@@ -47,6 +47,9 @@
     <Compile Include="ComprobanteDePago_Result.cs">
       <DependentUpon>ORM.tt</DependentUpon>
     </Compile>
+    <Compile Include="Configuracion.cs">
+      <DependentUpon>ORM.tt</DependentUpon>
+    </Compile>
     <Compile Include="Cuota.cs">
       <DependentUpon>ORM.tt</DependentUpon>
     </Compile>
@@ -69,6 +72,9 @@
       <DependentUpon>ORM.tt</DependentUpon>
     </Compile>
     <Compile Include="ReciboDePago_Result.cs">
+      <DependentUpon>ORM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_DetalleDeVenta_Result.cs">
       <DependentUpon>ORM.tt</DependentUpon>
     </Compile>
     <Compile Include="sp_GetVentasByClientId_Result.cs">
