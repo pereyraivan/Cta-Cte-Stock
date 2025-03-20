@@ -100,7 +100,6 @@
             this.Controls.Add(this.dtpDesde);
             this.Name = "frmVentasPorFecha";
             this.Text = "Ventas por fecha";
-            this.Load += new System.EventHandler(this.frmReporteVentasPorFecha_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

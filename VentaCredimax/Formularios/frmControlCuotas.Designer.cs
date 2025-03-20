@@ -60,7 +60,7 @@
             this.dgvCuotas.Name = "dgvCuotas";
             this.dgvCuotas.ReadOnly = true;
             this.dgvCuotas.RowHeadersWidth = 51;
-            this.dgvCuotas.Size = new System.Drawing.Size(1285, 431);
+            this.dgvCuotas.Size = new System.Drawing.Size(1165, 431);
             this.dgvCuotas.TabIndex = 31;
             this.dgvCuotas.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvCuotas_DataBindingComplete);
             // 
@@ -68,7 +68,7 @@
             // 
             this.button1.BackColor = System.Drawing.Color.Azure;
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(1022, 466);
+            this.button1.Location = new System.Drawing.Point(905, 466);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(269, 70);
             this.button1.TabIndex = 32;
@@ -93,12 +93,12 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.ClientSize = new System.Drawing.Size(1303, 561);
+            this.ClientSize = new System.Drawing.Size(1184, 561);
             this.Controls.Add(this.btnImprimirComprobante);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.dgvCuotas);
             this.MaximumSize = new System.Drawing.Size(1319, 600);
-            this.MinimumSize = new System.Drawing.Size(1319, 600);
+            this.MinimumSize = new System.Drawing.Size(1200, 600);
             this.Name = "frmControlCuotas";
             this.Text = "Control de cuotas por venta";
             this.Load += new System.EventHandler(this.frmControlCuotas_Load);

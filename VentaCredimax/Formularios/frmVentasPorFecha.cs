@@ -17,12 +17,6 @@ namespace VentaCredimax.Formularios
         {
             InitializeComponent();
         }
-
-        private void frmReporteVentasPorFecha_Load(object sender, EventArgs e)
-        {
-            
-        }
-
         private void btnImprimirComprobante_Click(object sender, EventArgs e)
         {
             if (dtpDesde.Value == null || dtpHasta.Value == null)

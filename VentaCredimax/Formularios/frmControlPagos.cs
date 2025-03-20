@@ -209,6 +209,7 @@ namespace VentaCredimax.Formularios
                 textoHtml = textoHtml.Replace("@dni", listaDetalleDeVenta.FirstOrDefault().DNICliente.ToString());
                 textoHtml = textoHtml.Replace("@direccion", listaDetalleDeVenta.FirstOrDefault().DireccionCliente);
                 textoHtml = textoHtml.Replace("@telefono", listaDetalleDeVenta.FirstOrDefault().TelefonoCliente);
+                textoHtml = textoHtml.Replace("@fecha-hoy", DateTime.Now.ToString("dd/MM/yyyy"));
 
                 // Generar las filas de la tabla agrupando por VentaId
                 string filasTabla = string.Join("", listaDetalleDeVenta
@@ -217,21 +218,18 @@ namespace VentaCredimax.Formularios
                     <tr>
                         {(index == 0 ? $"<td rowspan='{grupo.Count()}'>{venta.Articulo}</td>" : "")}
                         {(index == 0 ? $"<td rowspan='{grupo.Count()}'>{string.Format("{0:#,##0.00}", venta.Precio).Replace(",", "X").Replace(".", ",").Replace("X", ".")}</td>" : "")}
-                        {(index == 0 ? $"<td rowspan='{grupo.Count()}'>{venta.Cuotas}</td>" : "")}                   
-                        <td>{venta.FechaDeVenta.ToString("dd/MM/yyyy")}</td>
+                        {(index == 0 ? $"<td rowspan='{grupo.Count()}'>{venta.Cuotas}</td>" : "")}  
+                        {(index == 0 ? $"<td rowspan='{grupo.Count()}'>{venta.FechaDeVenta.ToString("dd/MM/yyyy")}</td>": "")}
                         <td>{venta.NumeroDeCuota}</td>
                         <td>{string.Format("{0:#,##0.00}", venta.MontoCuota).Replace(",", "X").Replace(".", ",").Replace("X", ".")}</td>
-                        <td>{(venta.FechaQuePagoCuota.HasValue ? venta.FechaQuePagoCuota.Value.ToString("dd/MM/yyyy") : "")}</td>
+                        <td>{(venta.FechaProgramadaDeCuota.ToString("dd/MM/yyyy"))}</td>
+                        <td>{(venta.FechaQuePagoCuota.HasValue ? venta.FechaQuePagoCuota.Value.ToString("dd/MM/yyyy") : "Pendiente")}</td>
                     </tr>")));
 
                 // Reemplazar en la plantilla HTML
                 textoHtml = textoHtml.Replace("@filasTabla", filasTabla);
-
-                textoHtml = textoHtml.Replace("@talle", listaDetalleDeVenta.FirstOrDefault().Talle.ToString());
-                textoHtml = textoHtml.Replace("@fecha-cancelacion-cuota", listaDetalleDeVenta.FirstOrDefault()?.FechaCancelacionCuotas?.ToString("dd/MM/yyyy") ?? "");
                 textoHtml = textoHtml.Replace("@fecha-programada-cuota", listaDetalleDeVenta.FirstOrDefault()?.FechaProgramadaDeCuota.ToString("dd/MM/yyyy"));
-                textoHtml = textoHtml.Replace("@fecha-venta", listaDetalleDeVenta.FirstOrDefault()?.FechaDeVenta.ToString("dd/MM/yyyy"));
-                textoHtml = textoHtml.Replace("@frecuencia-pago", listaDetalleDeVenta.FirstOrDefault().FormaDePago.ToString());
+                
 
                 SaveFileDialog saveFile = new SaveFileDialog();
                 saveFile.FileName = $"detalle-de-venta_{listaDetalleDeVenta.FirstOrDefault().NombreCliente + listaDetalleDeVenta.FirstOrDefault().ApellidoCliente}-{DateTime.Now.ToString("dd_MM_yyyy")}.pdf";
