@@ -232,7 +232,7 @@ namespace VentaCredimax.Formularios
                 
 
                 SaveFileDialog saveFile = new SaveFileDialog();
-                saveFile.FileName = $"detalle-de-venta_{listaDetalleDeVenta.FirstOrDefault().NombreCliente + listaDetalleDeVenta.FirstOrDefault().ApellidoCliente}-{DateTime.Now.ToString("dd_MM_yyyy")}.pdf";
+                saveFile.FileName = $"detalle-de-venta_{listaDetalleDeVenta.FirstOrDefault().NombreCliente}-{listaDetalleDeVenta.FirstOrDefault().ApellidoCliente}.pdf";
                 saveFile.Filter = "Pdf Files|*.pdf";
 
                 if (saveFile.ShowDialog() == DialogResult.OK)
