@@ -163,7 +163,7 @@
             this.btnImpDetalleDeVenta.Name = "btnImpDetalleDeVenta";
             this.btnImpDetalleDeVenta.Size = new System.Drawing.Size(295, 62);
             this.btnImpDetalleDeVenta.TabIndex = 45;
-            this.btnImpDetalleDeVenta.Text = "&Imprimir detalle de venta";
+            this.btnImpDetalleDeVenta.Text = "&Imprimir detalle de venta/pestamo";
             this.toolTip1.SetToolTip(this.btnImpDetalleDeVenta, "Imprime el detalle de venta seleccionado");
             this.btnImpDetalleDeVenta.UseVisualStyleBackColor = false;
             this.btnImpDetalleDeVenta.Click += new System.EventHandler(this.btnImpDetalleDeVenta_Click);

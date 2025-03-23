@@ -219,7 +219,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(466, 59);
             this.button1.TabIndex = 11;
-            this.button1.Text = "&Registrar Venta";
+            this.button1.Text = "&Registrar Operacion";
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -409,12 +409,12 @@
             // 
             this.btnImprimirVenta.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnImprimirVenta.BackColor = System.Drawing.Color.Azure;
-            this.btnImprimirVenta.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnImprimirVenta.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnImprimirVenta.Location = new System.Drawing.Point(525, 435);
             this.btnImprimirVenta.Name = "btnImprimirVenta";
             this.btnImprimirVenta.Size = new System.Drawing.Size(218, 59);
             this.btnImprimirVenta.TabIndex = 46;
-            this.btnImprimirVenta.Text = "&Imprimir Venta";
+            this.btnImprimirVenta.Text = "&Imprimir Movimiento";
             this.btnImprimirVenta.UseVisualStyleBackColor = false;
             this.btnImprimirVenta.Click += new System.EventHandler(this.btnImprimirVenta_Click);
             // 
