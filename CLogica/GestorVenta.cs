@@ -52,5 +52,9 @@ namespace CLogica
         {
             return _repositorioVenta.FiltrarVentasPorArticulo(nombreArticulo);
         }
+        public bool EsDemo()
+        {
+            return _repositorioVenta.EsDemo();
+        }
     }
 }

@@ -405,6 +405,23 @@ namespace CDatos
                
             }         
         }
-
+        public bool EsDemo()
+        {
+            
+            try
+            {
+                using (VentasCredimaxEntities db = new VentasCredimaxEntities())
+                {
+                   
+                   return db.Configuracion.Select(x => x.isDemo).FirstOrDefault();
+                  
+                }
+            }
+            catch (Exception e)
+            {
+                respuesta = e.Message;
+                return false;
+            }
+        }
     }
 }

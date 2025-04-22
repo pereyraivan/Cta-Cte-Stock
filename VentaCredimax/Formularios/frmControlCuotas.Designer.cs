@@ -40,7 +40,7 @@
             // 
             this.dgvCuotas.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Azure;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
@@ -58,8 +58,8 @@
             this.dgvCuotas.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvCuotas.Location = new System.Drawing.Point(7, 15);
             this.dgvCuotas.Name = "dgvCuotas";
-            this.dgvCuotas.ReadOnly = true;
             this.dgvCuotas.RowHeadersWidth = 51;
+            this.dgvCuotas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvCuotas.Size = new System.Drawing.Size(1165, 431);
             this.dgvCuotas.TabIndex = 31;
             this.dgvCuotas.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvCuotas_DataBindingComplete);

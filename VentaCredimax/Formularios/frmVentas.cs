@@ -126,6 +126,16 @@ namespace VentaCredimax.Formularios
         }
         private void button1_Click(object sender, EventArgs e)
         {
+            var esdemo = _gestorVenta.EsDemo();
+            if (esdemo)
+            {
+               var contarVentas = dgvVentas.Rows.Count;
+                if(contarVentas > 5)
+                {
+                    MessageBox.Show("Está utilizando una versión de prueba. Adquiera la versión completa para disfrutar de todas las funciones sin restricciones.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return;
+                }
+            }
             RegistrarVenta();
             ListarVentas();
         }
