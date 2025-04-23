@@ -100,7 +100,7 @@ namespace VentaCredimax.Formularios
             venta.FormaDePagoId = (int)formaDePagoSeleccionada;
             venta.Precio = Convert.ToDecimal(txtPrecio.Text);
             venta.Cuotas = Convert.ToInt32(txtCuotas.Text);
-            venta.FechaDeInicio = DateTime.Now;
+            venta.FechaDeInicio = dtfechaVenta.Value;
             venta.FechaDeCancelacion = dtpFechaCancelacion.Value;
             venta.Cantidad = Convert.ToInt32(txtCantidad.Text);
             if (decimal.TryParse(txtPrecio.Text, out precio) && int.TryParse(txtCantidad.Text, out cantidad))
@@ -150,6 +150,7 @@ namespace VentaCredimax.Formularios
             txtPrecio.Text = "";
             txtCuotas.Text = "";
             dtpFechaCancelacion.Value = DateTime.Now;
+            dtfechaVenta.Value = DateTime.Now;
             txtCantidad.Text = "";
             lblTotal.Text = "";
 
@@ -192,6 +193,7 @@ namespace VentaCredimax.Formularios
                 txtCantidad.Text = dgvVentas.CurrentRow.Cells["Cantidad"].Value?.ToString();
                 lblTotal.Text = Convert.ToDecimal(dgvVentas.CurrentRow.Cells["Total"].Value).ToString("N2", new System.Globalization.CultureInfo("es-AR"));
                 dtpFechaCancelacion.Value = DateTime.Parse(dgvVentas.CurrentRow.Cells["FechaDeCancelacion"].Value?.ToString() ?? DateTime.Now.ToString());
+                dtfechaVenta.Value = DateTime.Parse(dgvVentas.CurrentRow.Cells["FechaDeInicio"].Value?.ToString() ?? DateTime.Now.ToString());
 
                 id = dgvVentas.CurrentRow.Cells["VentaId"].Value.ToString();
             }
@@ -213,7 +215,7 @@ namespace VentaCredimax.Formularios
                     venta.Cuotas = Convert.ToInt32(txtCuotas.Text);
                     venta.Cantidad = Convert.ToInt32(txtCantidad.Text);
                     venta.Total = Convert.ToDecimal(lblTotal.Text);
-                    venta.FechaDeInicio = DateTime.Now;
+                    venta.FechaDeInicio = dtfechaVenta.Value;
                     venta.FechaDeCancelacion = dtpFechaCancelacion.Value;
                     venta.FechaAnulacion = null;
 
@@ -303,7 +305,7 @@ namespace VentaCredimax.Formularios
                 return;
             }
             // Obtener la fecha de venta
-            DateTime fechaVenta = DateTime.Now;
+            DateTime fechaVenta = dtfechaVenta.Value;
 
             // Obtener la cantidad de cuotas
             int cantidadCuotas;
