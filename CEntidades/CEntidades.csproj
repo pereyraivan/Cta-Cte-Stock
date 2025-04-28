@@ -64,9 +64,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ORM.tt</DependentUpon>
     </Compile>
-    <Compile Include="Pago.cs">
-      <DependentUpon>ORM.tt</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReciboControl.cs">
       <DependentUpon>ORM.tt</DependentUpon>
@@ -81,6 +78,9 @@
       <DependentUpon>ORM.tt</DependentUpon>
     </Compile>
     <Compile Include="sp_ReporteVentas_Result.cs">
+      <DependentUpon>ORM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Vendedor.cs">
       <DependentUpon>ORM.tt</DependentUpon>
     </Compile>
     <Compile Include="Venta.cs">

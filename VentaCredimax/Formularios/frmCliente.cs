@@ -49,12 +49,7 @@ namespace VentaCredimax.Formularios
             {
                 errorProvider1.SetError(txtApellido, "Campo obligatorio");
                 esValido = false;
-            }
-            if (string.IsNullOrWhiteSpace(txtDni.Text))
-            {
-                errorProvider1.SetError(txtDni, "Campo obligatorio");
-                esValido = false;
-            }
+            }         
 
             // Validar que el DNI sea un número válido
             if (!int.TryParse(txtDni.Text, out int dni))

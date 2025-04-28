@@ -12,12 +12,10 @@ namespace CEntidades
     using System;
     using System.Collections.Generic;
     
-    public partial class Pago
+    public partial class Vendedor
     {
-        public int PagoId { get; set; }
-        public int VentaId { get; set; }
-        public decimal Monto { get; set; }
-        public System.DateTime FechaDePago { get; set; }
-        public Nullable<System.DateTime> FechaAnulacion { get; set; }
+        public int VendedorId { get; set; }
+        public string NombreYApellido { get; set; }
+        public string Telefono { get; set; }
     }
 }

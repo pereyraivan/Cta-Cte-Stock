@@ -53,6 +53,14 @@ warning 6002: The table/view 'VentasCredimax.dbo.ReciboControl' does not have a 
           <Property Name="Serie" Type="int" Nullable="false" />
           <Property Name="NumeroSecuencial" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="Vendedor">
+          <Key>
+            <PropertyRef Name="VendedorId" />
+          </Key>
+          <Property Name="VendedorId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NombreYApellido" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Telefono" Type="nvarchar" MaxLength="15" />
+        </EntityType>
         <EntityType Name="Venta">
           <Key>
             <PropertyRef Name="VentaId" />
@@ -69,6 +77,7 @@ warning 6002: The table/view 'VentasCredimax.dbo.ReciboControl' does not have a 
           <Property Name="Cuotas" Type="int" />
           <Property Name="Cantidad" Type="int" />
           <Property Name="Total" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="VendedorId" Type="int" />
         </EntityType>
         <Function Name="ComprobanteDePago" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="VentaId" Type="int" Mode="In" />
@@ -92,6 +101,7 @@ warning 6002: The table/view 'VentasCredimax.dbo.ReciboControl' does not have a 
           <EntitySet Name="Configuracion" EntityType="Self.Configuracion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Cuota" EntityType="Self.Cuota" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FormaDePago" EntityType="Self.FormaDePago" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Vendedor" EntityType="Self.Vendedor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Venta" EntityType="Self.Venta" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ReciboControl" EntityType="Self.ReciboControl" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -128,6 +138,7 @@ warning 6002: The table/view 'VentasCredimax.dbo.ReciboControl' does not have a 
           <FunctionImport Name="sp_DetalleDeVenta" ReturnType="Collection(VentasCredimaxModel.sp_DetalleDeVenta_Result)">
           <Parameter Name="VentaId" Mode="In" Type="Int32" />
           </FunctionImport>
+          <EntitySet Name="Vendedor" EntityType="VentasCredimaxModel.Vendedor" />
         </EntityContainer>
         <EntityType Name="Cliente">
           <Key>
@@ -164,6 +175,7 @@ warning 6002: The table/view 'VentasCredimax.dbo.ReciboControl' does not have a 
           <Property Name="Cuotas" Type="Int32" />
           <Property Name="Cantidad" Type="Int32" />
           <Property Name="Total" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="VendedorId" Type="Int32" />
         </EntityType>
         <EntityType Name="Cuota">
           <Key>
@@ -282,6 +294,14 @@ warning 6002: The table/view 'VentasCredimax.dbo.ReciboControl' does not have a 
           <Property Type="Boolean" Name="EstadoCuota" Nullable="true" />
           <Property Type="String" Name="FormaDePago" Nullable="false" MaxLength="30" />
         </ComplexType>
+        <EntityType Name="Vendedor">
+          <Key>
+            <PropertyRef Name="VendedorId" />
+          </Key>
+          <Property Name="VendedorId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombreYApellido" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Telefono" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -312,6 +332,7 @@ warning 6002: The table/view 'VentasCredimax.dbo.ReciboControl' does not have a 
           <EntitySetMapping Name="Venta">
             <EntityTypeMapping TypeName="VentasCredimaxModel.Venta">
               <MappingFragment StoreEntitySet="Venta">
+                <ScalarProperty Name="VendedorId" ColumnName="VendedorId" />
                 <ScalarProperty Name="Total" ColumnName="Total" />
                 <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
                 <ScalarProperty Name="Cuotas" ColumnName="Cuotas" />
@@ -466,6 +487,15 @@ warning 6002: The table/view 'VentasCredimax.dbo.ReciboControl' does not have a 
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="Vendedor">
+            <EntityTypeMapping TypeName="VentasCredimaxModel.Vendedor">
+              <MappingFragment StoreEntitySet="Vendedor">
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="NombreYApellido" ColumnName="NombreYApellido" />
+                <ScalarProperty Name="VendedorId" ColumnName="VendedorId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

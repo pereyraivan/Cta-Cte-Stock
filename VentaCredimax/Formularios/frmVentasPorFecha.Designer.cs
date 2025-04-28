@@ -99,6 +99,7 @@
             this.Controls.Add(this.dtpHasta);
             this.Controls.Add(this.dtpDesde);
             this.Name = "frmVentasPorFecha";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Ventas por fecha";
             this.ResumeLayout(false);
             this.PerformLayout();

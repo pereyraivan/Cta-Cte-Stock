@@ -34,6 +34,7 @@ namespace CDatos
         public virtual DbSet<Cuota> Cuota { get; set; }
         public virtual DbSet<ReciboControl> ReciboControl { get; set; }
         public virtual DbSet<Configuracion> Configuracion { get; set; }
+        public virtual DbSet<Vendedor> Vendedor { get; set; }
     
         public virtual ObjectResult<sp_GetVentasByClientId_Result> sp_GetVentasByClientId(Nullable<int> clientId)
         {

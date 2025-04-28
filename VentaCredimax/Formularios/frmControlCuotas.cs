@@ -94,7 +94,6 @@ namespace VentaCredimax.Formularios
                 dgvCuotas.Columns["MontoCuota"].HeaderText = "Monto Cuota";
                 dgvCuotas.Columns["FechaProgramada"].HeaderText = "Vencimiento";
                 dgvCuotas.Columns["FechaPago"].HeaderText = "Fecha de Pago";
-
             }
         }
 

@@ -16,6 +16,7 @@ namespace VentaCredimax.Formularios
         private int idCliente;
         GestorCliente _gestorCliente = new GestorCliente();
         GestorVenta _gestorVenta = new GestorVenta();
+        GestorVendedor gestorVendedor = new GestorVendedor();   
         private GestorReportes _gestorReportes = new GestorReportes();
         public frmVentas()
         {
@@ -40,6 +41,7 @@ namespace VentaCredimax.Formularios
             cbSeleccionCliente.DisplayMember = "NombreCompleto"; // Muestra Apellido, Nombre (DNI)
             cbSeleccionCliente.ValueMember = "IdCliente"; // Identificador real del cliente
             cbSeleccionCliente.DataSource = _gestorCliente.CargarComboCliente();
+            CargarVendedores(); 
         }
         public void ClienteSeleccionado(string nombreCliente, string apellidoCliente, int idClienteSeleccionado, int dni)
         {
@@ -90,6 +92,11 @@ namespace VentaCredimax.Formularios
 
                 return; // Si hay campos vacíos, no se ejecuta el resto del código
             }
+            if (cbVendedor.SelectedIndex == -1)
+            {
+                MessageBox.Show("Debe seleccionar un vendedor.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
             var venta = new Venta();
 
@@ -103,6 +110,7 @@ namespace VentaCredimax.Formularios
             venta.FechaDeInicio = dtfechaVenta.Value;
             venta.FechaDeCancelacion = dtpFechaCancelacion.Value;
             venta.Cantidad = Convert.ToInt32(txtCantidad.Text);
+            venta.VendedorId = (int)cbVendedor.SelectedValue;   
             if (decimal.TryParse(txtPrecio.Text, out precio) && int.TryParse(txtCantidad.Text, out cantidad))
             {
                 venta.Total = precio * cantidad;
@@ -188,6 +196,7 @@ namespace VentaCredimax.Formularios
                 txtArticulo.Text = dgvVentas.CurrentRow.Cells["Articulo"].Value?.ToString();
                 txtTalle.Text = dgvVentas.CurrentRow.Cells["Talle"].Value?.ToString();
                 cbFormaPago.Text = dgvVentas.CurrentRow.Cells["FormaDePago"].Value?.ToString();
+                cbVendedor.Text = dgvVentas.CurrentRow.Cells["VendedorNombre"].Value?.ToString();
                 txtPrecio.Text = Convert.ToDecimal(dgvVentas.CurrentRow.Cells["Precio"].Value).ToString("N2", new System.Globalization.CultureInfo("es-AR"));
                 txtCuotas.Text = dgvVentas.CurrentRow.Cells["Cuotas"].Value?.ToString();
                 txtCantidad.Text = dgvVentas.CurrentRow.Cells["Cantidad"].Value?.ToString();
@@ -210,6 +219,7 @@ namespace VentaCredimax.Formularios
                     venta.ClientId = idCliente;
                     venta.Articulo = txtArticulo.Text;
                     venta.FormaDePagoId = (int)cbFormaPago.SelectedValue;
+                    venta.VendedorId = (int)cbVendedor.SelectedValue;
                     venta.Talle = string.IsNullOrEmpty(txtTalle.Text) ? (int?)null : Convert.ToInt32(txtTalle.Text);
                     venta.Precio = string.IsNullOrEmpty(txtPrecio.Text) ? (decimal?)null : Convert.ToDecimal(txtPrecio.Text);
                     venta.Cuotas = Convert.ToInt32(txtCuotas.Text);
@@ -285,6 +295,7 @@ namespace VentaCredimax.Formularios
             dgvVentas.Columns["FormaDePago"].HeaderText = "Forma de pago";
             dgvVentas.Columns["FechaDeInicio"].HeaderText = "Fecha Venta";
             dgvVentas.Columns["FechaDeCancelacion"].HeaderText = "Cancelación pagos";
+            dgvVentas.Columns["VendedorNombre"].HeaderText = "Vendedor";
             dgvVentas.Columns["Precio"].DefaultCellStyle.Format = "N2";
             dgvVentas.Columns["Total"].DefaultCellStyle.Format = "N2";
             dgvVentas.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
@@ -498,6 +509,24 @@ namespace VentaCredimax.Formularios
             }
             int ventaId = Convert.ToInt32(dgvVentas.CurrentRow.Cells["VentaId"].Value);
             ImprimirReporteComprobanteDeVenta(ventaId);
+        }
+        private void CargarVendedores()
+        {
+            var vendedores = gestorVendedor.Listar();
+            cbVendedor.DataSource = vendedores;
+            cbVendedor.DisplayMember = "NombreYApellido"; // Campo que se mostrará en el ComboBox
+            cbVendedor.ValueMember = "VendedorId"; // Campo que se usará como valor seleccionado
+            cbVendedor.SelectedIndex = -1; // Para que no haya un valor seleccionado por defecto
+
+            // Seleccionar por defecto el vendedor con VendedorId = 1
+            if (vendedores.Any(v => v.VendedorId == 1))
+            {
+                cbVendedor.SelectedValue = 1;
+            }
+            else
+            {
+                cbVendedor.SelectedIndex = -1; // Si no existe, no seleccionar nada
+            }
         }
     }
 }

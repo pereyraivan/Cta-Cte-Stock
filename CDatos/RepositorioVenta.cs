@@ -86,6 +86,7 @@ namespace CDatos
                     ventas = (from v in db.Venta
                               join c in db.Cliente on v.ClientId equals c.ClientId
                               join fp in db.FormaDePago on v.FormaDePagoId equals fp.FormaDePagoId
+                              join ven in db.Vendedor on v.VendedorId equals ven.VendedorId
                               where mostrarTodas || v.FechaAnulacion == null
                               orderby v.FechaDeInicio descending
                               select new VentaDTO
@@ -102,6 +103,7 @@ namespace CDatos
                                   FechaDeCancelacion = v.FechaDeCancelacion,
                                   Cantidad = v.Cantidad,
                                   Total = v.Total,
+                                  VendedorNombre = ven.NombreYApellido, 
                                   FechaAnulacion = v.FechaAnulacion,
                                   CuotasVencidas = db.Cuota.Any(cuota => cuota.VentaId == v.VentaId && cuota.FechaProgramada < DateTime.Now && cuota.FechaPago == null)
                               }).ToList();
@@ -146,6 +148,7 @@ namespace CDatos
                     ventas = (from v in db.Venta
                               join c in db.Cliente on v.ClientId equals c.ClientId
                               join fp in db.FormaDePago on v.FormaDePagoId equals fp.FormaDePagoId
+                              join ven in db.Vendedor on v.VendedorId equals ven.VendedorId
                               where v.FechaAnulacion == null
                               select new VentaDTO
                               {
@@ -162,6 +165,7 @@ namespace CDatos
                                   FechaAnulacion = v.FechaAnulacion,
                                   Cantidad = v.Cantidad,
                                   Total = v.Total,
+                                  VendedorNombre = ven.NombreYApellido,
                                   CuotasVencidas = db.Cuota.Any(cuota => cuota.VentaId == v.VentaId && cuota.FechaProgramada < DateTime.Now && cuota.FechaPago == null)
                               })
                               .ToList();
@@ -205,6 +209,7 @@ namespace CDatos
                     ventas = (from v in db.Venta
                               join c in db.Cliente on v.ClientId equals c.ClientId
                               join fp in db.FormaDePago on v.FormaDePagoId equals fp.FormaDePagoId
+                              join ven in db.Vendedor on v.VendedorId equals ven.VendedorId
                               where (c.Apellido + " " + c.Nombre).Contains(nombreApellidoCliente) // Filtrar por nombre y apellido
                               orderby v.FechaDeInicio descending
                               select new VentaDTO
@@ -221,6 +226,7 @@ namespace CDatos
                                   FechaDeCancelacion = v.FechaDeCancelacion,
                                   Cantidad = v.Cantidad,
                                   Total = v.Total,
+                                  VendedorNombre = ven.NombreYApellido,
                                   FechaAnulacion = v.FechaAnulacion
                               }).ToList();
                 }
@@ -242,6 +248,7 @@ namespace CDatos
                     ventas = (from v in db.Venta
                               join c in db.Cliente on v.ClientId equals c.ClientId
                               join fp in db.FormaDePago on v.FormaDePagoId equals fp.FormaDePagoId
+                              join ven in db.Vendedor on v.VendedorId equals ven.VendedorId
                               where v.Articulo.Contains(nombreArticulo) // Filtrar por nombre del artículo
                               orderby v.FechaDeInicio descending
                               select new VentaDTO
@@ -258,6 +265,7 @@ namespace CDatos
                                   FechaDeCancelacion = v.FechaDeCancelacion,
                                   Cantidad = v.Cantidad,
                                   Total = v.Total,
+                                  VendedorNombre = ven.NombreYApellido,
                                   FechaAnulacion = v.FechaAnulacion
                               }).ToList();
                 }
@@ -353,7 +361,8 @@ namespace CDatos
                     editarVenta.Cuotas = venta.Cuotas;
                     editarVenta.Cantidad = venta.Cantidad;
                     editarVenta.Total = venta.Total;
-             
+                    editarVenta.VendedorId = venta.VendedorId;
+
                     db.SaveChanges();
                 }
             }
@@ -422,6 +431,51 @@ namespace CDatos
                 respuesta = e.Message;
                 return false;
             }
+        }
+
+        public List<VentaDTO> FiltrarVentasPorVendedor(string vendedorNombre)
+        {
+            List<VentaDTO> ventas = null;
+            try
+            {
+                using (VentasCredimaxEntities db = new VentasCredimaxEntities())
+                {
+                    ventas = (from v in db.Venta
+                              join c in db.Cliente on v.ClientId equals c.ClientId
+                              join fp in db.FormaDePago on v.FormaDePagoId equals fp.FormaDePagoId
+                              join ven in db.Vendedor on v.VendedorId equals ven.VendedorId 
+                              where ven.NombreYApellido.Contains(vendedorNombre) // Filtrar por ID del vendedor  
+                              orderby v.FechaDeInicio descending
+                              select new VentaDTO
+                              {
+                                  VentaId = v.VentaId,
+                                  IdCliente = c.ClientId,
+                                  NombreCliente = c.Apellido + " " + c.Nombre,
+                                  Articulo = v.Articulo,
+                                  Talle = v.Talle,
+                                  FormaDePago = fp.Nombre,
+                                  Precio = v.Precio,
+                                  Cuotas = v.Cuotas,
+                                  FechaDeInicio = v.FechaDeInicio,
+                                  FechaDeCancelacion = v.FechaDeCancelacion,
+                                  Cantidad = v.Cantidad,
+                                  Total = v.Total,
+                                  VendedorNombre = ven.NombreYApellido,
+                                  FechaAnulacion = v.FechaAnulacion
+
+                              }).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                // Manejar el error  
+                respuesta = ex.Message;
+            }
+            return ventas;
+        }
+            public string ObtenerRespuesta()
+        {
+            return respuesta;
         }
     }
 }

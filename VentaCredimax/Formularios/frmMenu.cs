@@ -136,6 +136,7 @@ namespace VentaCredimax.Formularios
                 dgvVentasMenu.Columns["FormaDePago"].HeaderText = "Frecuencia de pago";
                 dgvVentasMenu.Columns["FechaDeInicio"].HeaderText = "Fecha compra";
                 dgvVentasMenu.Columns["FechaDeCancelacion"].HeaderText = "Cancelacion compra";
+                dgvVentasMenu.Columns["VendedorNombre"].HeaderText = "Vendedor";
             }
         }
 
@@ -267,6 +268,13 @@ namespace VentaCredimax.Formularios
         private void button1_Click(object sender, EventArgs e)
         {
             ListarVentas();
+        }
+
+        private void btnGestionVendedor_Click(object sender, EventArgs e)
+        {
+            frmVendedor vendedor = new frmVendedor();
+            vendedor.FormClosed += (s, args) => ListarVentas(); // Refresca la lista al cerrar el formulario
+            vendedor.ShowDialog();
         }
     }
 }

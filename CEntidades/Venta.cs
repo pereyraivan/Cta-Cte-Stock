@@ -26,5 +26,6 @@ namespace CEntidades
         public Nullable<int> Cuotas { get; set; }
         public Nullable<int> Cantidad { get; set; }
         public Nullable<decimal> Total { get; set; }
+        public Nullable<int> VendedorId { get; set; }
     }
 }

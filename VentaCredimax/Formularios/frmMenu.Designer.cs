@@ -36,6 +36,8 @@
             this.button1 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.pMenuLateral = new System.Windows.Forms.Panel();
+            this.panel9 = new System.Windows.Forms.Panel();
+            this.btnGestionVendedor = new System.Windows.Forms.Button();
             this.pSubMenuInformes = new System.Windows.Forms.Panel();
             this.panel6 = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
@@ -113,6 +115,8 @@
             // pMenuLateral
             // 
             this.pMenuLateral.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(164)))), ((int)(((byte)(196)))), ((int)(((byte)(231)))), ((int)(((byte)(255)))));
+            this.pMenuLateral.Controls.Add(this.panel9);
+            this.pMenuLateral.Controls.Add(this.btnGestionVendedor);
             this.pMenuLateral.Controls.Add(this.pSubMenuInformes);
             this.pMenuLateral.Controls.Add(this.btnInformes);
             this.pMenuLateral.Controls.Add(this.panel4);
@@ -125,8 +129,34 @@
             this.pMenuLateral.Dock = System.Windows.Forms.DockStyle.Left;
             this.pMenuLateral.Location = new System.Drawing.Point(0, 54);
             this.pMenuLateral.Name = "pMenuLateral";
-            this.pMenuLateral.Size = new System.Drawing.Size(248, 599);
+            this.pMenuLateral.Size = new System.Drawing.Size(248, 708);
             this.pMenuLateral.TabIndex = 2;
+            // 
+            // panel9
+            // 
+            this.panel9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(52)))), ((int)(((byte)(108)))));
+            this.panel9.Location = new System.Drawing.Point(1, 327);
+            this.panel9.Name = "panel9";
+            this.panel9.Size = new System.Drawing.Size(10, 93);
+            this.panel9.TabIndex = 11;
+            // 
+            // btnGestionVendedor
+            // 
+            this.btnGestionVendedor.FlatAppearance.BorderSize = 0;
+            this.btnGestionVendedor.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Highlight;
+            this.btnGestionVendedor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnGestionVendedor.Font = new System.Drawing.Font("OCR A Extended", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnGestionVendedor.Image = ((System.Drawing.Image)(resources.GetObject("btnGestionVendedor.Image")));
+            this.btnGestionVendedor.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnGestionVendedor.Location = new System.Drawing.Point(13, 329);
+            this.btnGestionVendedor.Name = "btnGestionVendedor";
+            this.btnGestionVendedor.Size = new System.Drawing.Size(234, 93);
+            this.btnGestionVendedor.TabIndex = 10;
+            this.btnGestionVendedor.Text = "Gestion \r\nVendedor";
+            this.btnGestionVendedor.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.TTAyudaMenu.SetToolTip(this.btnGestionVendedor, "Alta, Baja y modificacion de clientes");
+            this.btnGestionVendedor.UseVisualStyleBackColor = true;
+            this.btnGestionVendedor.Click += new System.EventHandler(this.btnGestionVendedor_Click);
             // 
             // pSubMenuInformes
             // 
@@ -134,7 +164,7 @@
             this.pSubMenuInformes.Controls.Add(this.panel5);
             this.pSubMenuInformes.Controls.Add(this.btnInformeVentas);
             this.pSubMenuInformes.Controls.Add(this.btnInformeCuotas);
-            this.pSubMenuInformes.Location = new System.Drawing.Point(35, 423);
+            this.pSubMenuInformes.Location = new System.Drawing.Point(35, 528);
             this.pSubMenuInformes.Name = "pSubMenuInformes";
             this.pSubMenuInformes.Size = new System.Drawing.Size(213, 134);
             this.pSubMenuInformes.TabIndex = 9;
@@ -200,7 +230,7 @@
             this.btnInformes.Font = new System.Drawing.Font("OCR A Extended", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnInformes.Image = ((System.Drawing.Image)(resources.GetObject("btnInformes.Image")));
             this.btnInformes.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnInformes.Location = new System.Drawing.Point(13, 324);
+            this.btnInformes.Location = new System.Drawing.Point(13, 433);
             this.btnInformes.Name = "btnInformes";
             this.btnInformes.Size = new System.Drawing.Size(235, 93);
             this.btnInformes.TabIndex = 8;
@@ -212,7 +242,7 @@
             // panel4
             // 
             this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(52)))), ((int)(((byte)(108)))));
-            this.panel4.Location = new System.Drawing.Point(2, 324);
+            this.panel4.Location = new System.Drawing.Point(2, 433);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(10, 93);
             this.panel4.TabIndex = 7;
@@ -306,7 +336,7 @@
             this.panel7.Dock = System.Windows.Forms.DockStyle.Right;
             this.panel7.Location = new System.Drawing.Point(1282, 54);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(0, 599);
+            this.panel7.Size = new System.Drawing.Size(0, 708);
             this.panel7.TabIndex = 3;
             // 
             // btnActualizarVentas
@@ -409,7 +439,7 @@
             this.dgvVentasMenu.Name = "dgvVentasMenu";
             this.dgvVentasMenu.ReadOnly = true;
             this.dgvVentasMenu.RowHeadersWidth = 51;
-            this.dgvVentasMenu.Size = new System.Drawing.Size(1010, 579);
+            this.dgvVentasMenu.Size = new System.Drawing.Size(1010, 688);
             this.dgvVentasMenu.TabIndex = 36;
             this.dgvVentasMenu.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvVentasMenu_CellDoubleClick);
             // 
@@ -419,14 +449,14 @@
             this.panel8.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel8.Location = new System.Drawing.Point(248, 54);
             this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(1034, 599);
+            this.panel8.Size = new System.Drawing.Size(1034, 708);
             this.panel8.TabIndex = 37;
             // 
             // frmMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1282, 653);
+            this.ClientSize = new System.Drawing.Size(1282, 762);
             this.Controls.Add(this.panel8);
             this.Controls.Add(this.panel7);
             this.Controls.Add(this.pMenuLateral);
@@ -478,5 +508,7 @@
         private System.Windows.Forms.Panel panel8;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Panel panel9;
+        private System.Windows.Forms.Button btnGestionVendedor;
     }
 }

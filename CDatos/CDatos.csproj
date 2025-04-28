@@ -64,6 +64,7 @@
     <Compile Include="RepositorioCliente.cs" />
     <Compile Include="RepositorioCuotas.cs" />
     <Compile Include="RepositorioReportes.cs" />
+    <Compile Include="RepositorioVendedor.cs" />
     <Compile Include="RepositorioVenta.cs" />
   </ItemGroup>
   <ItemGroup>

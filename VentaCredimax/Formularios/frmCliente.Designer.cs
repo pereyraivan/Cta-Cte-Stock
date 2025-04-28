@@ -327,6 +327,7 @@
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel1);
             this.Name = "frmCliente";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Alta/Baja de clientes";
             this.Load += new System.EventHandler(this.frmCliente_Load_1);
             ((System.ComponentModel.ISupportInitialize)(this.dgvClientes)).EndInit();

@@ -75,6 +75,9 @@ namespace VentaCredimax.Formularios
                     case "Articulo":
                         FiltrarVentasPorArticulo();
                         break;
+                    case "Vendedor":
+                        FiltrarVentasPorVendedor();
+                        break;
                 }
             }
         }
@@ -101,6 +104,7 @@ namespace VentaCredimax.Formularios
                 dgvVentas.Columns["FormaDePago"].HeaderText = "Frecuencia de pago";
                 dgvVentas.Columns["FechaDeInicio"].HeaderText = "Fecha compra";
                 dgvVentas.Columns["FechaDeCancelacion"].HeaderText = "Cancelacion compra";
+                dgvVentas.Columns["VendedorNombre"].HeaderText = "Vendedor";
             }
         }
 
@@ -250,6 +254,11 @@ namespace VentaCredimax.Formularios
                     MessageBox.Show("Documento Generado", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
+        }   
+       private void FiltrarVentasPorVendedor()
+        {
+            dgvVentas.DataSource = _gestorVenta.FiltrarVentasPorVendedor(txtBuscar.Text);
+            OcultarColumnas();
         }
     }
 }

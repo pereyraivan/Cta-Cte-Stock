@@ -22,6 +22,7 @@ namespace CEntidades.DTOs
         public bool CuotasVencidas { get; set; }
         public int? Cantidad { get; set; }
         public decimal? Total { get; set; }
+        public string VendedorNombre { get; set; }
 
     }
 }

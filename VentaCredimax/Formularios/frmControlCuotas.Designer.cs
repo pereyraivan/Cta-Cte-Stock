@@ -100,6 +100,7 @@
             this.MaximumSize = new System.Drawing.Size(1319, 600);
             this.MinimumSize = new System.Drawing.Size(1200, 600);
             this.Name = "frmControlCuotas";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Control de cuotas por venta";
             this.Load += new System.EventHandler(this.frmControlCuotas_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvCuotas)).EndInit();
