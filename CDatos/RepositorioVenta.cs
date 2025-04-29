@@ -86,7 +86,8 @@ namespace CDatos
                     ventas = (from v in db.Venta
                               join c in db.Cliente on v.ClientId equals c.ClientId
                               join fp in db.FormaDePago on v.FormaDePagoId equals fp.FormaDePagoId
-                              join ven in db.Vendedor on v.VendedorId equals ven.VendedorId
+                              join ven in db.Vendedor on v.VendedorId equals ven.VendedorId into vendedorJoin
+                              from ven in vendedorJoin.DefaultIfEmpty() // LEFT JOIN
                               where mostrarTodas || v.FechaAnulacion == null
                               orderby v.FechaDeInicio descending
                               select new VentaDTO
@@ -148,7 +149,8 @@ namespace CDatos
                     ventas = (from v in db.Venta
                               join c in db.Cliente on v.ClientId equals c.ClientId
                               join fp in db.FormaDePago on v.FormaDePagoId equals fp.FormaDePagoId
-                              join ven in db.Vendedor on v.VendedorId equals ven.VendedorId
+                              join ven in db.Vendedor on v.VendedorId equals ven.VendedorId into vendedorJoin
+                              from ven in vendedorJoin.DefaultIfEmpty() // LEFT JOIN
                               where v.FechaAnulacion == null
                               select new VentaDTO
                               {
@@ -209,7 +211,8 @@ namespace CDatos
                     ventas = (from v in db.Venta
                               join c in db.Cliente on v.ClientId equals c.ClientId
                               join fp in db.FormaDePago on v.FormaDePagoId equals fp.FormaDePagoId
-                              join ven in db.Vendedor on v.VendedorId equals ven.VendedorId
+                              join ven in db.Vendedor on v.VendedorId equals ven.VendedorId into vendedorJoin
+                              from ven in vendedorJoin.DefaultIfEmpty() // LEFT JOIN
                               where (c.Apellido + " " + c.Nombre).Contains(nombreApellidoCliente) // Filtrar por nombre y apellido
                               orderby v.FechaDeInicio descending
                               select new VentaDTO
@@ -248,7 +251,8 @@ namespace CDatos
                     ventas = (from v in db.Venta
                               join c in db.Cliente on v.ClientId equals c.ClientId
                               join fp in db.FormaDePago on v.FormaDePagoId equals fp.FormaDePagoId
-                              join ven in db.Vendedor on v.VendedorId equals ven.VendedorId
+                              join ven in db.Vendedor on v.VendedorId equals ven.VendedorId into vendedorJoin
+                              from ven in vendedorJoin.DefaultIfEmpty() // LEFT JOIN
                               where v.Articulo.Contains(nombreArticulo) // Filtrar por nombre del artículo
                               orderby v.FechaDeInicio descending
                               select new VentaDTO
@@ -443,7 +447,8 @@ namespace CDatos
                     ventas = (from v in db.Venta
                               join c in db.Cliente on v.ClientId equals c.ClientId
                               join fp in db.FormaDePago on v.FormaDePagoId equals fp.FormaDePagoId
-                              join ven in db.Vendedor on v.VendedorId equals ven.VendedorId 
+                              join ven in db.Vendedor on v.VendedorId equals ven.VendedorId into vendedorJoin
+                              from ven in vendedorJoin.DefaultIfEmpty() // LEFT JOIN
                               where ven.NombreYApellido.Contains(vendedorNombre) // Filtrar por ID del vendedor  
                               orderby v.FechaDeInicio descending
                               select new VentaDTO
