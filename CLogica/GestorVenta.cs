@@ -56,6 +56,10 @@ namespace CLogica
         {
             return _repositorioVenta.FiltrarVentasPorVendedor(nombreVendedor);
         }
+        public List<VentaDTO> FiltrarVentasPorFrecPago(string nombreVendedor)
+        {
+            return _repositorioVenta.FiltrarVentasPorFrecPago(nombreVendedor);
+        }
         public bool EsDemo()
         {
             return _repositorioVenta.EsDemo();

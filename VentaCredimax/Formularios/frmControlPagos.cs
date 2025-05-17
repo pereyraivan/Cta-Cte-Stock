@@ -58,6 +58,11 @@ namespace VentaCredimax.Formularios
             dgvVentas.DataSource = _gestorVenta.FiltrarVentasPorArticulo(txtBuscar.Text);
             OcultarColumnas();
         }
+        private void FiltrarVentasPorFrecPago()
+        {
+            dgvVentas.DataSource = _gestorVenta.FiltrarVentasPorFrecPago(txtBuscar.Text);
+            OcultarColumnas();  
+        }
         private void Buscar()
         {
             if (cbBuscarPor.SelectedIndex == -1)
@@ -78,6 +83,9 @@ namespace VentaCredimax.Formularios
                     case "Vendedor":
                         FiltrarVentasPorVendedor();
                         break;
+                    case "Frecuencia Pago":
+                        FiltrarVentasPorFrecPago();
+                        break;  
                 }
             }
         }

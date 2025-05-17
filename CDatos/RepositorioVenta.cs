@@ -123,6 +123,12 @@ namespace CDatos
                                 .OrderByDescending(v => v.FechaDeInicio)
                                 .ToList();
                             break;
+                        case "Frecuencia Pago":
+                            ventas = ventas
+                                .OrderBy(v => v.FormaDePago) // Ordena por nombre de la forma de pago
+                                .ThenByDescending(v => v.FechaDeInicio)
+                                .ToList();
+                            break;
 
                         default:
                             ventas = ventas
@@ -254,6 +260,46 @@ namespace CDatos
                               join ven in db.Vendedor on v.VendedorId equals ven.VendedorId into vendedorJoin
                               from ven in vendedorJoin.DefaultIfEmpty() // LEFT JOIN
                               where v.Articulo.Contains(nombreArticulo) // Filtrar por nombre del artículo
+                              orderby v.FechaDeInicio descending
+                              select new VentaDTO
+                              {
+                                  VentaId = v.VentaId,
+                                  IdCliente = c.ClientId,
+                                  NombreCliente = c.Apellido + " " + c.Nombre,
+                                  Articulo = v.Articulo,
+                                  Talle = v.Talle,
+                                  FormaDePago = fp.Nombre,
+                                  Precio = v.Precio,
+                                  Cuotas = v.Cuotas,
+                                  FechaDeInicio = v.FechaDeInicio,
+                                  FechaDeCancelacion = v.FechaDeCancelacion,
+                                  Cantidad = v.Cantidad,
+                                  Total = v.Total,
+                                  VendedorNombre = ven.NombreYApellido,
+                                  FechaAnulacion = v.FechaAnulacion
+                              }).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                // Manejar el error
+                respuesta = ex.Message;
+            }
+            return ventas;
+        }
+        public List<VentaDTO> FiltrarVentasPorFrecPago(string frecuenciaPago)
+        {
+            List<VentaDTO> ventas = null;
+            try
+            {
+                using (VentasCredimaxEntities db = new VentasCredimaxEntities())
+                {
+                    ventas = (from v in db.Venta
+                              join c in db.Cliente on v.ClientId equals c.ClientId
+                              join fp in db.FormaDePago on v.FormaDePagoId equals fp.FormaDePagoId
+                              join ven in db.Vendedor on v.VendedorId equals ven.VendedorId into vendedorJoin
+                              from ven in vendedorJoin.DefaultIfEmpty() // LEFT JOIN
+                              where fp.Nombre.Contains(frecuenciaPago) 
                               orderby v.FechaDeInicio descending
                               select new VentaDTO
                               {
@@ -436,7 +482,6 @@ namespace CDatos
                 return false;
             }
         }
-
         public List<VentaDTO> FiltrarVentasPorVendedor(string vendedorNombre)
         {
             List<VentaDTO> ventas = null;
