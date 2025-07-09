@@ -30,6 +30,26 @@ namespace VentaCredimax.Formularios
             OcultarColumnas();
             EstiloDataGrid();
             PintarFilas();
+            CargarComboDiaSemana();
+            cbDiaSemana.SelectedIndexChanged += cbDiaSemana_SelectedIndexChanged;
+        }
+        private void cbDiaSemana_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cbDiaSemana.SelectedIndex >= 0)
+            {
+                var diaSeleccionado = cbDiaSemana.SelectedItem as DiaDeSemana;
+                if (diaSeleccionado != null)
+                {
+                    dgvVentas.DataSource = _gestorVenta.FiltrarVentasPorDiaSemana(diaSeleccionado.Id);
+                    OcultarColumnas();
+                    EstiloDataGrid();
+                    PintarFilas();
+                }
+            }
+            else
+            {
+                ListarVentas();
+            }
         }
         private void ListarVentas()
         {
@@ -61,7 +81,7 @@ namespace VentaCredimax.Formularios
         private void FiltrarVentasPorFrecPago()
         {
             dgvVentas.DataSource = _gestorVenta.FiltrarVentasPorFrecPago(txtBuscar.Text);
-            OcultarColumnas();  
+            OcultarColumnas();
         }
         private void Buscar()
         {
@@ -85,7 +105,7 @@ namespace VentaCredimax.Formularios
                         break;
                     case "Frecuencia Pago":
                         FiltrarVentasPorFrecPago();
-                        break;  
+                        break;
                 }
             }
         }
@@ -102,6 +122,7 @@ namespace VentaCredimax.Formularios
                 dgvVentas.Columns["IdCliente"].Visible = false;
                 dgvVentas.Columns["FechaAnulacion"].Visible = false;
                 dgvVentas.Columns["CuotasVencidas"].Visible = false;
+                dgvVentas.Columns["IdDiaSemana"].Visible = false;
             }
         }
         private void EstiloDataGrid()
@@ -113,6 +134,7 @@ namespace VentaCredimax.Formularios
                 dgvVentas.Columns["FechaDeInicio"].HeaderText = "Fecha compra";
                 dgvVentas.Columns["FechaDeCancelacion"].HeaderText = "Cancelacion compra";
                 dgvVentas.Columns["VendedorNombre"].HeaderText = "Vendedor";
+                dgvVentas.Columns["DiaSemanaNombre"].HeaderText = "Dia Pago";
             }
         }
 
@@ -188,7 +210,7 @@ namespace VentaCredimax.Formularios
             int IdVenta = Convert.ToInt32(dgvVentas?.CurrentRow?.Cells["VentaId"]?.Value);
             if (IdVenta > 0)
             {
-              
+
                 ImprimirDetalleDeVenta(IdVenta);
             }
             else
@@ -231,7 +253,7 @@ namespace VentaCredimax.Formularios
                         {(index == 0 ? $"<td rowspan='{grupo.Count()}'>{venta.Articulo}</td>" : "")}
                         {(index == 0 ? $"<td rowspan='{grupo.Count()}'>{string.Format("{0:#,##0.00}", venta.Precio).Replace(",", "X").Replace(".", ",").Replace("X", ".")}</td>" : "")}
                         {(index == 0 ? $"<td rowspan='{grupo.Count()}'>{venta.Cuotas}</td>" : "")}  
-                        {(index == 0 ? $"<td rowspan='{grupo.Count()}'>{venta.FechaDeVenta.ToString("dd/MM/yyyy")}</td>": "")}
+                        {(index == 0 ? $"<td rowspan='{grupo.Count()}'>{venta.FechaDeVenta.ToString("dd/MM/yyyy")}</td>" : "")}
                         <td>{venta.NumeroDeCuota}</td>
                         <td>{string.Format("{0:#,##0.00}", venta.MontoCuota).Replace(",", "X").Replace(".", ",").Replace("X", ".")}</td>
                         <td>{(venta.FechaProgramadaDeCuota.ToString("dd/MM/yyyy"))}</td>
@@ -241,7 +263,7 @@ namespace VentaCredimax.Formularios
                 // Reemplazar en la plantilla HTML
                 textoHtml = textoHtml.Replace("@filasTabla", filasTabla);
                 textoHtml = textoHtml.Replace("@fecha-programada-cuota", listaDetalleDeVenta.FirstOrDefault()?.FechaProgramadaDeCuota.ToString("dd/MM/yyyy"));
-                
+
 
                 SaveFileDialog saveFile = new SaveFileDialog();
                 saveFile.FileName = $"detalle-de-venta_{listaDetalleDeVenta.FirstOrDefault().NombreCliente}-{listaDetalleDeVenta.FirstOrDefault().ApellidoCliente}.pdf";
@@ -262,11 +284,37 @@ namespace VentaCredimax.Formularios
                     MessageBox.Show("Documento Generado", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
-        }   
-       private void FiltrarVentasPorVendedor()
+        }
+        private void FiltrarVentasPorVendedor()
         {
             dgvVentas.DataSource = _gestorVenta.FiltrarVentasPorVendedor(txtBuscar.Text);
             OcultarColumnas();
+        }
+        private void CargarComboDiaSemana()
+        {
+            cbDiaSemana.DataSource = _gestorVenta.ObtenerDiasDeSemana();
+            cbDiaSemana.DisplayMember = "Nombre";
+            cbDiaSemana.ValueMember = "Id";
+            cbDiaSemana.SelectedIndex = -1;
+        }
+
+        private void cbDiaSemana_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+            if (cbDiaSemana.SelectedIndex >= 0)
+            {
+                var diaSeleccionado = cbDiaSemana.SelectedItem as DiaDeSemana;
+                if (diaSeleccionado != null)
+                {
+                    dgvVentas.DataSource = _gestorVenta.FiltrarVentasPorDiaSemana(diaSeleccionado.Id);
+                    OcultarColumnas();
+                    EstiloDataGrid();
+                    PintarFilas();
+                }
+            }
+            else
+            {
+                ListarVentas();
+            }
         }
     }
 }

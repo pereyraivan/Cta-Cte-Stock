@@ -11,6 +11,58 @@ namespace CDatos
 {
     public class RepositorioVenta
     {
+        // Obtener todos los días de la semana
+        public List<DiaDeSemana> ObtenerDiasDeSemana()
+        {
+            using (VentasCredimaxEntities db = new VentasCredimaxEntities())
+            {
+                return db.DiaDeSemana.OrderBy(d => d.Id).ToList();
+            }
+        }
+
+        // Nuevo método para filtrar ventas por día de la semana
+        public List<VentaDTO> FiltrarVentasPorDiaSemana(int idDiaSemana)
+        {
+            List<VentaDTO> ventas = null;
+            try
+            {
+                using (VentasCredimaxEntities db = new VentasCredimaxEntities())
+                {
+                    ventas = (from v in db.Venta
+                              join c in db.Cliente on v.ClientId equals c.ClientId
+                              join fp in db.FormaDePago on v.FormaDePagoId equals fp.FormaDePagoId
+                              join ven in db.Vendedor on v.VendedorId equals ven.VendedorId into vendedorJoin
+                              from ven in vendedorJoin.DefaultIfEmpty()
+                              join d in db.DiaDeSemana on v.IdDiaSemana equals d.Id
+                              where v.IdDiaSemana == idDiaSemana
+                              orderby v.FechaDeInicio descending
+                              select new VentaDTO
+                              {
+                                  VentaId = v.VentaId,
+                                  IdCliente = c.ClientId,
+                                  NombreCliente = c.Apellido + " " + c.Nombre,
+                                  Articulo = v.Articulo,
+                                  Talle = v.Talle,
+                                  FormaDePago = fp.Nombre,
+                                  Precio = v.Precio,
+                                  Cuotas = v.Cuotas,
+                                  FechaDeInicio = v.FechaDeInicio,
+                                  FechaDeCancelacion = v.FechaDeCancelacion,
+                                  Cantidad = v.Cantidad,
+                                  Total = v.Total,
+                                  VendedorNombre = ven.NombreYApellido,
+                                  FechaAnulacion = v.FechaAnulacion,
+                                  IdDiaSemana = v.IdDiaSemana,
+                                  DiaSemanaNombre = d.Nombre
+                              }).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                respuesta = ex.Message;
+            }
+            return ventas;
+        }
         private string respuesta = "";
         public void RegistrarVenta(Venta venta)
         {
@@ -21,7 +73,7 @@ namespace CDatos
                     db.Venta.Add(venta);
                     db.SaveChanges();
 
-                    if(venta.Cuotas > 0)
+                    if (venta.Cuotas > 0)
                     {
                         decimal montoPorCuota = (decimal)(venta.Precio / venta.Cuotas);
                         List<Cuota> cuotas = new List<Cuota>();
@@ -32,7 +84,7 @@ namespace CDatos
                         switch (venta.FormaDePagoId)
                         {
                             case 1: // Mensual
-                                incrementoDias = 30; 
+                                incrementoDias = 30;
                                 break;
                             case 2: // Quincenal
                                 incrementoDias = 15;
@@ -41,7 +93,7 @@ namespace CDatos
                                 incrementoDias = 7;
                                 break;
                             default:
-                                incrementoDias = 0; 
+                                incrementoDias = 0;
                                 break;
                         }
 
@@ -73,7 +125,10 @@ namespace CDatos
             }
             catch (Exception e)
             {
-                respuesta = e.Message;
+                Exception ex = e;
+                while (ex.InnerException != null)
+                    ex = ex.InnerException;
+                respuesta = ex.Message;
             }
         }
         public List<VentaDTO> ListarVentas(string criterioOrden, bool mostrarTodas)
@@ -88,13 +143,15 @@ namespace CDatos
                               join fp in db.FormaDePago on v.FormaDePagoId equals fp.FormaDePagoId
                               join ven in db.Vendedor on v.VendedorId equals ven.VendedorId into vendedorJoin
                               from ven in vendedorJoin.DefaultIfEmpty() // LEFT JOIN
+                              join d in db.DiaDeSemana on v.IdDiaSemana equals d.Id into diaJoin
+                              from d in diaJoin.DefaultIfEmpty() // LEFT JOIN para el día de la semana
                               where mostrarTodas || v.FechaAnulacion == null
                               orderby v.FechaDeInicio descending
                               select new VentaDTO
                               {
                                   VentaId = v.VentaId,
                                   IdCliente = c.ClientId,
-                                  NombreCliente = c.Apellido+ " " + c.Nombre, // Nombre del cliente
+                                  NombreCliente = c.Apellido + " " + c.Nombre, // Nombre del cliente
                                   Articulo = v.Articulo,
                                   Talle = v.Talle,
                                   FormaDePago = fp.Nombre,  // Nombre de la forma de pago
@@ -104,9 +161,10 @@ namespace CDatos
                                   FechaDeCancelacion = v.FechaDeCancelacion,
                                   Cantidad = v.Cantidad,
                                   Total = v.Total,
-                                  VendedorNombre = ven.NombreYApellido, 
+                                  VendedorNombre = ven.NombreYApellido,
                                   FechaAnulacion = v.FechaAnulacion,
-                                  CuotasVencidas = db.Cuota.Any(cuota => cuota.VentaId == v.VentaId && cuota.FechaProgramada < DateTime.Now && cuota.FechaPago == null)
+                                  CuotasVencidas = db.Cuota.Any(cuota => cuota.VentaId == v.VentaId && cuota.FechaProgramada < DateTime.Now && cuota.FechaPago == null),
+                                  DiaSemanaNombre = d != null ? d.Nombre : ""
                               }).ToList();
 
                     switch (criterioOrden.Trim())
@@ -157,6 +215,8 @@ namespace CDatos
                               join fp in db.FormaDePago on v.FormaDePagoId equals fp.FormaDePagoId
                               join ven in db.Vendedor on v.VendedorId equals ven.VendedorId into vendedorJoin
                               from ven in vendedorJoin.DefaultIfEmpty() // LEFT JOIN
+                              join d in db.DiaDeSemana on v.IdDiaSemana equals d.Id into diaJoin
+                              from d in diaJoin.DefaultIfEmpty() // LEFT JOIN para el día de la semana
                               where v.FechaAnulacion == null
                               select new VentaDTO
                               {
@@ -174,7 +234,8 @@ namespace CDatos
                                   Cantidad = v.Cantidad,
                                   Total = v.Total,
                                   VendedorNombre = ven.NombreYApellido,
-                                  CuotasVencidas = db.Cuota.Any(cuota => cuota.VentaId == v.VentaId && cuota.FechaProgramada < DateTime.Now && cuota.FechaPago == null)
+                                  CuotasVencidas = db.Cuota.Any(cuota => cuota.VentaId == v.VentaId && cuota.FechaProgramada < DateTime.Now && cuota.FechaPago == null),
+                                  DiaSemanaNombre = d != null ? d.Nombre : ""
                               })
                               .ToList();
                     switch (criterioOrden.Trim())
@@ -299,7 +360,7 @@ namespace CDatos
                               join fp in db.FormaDePago on v.FormaDePagoId equals fp.FormaDePagoId
                               join ven in db.Vendedor on v.VendedorId equals ven.VendedorId into vendedorJoin
                               from ven in vendedorJoin.DefaultIfEmpty() // LEFT JOIN
-                              where fp.Nombre.Contains(frecuenciaPago) 
+                              where fp.Nombre.Contains(frecuenciaPago)
                               orderby v.FechaDeInicio descending
                               select new VentaDTO
                               {
@@ -349,7 +410,7 @@ namespace CDatos
 
                     if (editarTablaCuotas)
                     {
-                       
+
                         // Eliminar cuotas existentes
                         var cuotasExistentes = db.Cuota.Where(c => c.VentaId == venta.VentaId);
                         db.Cuota.RemoveRange(cuotasExistentes);
@@ -405,6 +466,7 @@ namespace CDatos
                     editarVenta.Articulo = venta.Articulo;
                     editarVenta.Talle = venta.Talle;
                     editarVenta.FormaDePagoId = venta.FormaDePagoId;
+                    editarVenta.IdDiaSemana = venta.IdDiaSemana;
                     editarVenta.FechaDeInicio = venta.FechaDeInicio;
                     editarVenta.FechaDeCancelacion = venta.FechaDeCancelacion;
                     editarVenta.Precio = venta.Precio;
@@ -416,7 +478,7 @@ namespace CDatos
                     db.SaveChanges();
                 }
             }
-            catch(InvalidOperationException ex)
+            catch (InvalidOperationException ex)
             {
                 throw;
             }
@@ -455,25 +517,25 @@ namespace CDatos
                     {
                         c.Estado = true;
                     }
-                    db.SaveChanges() ;
+                    db.SaveChanges();
                 }
-                catch(Exception e)
+                catch (Exception e)
                 {
 
                 }
-               
-            }         
+
+            }
         }
         public bool EsDemo()
         {
-            
+
             try
             {
                 using (VentasCredimaxEntities db = new VentasCredimaxEntities())
                 {
-                   
-                   return db.Configuracion.Select(x => x.isDemo).FirstOrDefault();
-                  
+
+                    return db.Configuracion.Select(x => x.isDemo).FirstOrDefault();
+
                 }
             }
             catch (Exception e)
@@ -522,10 +584,6 @@ namespace CDatos
                 respuesta = ex.Message;
             }
             return ventas;
-        }
-            public string ObtenerRespuesta()
-        {
-            return respuesta;
         }
     }
 }

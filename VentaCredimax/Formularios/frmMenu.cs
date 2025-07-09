@@ -125,6 +125,7 @@ namespace VentaCredimax.Formularios
                 dgvVentasMenu.Columns["IdCliente"].Visible = false;
                 dgvVentasMenu.Columns["FechaAnulacion"].Visible = false;
                 dgvVentasMenu.Columns["CuotasVencidas"].Visible = false;
+                dgvVentasMenu.Columns["IdDiaSemana"].Visible = false; 
             }
         }
 
@@ -137,6 +138,8 @@ namespace VentaCredimax.Formularios
                 dgvVentasMenu.Columns["FechaDeInicio"].HeaderText = "Fecha compra";
                 dgvVentasMenu.Columns["FechaDeCancelacion"].HeaderText = "Cancelacion compra";
                 dgvVentasMenu.Columns["VendedorNombre"].HeaderText = "Vendedor";
+                dgvVentasMenu.Columns["Articulo"].HeaderText = "Articulo";
+                dgvVentasMenu.Columns["DiaSemanaNombre"].HeaderText = "Dia Pago";
             }
         }
 

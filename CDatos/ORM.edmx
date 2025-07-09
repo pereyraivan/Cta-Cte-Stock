@@ -36,6 +36,13 @@
           <Property Name="FechaPago" Type="datetime" />
           <Property Name="Estado" Type="bit" />
         </EntityType>
+        <EntityType Name="DiaDeSemana">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
         <EntityType Name="FormaDePago">
           <Key>
             <PropertyRef Name="FormaDePagoId" />
@@ -78,6 +85,7 @@ warning 6002: The table/view 'VentasCredimax.dbo.ReciboControl' does not have a 
           <Property Name="Cantidad" Type="int" />
           <Property Name="Total" Type="decimal" Precision="18" Scale="2" />
           <Property Name="VendedorId" Type="int" />
+          <Property Name="IdDiaSemana" Type="int" />
         </EntityType>
         <Function Name="ComprobanteDePago" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="VentaId" Type="int" Mode="In" />
@@ -100,6 +108,7 @@ warning 6002: The table/view 'VentasCredimax.dbo.ReciboControl' does not have a 
           <EntitySet Name="Cliente" EntityType="Self.Cliente" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Configuracion" EntityType="Self.Configuracion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Cuota" EntityType="Self.Cuota" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DiaDeSemana" EntityType="Self.DiaDeSemana" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FormaDePago" EntityType="Self.FormaDePago" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Vendedor" EntityType="Self.Vendedor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Venta" EntityType="Self.Venta" Schema="dbo" store:Type="Tables" />
@@ -117,7 +126,6 @@ warning 6002: The table/view 'VentasCredimax.dbo.ReciboControl' does not have a 
         <EntityContainer Name="VentasCredimaxEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Cliente" EntityType="VentasCredimaxModel.Cliente" />
           <EntitySet Name="FormaDePago" EntityType="VentasCredimaxModel.FormaDePago" />
-          <EntitySet Name="Venta" EntityType="VentasCredimaxModel.Venta" />
           <EntitySet Name="Cuota" EntityType="VentasCredimaxModel.Cuota" />
           <EntitySet Name="ReciboControl" EntityType="VentasCredimaxModel.ReciboControl" />
           <FunctionImport Name="sp_GetVentasByClientId" ReturnType="Collection(VentasCredimaxModel.sp_GetVentasByClientId_Result)">
@@ -139,6 +147,8 @@ warning 6002: The table/view 'VentasCredimax.dbo.ReciboControl' does not have a 
           <Parameter Name="VentaId" Mode="In" Type="Int32" />
           </FunctionImport>
           <EntitySet Name="Vendedor" EntityType="VentasCredimaxModel.Vendedor" />
+          <EntitySet Name="Venta" EntityType="VentasCredimaxModel.Venta" />
+          <EntitySet Name="DiaDeSemana" EntityType="VentasCredimaxModel.DiaDeSemana" />
         </EntityContainer>
         <EntityType Name="Cliente">
           <Key>
@@ -158,24 +168,6 @@ warning 6002: The table/view 'VentasCredimax.dbo.ReciboControl' does not have a 
           </Key>
           <Property Name="FormaDePagoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nombre" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="Venta">
-          <Key>
-            <PropertyRef Name="VentaId" />
-          </Key>
-          <Property Name="VentaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ClientId" Type="Int32" Nullable="false" />
-          <Property Name="Articulo" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="Talle" Type="Int32" />
-          <Property Name="FormaDePagoId" Type="Int32" Nullable="false" />
-          <Property Name="FechaDeInicio" Type="DateTime" Precision="0" Nullable="false" />
-          <Property Name="FechaDeCancelacion" Type="DateTime" Precision="0" />
-          <Property Name="FechaAnulacion" Type="DateTime" Precision="3" />
-          <Property Name="Precio" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="Cuotas" Type="Int32" />
-          <Property Name="Cantidad" Type="Int32" />
-          <Property Name="Total" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="VendedorId" Type="Int32" />
         </EntityType>
         <EntityType Name="Cuota">
           <Key>
@@ -302,6 +294,32 @@ warning 6002: The table/view 'VentasCredimax.dbo.ReciboControl' does not have a 
           <Property Name="NombreYApellido" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Telefono" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="Venta">
+          <Key>
+            <PropertyRef Name="VentaId" />
+          </Key>
+          <Property Name="VentaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClientId" Type="Int32" Nullable="false" />
+          <Property Name="Articulo" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Talle" Type="Int32" />
+          <Property Name="FormaDePagoId" Type="Int32" Nullable="false" />
+          <Property Name="FechaDeInicio" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="FechaDeCancelacion" Type="DateTime" Precision="0" />
+          <Property Name="FechaAnulacion" Type="DateTime" Precision="3" />
+          <Property Name="Precio" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Cuotas" Type="Int32" />
+          <Property Name="Cantidad" Type="Int32" />
+          <Property Name="Total" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="VendedorId" Type="Int32" />
+          <Property Name="IdDiaSemana" Type="Int32" />
+        </EntityType>
+        <EntityType Name="DiaDeSemana">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -326,25 +344,6 @@ warning 6002: The table/view 'VentasCredimax.dbo.ReciboControl' does not have a 
               <MappingFragment StoreEntitySet="FormaDePago">
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="FormaDePagoId" ColumnName="FormaDePagoId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Venta">
-            <EntityTypeMapping TypeName="VentasCredimaxModel.Venta">
-              <MappingFragment StoreEntitySet="Venta">
-                <ScalarProperty Name="VendedorId" ColumnName="VendedorId" />
-                <ScalarProperty Name="Total" ColumnName="Total" />
-                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
-                <ScalarProperty Name="Cuotas" ColumnName="Cuotas" />
-                <ScalarProperty Name="Precio" ColumnName="Precio" />
-                <ScalarProperty Name="FechaAnulacion" ColumnName="FechaAnulacion" />
-                <ScalarProperty Name="FechaDeCancelacion" ColumnName="FechaDeCancelacion" />
-                <ScalarProperty Name="FechaDeInicio" ColumnName="FechaDeInicio" />
-                <ScalarProperty Name="FormaDePagoId" ColumnName="FormaDePagoId" />
-                <ScalarProperty Name="Talle" ColumnName="Talle" />
-                <ScalarProperty Name="Articulo" ColumnName="Articulo" />
-                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
-                <ScalarProperty Name="VentaId" ColumnName="VentaId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -493,6 +492,34 @@ warning 6002: The table/view 'VentasCredimax.dbo.ReciboControl' does not have a 
                 <ScalarProperty Name="Telefono" ColumnName="Telefono" />
                 <ScalarProperty Name="NombreYApellido" ColumnName="NombreYApellido" />
                 <ScalarProperty Name="VendedorId" ColumnName="VendedorId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Venta">
+            <EntityTypeMapping TypeName="VentasCredimaxModel.Venta">
+              <MappingFragment StoreEntitySet="Venta">
+                <ScalarProperty Name="IdDiaSemana" ColumnName="IdDiaSemana" />
+                <ScalarProperty Name="VendedorId" ColumnName="VendedorId" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="Cuotas" ColumnName="Cuotas" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="FechaAnulacion" ColumnName="FechaAnulacion" />
+                <ScalarProperty Name="FechaDeCancelacion" ColumnName="FechaDeCancelacion" />
+                <ScalarProperty Name="FechaDeInicio" ColumnName="FechaDeInicio" />
+                <ScalarProperty Name="FormaDePagoId" ColumnName="FormaDePagoId" />
+                <ScalarProperty Name="Talle" ColumnName="Talle" />
+                <ScalarProperty Name="Articulo" ColumnName="Articulo" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="VentaId" ColumnName="VentaId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DiaDeSemana">
+            <EntityTypeMapping TypeName="VentasCredimaxModel.DiaDeSemana">
+              <MappingFragment StoreEntitySet="DiaDeSemana">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

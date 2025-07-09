@@ -32,6 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -51,6 +52,9 @@
       <DependentUpon>ORM.tt</DependentUpon>
     </Compile>
     <Compile Include="Cuota.cs">
+      <DependentUpon>ORM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DiaDeSemana.cs">
       <DependentUpon>ORM.tt</DependentUpon>
     </Compile>
     <Compile Include="DTOs\ClienteDTO.cs" />

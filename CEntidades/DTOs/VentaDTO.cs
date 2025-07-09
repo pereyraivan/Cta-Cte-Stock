@@ -23,6 +23,8 @@ namespace CEntidades.DTOs
         public int? Cantidad { get; set; }
         public decimal? Total { get; set; }
         public string VendedorNombre { get; set; }
+        public int? IdDiaSemana { get; set; } // Nuevo campo para filtrar por día de la semana
+        public string DiaSemanaNombre { get; set; } // Nombre del día de la semana
 
     }
 }

@@ -10,8 +10,7 @@
 namespace CEntidades
 {
     using System;
-    using System.Collections.Generic;
-    
+
     public partial class Venta
     {
         public int VentaId { get; set; }
@@ -27,5 +26,6 @@ namespace CEntidades
         public Nullable<int> Cantidad { get; set; }
         public Nullable<decimal> Total { get; set; }
         public Nullable<int> VendedorId { get; set; }
+        public Nullable<int> IdDiaSemana { get; set; }
     }
 }

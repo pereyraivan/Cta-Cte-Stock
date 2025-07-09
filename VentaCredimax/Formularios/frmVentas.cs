@@ -105,6 +105,9 @@ namespace VentaCredimax.Formularios
             venta.Talle = string.IsNullOrEmpty(txtTalle.Text) ? (int?)null : Convert.ToInt32(txtTalle.Text);
             FormaDePago formaDePagoSeleccionada = (FormaDePago)cbFormaPago.SelectedItem;
             venta.FormaDePagoId = (int)formaDePagoSeleccionada;
+
+            int diaSemanabaSeleccionada = (int)cbDiaPago.SelectedValue;
+            venta.IdDiaSemana = diaSemanabaSeleccionada;
             venta.Precio = Convert.ToDecimal(txtPrecio.Text);
             venta.Cuotas = Convert.ToInt32(txtCuotas.Text);
             venta.FechaDeInicio = dtfechaVenta.Value;
@@ -155,6 +158,7 @@ namespace VentaCredimax.Formularios
             txtArticulo.Text = "";
             txtTalle.Text = "";
             cbFormaPago.SelectedIndex = -1;
+            cbDiaPago.SelectedIndex = -1;
             txtPrecio.Text = "";
             txtCuotas.Text = "";
             dtpFechaCancelacion.Value = DateTime.Now;
@@ -178,6 +182,7 @@ namespace VentaCredimax.Formularios
                 dgvVentas.Columns["IdCliente"].Visible = false;
                 dgvVentas.Columns["FechaAnulacion"].Visible = false;
                 dgvVentas.Columns["CuotasVencidas"].Visible = false;
+                dgvVentas.Columns["IdDiaSemana"].Visible = false;
             }
         }
         private void dgvVentas_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -197,6 +202,7 @@ namespace VentaCredimax.Formularios
                 txtTalle.Text = dgvVentas.CurrentRow.Cells["Talle"].Value?.ToString();
                 cbFormaPago.Text = dgvVentas.CurrentRow.Cells["FormaDePago"].Value?.ToString();
                 cbVendedor.Text = dgvVentas.CurrentRow.Cells["VendedorNombre"].Value?.ToString();
+                cbVendedor.Text = dgvVentas.CurrentRow.Cells["DiaSemanaNombre"].Value?.ToString();
                 txtPrecio.Text = Convert.ToDecimal(dgvVentas.CurrentRow.Cells["Precio"].Value).ToString("N2", new System.Globalization.CultureInfo("es-AR"));
                 txtCuotas.Text = dgvVentas.CurrentRow.Cells["Cuotas"].Value?.ToString();
                 txtCantidad.Text = dgvVentas.CurrentRow.Cells["Cantidad"].Value?.ToString();
@@ -219,6 +225,7 @@ namespace VentaCredimax.Formularios
                     venta.ClientId = idCliente;
                     venta.Articulo = txtArticulo.Text;
                     venta.FormaDePagoId = (int)cbFormaPago.SelectedValue;
+                    venta.IdDiaSemana = (int)cbDiaPago.SelectedValue;
                     venta.VendedorId = (int)cbVendedor.SelectedValue;
                     venta.Talle = string.IsNullOrEmpty(txtTalle.Text) ? (int?)null : Convert.ToInt32(txtTalle.Text);
                     venta.Precio = string.IsNullOrEmpty(txtPrecio.Text) ? (decimal?)null : Convert.ToDecimal(txtPrecio.Text);
@@ -296,6 +303,7 @@ namespace VentaCredimax.Formularios
             dgvVentas.Columns["FechaDeInicio"].HeaderText = "Fecha Venta";
             dgvVentas.Columns["FechaDeCancelacion"].HeaderText = "Cancelación pagos";
             dgvVentas.Columns["VendedorNombre"].HeaderText = "Vendedor";
+            dgvVentas.Columns["DiaSemanaNombre"].HeaderText = "Dia Pago";
             dgvVentas.Columns["Precio"].DefaultCellStyle.Format = "N2";
             dgvVentas.Columns["Total"].DefaultCellStyle.Format = "N2";
             dgvVentas.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
@@ -424,6 +432,7 @@ namespace VentaCredimax.Formularios
         }
         private void frmVentas_Load(object sender, EventArgs e)
         {
+            CargarComboDiasSemana();
             CargarComboCliente();
             CargarFormaDePagoComboBox();
             ListarVentas();
@@ -527,6 +536,14 @@ namespace VentaCredimax.Formularios
             {
                 cbVendedor.SelectedIndex = -1; // Si no existe, no seleccionar nada
             }
+        }
+        private void CargarComboDiasSemana()
+        {
+            var diasDeSemana = _gestorVenta.ObtenerDiasDeSemana();
+            cbDiaPago.DataSource = diasDeSemana;
+            cbDiaPago.DisplayMember = "Nombre";
+            cbDiaPago.ValueMember = "Id";
+
         }
     }
 }

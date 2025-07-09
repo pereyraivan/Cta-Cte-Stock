@@ -11,7 +11,10 @@ namespace CLogica
 {
     public class GestorVenta
     {
-
+        public List<DiaDeSemana> ObtenerDiasDeSemana()
+        {
+            return _repositorioVenta.ObtenerDiasDeSemana();
+        }   
         private RepositorioVenta _repositorioVenta = new RepositorioVenta();
         public void RegistrarVenta(Venta venta)
         {
@@ -63,6 +66,12 @@ namespace CLogica
         public bool EsDemo()
         {
             return _repositorioVenta.EsDemo();
+        }
+
+        // Nuevo método para filtrar ventas por día de la semana
+        public List<VentaDTO> FiltrarVentasPorDiaSemana(int idDiaSemana)
+        {
+            return _repositorioVenta.FiltrarVentasPorDiaSemana(idDiaSemana);
         }
     }
 }
