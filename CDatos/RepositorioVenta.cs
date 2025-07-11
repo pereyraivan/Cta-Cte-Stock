@@ -280,7 +280,8 @@ namespace CDatos
                               join fp in db.FormaDePago on v.FormaDePagoId equals fp.FormaDePagoId
                               join ven in db.Vendedor on v.VendedorId equals ven.VendedorId into vendedorJoin
                               from ven in vendedorJoin.DefaultIfEmpty() // LEFT JOIN
-                              where (c.Apellido + " " + c.Nombre).Contains(nombreApellidoCliente) // Filtrar por nombre y apellido
+                              where (c.Apellido + " " + c.Nombre).Contains(nombreApellidoCliente) && // Filtrar por nombre y apellido
+                              v.FechaAnulacion == null // Asegurarse de que la venta no esté anulada
                               orderby v.FechaDeInicio descending
                               select new VentaDTO
                               {
@@ -320,7 +321,8 @@ namespace CDatos
                               join fp in db.FormaDePago on v.FormaDePagoId equals fp.FormaDePagoId
                               join ven in db.Vendedor on v.VendedorId equals ven.VendedorId into vendedorJoin
                               from ven in vendedorJoin.DefaultIfEmpty() // LEFT JOIN
-                              where v.Articulo.Contains(nombreArticulo) // Filtrar por nombre del artículo
+                              where v.Articulo.Contains(nombreArticulo) &&// Filtrar por nombre del artículo
+                              v.FechaAnulacion == null // Asegurarse de que la venta no esté anulada
                               orderby v.FechaDeInicio descending
                               select new VentaDTO
                               {
@@ -360,7 +362,8 @@ namespace CDatos
                               join fp in db.FormaDePago on v.FormaDePagoId equals fp.FormaDePagoId
                               join ven in db.Vendedor on v.VendedorId equals ven.VendedorId into vendedorJoin
                               from ven in vendedorJoin.DefaultIfEmpty() // LEFT JOIN
-                              where fp.Nombre.Contains(frecuenciaPago)
+                              where fp.Nombre.Contains(frecuenciaPago) 
+                              && v.FechaAnulacion == null
                               orderby v.FechaDeInicio descending
                               select new VentaDTO
                               {
@@ -495,14 +498,15 @@ namespace CDatos
                 {
                     EliminarCuotasPorIdVenta(id);
                     var venta = db.Venta.FirstOrDefault(x => x.VentaId == id);
-                    venta.FechaAnulacion = DateTime.Today;
-                    db.SaveChanges();
+                    if (venta != null)
+                    {
+                        db.Venta.Remove(venta);
+                        db.SaveChanges();
+                    }                      
                 }
-
             }
             catch (Exception e)
             {
-
                 respuesta = e.Message;
             }
         }
@@ -513,17 +517,17 @@ namespace CDatos
                 try
                 {
                     var cuotas = db.Cuota.Where(c => c.VentaId == ventaId).ToList();
-                    foreach (var c in cuotas)
+
+                    if (cuotas.Any())
                     {
-                        c.Estado = true;
+                        db.Cuota.RemoveRange(cuotas); // Elimina todas de una
+                        db.SaveChanges();
                     }
-                    db.SaveChanges();
                 }
                 catch (Exception e)
                 {
-
+                    respuesta = e.Message;
                 }
-
             }
         }
         public bool EsDemo()
@@ -556,7 +560,8 @@ namespace CDatos
                               join fp in db.FormaDePago on v.FormaDePagoId equals fp.FormaDePagoId
                               join ven in db.Vendedor on v.VendedorId equals ven.VendedorId into vendedorJoin
                               from ven in vendedorJoin.DefaultIfEmpty() // LEFT JOIN
-                              where ven.NombreYApellido.Contains(vendedorNombre) // Filtrar por ID del vendedor  
+                              where ven.NombreYApellido.Contains(vendedorNombre) 
+                              && v.FechaAnulacion == null     // Filtrar por ID del vendedor  
                               orderby v.FechaDeInicio descending
                               select new VentaDTO
                               {
