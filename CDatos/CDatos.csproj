@@ -40,8 +40,10 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -50,42 +52,34 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ORM.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ORM.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORM.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ORM.edmx</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RepositorioArticulo.cs" />
     <Compile Include="RepositorioCliente.cs" />
     <Compile Include="RepositorioCuotas.cs" />
     <Compile Include="RepositorioReportes.cs" />
     <Compile Include="RepositorioVendedor.cs" />
     <Compile Include="RepositorioVenta.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <EntityDeploy Include="ORM.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ORM.Designer.cs</LastGenOutput>
-    </EntityDeploy>
+    <Compile Include="VentasStock.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>VentasStock.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VentasStock.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>VentasStock.edmx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />
-    <None Include="ORM.edmx.diagram">
-      <DependentUpon>ORM.edmx</DependentUpon>
-    </None>
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="ORM.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ORM.Context.cs</LastGenOutput>
-      <DependentUpon>ORM.edmx</DependentUpon>
-    </Content>
+    <EntityDeploy Include="VentasStock.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>VentasStock.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="VentasStock.edmx.diagram">
+      <DependentUpon>VentasStock.edmx</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
@@ -95,6 +89,13 @@
       <Project>{1CC06D7A-8FEF-40D7-B0F6-EB48264DD390}</Project>
       <Name>CEntidades</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="VentasStock.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>VentasStock.edmx</DependentUpon>
+      <LastGenOutput>VentasStock.Context.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

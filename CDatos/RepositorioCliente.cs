@@ -13,7 +13,7 @@ namespace CDatos
         {
             try
             {
-                using (VentasCredimaxEntities db = new VentasCredimaxEntities())
+                using (ventas_cta_cteEntities db = new ventas_cta_cteEntities())
                 {
                     var cliente = db.Cliente.FirstOrDefault(x => x.ClientId == id);
                     cliente.FechaAnulacion = DateTime.Today;
@@ -31,7 +31,7 @@ namespace CDatos
             List<Cliente> clientes = new List<Cliente>();
             try
             {
-                using (VentasCredimaxEntities db = new VentasCredimaxEntities())
+                using (ventas_cta_cteEntities db = new ventas_cta_cteEntities())
                 {
                     clientes = db.Cliente.Where(x => x.DNI.ToString().StartsWith(numero) && x.FechaAnulacion == null).ToList();
                 }
@@ -48,7 +48,7 @@ namespace CDatos
             List<Cliente> clientes = new List<Cliente>();
             try
             {
-                using (VentasCredimaxEntities db = new VentasCredimaxEntities())
+                using (ventas_cta_cteEntities db = new ventas_cta_cteEntities())
                 {
                     //clientes = db.SP_listaClientes().Where(x => x.NombreCompleto.Contains(nombre)).ToList();
 
@@ -67,7 +67,7 @@ namespace CDatos
             List<Cliente> clientes = new List<Cliente>();
             try
             {
-                using (VentasCredimaxEntities db = new VentasCredimaxEntities())
+                using (ventas_cta_cteEntities db = new ventas_cta_cteEntities())
                 {
                     //clientes = db.SP_listaClientes().Where(x => x.NombreCompleto.Contains(nombre)).ToList();
 
@@ -85,7 +85,7 @@ namespace CDatos
         {
             try
             {
-                using (VentasCredimaxEntities db = new VentasCredimaxEntities())
+                using (ventas_cta_cteEntities db = new ventas_cta_cteEntities())
                 {
                     db.Cliente.Add(cliente);
                     db.SaveChanges();
@@ -102,7 +102,7 @@ namespace CDatos
             List<Cliente> clientes = null;
             try
             {
-                using (VentasCredimaxEntities db = new VentasCredimaxEntities())
+                using (ventas_cta_cteEntities db = new ventas_cta_cteEntities())
                 {
                     clientes = db.Cliente.Where(x => x.FechaAnulacion == null).ToList();
                 }
@@ -117,7 +117,7 @@ namespace CDatos
         {
             try
             {
-                using (VentasCredimaxEntities db = new VentasCredimaxEntities())
+                using (ventas_cta_cteEntities db = new ventas_cta_cteEntities())
                 {
                     var editarCliente = db.Cliente.FirstOrDefault(x => x.ClientId == cliente.ClientId);
                     editarCliente.Nombre = cliente.Nombre;
@@ -136,7 +136,7 @@ namespace CDatos
         public List<Cliente> ValidarExistencia(string nombre, string apellido, int numDoc)
         {
             List<Cliente> clientes = new List<Cliente>();
-            using (VentasCredimaxEntities db = new VentasCredimaxEntities())
+            using (ventas_cta_cteEntities db = new ventas_cta_cteEntities())
             {
                 clientes = db.Cliente.AsQueryable().Where(x => x.Nombre.ToLower().Contains(nombre)
                            && x.Apellido.ToLower().Contains(apellido)
@@ -147,7 +147,7 @@ namespace CDatos
         }
         public List<ClienteDTO> CargaComboCliente()
         {
-            using (VentasCredimaxEntities db = new VentasCredimaxEntities())
+            using (ventas_cta_cteEntities db = new ventas_cta_cteEntities())
             {
                 var clientess = db.Cliente.
                     Where(x => x.FechaAnulacion == null)

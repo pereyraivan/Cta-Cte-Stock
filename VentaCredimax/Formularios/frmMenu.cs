@@ -279,5 +279,17 @@ namespace VentaCredimax.Formularios
             vendedor.FormClosed += (s, args) => ListarVentas(); // Refresca la lista al cerrar el formulario
             vendedor.ShowDialog();
         }
+
+        private void btnProveedor_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            frmArticulo articulo = new frmArticulo();
+            articulo.FormClosed += (s, args) => ListarVentas(); // Refresca la lista al cerrar el formulario
+            articulo.ShowDialog();
+        }
     }
 }

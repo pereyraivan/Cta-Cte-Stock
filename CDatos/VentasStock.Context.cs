@@ -16,10 +16,10 @@ namespace CDatos
     using System.Linq;
     using CEntidades;
 
-    public partial class VentasCredimaxEntities : DbContext
+    public partial class ventas_cta_cteEntities : DbContext
     {
-        public VentasCredimaxEntities()
-            : base("name=VentasCredimaxEntities")
+        public ventas_cta_cteEntities()
+            : base("name=ventas_cta_cteEntities")
         {
         }
     
@@ -28,23 +28,17 @@ namespace CDatos
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Articulo> Articulo { get; set; }
         public virtual DbSet<Cliente> Cliente { get; set; }
-        public virtual DbSet<FormaDePago> FormaDePago { get; set; }
-        public virtual DbSet<Cuota> Cuota { get; set; }
-        public virtual DbSet<ReciboControl> ReciboControl { get; set; }
         public virtual DbSet<Configuracion> Configuracion { get; set; }
+        public virtual DbSet<Cuota> Cuota { get; set; }
+        public virtual DbSet<DetalleVenta> DetalleVenta { get; set; }
+        public virtual DbSet<DiaDeSemana> DiaDeSemana { get; set; }
+        public virtual DbSet<FormaDePago> FormaDePago { get; set; }
+        public virtual DbSet<MovimientoStock> MovimientoStock { get; set; }
         public virtual DbSet<Vendedor> Vendedor { get; set; }
         public virtual DbSet<Venta> Venta { get; set; }
-        public virtual DbSet<DiaDeSemana> DiaDeSemana { get; set; }
-    
-        public virtual ObjectResult<sp_GetVentasByClientId_Result> sp_GetVentasByClientId(Nullable<int> clientId)
-        {
-            var clientIdParameter = clientId.HasValue ?
-                new ObjectParameter("ClientId", clientId) :
-                new ObjectParameter("ClientId", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetVentasByClientId_Result>("sp_GetVentasByClientId", clientIdParameter);
-        }
+        public virtual DbSet<ReciboControl> ReciboControl { get; set; }
     
         public virtual ObjectResult<ComprobanteDePago_Result> ComprobanteDePago(Nullable<int> ventaId)
         {
@@ -68,6 +62,24 @@ namespace CDatos
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReciboDePago_Result>("ReciboDePago", ventaIdParameter, numeroDeCuotaParameter);
         }
     
+        public virtual ObjectResult<sp_DetalleDeVenta_Result> sp_DetalleDeVenta(Nullable<int> ventaId)
+        {
+            var ventaIdParameter = ventaId.HasValue ?
+                new ObjectParameter("VentaId", ventaId) :
+                new ObjectParameter("VentaId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_DetalleDeVenta_Result>("sp_DetalleDeVenta", ventaIdParameter);
+        }
+    
+        public virtual ObjectResult<sp_GetVentasByClientId_Result> sp_GetVentasByClientId(Nullable<int> clientId)
+        {
+            var clientIdParameter = clientId.HasValue ?
+                new ObjectParameter("ClientId", clientId) :
+                new ObjectParameter("ClientId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetVentasByClientId_Result>("sp_GetVentasByClientId", clientIdParameter);
+        }
+    
         public virtual ObjectResult<sp_ReporteVentas_Result> sp_ReporteVentas(Nullable<System.DateTime> fechaDesde, Nullable<System.DateTime> fechaHasta)
         {
             var fechaDesdeParameter = fechaDesde.HasValue ?
@@ -79,15 +91,6 @@ namespace CDatos
                 new ObjectParameter("FechaHasta", typeof(System.DateTime));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_ReporteVentas_Result>("sp_ReporteVentas", fechaDesdeParameter, fechaHastaParameter);
-        }
-    
-        public virtual ObjectResult<sp_DetalleDeVenta_Result> sp_DetalleDeVenta(Nullable<int> ventaId)
-        {
-            var ventaIdParameter = ventaId.HasValue ?
-                new ObjectParameter("VentaId", ventaId) :
-                new ObjectParameter("VentaId", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_DetalleDeVenta_Result>("sp_DetalleDeVenta", ventaIdParameter);
         }
     }
 }

@@ -10,7 +10,7 @@ namespace CDatos
     {
         public List<CuotaDTO> ObtenerCuotasPorVenta(int ventaId)
         {
-            using (VentasCredimaxEntities db = new VentasCredimaxEntities())
+            using (ventas_cta_cteEntities db = new ventas_cta_cteEntities())
             {
                 var cuotas = (from c in db.Cuota
                               where c.VentaId == ventaId
@@ -41,7 +41,7 @@ namespace CDatos
         {
             try
             {
-                using (VentasCredimaxEntities db = new VentasCredimaxEntities())
+                using (ventas_cta_cteEntities db = new ventas_cta_cteEntities())
                 {
                     Cuota cuota = db.Cuota.FirstOrDefault(c => c.CuotaId == cuotaId);
                     if (cuota != null)

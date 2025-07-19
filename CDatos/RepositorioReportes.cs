@@ -12,7 +12,7 @@ namespace CDatos
    //     {
 			//try
 			//{
-   //             using (VentasCredimaxEntities db = new VentasCredimaxEntities())
+   //             using (ventas_cta_cteEntities db = new ventas_cta_cteEntities())
    //             {
    //                 return true;
    //             }
@@ -28,7 +28,7 @@ namespace CDatos
         {
             try
             {
-                using (VentasCredimaxEntities db = new VentasCredimaxEntities())
+                using (ventas_cta_cteEntities db = new ventas_cta_cteEntities())
                 {
                     return db.Database.SqlQuery<ReciboDePago_Result>(
                         "EXEC ReciboDePago @IdVenta,  @NumeroDeCuota",
@@ -47,7 +47,7 @@ namespace CDatos
         {
             try
             {
-                using (VentasCredimaxEntities db = new VentasCredimaxEntities())
+                using (ventas_cta_cteEntities db = new ventas_cta_cteEntities())
                 {
                     return db.Database.SqlQuery<ComprobanteDePago_Result>(
                         "EXEC ComprobanteDePago @IdVenta",
@@ -64,7 +64,7 @@ namespace CDatos
         {
             try
             {
-                using (VentasCredimaxEntities db = new VentasCredimaxEntities())
+                using (ventas_cta_cteEntities db = new ventas_cta_cteEntities())
                 {
                     return db.Database.SqlQuery<sp_GetVentasByClientId_Result>(
                         "EXEC sp_GetVentasByClientId @ClientId",
@@ -82,7 +82,7 @@ namespace CDatos
         {
             try
             {
-                using (VentasCredimaxEntities db = new VentasCredimaxEntities())
+                using (ventas_cta_cteEntities db = new ventas_cta_cteEntities())
                 {
                     return db.Database.SqlQuery<sp_ReporteVentas_Result>(
                         "EXEC sp_ReporteVentas @FechaDesde, @FechaHasta",
@@ -100,7 +100,7 @@ namespace CDatos
         {
             try
             {
-                using (VentasCredimaxEntities db = new VentasCredimaxEntities())
+                using (ventas_cta_cteEntities db = new ventas_cta_cteEntities())
                 {
                     return db.Database.SqlQuery<sp_DetalleDeVenta_Result>(
                         "EXEC sp_DetalleDeVenta @VentaId",

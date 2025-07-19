@@ -14,7 +14,7 @@ namespace CDatos
         // Obtener todos los días de la semana
         public List<DiaDeSemana> ObtenerDiasDeSemana()
         {
-            using (VentasCredimaxEntities db = new VentasCredimaxEntities())
+            using (ventas_cta_cteEntities db = new ventas_cta_cteEntities())
             {
                 return db.DiaDeSemana.OrderBy(d => d.Id).ToList();
             }
@@ -26,7 +26,7 @@ namespace CDatos
             List<VentaDTO> ventas = null;
             try
             {
-                using (VentasCredimaxEntities db = new VentasCredimaxEntities())
+                using (ventas_cta_cteEntities db = new ventas_cta_cteEntities())
                 {
                     ventas = (from v in db.Venta
                               join c in db.Cliente on v.ClientId equals c.ClientId
@@ -68,7 +68,7 @@ namespace CDatos
         {
             try
             {
-                using (VentasCredimaxEntities db = new VentasCredimaxEntities())
+                using (ventas_cta_cteEntities db = new ventas_cta_cteEntities())
                 {
                     db.Venta.Add(venta);
                     db.SaveChanges();
@@ -136,7 +136,7 @@ namespace CDatos
             List<VentaDTO> ventas = null;
             try
             {
-                using (VentasCredimaxEntities db = new VentasCredimaxEntities())
+                using (ventas_cta_cteEntities db = new ventas_cta_cteEntities())
                 {
                     ventas = (from v in db.Venta
                               join c in db.Cliente on v.ClientId equals c.ClientId
@@ -208,7 +208,7 @@ namespace CDatos
             List<VentaDTO> ventas = null;
             try
             {
-                using (VentasCredimaxEntities db = new VentasCredimaxEntities())
+                using (ventas_cta_cteEntities db = new ventas_cta_cteEntities())
                 {
                     ventas = (from v in db.Venta
                               join c in db.Cliente on v.ClientId equals c.ClientId
@@ -273,7 +273,7 @@ namespace CDatos
             List<VentaDTO> ventas = null;
             try
             {
-                using (VentasCredimaxEntities db = new VentasCredimaxEntities())
+                using (ventas_cta_cteEntities db = new ventas_cta_cteEntities())
                 {
                     ventas = (from v in db.Venta
                               join c in db.Cliente on v.ClientId equals c.ClientId
@@ -314,7 +314,7 @@ namespace CDatos
             List<VentaDTO> ventas = null;
             try
             {
-                using (VentasCredimaxEntities db = new VentasCredimaxEntities())
+                using (ventas_cta_cteEntities db = new ventas_cta_cteEntities())
                 {
                     ventas = (from v in db.Venta
                               join c in db.Cliente on v.ClientId equals c.ClientId
@@ -355,7 +355,7 @@ namespace CDatos
             List<VentaDTO> ventas = null;
             try
             {
-                using (VentasCredimaxEntities db = new VentasCredimaxEntities())
+                using (ventas_cta_cteEntities db = new ventas_cta_cteEntities())
                 {
                     ventas = (from v in db.Venta
                               join c in db.Cliente on v.ClientId equals c.ClientId
@@ -395,7 +395,7 @@ namespace CDatos
         {
             try
             {
-                using (VentasCredimaxEntities db = new VentasCredimaxEntities())
+                using (ventas_cta_cteEntities db = new ventas_cta_cteEntities())
                 {
                     var editarVenta = db.Venta.FirstOrDefault(x => x.VentaId == venta.VentaId);
                     // Comparar los valores relevantes
@@ -494,7 +494,7 @@ namespace CDatos
         {
             try
             {
-                using (VentasCredimaxEntities db = new VentasCredimaxEntities())
+                using (ventas_cta_cteEntities db = new ventas_cta_cteEntities())
                 {
                     EliminarCuotasPorIdVenta(id);
                     var venta = db.Venta.FirstOrDefault(x => x.VentaId == id);
@@ -512,7 +512,7 @@ namespace CDatos
         }
         public void EliminarCuotasPorIdVenta(int ventaId)
         {
-            using (VentasCredimaxEntities db = new VentasCredimaxEntities())
+            using (ventas_cta_cteEntities db = new ventas_cta_cteEntities())
             {
                 try
                 {
@@ -535,7 +535,7 @@ namespace CDatos
 
             try
             {
-                using (VentasCredimaxEntities db = new VentasCredimaxEntities())
+                using (ventas_cta_cteEntities db = new ventas_cta_cteEntities())
                 {
 
                     return db.Configuracion.Select(x => x.isDemo).FirstOrDefault();
@@ -553,7 +553,7 @@ namespace CDatos
             List<VentaDTO> ventas = null;
             try
             {
-                using (VentasCredimaxEntities db = new VentasCredimaxEntities())
+                using (ventas_cta_cteEntities db = new ventas_cta_cteEntities())
                 {
                     ventas = (from v in db.Venta
                               join c in db.Cliente on v.ClientId equals c.ClientId

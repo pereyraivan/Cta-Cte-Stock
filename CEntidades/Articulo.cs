@@ -12,30 +12,28 @@ namespace CEntidades
     using System;
     using System.Collections.Generic;
     
-    public partial class Venta
+    public partial class Articulo
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Venta()
+        public Articulo()
         {
             this.DetalleVenta = new HashSet<DetalleVenta>();
+            this.MovimientoStock = new HashSet<MovimientoStock>();
         }
     
-        public int VentaId { get; set; }
-        public int ClientId { get; set; }
-        public string Articulo { get; set; }
-        public Nullable<int> Talle { get; set; }
-        public int FormaDePagoId { get; set; }
-        public System.DateTime FechaDeInicio { get; set; }
-        public Nullable<System.DateTime> FechaDeCancelacion { get; set; }
+        public int ArticuloId { get; set; }
+        public string Codigo { get; set; }
+        public string Descripcion { get; set; }
+        public decimal PrecioCompra { get; set; }
+        public decimal PrecioVenta { get; set; }
+        public int Stock { get; set; }
+        public int StockMinimo { get; set; }
+        public System.DateTime FechaAlta { get; set; }
         public Nullable<System.DateTime> FechaAnulacion { get; set; }
-        public Nullable<decimal> Precio { get; set; }
-        public Nullable<int> Cuotas { get; set; }
-        public Nullable<int> Cantidad { get; set; }
-        public Nullable<decimal> Total { get; set; }
-        public Nullable<int> VendedorId { get; set; }
-        public Nullable<int> IdDiaSemana { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DetalleVenta> DetalleVenta { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<MovimientoStock> MovimientoStock { get; set; }
     }
 }

@@ -16,7 +16,7 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>C:\Users\perey\OneDrive\Escritorio\Control-C\</PublishUrl>
+    <PublishUrl>C:\Users\perey\Desktop\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -28,7 +28,7 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ProductName>Control-C</ProductName>
     <PublisherName>Control-C</PublisherName>
-    <ApplicationRevision>15</ApplicationRevision>
+    <ApplicationRevision>16</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -299,6 +299,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Formularios\frmArticulo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\frmArticulo.Designer.cs">
+      <DependentUpon>frmArticulo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Formularios\frmCalcularCuotas.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -356,6 +362,9 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SqlServerTypes\Loader.cs" />
+    <EmbeddedResource Include="Formularios\frmArticulo.resx">
+      <DependentUpon>frmArticulo.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Formularios\frmCalcularCuotas.resx">
       <DependentUpon>frmCalcularCuotas.cs</DependentUpon>
     </EmbeddedResource>
@@ -417,6 +426,7 @@
     <None Include="Resources\VentasPorFecha.html" />
     <Content Include="logosistema.ico" />
     <None Include="Resources\DetalleDeVenta.html" />
+    <None Include="Resources\productos.png" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

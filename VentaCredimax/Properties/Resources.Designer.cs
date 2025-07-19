@@ -97,7 +97,7 @@ namespace VentaCredimax.Properties {
         ///   Looks up a localized string similar to &lt;!DOCTYPE html&gt;
         ///&lt;html&gt;
         ///&lt;head&gt;
-        ///    &lt;title&gt;ventas por cliente&lt;/title&gt;
+        ///    &lt;title&gt;detalle de venta&lt;/title&gt;
         ///    &lt;style&gt;
         ///        body {
         ///            font-family: Arial, sans-serif;
@@ -120,11 +120,21 @@ namespace VentaCredimax.Properties {
         ///        }
         ///
         ///        .header p {
-        ///            marg [rest of string was truncated]&quot;;.
+        ///            margin [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string DetalleDeVenta {
             get {
                 return ResourceManager.GetString("DetalleDeVenta", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap productos {
+            get {
+                object obj = ResourceManager.GetObject("productos", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         

@@ -42,63 +42,72 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Articulo.cs">
+      <DependentUpon>VentasStock.tt</DependentUpon>
+    </Compile>
     <Compile Include="Cliente.cs">
-      <DependentUpon>ORM.tt</DependentUpon>
+      <DependentUpon>VentasStock.tt</DependentUpon>
     </Compile>
     <Compile Include="ComprobanteDePago_Result.cs">
-      <DependentUpon>ORM.tt</DependentUpon>
+      <DependentUpon>VentasStock.tt</DependentUpon>
     </Compile>
     <Compile Include="Configuracion.cs">
-      <DependentUpon>ORM.tt</DependentUpon>
+      <DependentUpon>VentasStock.tt</DependentUpon>
     </Compile>
     <Compile Include="Cuota.cs">
-      <DependentUpon>ORM.tt</DependentUpon>
+      <DependentUpon>VentasStock.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DetalleVenta.cs">
+      <DependentUpon>VentasStock.tt</DependentUpon>
     </Compile>
     <Compile Include="DiaDeSemana.cs">
-      <DependentUpon>ORM.tt</DependentUpon>
+      <DependentUpon>VentasStock.tt</DependentUpon>
     </Compile>
     <Compile Include="DTOs\ClienteDTO.cs" />
     <Compile Include="DTOs\CuotaDTO.cs" />
     <Compile Include="DTOs\VentaDTO.cs" />
     <Compile Include="FormaDePago.cs">
-      <DependentUpon>ORM.tt</DependentUpon>
+      <DependentUpon>VentasStock.tt</DependentUpon>
     </Compile>
-    <Compile Include="ORM.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ORM.tt</DependentUpon>
+    <Compile Include="MovimientoStock.cs">
+      <DependentUpon>VentasStock.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReciboControl.cs">
-      <DependentUpon>ORM.tt</DependentUpon>
+      <DependentUpon>VentasStock.tt</DependentUpon>
     </Compile>
     <Compile Include="ReciboDePago_Result.cs">
-      <DependentUpon>ORM.tt</DependentUpon>
+      <DependentUpon>VentasStock.tt</DependentUpon>
     </Compile>
     <Compile Include="sp_DetalleDeVenta_Result.cs">
-      <DependentUpon>ORM.tt</DependentUpon>
+      <DependentUpon>VentasStock.tt</DependentUpon>
     </Compile>
     <Compile Include="sp_GetVentasByClientId_Result.cs">
-      <DependentUpon>ORM.tt</DependentUpon>
+      <DependentUpon>VentasStock.tt</DependentUpon>
     </Compile>
     <Compile Include="sp_ReporteVentas_Result.cs">
-      <DependentUpon>ORM.tt</DependentUpon>
+      <DependentUpon>VentasStock.tt</DependentUpon>
     </Compile>
     <Compile Include="Vendedor.cs">
-      <DependentUpon>ORM.tt</DependentUpon>
+      <DependentUpon>VentasStock.tt</DependentUpon>
     </Compile>
     <Compile Include="Venta.cs">
-      <DependentUpon>ORM.tt</DependentUpon>
+      <DependentUpon>VentasStock.tt</DependentUpon>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="ORM.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ORM.cs</LastGenOutput>
-    </Content>
+    <Compile Include="VentasStock.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>VentasStock.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="VentasStock.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>VentasStock.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

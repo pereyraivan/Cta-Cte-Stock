@@ -13,7 +13,7 @@ namespace CDatos
         {
             try
             {
-                using (VentasCredimaxEntities db = new VentasCredimaxEntities())
+                using (ventas_cta_cteEntities db = new ventas_cta_cteEntities())
                 {
                     db.Vendedor.Add(vendedor);
                     db.SaveChanges();
@@ -29,7 +29,7 @@ namespace CDatos
         {
             try
             {
-                using (VentasCredimaxEntities db = new VentasCredimaxEntities())
+                using (ventas_cta_cteEntities db = new ventas_cta_cteEntities())
                 {
                     var editarVendedor = db.Vendedor.FirstOrDefault(x => x.VendedorId == vendedor.VendedorId);
                     if (editarVendedor != null)
@@ -50,7 +50,7 @@ namespace CDatos
         {
             try
             {
-                using (VentasCredimaxEntities db = new VentasCredimaxEntities())
+                using (ventas_cta_cteEntities db = new ventas_cta_cteEntities())
                 {
                     var vendedor = db.Vendedor.FirstOrDefault(x => x.VendedorId == id);
                     if (vendedor != null)
@@ -71,7 +71,7 @@ namespace CDatos
             List<Vendedor> vendedores = null;
             try
             {
-                using (VentasCredimaxEntities db = new VentasCredimaxEntities())
+                using (ventas_cta_cteEntities db = new ventas_cta_cteEntities())
                 {
                     vendedores = db.Vendedor.ToList();
                 }
@@ -87,7 +87,7 @@ namespace CDatos
             List<Vendedor> vendedor = new List<Vendedor>();
             try
             {
-                using (VentasCredimaxEntities db = new VentasCredimaxEntities())
+                using (ventas_cta_cteEntities db = new ventas_cta_cteEntities())
                 {
                     //clientes = db.SP_listaClientes().Where(x => x.NombreCompleto.Contains(nombre)).ToList();
 
