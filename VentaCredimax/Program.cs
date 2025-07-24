@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using VentaCredimax.Formularios;
+using SqlServerTypes;
 
 namespace VentaCredimax
 {
@@ -15,6 +16,9 @@ namespace VentaCredimax
         [STAThread]
         static void Main()
         {
+            // Cargar las DLLs nativas de SQL Server Types
+            SqlServerTypes.Utilities.LoadNativeAssemblies(AppDomain.CurrentDomain.BaseDirectory);
+            
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new frmMenu());

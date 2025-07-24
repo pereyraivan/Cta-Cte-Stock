@@ -235,12 +235,11 @@ namespace VentaCredimax.Formularios
 
                 // Reemplazar en la plantilla HTML
                 textoHtml = textoHtml.Replace("@filasTabla", filasTabla);
-
-                textoHtml = textoHtml.Replace("@talle", listaVentasPorCliente.FirstOrDefault().Talle.ToString());         
+       
                 textoHtml = textoHtml.Replace("@fecha-cancelacion-cuota", listaVentasPorCliente.FirstOrDefault()?.FechaCancelacionCuotas?.ToString("dd/MM/yyyy") ?? "");
                 textoHtml = textoHtml.Replace("@fecha-programada-cuota", listaVentasPorCliente.FirstOrDefault()?.FechaProgramadaDeCuota.ToString("dd/MM/yyyy"));
                 textoHtml = textoHtml.Replace("@fecha-venta", listaVentasPorCliente.FirstOrDefault()?.FechaDeVenta.ToString("dd/MM/yyyy"));
-                textoHtml = textoHtml.Replace("@frecuencia-pago", listaVentasPorCliente.FirstOrDefault().Nombre.ToString());
+                textoHtml = textoHtml.Replace("@frecuencia-pago", listaVentasPorCliente.FirstOrDefault().FormaDePago.ToString());
 
                 SaveFileDialog saveFile = new SaveFileDialog();
                 saveFile.FileName = $"ventas-por-cliente_{listaVentasPorCliente.FirstOrDefault().NombreCliente + listaVentasPorCliente.FirstOrDefault().ApellidoCliente}-{DateTime.Now.ToString("dd_MM_yyyy")}.pdf";
@@ -273,13 +272,6 @@ namespace VentaCredimax.Formularios
             ListarVentas();
         }
 
-        private void btnGestionVendedor_Click(object sender, EventArgs e)
-        {
-            frmVendedor vendedor = new frmVendedor();
-            vendedor.FormClosed += (s, args) => ListarVentas(); // Refresca la lista al cerrar el formulario
-            vendedor.ShowDialog();
-        }
-
         private void btnProveedor_Click(object sender, EventArgs e)
         {
 
@@ -291,5 +283,6 @@ namespace VentaCredimax.Formularios
             articulo.FormClosed += (s, args) => ListarVentas(); // Refresca la lista al cerrar el formulario
             articulo.ShowDialog();
         }
+
     }
 }

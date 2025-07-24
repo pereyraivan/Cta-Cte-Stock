@@ -11,16 +11,8 @@ namespace CDatos
 {
     public class RepositorioVenta
     {
-        // Obtener todos los días de la semana
-        public List<DiaDeSemana> ObtenerDiasDeSemana()
-        {
-            using (ventas_cta_cteEntities db = new ventas_cta_cteEntities())
-            {
-                return db.DiaDeSemana.OrderBy(d => d.Id).ToList();
-            }
-        }
-
-        // Nuevo método para filtrar ventas por día de la semana
+        
+        // Método obsoleto para filtrar ventas por día de la semana
         public List<VentaDTO> FiltrarVentasPorDiaSemana(int idDiaSemana)
         {
             List<VentaDTO> ventas = null;
@@ -31,18 +23,15 @@ namespace CDatos
                     ventas = (from v in db.Venta
                               join c in db.Cliente on v.ClientId equals c.ClientId
                               join fp in db.FormaDePago on v.FormaDePagoId equals fp.FormaDePagoId
-                              join ven in db.Vendedor on v.VendedorId equals ven.VendedorId into vendedorJoin
-                              from ven in vendedorJoin.DefaultIfEmpty()
-                              join d in db.DiaDeSemana on v.IdDiaSemana equals d.Id
-                              where v.IdDiaSemana == idDiaSemana
+                              join a in db.Articulo on v.IdArticulo equals a.ArticuloId
                               orderby v.FechaDeInicio descending
                               select new VentaDTO
                               {
                                   VentaId = v.VentaId,
                                   IdCliente = c.ClientId,
                                   NombreCliente = c.Apellido + " " + c.Nombre,
-                                  Articulo = v.Articulo,
-                                  Talle = v.Talle,
+                                  IdArticulo = v.IdArticulo,
+                                  Articulo = a.Descripcion,
                                   FormaDePago = fp.Nombre,
                                   Precio = v.Precio,
                                   Cuotas = v.Cuotas,
@@ -50,10 +39,7 @@ namespace CDatos
                                   FechaDeCancelacion = v.FechaDeCancelacion,
                                   Cantidad = v.Cantidad,
                                   Total = v.Total,
-                                  VendedorNombre = ven.NombreYApellido,
-                                  FechaAnulacion = v.FechaAnulacion,
-                                  IdDiaSemana = v.IdDiaSemana,
-                                  DiaSemanaNombre = d.Nombre
+                                  FechaAnulacion = v.FechaAnulacion
                               }).ToList();
                 }
             }
@@ -141,10 +127,7 @@ namespace CDatos
                     ventas = (from v in db.Venta
                               join c in db.Cliente on v.ClientId equals c.ClientId
                               join fp in db.FormaDePago on v.FormaDePagoId equals fp.FormaDePagoId
-                              join ven in db.Vendedor on v.VendedorId equals ven.VendedorId into vendedorJoin
-                              from ven in vendedorJoin.DefaultIfEmpty() // LEFT JOIN
-                              join d in db.DiaDeSemana on v.IdDiaSemana equals d.Id into diaJoin
-                              from d in diaJoin.DefaultIfEmpty() // LEFT JOIN para el día de la semana
+                              join a in db.Articulo on v.IdArticulo equals a.ArticuloId
                               where mostrarTodas || v.FechaAnulacion == null
                               orderby v.FechaDeInicio descending
                               select new VentaDTO
@@ -152,8 +135,8 @@ namespace CDatos
                                   VentaId = v.VentaId,
                                   IdCliente = c.ClientId,
                                   NombreCliente = c.Apellido + " " + c.Nombre, // Nombre del cliente
-                                  Articulo = v.Articulo,
-                                  Talle = v.Talle,
+                                  IdArticulo = v.IdArticulo,
+                                  Articulo = a.Descripcion,
                                   FormaDePago = fp.Nombre,  // Nombre de la forma de pago
                                   Precio = v.Precio,
                                   Cuotas = v.Cuotas,
@@ -161,10 +144,8 @@ namespace CDatos
                                   FechaDeCancelacion = v.FechaDeCancelacion,
                                   Cantidad = v.Cantidad,
                                   Total = v.Total,
-                                  VendedorNombre = ven.NombreYApellido,
                                   FechaAnulacion = v.FechaAnulacion,
-                                  CuotasVencidas = db.Cuota.Any(cuota => cuota.VentaId == v.VentaId && cuota.FechaProgramada < DateTime.Now && cuota.FechaPago == null),
-                                  DiaSemanaNombre = d != null ? d.Nombre : ""
+                                  CuotasVencidas = db.Cuota.Any(cuota => cuota.VentaId == v.VentaId && cuota.FechaProgramada < DateTime.Now && cuota.FechaPago == null)
                               }).ToList();
 
                     switch (criterioOrden.Trim())
@@ -213,18 +194,15 @@ namespace CDatos
                     ventas = (from v in db.Venta
                               join c in db.Cliente on v.ClientId equals c.ClientId
                               join fp in db.FormaDePago on v.FormaDePagoId equals fp.FormaDePagoId
-                              join ven in db.Vendedor on v.VendedorId equals ven.VendedorId into vendedorJoin
-                              from ven in vendedorJoin.DefaultIfEmpty() // LEFT JOIN
-                              join d in db.DiaDeSemana on v.IdDiaSemana equals d.Id into diaJoin
-                              from d in diaJoin.DefaultIfEmpty() // LEFT JOIN para el día de la semana
+                              join a in db.Articulo on v.IdArticulo equals a.ArticuloId
                               where v.FechaAnulacion == null
                               select new VentaDTO
                               {
                                   VentaId = v.VentaId,
                                   IdCliente = c.ClientId,
                                   NombreCliente = c.Apellido + " " + c.Nombre,
-                                  Articulo = v.Articulo,
-                                  Talle = v.Talle,
+                                  IdArticulo = v.IdArticulo,
+                                  Articulo = a.Descripcion,
                                   FormaDePago = fp.Nombre,
                                   Precio = v.Precio,
                                   Cuotas = v.Cuotas,
@@ -233,9 +211,7 @@ namespace CDatos
                                   FechaAnulacion = v.FechaAnulacion,
                                   Cantidad = v.Cantidad,
                                   Total = v.Total,
-                                  VendedorNombre = ven.NombreYApellido,
-                                  CuotasVencidas = db.Cuota.Any(cuota => cuota.VentaId == v.VentaId && cuota.FechaProgramada < DateTime.Now && cuota.FechaPago == null),
-                                  DiaSemanaNombre = d != null ? d.Nombre : ""
+                                  CuotasVencidas = db.Cuota.Any(cuota => cuota.VentaId == v.VentaId && cuota.FechaProgramada < DateTime.Now && cuota.FechaPago == null)
                               })
                               .ToList();
                     switch (criterioOrden.Trim())
@@ -278,8 +254,7 @@ namespace CDatos
                     ventas = (from v in db.Venta
                               join c in db.Cliente on v.ClientId equals c.ClientId
                               join fp in db.FormaDePago on v.FormaDePagoId equals fp.FormaDePagoId
-                              join ven in db.Vendedor on v.VendedorId equals ven.VendedorId into vendedorJoin
-                              from ven in vendedorJoin.DefaultIfEmpty() // LEFT JOIN
+                              join a in db.Articulo on v.IdArticulo equals a.ArticuloId
                               where (c.Apellido + " " + c.Nombre).Contains(nombreApellidoCliente) && // Filtrar por nombre y apellido
                               v.FechaAnulacion == null // Asegurarse de que la venta no esté anulada
                               orderby v.FechaDeInicio descending
@@ -288,8 +263,8 @@ namespace CDatos
                                   VentaId = v.VentaId,
                                   IdCliente = c.ClientId,
                                   NombreCliente = c.Apellido + " " + c.Nombre,
-                                  Articulo = v.Articulo,
-                                  Talle = v.Talle,
+                                  IdArticulo = v.IdArticulo,
+                                  Articulo = a.Descripcion,
                                   FormaDePago = fp.Nombre,
                                   Precio = v.Precio,
                                   Cuotas = v.Cuotas,
@@ -297,7 +272,6 @@ namespace CDatos
                                   FechaDeCancelacion = v.FechaDeCancelacion,
                                   Cantidad = v.Cantidad,
                                   Total = v.Total,
-                                  VendedorNombre = ven.NombreYApellido,
                                   FechaAnulacion = v.FechaAnulacion
                               }).ToList();
                 }
@@ -319,9 +293,8 @@ namespace CDatos
                     ventas = (from v in db.Venta
                               join c in db.Cliente on v.ClientId equals c.ClientId
                               join fp in db.FormaDePago on v.FormaDePagoId equals fp.FormaDePagoId
-                              join ven in db.Vendedor on v.VendedorId equals ven.VendedorId into vendedorJoin
-                              from ven in vendedorJoin.DefaultIfEmpty() // LEFT JOIN
-                              where v.Articulo.Contains(nombreArticulo) &&// Filtrar por nombre del artículo
+                              join a in db.Articulo on v.IdArticulo equals a.ArticuloId
+                              where a.Descripcion.Contains(nombreArticulo) &&// Filtrar por nombre del artículo
                               v.FechaAnulacion == null // Asegurarse de que la venta no esté anulada
                               orderby v.FechaDeInicio descending
                               select new VentaDTO
@@ -329,8 +302,8 @@ namespace CDatos
                                   VentaId = v.VentaId,
                                   IdCliente = c.ClientId,
                                   NombreCliente = c.Apellido + " " + c.Nombre,
-                                  Articulo = v.Articulo,
-                                  Talle = v.Talle,
+                                  IdArticulo = v.IdArticulo,
+                                  Articulo = a.Descripcion,
                                   FormaDePago = fp.Nombre,
                                   Precio = v.Precio,
                                   Cuotas = v.Cuotas,
@@ -338,7 +311,6 @@ namespace CDatos
                                   FechaDeCancelacion = v.FechaDeCancelacion,
                                   Cantidad = v.Cantidad,
                                   Total = v.Total,
-                                  VendedorNombre = ven.NombreYApellido,
                                   FechaAnulacion = v.FechaAnulacion
                               }).ToList();
                 }
@@ -360,8 +332,7 @@ namespace CDatos
                     ventas = (from v in db.Venta
                               join c in db.Cliente on v.ClientId equals c.ClientId
                               join fp in db.FormaDePago on v.FormaDePagoId equals fp.FormaDePagoId
-                              join ven in db.Vendedor on v.VendedorId equals ven.VendedorId into vendedorJoin
-                              from ven in vendedorJoin.DefaultIfEmpty() // LEFT JOIN
+                              join a in db.Articulo on v.IdArticulo equals a.ArticuloId
                               where fp.Nombre.Contains(frecuenciaPago) 
                               && v.FechaAnulacion == null
                               orderby v.FechaDeInicio descending
@@ -370,8 +341,8 @@ namespace CDatos
                                   VentaId = v.VentaId,
                                   IdCliente = c.ClientId,
                                   NombreCliente = c.Apellido + " " + c.Nombre,
-                                  Articulo = v.Articulo,
-                                  Talle = v.Talle,
+                                  IdArticulo = v.IdArticulo,
+                                  Articulo = a.Descripcion,
                                   FormaDePago = fp.Nombre,
                                   Precio = v.Precio,
                                   Cuotas = v.Cuotas,
@@ -379,7 +350,6 @@ namespace CDatos
                                   FechaDeCancelacion = v.FechaDeCancelacion,
                                   Cantidad = v.Cantidad,
                                   Total = v.Total,
-                                  VendedorNombre = ven.NombreYApellido,
                                   FechaAnulacion = v.FechaAnulacion
                               }).ToList();
                 }
@@ -466,22 +436,19 @@ namespace CDatos
 
                     //var editarVenta = db.Venta.FirstOrDefault(x => x.VentaId == venta.VentaId);
                     editarVenta.ClientId = venta.ClientId;
-                    editarVenta.Articulo = venta.Articulo;
-                    editarVenta.Talle = venta.Talle;
+                    editarVenta.IdArticulo = venta.IdArticulo;
                     editarVenta.FormaDePagoId = venta.FormaDePagoId;
-                    editarVenta.IdDiaSemana = venta.IdDiaSemana;
                     editarVenta.FechaDeInicio = venta.FechaDeInicio;
                     editarVenta.FechaDeCancelacion = venta.FechaDeCancelacion;
                     editarVenta.Precio = venta.Precio;
                     editarVenta.Cuotas = venta.Cuotas;
                     editarVenta.Cantidad = venta.Cantidad;
                     editarVenta.Total = venta.Total;
-                    editarVenta.VendedorId = venta.VendedorId;
 
                     db.SaveChanges();
                 }
             }
-            catch (InvalidOperationException ex)
+            catch (InvalidOperationException)
             {
                 throw;
             }
@@ -550,45 +517,8 @@ namespace CDatos
         }
         public List<VentaDTO> FiltrarVentasPorVendedor(string vendedorNombre)
         {
-            List<VentaDTO> ventas = null;
-            try
-            {
-                using (ventas_cta_cteEntities db = new ventas_cta_cteEntities())
-                {
-                    ventas = (from v in db.Venta
-                              join c in db.Cliente on v.ClientId equals c.ClientId
-                              join fp in db.FormaDePago on v.FormaDePagoId equals fp.FormaDePagoId
-                              join ven in db.Vendedor on v.VendedorId equals ven.VendedorId into vendedorJoin
-                              from ven in vendedorJoin.DefaultIfEmpty() // LEFT JOIN
-                              where ven.NombreYApellido.Contains(vendedorNombre) 
-                              && v.FechaAnulacion == null     // Filtrar por ID del vendedor  
-                              orderby v.FechaDeInicio descending
-                              select new VentaDTO
-                              {
-                                  VentaId = v.VentaId,
-                                  IdCliente = c.ClientId,
-                                  NombreCliente = c.Apellido + " " + c.Nombre,
-                                  Articulo = v.Articulo,
-                                  Talle = v.Talle,
-                                  FormaDePago = fp.Nombre,
-                                  Precio = v.Precio,
-                                  Cuotas = v.Cuotas,
-                                  FechaDeInicio = v.FechaDeInicio,
-                                  FechaDeCancelacion = v.FechaDeCancelacion,
-                                  Cantidad = v.Cantidad,
-                                  Total = v.Total,
-                                  VendedorNombre = ven.NombreYApellido,
-                                  FechaAnulacion = v.FechaAnulacion
-
-                              }).ToList();
-                }
-            }
-            catch (Exception ex)
-            {
-                // Manejar el error  
-                respuesta = ex.Message;
-            }
-            return ventas;
+            // Método obsoleto: La tabla Vendedor ya no se usa
+            return new List<VentaDTO>();
         }
     }
 }

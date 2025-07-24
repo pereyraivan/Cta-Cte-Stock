@@ -16,7 +16,7 @@ namespace VentaCredimax.Formularios
         private int idCliente;
         GestorCliente _gestorCliente = new GestorCliente();
         GestorVenta _gestorVenta = new GestorVenta();
-        GestorVendedor gestorVendedor = new GestorVendedor();   
+        GestorArticulo _gestorArticulo = new GestorArticulo();
         private GestorReportes _gestorReportes = new GestorReportes();
         public frmVentas()
         {
@@ -41,7 +41,15 @@ namespace VentaCredimax.Formularios
             cbSeleccionCliente.DisplayMember = "NombreCompleto"; // Muestra Apellido, Nombre (DNI)
             cbSeleccionCliente.ValueMember = "IdCliente"; // Identificador real del cliente
             cbSeleccionCliente.DataSource = _gestorCliente.CargarComboCliente();
-            CargarVendedores(); 
+            // CargarVendedores(); // Obsoleto - Los vendedores ya no se usan
+        }
+
+        private void CargarComboArticulos()
+        {
+            cbArticulo.DataSource = null; // Limpiar antes de asignar nuevos datos
+            cbArticulo.DisplayMember = "Descripcion"; // Muestra la descripción del artículo
+            cbArticulo.ValueMember = "ArticuloId"; // Identificador real del artículo
+            cbArticulo.DataSource = _gestorArticulo.Listar().Where(a => a.FechaAnulacion == null).ToList();
         }
         public void ClienteSeleccionado(string nombreCliente, string apellidoCliente, int idClienteSeleccionado, int dni)
         {
@@ -72,17 +80,44 @@ namespace VentaCredimax.Formularios
                 cbSeleccionCliente.SelectedValue = idClienteSeleccionado; // Seleccionamos el nuevo cliente
             }
         }
+
+        public void ArticuloSeleccionado(string descripcionArticulo, int idArticuloSeleccionado, decimal precioVenta)
+        {
+            // Cargar los artículos en el ComboBox si no están cargados
+            CargarComboArticulos();
+
+            // Buscar el artículo por su Id en el DataSource
+            var articulos = (List<Articulo>)cbArticulo.DataSource;
+
+            // Encontrar el artículo en la lista del ComboBox
+            var articulo = articulos.FirstOrDefault(a => a.ArticuloId == idArticuloSeleccionado);
+
+            if (articulo != null)
+            {
+                // Selecciona el artículo en el ComboBox
+                cbArticulo.SelectedValue = articulo.ArticuloId;
+            }
+            else
+            {
+                // Si no está en la lista, simplemente establecer el texto
+                cbArticulo.Text = descripcionArticulo;
+            }
+
+            // Establecer automáticamente el precio de venta
+            txtPrecio.Text = precioVenta.ToString("N2", new System.Globalization.CultureInfo("es-AR"));
+        }
+
         private void RegistrarVenta()
         {
             decimal precio;
             int cantidad;
 
-            if (cbSeleccionCliente.Text == "" || txtArticulo.Text == "" || txtPrecio.Text == "" || txtCantidad.Text == "" || txtCuotas.Text == "")
+            if (cbSeleccionCliente.Text == "" || cbArticulo.Text == "" || txtPrecio.Text == "" || txtCantidad.Text == "" || txtCuotas.Text == "")
             {
                 if (cbSeleccionCliente.Text == "")
                     errorProvider1.SetError(cbSeleccionCliente, "Campo obligatorio");
-                if (txtArticulo.Text == "")
-                    errorProvider1.SetError(txtArticulo, "Campo obligatorio");
+                if (cbArticulo.Text == "")
+                    errorProvider1.SetError(cbArticulo, "Campo obligatorio");
                 if (txtPrecio.Text == "")
                     errorProvider1.SetError(txtPrecio, "Campo obligatorio");
                 if (txtCantidad.Text == "")
@@ -92,28 +127,38 @@ namespace VentaCredimax.Formularios
 
                 return; // Si hay campos vacíos, no se ejecuta el resto del código
             }
-            if (cbVendedor.SelectedIndex == -1)
-            {
-                MessageBox.Show("Debe seleccionar un vendedor.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
 
             var venta = new Venta();
 
             venta.ClientId = (int)cbSeleccionCliente.SelectedValue;
-            venta.Articulo = txtArticulo.Text;
-            venta.Talle = string.IsNullOrEmpty(txtTalle.Text) ? (int?)null : Convert.ToInt32(txtTalle.Text);
+            // Buscar el ID del artículo por su descripción
+            if (cbArticulo.SelectedValue != null)
+            {
+                venta.IdArticulo = (int)cbArticulo.SelectedValue;
+            }
+            else
+            {
+                // Si no se seleccionó de la lista, buscar por texto
+                var gestorArticulo = new GestorArticulo();
+                var articulos = gestorArticulo.BuscarPorNombre(cbArticulo.Text);
+                if (articulos.Any())
+                {
+                    venta.IdArticulo = articulos.First().ArticuloId;
+                }
+                else
+                {
+                    MessageBox.Show("No se encontró el artículo especificado.");
+                    return;
+                }
+            }
             FormaDePago formaDePagoSeleccionada = (FormaDePago)cbFormaPago.SelectedItem;
             venta.FormaDePagoId = (int)formaDePagoSeleccionada;
 
-            int diaSemanabaSeleccionada = (int)cbDiaPago.SelectedValue;
-            venta.IdDiaSemana = diaSemanabaSeleccionada;
             venta.Precio = Convert.ToDecimal(txtPrecio.Text);
             venta.Cuotas = Convert.ToInt32(txtCuotas.Text);
             venta.FechaDeInicio = dtfechaVenta.Value;
             venta.FechaDeCancelacion = dtpFechaCancelacion.Value;
             venta.Cantidad = Convert.ToInt32(txtCantidad.Text);
-            venta.VendedorId = (int)cbVendedor.SelectedValue;   
             if (decimal.TryParse(txtPrecio.Text, out precio) && int.TryParse(txtCantidad.Text, out cantidad))
             {
                 venta.Total = precio * cantidad;
@@ -155,10 +200,8 @@ namespace VentaCredimax.Formularios
             cbFormaPago.SelectedIndexChanged -= cbFormaPago_SelectedIndexChanged;
 
             cbSeleccionCliente.SelectedIndex = -1;
-            txtArticulo.Text = "";
-            txtTalle.Text = "";
+            cbArticulo.Text = "";
             cbFormaPago.SelectedIndex = -1;
-            cbDiaPago.SelectedIndex = -1;
             txtPrecio.Text = "";
             txtCuotas.Text = "";
             dtpFechaCancelacion.Value = DateTime.Now;
@@ -180,9 +223,10 @@ namespace VentaCredimax.Formularios
             {
                 dgvVentas.Columns["VentaId"].Visible = false;
                 dgvVentas.Columns["IdCliente"].Visible = false;
+                dgvVentas.Columns["IdArticulo"].Visible = false;
                 dgvVentas.Columns["FechaAnulacion"].Visible = false;
                 dgvVentas.Columns["CuotasVencidas"].Visible = false;
-                dgvVentas.Columns["IdDiaSemana"].Visible = false;
+                // dgvVentas.Columns["IdDiaSemana"].Visible = false; // Obsoleto - ya no existe
             }
         }
         private void dgvVentas_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -198,11 +242,10 @@ namespace VentaCredimax.Formularios
                 // Asignar el valor al ComboBox
                 cbSeleccionCliente.SelectedValue = idCliente;
                 cbSeleccionCliente.Text = dgvVentas.CurrentRow.Cells["NombreCliente"].Value?.ToString();
-                txtArticulo.Text = dgvVentas.CurrentRow.Cells["Articulo"].Value?.ToString();
-                txtTalle.Text = dgvVentas.CurrentRow.Cells["Talle"].Value?.ToString();
+                // Seleccionar el artículo por su ID
+                int idArticulo = (int)dgvVentas.CurrentRow.Cells["IdArticulo"].Value;
+                cbArticulo.SelectedValue = idArticulo;
                 cbFormaPago.Text = dgvVentas.CurrentRow.Cells["FormaDePago"].Value?.ToString();
-                cbVendedor.Text = dgvVentas.CurrentRow.Cells["VendedorNombre"].Value?.ToString();
-                cbVendedor.Text = dgvVentas.CurrentRow.Cells["DiaSemanaNombre"].Value?.ToString();
                 txtPrecio.Text = Convert.ToDecimal(dgvVentas.CurrentRow.Cells["Precio"].Value).ToString("N2", new System.Globalization.CultureInfo("es-AR"));
                 txtCuotas.Text = dgvVentas.CurrentRow.Cells["Cuotas"].Value?.ToString();
                 txtCantidad.Text = dgvVentas.CurrentRow.Cells["Cantidad"].Value?.ToString();
@@ -216,18 +259,34 @@ namespace VentaCredimax.Formularios
         }
         private void ModificarVenta()
         {
-            if (cbSeleccionCliente.Text != "" && txtArticulo.Text != "")
+            if (cbSeleccionCliente.Text != "" && cbArticulo.Text != "")
             {
                 try
                 {
                     var venta = new Venta();
                     venta.VentaId = Convert.ToInt32(id);
                     venta.ClientId = idCliente;
-                    venta.Articulo = txtArticulo.Text;
+                    // Buscar el ID del artículo por su descripción
+                    if (cbArticulo.SelectedValue != null)
+                    {
+                        venta.IdArticulo = (int)cbArticulo.SelectedValue;
+                    }
+                    else
+                    {
+                        // Si no se seleccionó de la lista, buscar por texto
+                        var gestorArticulo = new GestorArticulo();
+                        var articulos = gestorArticulo.BuscarPorNombre(cbArticulo.Text);
+                        if (articulos.Any())
+                        {
+                            venta.IdArticulo = articulos.First().ArticuloId;
+                        }
+                        else
+                        {
+                            MessageBox.Show("No se encontró el artículo especificado.");
+                            return;
+                        }
+                    }
                     venta.FormaDePagoId = (int)cbFormaPago.SelectedValue;
-                    venta.IdDiaSemana = (int)cbDiaPago.SelectedValue;
-                    venta.VendedorId = (int)cbVendedor.SelectedValue;
-                    venta.Talle = string.IsNullOrEmpty(txtTalle.Text) ? (int?)null : Convert.ToInt32(txtTalle.Text);
                     venta.Precio = string.IsNullOrEmpty(txtPrecio.Text) ? (decimal?)null : Convert.ToDecimal(txtPrecio.Text);
                     venta.Cuotas = Convert.ToInt32(txtCuotas.Text);
                     venta.Cantidad = Convert.ToInt32(txtCantidad.Text);
@@ -256,9 +315,9 @@ namespace VentaCredimax.Formularios
                 {
                     errorProvider1.SetError(cbSeleccionCliente, "Campo obligatorio");
                 }
-                if (txtArticulo.Text == "")
+                if (cbArticulo.Text == "")
                 {
-                    errorProvider1.SetError(txtArticulo, "Campo obligatorio");
+                    errorProvider1.SetError(cbArticulo, "Campo obligatorio");
                 }
             }
         }
@@ -299,11 +358,12 @@ namespace VentaCredimax.Formularios
         private void FormatoColumnasDataGrid()
         {
             dgvVentas.Columns["NombreCliente"].HeaderText = "Nombre Cliente";
+            dgvVentas.Columns["Articulo"].HeaderText = "Artículo";
             dgvVentas.Columns["FormaDePago"].HeaderText = "Forma de pago";
             dgvVentas.Columns["FechaDeInicio"].HeaderText = "Fecha Venta";
             dgvVentas.Columns["FechaDeCancelacion"].HeaderText = "Cancelación pagos";
-            dgvVentas.Columns["VendedorNombre"].HeaderText = "Vendedor";
-            dgvVentas.Columns["DiaSemanaNombre"].HeaderText = "Dia Pago";
+            // dgvVentas.Columns["VendedorNombre"].HeaderText = "Vendedor"; // Obsoleto
+            // dgvVentas.Columns["DiaSemanaNombre"].HeaderText = "Dia Pago"; // Obsoleto
             dgvVentas.Columns["Precio"].DefaultCellStyle.Format = "N2";
             dgvVentas.Columns["Total"].DefaultCellStyle.Format = "N2";
             dgvVentas.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
@@ -432,8 +492,9 @@ namespace VentaCredimax.Formularios
         }
         private void frmVentas_Load(object sender, EventArgs e)
         {
-            CargarComboDiasSemana();
+            // CargarComboDiasSemana(); // Obsoleto - Los días de semana ya no se usan
             CargarComboCliente();
+            CargarComboArticulos();
             CargarFormaDePagoComboBox();
             ListarVentas();
             OcultarColumnas();
@@ -476,8 +537,7 @@ namespace VentaCredimax.Formularios
 
                 //tabla
                 textoHtml = textoHtml.Replace("@cantidad", listaComprobanteDeVenta.FirstOrDefault().Cantidad.ToString());
-                textoHtml = textoHtml.Replace("@articulo", listaComprobanteDeVenta.FirstOrDefault().Articulo);
-                textoHtml = textoHtml.Replace("@talle", listaComprobanteDeVenta.FirstOrDefault().Talle.ToString());          
+                textoHtml = textoHtml.Replace("@articulo", listaComprobanteDeVenta.FirstOrDefault().Articulo);          
 
                 decimal precio = listaComprobanteDeVenta.FirstOrDefault().Precio.Value;
                 string montoPrecioFormateado = string.Format("{0:#,##0.00}", precio).Replace(",", "X").Replace(".", ",").Replace("X", ".");
@@ -519,31 +579,20 @@ namespace VentaCredimax.Formularios
             int ventaId = Convert.ToInt32(dgvVentas.CurrentRow.Cells["VentaId"].Value);
             ImprimirReporteComprobanteDeVenta(ventaId);
         }
-        private void CargarVendedores()
-        {
-            var vendedores = gestorVendedor.Listar();
-            cbVendedor.DataSource = vendedores;
-            cbVendedor.DisplayMember = "NombreYApellido"; // Campo que se mostrará en el ComboBox
-            cbVendedor.ValueMember = "VendedorId"; // Campo que se usará como valor seleccionado
-            cbVendedor.SelectedIndex = -1; // Para que no haya un valor seleccionado por defecto
 
-            // Seleccionar por defecto el vendedor con VendedorId = 1
-            if (vendedores.Any(v => v.VendedorId == 1))
-            {
-                cbVendedor.SelectedValue = 1;
-            }
-            else
-            {
-                cbVendedor.SelectedIndex = -1; // Si no existe, no seleccionar nada
-            }
-        }
-        private void CargarComboDiasSemana()
+        private void btnBuscarArticulo_Click(object sender, EventArgs e)
         {
-            var diasDeSemana = _gestorVenta.ObtenerDiasDeSemana();
-            cbDiaPago.DataSource = diasDeSemana;
-            cbDiaPago.DisplayMember = "Nombre";
-            cbDiaPago.ValueMember = "Id";
-
+            frmListaArticulos seleccionarArticulo = new frmListaArticulos(this); // Pasa la referencia del formulario padre
+            
+            if (seleccionarArticulo.ShowDialog() == DialogResult.OK)
+            {
+                // Si se seleccionó un artículo, obtenerlo y configurar el ComboBox
+                var articuloSeleccionado = seleccionarArticulo.ArticuloSeleccionado;
+                if (articuloSeleccionado != null)
+                {
+                    ArticuloSeleccionado(articuloSeleccionado.Descripcion, articuloSeleccionado.ArticuloId, articuloSeleccionado.PrecioVenta);
+                }
+            }
         }
     }
 }

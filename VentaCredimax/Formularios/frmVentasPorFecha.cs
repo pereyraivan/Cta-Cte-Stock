@@ -53,12 +53,11 @@ namespace VentaCredimax.Formularios
                 // Generar las filas de la tabla agrupando por VentaId
                 string filasTabla = string.Join("", listaVentasPorFecha.Select(venta => $@"
                 <tr>
-                    <td>{venta.FechaDeVanta:dd/MM/yyyy}</td>
+                    <td>{venta.FechaDeVenta:dd/MM/yyyy}</td>
                     <td>{venta.Nombre} {venta.Apellido}</td>
                     <td>{venta.DNI}</td>
                     <td>{venta.Articulo}</td>
                     <td>{venta.Precio?.ToString("#,##0.00").Replace(",", "X").Replace(".", ",").Replace("X", ".")}</td>
-                    <td>{venta.Talle}</td>
                     <td>{venta.Cantidad}</td>
                     <td>{venta.FormaDePago}</td>
                     <td>{venta.Cuotas}</td>                

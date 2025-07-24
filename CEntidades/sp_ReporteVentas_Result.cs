@@ -17,9 +17,10 @@ namespace CEntidades
         public string Nombre { get; set; }
         public string Apellido { get; set; }
         public Nullable<int> DNI { get; set; }
+        public int IdArticulo { get; set; }
+        public string CodigoArticulo { get; set; }
         public string Articulo { get; set; }
-        public Nullable<int> Talle { get; set; }
-        public System.DateTime FechaDeVanta { get; set; }
+        public System.DateTime FechaDeVenta { get; set; }
         public Nullable<decimal> Precio { get; set; }
         public Nullable<int> Cuotas { get; set; }
         public Nullable<int> Cantidad { get; set; }

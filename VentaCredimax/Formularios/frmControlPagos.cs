@@ -30,26 +30,7 @@ namespace VentaCredimax.Formularios
             OcultarColumnas();
             EstiloDataGrid();
             PintarFilas();
-            CargarComboDiaSemana();
-            cbDiaSemana.SelectedIndexChanged += cbDiaSemana_SelectedIndexChanged;
-        }
-        private void cbDiaSemana_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (cbDiaSemana.SelectedIndex >= 0)
-            {
-                var diaSeleccionado = cbDiaSemana.SelectedItem as DiaDeSemana;
-                if (diaSeleccionado != null)
-                {
-                    dgvVentas.DataSource = _gestorVenta.FiltrarVentasPorDiaSemana(diaSeleccionado.Id);
-                    OcultarColumnas();
-                    EstiloDataGrid();
-                    PintarFilas();
-                }
-            }
-            else
-            {
-                ListarVentas();
-            }
+           
         }
         private void ListarVentas()
         {
@@ -100,9 +81,6 @@ namespace VentaCredimax.Formularios
                     case "Articulo":
                         FiltrarVentasPorArticulo();
                         break;
-                    case "Vendedor":
-                        FiltrarVentasPorVendedor();
-                        break;
                     case "Frecuencia Pago":
                         FiltrarVentasPorFrecPago();
                         break;
@@ -133,8 +111,6 @@ namespace VentaCredimax.Formularios
                 dgvVentas.Columns["FormaDePago"].HeaderText = "Frecuencia de pago";
                 dgvVentas.Columns["FechaDeInicio"].HeaderText = "Fecha compra";
                 dgvVentas.Columns["FechaDeCancelacion"].HeaderText = "Cancelacion compra";
-                dgvVentas.Columns["VendedorNombre"].HeaderText = "Vendedor";
-                dgvVentas.Columns["DiaSemanaNombre"].HeaderText = "Dia Pago";
             }
         }
 
@@ -285,36 +261,6 @@ namespace VentaCredimax.Formularios
                 }
             }
         }
-        private void FiltrarVentasPorVendedor()
-        {
-            dgvVentas.DataSource = _gestorVenta.FiltrarVentasPorVendedor(txtBuscar.Text);
-            OcultarColumnas();
-        }
-        private void CargarComboDiaSemana()
-        {
-            cbDiaSemana.DataSource = _gestorVenta.ObtenerDiasDeSemana();
-            cbDiaSemana.DisplayMember = "Nombre";
-            cbDiaSemana.ValueMember = "Id";
-            cbDiaSemana.SelectedIndex = -1;
-        }
-
-        private void cbDiaSemana_SelectedIndexChanged_1(object sender, EventArgs e)
-        {
-            if (cbDiaSemana.SelectedIndex >= 0)
-            {
-                var diaSeleccionado = cbDiaSemana.SelectedItem as DiaDeSemana;
-                if (diaSeleccionado != null)
-                {
-                    dgvVentas.DataSource = _gestorVenta.FiltrarVentasPorDiaSemana(diaSeleccionado.Id);
-                    OcultarColumnas();
-                    EstiloDataGrid();
-                    PintarFilas();
-                }
-            }
-            else
-            {
-                ListarVentas();
-            }
-        }
+      
     }
 }

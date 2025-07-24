@@ -60,9 +60,6 @@
     <Compile Include="DetalleVenta.cs">
       <DependentUpon>VentasStock.tt</DependentUpon>
     </Compile>
-    <Compile Include="DiaDeSemana.cs">
-      <DependentUpon>VentasStock.tt</DependentUpon>
-    </Compile>
     <Compile Include="DTOs\ClienteDTO.cs" />
     <Compile Include="DTOs\CuotaDTO.cs" />
     <Compile Include="DTOs\VentaDTO.cs" />
@@ -86,9 +83,6 @@
       <DependentUpon>VentasStock.tt</DependentUpon>
     </Compile>
     <Compile Include="sp_ReporteVentas_Result.cs">
-      <DependentUpon>VentasStock.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Vendedor.cs">
       <DependentUpon>VentasStock.tt</DependentUpon>
     </Compile>
     <Compile Include="Venta.cs">

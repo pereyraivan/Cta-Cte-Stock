@@ -14,6 +14,12 @@ namespace CLogica
 
         public void Guardar(Articulo articulo)
         {
+            // Generar código automáticamente si está vacío
+            if (string.IsNullOrEmpty(articulo.Codigo))
+            {
+                articulo.Codigo = ObtenerProximoCodigo();
+            }
+
             // Validaciones de negocio
             if (string.IsNullOrEmpty(articulo.Codigo))
                 throw new Exception("El código es requerido");
@@ -23,12 +29,22 @@ namespace CLogica
 
             if (articulo.PrecioVenta <= 0)
                 throw new Exception("El precio de venta debe ser mayor a 0");
+
+            // Verificar que el código no exista
+            if (_repositorioArticulo.ExisteCodigo(articulo.Codigo))
+                throw new Exception($"Ya existe un artículo con el código '{articulo.Codigo}'");
 
             _repositorioArticulo.Guardar(articulo);
         }
 
         public void Modificar(Articulo articulo)
         {
+            // Generar código automáticamente si está vacío
+            if (string.IsNullOrEmpty(articulo.Codigo))
+            {
+                articulo.Codigo = ObtenerProximoCodigo();
+            }
+
             // Validaciones de negocio
             if (string.IsNullOrEmpty(articulo.Codigo))
                 throw new Exception("El código es requerido");
@@ -38,6 +54,10 @@ namespace CLogica
 
             if (articulo.PrecioVenta <= 0)
                 throw new Exception("El precio de venta debe ser mayor a 0");
+
+            // Verificar que el código no exista en otro artículo
+            if (_repositorioArticulo.ExisteCodigo(articulo.Codigo, articulo.ArticuloId))
+                throw new Exception($"Ya existe otro artículo con el código '{articulo.Codigo}'");
 
             _repositorioArticulo.Modificar(articulo);
         }
@@ -78,6 +98,11 @@ namespace CLogica
         public void Eliminar(int id)
         {
             _repositorioArticulo.Eliminar(id);
+        }
+
+        public string ObtenerProximoCodigo()
+        {
+            return _repositorioArticulo.ObtenerProximoCodigo();
         }
     }
 }

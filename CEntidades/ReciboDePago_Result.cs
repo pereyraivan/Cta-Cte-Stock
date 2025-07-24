@@ -19,7 +19,6 @@ namespace CEntidades
         public string Apellido { get; set; }
         public decimal MontoCuota { get; set; }
         public string Articulo { get; set; }
-        public Nullable<int> Talle { get; set; }
         public int NumeroDeCuota { get; set; }
         public Nullable<decimal> TotalPagado { get; set; }
         public Nullable<decimal> SaldoRestante { get; set; }

@@ -329,17 +329,17 @@
     <Compile Include="Formularios\frmControlPagos.Designer.cs">
       <DependentUpon>frmControlPagos.cs</DependentUpon>
     </Compile>
+    <Compile Include="Formularios\frmListaArticulos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\frmListaArticulos.Designer.cs">
+      <DependentUpon>frmListaArticulos.cs</DependentUpon>
+    </Compile>
     <Compile Include="Formularios\frmMenu.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Formularios\frmMenu.Designer.cs">
       <DependentUpon>frmMenu.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Formularios\frmVendedor.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Formularios\frmVendedor.Designer.cs">
-      <DependentUpon>frmVendedor.cs</DependentUpon>
     </Compile>
     <Compile Include="Formularios\frmVentasPorFecha.cs">
       <SubType>Form</SubType>
@@ -377,11 +377,11 @@
     <EmbeddedResource Include="Formularios\frmControlPagos.resx">
       <DependentUpon>frmControlPagos.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\frmListaArticulos.resx">
+      <DependentUpon>frmListaArticulos.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Formularios\frmMenu.resx">
       <DependentUpon>frmMenu.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Formularios\frmVendedor.resx">
-      <DependentUpon>frmVendedor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\frmVentasPorFecha.resx">
       <DependentUpon>frmVentasPorFecha.cs</DependentUpon>

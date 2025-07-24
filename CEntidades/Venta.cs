@@ -22,7 +22,6 @@ namespace CEntidades
     
         public int VentaId { get; set; }
         public int ClientId { get; set; }
-        public string Articulo { get; set; }
         public Nullable<int> Talle { get; set; }
         public int FormaDePagoId { get; set; }
         public System.DateTime FechaDeInicio { get; set; }
@@ -34,6 +33,7 @@ namespace CEntidades
         public Nullable<decimal> Total { get; set; }
         public Nullable<int> VendedorId { get; set; }
         public Nullable<int> IdDiaSemana { get; set; }
+        public int IdArticulo { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DetalleVenta> DetalleVenta { get; set; }

@@ -21,7 +21,6 @@ namespace CEntidades
         public int VentaId { get; set; }
         public int ClientId { get; set; }
         public string Articulo { get; set; }
-        public Nullable<int> Talle { get; set; }
         public System.DateTime FechaDeInicio { get; set; }
         public Nullable<decimal> Precio { get; set; }
         public Nullable<int> Cantidad { get; set; }

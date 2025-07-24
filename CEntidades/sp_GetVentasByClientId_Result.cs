@@ -20,8 +20,9 @@ namespace CEntidades
         public string TelefonoCliente { get; set; }
         public int VentaId { get; set; }
         public int ClientId { get; set; }
+        public int IdArticulo { get; set; }
+        public string CodigoArticulo { get; set; }
         public string Articulo { get; set; }
-        public Nullable<int> Talle { get; set; }
         public System.DateTime FechaDeVenta { get; set; }
         public Nullable<System.DateTime> FechaCancelacionCuotas { get; set; }
         public Nullable<System.DateTime> FechaAnulacion { get; set; }
@@ -33,6 +34,6 @@ namespace CEntidades
         public System.DateTime FechaProgramadaDeCuota { get; set; }
         public Nullable<System.DateTime> FechaQuePagoCuota { get; set; }
         public Nullable<bool> EstadoCuota { get; set; }
-        public string Nombre { get; set; }
+        public string FormaDePago { get; set; }
     }
 }

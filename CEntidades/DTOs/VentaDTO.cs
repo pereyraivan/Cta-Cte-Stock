@@ -11,8 +11,8 @@ namespace CEntidades.DTOs
         public int VentaId { get; set; }
         public int IdCliente { get; set; }
         public string NombreCliente { get; set; } 
+        public int IdArticulo { get; set; }
         public string Articulo { get; set; }
-        public int? Talle { get; set; }
         public string FormaDePago { get; set; } 
         public decimal? Precio { get; set; }
         public int? Cuotas { get; set; }
@@ -22,9 +22,6 @@ namespace CEntidades.DTOs
         public bool CuotasVencidas { get; set; }
         public int? Cantidad { get; set; }
         public decimal? Total { get; set; }
-        public string VendedorNombre { get; set; }
-        public int? IdDiaSemana { get; set; } // Nuevo campo para filtrar por día de la semana
-        public string DiaSemanaNombre { get; set; } // Nombre del día de la semana
 
     }
 }

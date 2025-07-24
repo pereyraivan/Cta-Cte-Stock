@@ -11,10 +11,6 @@ namespace CLogica
 {
     public class GestorVenta
     {
-        public List<DiaDeSemana> ObtenerDiasDeSemana()
-        {
-            return _repositorioVenta.ObtenerDiasDeSemana();
-        }   
         private RepositorioVenta _repositorioVenta = new RepositorioVenta();
         public void RegistrarVenta(Venta venta)
         {
@@ -38,7 +34,7 @@ namespace CLogica
             {
                 _repositorioVenta.ModificarVenta(venta);
             }
-            catch (InvalidOperationException ex)
+            catch (InvalidOperationException)
             {
                 throw; 
             }
@@ -55,13 +51,9 @@ namespace CLogica
         {
             return _repositorioVenta.FiltrarVentasPorArticulo(nombreArticulo);
         }
-        public List<VentaDTO> FiltrarVentasPorVendedor(string nombreVendedor)
+        public List<VentaDTO> FiltrarVentasPorFrecPago(string frecuenciaPago)
         {
-            return _repositorioVenta.FiltrarVentasPorVendedor(nombreVendedor);
-        }
-        public List<VentaDTO> FiltrarVentasPorFrecPago(string nombreVendedor)
-        {
-            return _repositorioVenta.FiltrarVentasPorFrecPago(nombreVendedor);
+            return _repositorioVenta.FiltrarVentasPorFrecPago(frecuenciaPago);
         }
         public bool EsDemo()
         {

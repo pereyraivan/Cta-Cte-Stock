@@ -52,3 +52,6 @@ Este proyecto está organizado en una arquitectura de 4 capas:
 - Entity Framework
 - Windows Forms
 - SQL Server (base de datos)
+
+## Idioma de respuestas
+- Todas las respuestas a consultas o pedidos de cambios quiero que me la respondas en español

@@ -189,7 +189,6 @@
             this.btnGestionVendedor.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.TTAyudaMenu.SetToolTip(this.btnGestionVendedor, "Alta, Baja y modificacion de clientes");
             this.btnGestionVendedor.UseVisualStyleBackColor = true;
-            this.btnGestionVendedor.Click += new System.EventHandler(this.btnGestionVendedor_Click);
             // 
             // pSubMenuInformes
             // 

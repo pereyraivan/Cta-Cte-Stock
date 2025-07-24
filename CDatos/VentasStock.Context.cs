@@ -33,10 +33,8 @@ namespace CDatos
         public virtual DbSet<Configuracion> Configuracion { get; set; }
         public virtual DbSet<Cuota> Cuota { get; set; }
         public virtual DbSet<DetalleVenta> DetalleVenta { get; set; }
-        public virtual DbSet<DiaDeSemana> DiaDeSemana { get; set; }
         public virtual DbSet<FormaDePago> FormaDePago { get; set; }
         public virtual DbSet<MovimientoStock> MovimientoStock { get; set; }
-        public virtual DbSet<Vendedor> Vendedor { get; set; }
         public virtual DbSet<Venta> Venta { get; set; }
         public virtual DbSet<ReciboControl> ReciboControl { get; set; }
     
