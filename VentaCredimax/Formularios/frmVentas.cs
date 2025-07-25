@@ -140,10 +140,10 @@ namespace VentaCredimax.Formularios
             {
                 // Si no se seleccionó de la lista, buscar por texto
                 var gestorArticulo = new GestorArticulo();
-                var articulos = gestorArticulo.BuscarPorNombre(cbArticulo.Text);
-                if (articulos.Any())
+                var articulosBusqueda = gestorArticulo.BuscarPorNombre(cbArticulo.Text);
+                if (articulosBusqueda.Any())
                 {
-                    venta.IdArticulo = articulos.First().ArticuloId;
+                    venta.IdArticulo = articulosBusqueda.First().ArticuloId;
                 }
                 else
                 {
@@ -169,8 +169,39 @@ namespace VentaCredimax.Formularios
             }
             venta.FechaAnulacion = null;
 
+            // Control de stock - verificar disponibilidad antes de registrar la venta
+            var articulos = _gestorArticulo.Listar();
+            var articulo = articulos.FirstOrDefault(a => a.ArticuloId == venta.IdArticulo);
+            
+            if (articulo == null)
+            {
+                MessageBox.Show("El artículo seleccionado no existe.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // Verificar stock disponible
+            if (articulo.Stock < venta.Cantidad)
+            {
+                MessageBox.Show($"Stock insuficiente. Stock disponible: {articulo.Stock}, Cantidad solicitada: {venta.Cantidad}", 
+                               "Stock Insuficiente", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Registrar la venta
             _gestorVenta.RegistrarVenta(venta);
-            MessageBox.Show("Operación Exitosa", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            // Actualizar stock - disminuir la cantidad vendida
+            try
+            {
+                _gestorArticulo.ActualizarStock(venta.IdArticulo, (int)venta.Cantidad, "Salida");
+                int nuevoStock = articulo.Stock - (int)venta.Cantidad;
+                MessageBox.Show($"Venta registrada exitosamente. Stock actualizado: {nuevoStock}", "Operación Exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Venta registrada, pero error al actualizar stock: {ex.Message}", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            
             LimpiarCampos();
             ListarVentas();
             errorProvider1.Clear();
@@ -198,6 +229,7 @@ namespace VentaCredimax.Formularios
         private void LimpiarCampos()
         {
             cbFormaPago.SelectedIndexChanged -= cbFormaPago_SelectedIndexChanged;
+            cbArticulo.SelectedIndexChanged -= cbArticulo_SelectedIndexChanged;
 
             cbSeleccionCliente.SelectedIndex = -1;
             cbArticulo.Text = "";
@@ -210,24 +242,28 @@ namespace VentaCredimax.Formularios
             lblTotal.Text = "";
 
             cbFormaPago.SelectedIndexChanged += cbFormaPago_SelectedIndexChanged;
+            cbArticulo.SelectedIndexChanged += cbArticulo_SelectedIndexChanged;
         }
         private void ListarVentas()
         {
             dgvVentas.DataSource = _gestorVenta.ListarVentasFormularioVentas(txtBuscar.Text);
+            OcultarColumnas();
             FormatoColumnasDataGrid();
-
         }
         private void OcultarColumnas()
         {
-            if (dgvVentas.Rows.Count > 0)
-            {
+            // Verificar si las columnas existen antes de intentar ocultarlas
+            if (dgvVentas.Columns.Contains("VentaId"))
                 dgvVentas.Columns["VentaId"].Visible = false;
+            if (dgvVentas.Columns.Contains("IdCliente"))
                 dgvVentas.Columns["IdCliente"].Visible = false;
+            if (dgvVentas.Columns.Contains("IdArticulo"))
                 dgvVentas.Columns["IdArticulo"].Visible = false;
+            if (dgvVentas.Columns.Contains("FechaAnulacion"))
                 dgvVentas.Columns["FechaAnulacion"].Visible = false;
+            if (dgvVentas.Columns.Contains("CuotasVencidas"))
                 dgvVentas.Columns["CuotasVencidas"].Visible = false;
-                // dgvVentas.Columns["IdDiaSemana"].Visible = false; // Obsoleto - ya no existe
-            }
+            // dgvVentas.Columns["IdDiaSemana"].Visible = false; // Obsoleto - ya no existe
         }
         private void dgvVentas_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -245,6 +281,8 @@ namespace VentaCredimax.Formularios
                 // Seleccionar el artículo por su ID
                 int idArticulo = (int)dgvVentas.CurrentRow.Cells["IdArticulo"].Value;
                 cbArticulo.SelectedValue = idArticulo;
+                // También establecer el texto del artículo para que sea visible
+                cbArticulo.Text = dgvVentas.CurrentRow.Cells["Articulo"].Value?.ToString();
                 cbFormaPago.Text = dgvVentas.CurrentRow.Cells["FormaDePago"].Value?.ToString();
                 txtPrecio.Text = Convert.ToDecimal(dgvVentas.CurrentRow.Cells["Precio"].Value).ToString("N2", new System.Globalization.CultureInfo("es-AR"));
                 txtCuotas.Text = dgvVentas.CurrentRow.Cells["Cuotas"].Value?.ToString();
@@ -265,7 +303,7 @@ namespace VentaCredimax.Formularios
                 {
                     var venta = new Venta();
                     venta.VentaId = Convert.ToInt32(id);
-                    venta.ClientId = idCliente;
+                    venta.ClientId = (int)cbSeleccionCliente.SelectedValue; // Tomar el cliente seleccionado actualmente en el ComboBox
                     // Buscar el ID del artículo por su descripción
                     if (cbArticulo.SelectedValue != null)
                     {
@@ -275,10 +313,10 @@ namespace VentaCredimax.Formularios
                     {
                         // Si no se seleccionó de la lista, buscar por texto
                         var gestorArticulo = new GestorArticulo();
-                        var articulos = gestorArticulo.BuscarPorNombre(cbArticulo.Text);
-                        if (articulos.Any())
+                        var articulosModificacion = gestorArticulo.BuscarPorNombre(cbArticulo.Text);
+                        if (articulosModificacion.Any())
                         {
-                            venta.IdArticulo = articulos.First().ArticuloId;
+                            venta.IdArticulo = articulosModificacion.First().ArticuloId;
                         }
                         else
                         {
@@ -331,12 +369,42 @@ namespace VentaCredimax.Formularios
         {
             if (dgvVentas.SelectedRows.Count > 0)
             {
-                var preguntar = MessageBox.Show("Al eliminar esta venta, se cancelarán todas las cuotas pendientes asociadas. ¿Desea continuar?", "Aviso", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                var preguntar = MessageBox.Show("Al eliminar esta venta, se cancelarán todas las cuotas pendientes asociadas y se restaurará el stock. ¿Desea continuar?", "Aviso", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (preguntar == DialogResult.Yes)
                 {
                     id = dgvVentas.CurrentRow.Cells["VentaId"].Value.ToString();
-                    _gestorVenta.EliminarVenta(Convert.ToInt32(id));
-                    MessageBox.Show("Operacion Exitosa", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    
+                    // Obtener información de la venta antes de eliminarla para restaurar el stock
+                    int idArticulo = (int)dgvVentas.CurrentRow.Cells["IdArticulo"].Value;
+                    int cantidadVendida = (int)dgvVentas.CurrentRow.Cells["Cantidad"].Value;
+                    
+                    // Obtener el artículo para actualizar su stock
+                    var articulos = _gestorArticulo.Listar();
+                    var articulo = articulos.FirstOrDefault(a => a.ArticuloId == idArticulo);
+                    
+                    if (articulo != null)
+                    {
+                        // Eliminar la venta
+                        _gestorVenta.EliminarVenta(Convert.ToInt32(id));
+                        
+                        // Restaurar stock - sumar la cantidad que se había vendido
+                        try
+                        {
+                            _gestorArticulo.ActualizarStock(idArticulo, cantidadVendida, "Entrada");
+                            int stockRestaurado = articulo.Stock + cantidadVendida;
+                            MessageBox.Show($"Venta eliminada exitosamente. Stock restaurado: {stockRestaurado}", "Operación Exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show($"Venta eliminada, pero error al restaurar stock: {ex.Message}", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }
+                    }
+                    else
+                    {
+                        // Si no encontramos el artículo, igual eliminamos la venta
+                        _gestorVenta.EliminarVenta(Convert.ToInt32(id));
+                        MessageBox.Show("Venta eliminada exitosamente", "Operación Exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
                 }
             }
             else
@@ -357,16 +425,54 @@ namespace VentaCredimax.Formularios
         }
         private void FormatoColumnasDataGrid()
         {
-            dgvVentas.Columns["NombreCliente"].HeaderText = "Nombre Cliente";
-            dgvVentas.Columns["Articulo"].HeaderText = "Artículo";
-            dgvVentas.Columns["FormaDePago"].HeaderText = "Forma de pago";
-            dgvVentas.Columns["FechaDeInicio"].HeaderText = "Fecha Venta";
-            dgvVentas.Columns["FechaDeCancelacion"].HeaderText = "Cancelación pagos";
+            // Verificar si las columnas existen antes de formatearlas
+            if (dgvVentas.Columns.Contains("NombreCliente"))
+                dgvVentas.Columns["NombreCliente"].HeaderText = "Nombre Cliente";
+            if (dgvVentas.Columns.Contains("Articulo"))
+                dgvVentas.Columns["Articulo"].HeaderText = "Artículo";
+            if (dgvVentas.Columns.Contains("FormaDePago"))
+                dgvVentas.Columns["FormaDePago"].HeaderText = "Forma de pago";
+            if (dgvVentas.Columns.Contains("FechaDeInicio"))
+                dgvVentas.Columns["FechaDeInicio"].HeaderText = "Fecha Venta";
+            if (dgvVentas.Columns.Contains("FechaDeCancelacion"))
+                dgvVentas.Columns["FechaDeCancelacion"].HeaderText = "Cancelación pagos";
             // dgvVentas.Columns["VendedorNombre"].HeaderText = "Vendedor"; // Obsoleto
             // dgvVentas.Columns["DiaSemanaNombre"].HeaderText = "Dia Pago"; // Obsoleto
-            dgvVentas.Columns["Precio"].DefaultCellStyle.Format = "N2";
-            dgvVentas.Columns["Total"].DefaultCellStyle.Format = "N2";
-            dgvVentas.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            if (dgvVentas.Columns.Contains("Precio"))
+                dgvVentas.Columns["Precio"].DefaultCellStyle.Format = "N2";
+            if (dgvVentas.Columns.Contains("Total"))
+                dgvVentas.Columns["Total"].DefaultCellStyle.Format = "N2";
+            
+            // Configurar para que las columnas ocupen todo el ancho disponible
+            dgvVentas.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            
+            // Configurar ancho mínimo para la columna del artículo para que se lea completo
+            if (dgvVentas.Columns.Contains("Articulo"))
+            {
+                dgvVentas.Columns["Articulo"].MinimumWidth = 200;
+                dgvVentas.Columns["Articulo"].FillWeight = 150; // Dar más peso a esta columna
+            }
+            
+            // Ajustar el peso de otras columnas para que la columna Artículo tenga más espacio
+            if (dgvVentas.Columns.Contains("NombreCliente"))
+                dgvVentas.Columns["NombreCliente"].FillWeight = 120;
+            if (dgvVentas.Columns.Contains("FormaDePago"))
+                dgvVentas.Columns["FormaDePago"].FillWeight = 80;
+            if (dgvVentas.Columns.Contains("Precio"))
+                dgvVentas.Columns["Precio"].FillWeight = 70;
+            if (dgvVentas.Columns.Contains("Total"))
+                dgvVentas.Columns["Total"].FillWeight = 70;
+            if (dgvVentas.Columns.Contains("Cuotas"))
+                dgvVentas.Columns["Cuotas"].FillWeight = 60;
+            if (dgvVentas.Columns.Contains("Cantidad"))
+                dgvVentas.Columns["Cantidad"].FillWeight = 60;
+            
+            // Configurar el estilo del encabezado - color Azure
+            dgvVentas.EnableHeadersVisualStyles = false;
+            dgvVentas.ColumnHeadersDefaultCellStyle.BackColor = System.Drawing.Color.Azure;
+            dgvVentas.ColumnHeadersDefaultCellStyle.ForeColor = System.Drawing.Color.Black;
+            dgvVentas.ColumnHeadersDefaultCellStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold);
+            dgvVentas.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
         }
         private void button2_Click(object sender, EventArgs e)
         {
@@ -451,6 +557,13 @@ namespace VentaCredimax.Formularios
         }
         private void Buscar()
         {
+            // Si no hay texto de búsqueda, mostrar todas las ventas
+            if (string.IsNullOrEmpty(txtBuscar.Text))
+            {
+                ListarVentas();
+                return;
+            }
+
             if (cbBuscarPor.SelectedItem == null)
             {
                 MessageBox.Show("Debe seleccionar un criterio de búsqueda.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -466,6 +579,9 @@ namespace VentaCredimax.Formularios
                     FiltrarVentasPorArticulo();
                     break;
             }
+            // Aplicar formato después de cualquier búsqueda
+            OcultarColumnas();
+            FormatoColumnasDataGrid();
         }
         private void txtBuscar_TextChanged(object sender, EventArgs e)
         {
@@ -497,9 +613,10 @@ namespace VentaCredimax.Formularios
             CargarComboArticulos();
             CargarFormaDePagoComboBox();
             ListarVentas();
-            OcultarColumnas();
-            FormatoColumnasDataGrid();
             btnEditarVenta.Enabled = false;
+            
+            // Suscribir el evento para establecer automáticamente el precio cuando se selecciona un artículo
+            cbArticulo.SelectedIndexChanged += cbArticulo_SelectedIndexChanged;
         }
 
         private void txtCantidad_Leave(object sender, EventArgs e)
@@ -591,6 +708,32 @@ namespace VentaCredimax.Formularios
                 if (articuloSeleccionado != null)
                 {
                     ArticuloSeleccionado(articuloSeleccionado.Descripcion, articuloSeleccionado.ArticuloId, articuloSeleccionado.PrecioVenta);
+                }
+            }
+        }
+
+        private void cbArticulo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Solo procesar si hay un artículo seleccionado y no es durante la carga
+            if (cbArticulo.SelectedValue != null && cbArticulo.DataSource != null)
+            {
+                try
+                {
+                    int articuloId = (int)cbArticulo.SelectedValue;
+                    
+                    // Buscar el artículo en el DataSource para obtener su precio
+                    var articulos = (List<Articulo>)cbArticulo.DataSource;
+                    var articuloSeleccionado = articulos.FirstOrDefault(a => a.ArticuloId == articuloId);
+                    
+                    if (articuloSeleccionado != null)
+                    {
+                        // Establecer automáticamente el precio de venta
+                        txtPrecio.Text = articuloSeleccionado.PrecioVenta.ToString("N2", new System.Globalization.CultureInfo("es-AR"));
+                    }
+                }
+                catch
+                {
+                    // Si hay algún error, no hacer nada para evitar excepciones durante la carga
                 }
             }
         }

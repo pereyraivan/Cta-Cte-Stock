@@ -21,5 +21,10 @@ namespace CLogica
         {
             return _repositorioCuotas.RegistrarPago(cuotaId);
         }
+
+        public decimal ObtenerTotalCuotasPagadasPorFecha(DateTime fechaDesde, DateTime fechaHasta)
+        {
+            return _repositorioCuotas.ObtenerTotalCuotasPagadasPorFecha(fechaDesde, fechaHasta);
+        }
     }
 }

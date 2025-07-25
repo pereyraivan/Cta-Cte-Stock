@@ -59,7 +59,7 @@ namespace VentaCredimax.Formularios
         private void btnInformeVentas_Click(object sender, EventArgs e)
         {
             pSubMenuInformes.Visible = false;
-            frmVentasPorFecha frmReporteVentasPorFecha = new frmVentasPorFecha();
+            frmVerVentasPorFecha frmReporteVentasPorFecha = new frmVerVentasPorFecha();
             frmReporteVentasPorFecha.ShowDialog();
         }
 
@@ -123,9 +123,9 @@ namespace VentaCredimax.Formularios
             {
                 dgvVentasMenu.Columns["VentaId"].Visible = false;
                 dgvVentasMenu.Columns["IdCliente"].Visible = false;
+                dgvVentasMenu.Columns["IdArticulo"].Visible = false;
                 dgvVentasMenu.Columns["FechaAnulacion"].Visible = false;
                 dgvVentasMenu.Columns["CuotasVencidas"].Visible = false;
-                dgvVentasMenu.Columns["IdDiaSemana"].Visible = false; 
             }
         }
 
@@ -137,9 +137,7 @@ namespace VentaCredimax.Formularios
                 dgvVentasMenu.Columns["FormaDePago"].HeaderText = "Frecuencia de pago";
                 dgvVentasMenu.Columns["FechaDeInicio"].HeaderText = "Fecha compra";
                 dgvVentasMenu.Columns["FechaDeCancelacion"].HeaderText = "Cancelacion compra";
-                dgvVentasMenu.Columns["VendedorNombre"].HeaderText = "Vendedor";
                 dgvVentasMenu.Columns["Articulo"].HeaderText = "Articulo";
-                dgvVentasMenu.Columns["DiaSemanaNombre"].HeaderText = "Dia Pago";
             }
         }
 
@@ -284,5 +282,10 @@ namespace VentaCredimax.Formularios
             articulo.ShowDialog();
         }
 
+        private void btnGestionVendedor_Click(object sender, EventArgs e)
+        {
+            frmVerVentasPorFecha verVentasPorFecha = new frmVerVentasPorFecha();
+            verVentasPorFecha.ShowDialog();
+        }
     }
 }

@@ -30,8 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmVentas));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.cbSeleccionCliente = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -114,7 +114,7 @@
             this.cbFormaPago.Location = new System.Drawing.Point(843, 54);
             this.cbFormaPago.Name = "cbFormaPago";
             this.cbFormaPago.Size = new System.Drawing.Size(225, 28);
-            this.cbFormaPago.TabIndex = 8;
+            this.cbFormaPago.TabIndex = 6;
             this.cbFormaPago.SelectedIndexChanged += new System.EventHandler(this.cbFormaPago_SelectedIndexChanged);
             // 
             // btnBuscarCliente
@@ -136,24 +136,25 @@
             this.dgvVentas.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvVentas.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvVentas.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvVentas.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.Azure;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvVentas.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.dgvVentas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvVentas.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvVentas.DefaultCellStyle = dataGridViewCellStyle6;
             this.dgvVentas.Location = new System.Drawing.Point(34, 325);
             this.dgvVentas.Name = "dgvVentas";
             this.dgvVentas.ReadOnly = true;
@@ -178,8 +179,6 @@
             // 
             // cbBuscarPor
             // 
-            this.cbBuscarPor.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.cbBuscarPor.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbBuscarPor.FormattingEnabled = true;
             this.cbBuscarPor.ItemHeight = 20;
@@ -188,17 +187,18 @@
             "Articulo"});
             this.cbBuscarPor.Location = new System.Drawing.Point(232, 291);
             this.cbBuscarPor.Name = "cbBuscarPor";
-            this.cbBuscarPor.Size = new System.Drawing.Size(207, 28);
-            this.cbBuscarPor.TabIndex = 15;
+            this.cbBuscarPor.Size = new System.Drawing.Size(254, 28);
+            this.cbBuscarPor.TabIndex = 9;
             // 
             // txtBuscar
             // 
-            this.txtBuscar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtBuscar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtBuscar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBuscar.Location = new System.Drawing.Point(463, 293);
+            this.txtBuscar.Location = new System.Drawing.Point(502, 293);
             this.txtBuscar.Name = "txtBuscar";
-            this.txtBuscar.Size = new System.Drawing.Size(748, 26);
-            this.txtBuscar.TabIndex = 16;
+            this.txtBuscar.Size = new System.Drawing.Size(709, 26);
+            this.txtBuscar.TabIndex = 10;
             this.txtBuscar.TextChanged += new System.EventHandler(this.txtBuscar_TextChanged);
             // 
             // label5
@@ -223,7 +223,7 @@
             this.btnEditarVenta.Location = new System.Drawing.Point(1112, 602);
             this.btnEditarVenta.Name = "btnEditarVenta";
             this.btnEditarVenta.Size = new System.Drawing.Size(218, 59);
-            this.btnEditarVenta.TabIndex = 12;
+            this.btnEditarVenta.TabIndex = 13;
             this.btnEditarVenta.Text = "&Editar Venta";
             this.ttAyuda.SetToolTip(this.btnEditarVenta, " Doble clic en la venta para editarla.");
             this.btnEditarVenta.UseVisualStyleBackColor = false;
@@ -237,7 +237,7 @@
             this.btnAnularVenta.Location = new System.Drawing.Point(864, 604);
             this.btnAnularVenta.Name = "btnAnularVenta";
             this.btnAnularVenta.Size = new System.Drawing.Size(218, 59);
-            this.btnAnularVenta.TabIndex = 13;
+            this.btnAnularVenta.TabIndex = 12;
             this.btnAnularVenta.Text = "&Anular Venta";
             this.ttAyuda.SetToolTip(this.btnAnularVenta, "Seleccione la venta a anular.");
             this.btnAnularVenta.UseVisualStyleBackColor = false;
@@ -249,7 +249,7 @@
             this.txtPrecio.Location = new System.Drawing.Point(147, 211);
             this.txtPrecio.Name = "txtPrecio";
             this.txtPrecio.Size = new System.Drawing.Size(121, 26);
-            this.txtPrecio.TabIndex = 5;
+            this.txtPrecio.TabIndex = 4;
             this.txtPrecio.Leave += new System.EventHandler(this.txtPrecio_Leave);
             // 
             // label8
@@ -269,7 +269,7 @@
             this.txtCuotas.Location = new System.Drawing.Point(749, 106);
             this.txtCuotas.Name = "txtCuotas";
             this.txtCuotas.Size = new System.Drawing.Size(95, 26);
-            this.txtCuotas.TabIndex = 9;
+            this.txtCuotas.TabIndex = 7;
             this.txtCuotas.Leave += new System.EventHandler(this.txtCuotas_Leave);
             // 
             // label9
@@ -326,7 +326,7 @@
             this.txtCantidad.Location = new System.Drawing.Point(389, 211);
             this.txtCantidad.Name = "txtCantidad";
             this.txtCantidad.Size = new System.Drawing.Size(113, 26);
-            this.txtCantidad.TabIndex = 6;
+            this.txtCantidad.TabIndex = 5;
             this.txtCantidad.Text = "1";
             this.txtCantidad.Leave += new System.EventHandler(this.txtCantidad_Leave);
             // 
@@ -366,7 +366,7 @@
             this.dtfechaVenta.Location = new System.Drawing.Point(147, 59);
             this.dtfechaVenta.Name = "dtfechaVenta";
             this.dtfechaVenta.Size = new System.Drawing.Size(156, 26);
-            this.dtfechaVenta.TabIndex = 28;
+            this.dtfechaVenta.TabIndex = 1;
             this.ttAyuda.SetToolTip(this.dtfechaVenta, "Fecha de inicio de venta");
             // 
             // dtpFechaCancelacion
@@ -377,7 +377,7 @@
             this.dtpFechaCancelacion.Location = new System.Drawing.Point(843, 159);
             this.dtpFechaCancelacion.Name = "dtpFechaCancelacion";
             this.dtpFechaCancelacion.Size = new System.Drawing.Size(225, 26);
-            this.dtpFechaCancelacion.TabIndex = 12;
+            this.dtpFechaCancelacion.TabIndex = 8;
             this.ttAyuda.SetToolTip(this.dtpFechaCancelacion, "Indica la fecha límite para pagar todas las cuotas.");
             // 
             // btnBuscarArticulo
@@ -402,7 +402,7 @@
             this.btnImprimirVenta.Location = new System.Drawing.Point(34, 604);
             this.btnImprimirVenta.Name = "btnImprimirVenta";
             this.btnImprimirVenta.Size = new System.Drawing.Size(218, 59);
-            this.btnImprimirVenta.TabIndex = 46;
+            this.btnImprimirVenta.TabIndex = 11;
             this.btnImprimirVenta.Text = "&Imprimir Movimiento";
             this.btnImprimirVenta.UseVisualStyleBackColor = false;
             this.btnImprimirVenta.Click += new System.EventHandler(this.btnImprimirVenta_Click);
@@ -477,7 +477,7 @@
             this.cbArticulo.Location = new System.Drawing.Point(147, 161);
             this.cbArticulo.Name = "cbArticulo";
             this.cbArticulo.Size = new System.Drawing.Size(292, 28);
-            this.cbArticulo.TabIndex = 53;
+            this.cbArticulo.TabIndex = 3;
             // 
             // frmVentas
             // 

@@ -72,9 +72,31 @@ namespace CDatos
                     return true;
                 }
             }
-            catch (Exception ex)
+            catch
             {
                 return false;         
+            }
+        }
+
+        public decimal ObtenerTotalCuotasPagadasPorFecha(DateTime fechaDesde, DateTime fechaHasta)
+        {
+            try
+            {
+                using (ventas_cta_cteEntities db = new ventas_cta_cteEntities())
+                {
+                    var totalCuotasPagadas = db.Cuota
+                        .Where(c => c.FechaPago.HasValue && 
+                                   c.FechaPago.Value >= fechaDesde && 
+                                   c.FechaPago.Value <= fechaHasta &&
+                                   c.Estado == true)
+                        .Sum(c => (decimal?)c.MontoCuota) ?? 0;
+
+                    return totalCuotasPagadas;
+                }
+            }
+            catch
+            {
+                return 0;
             }
         }
     }

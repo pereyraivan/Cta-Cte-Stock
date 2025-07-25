@@ -20,9 +20,18 @@ namespace CLogica
         {
             return _repositorioVenta.ListarVentas(criterioOrden, mostrarTodas);
         }
-        public List<VentaDTO> ListarVentasFormularioVentas(string criterioOrden)
+        public List<VentaDTO> ListarVentasFormularioVentas(string textoBusqueda)
         {
-            return _repositorioVenta.ListarVentas(criterioOrden, false).Where(x => x.FechaAnulacion == null).ToList();
+            // Si no hay texto de búsqueda, listar todas las ventas ordenadas por fecha
+            if (string.IsNullOrEmpty(textoBusqueda))
+            {
+                return _repositorioVenta.ListarVentas("Fecha", false).Where(x => x.FechaAnulacion == null).ToList();
+            }
+            else
+            {
+                // Si hay texto de búsqueda, devolver lista vacía porque la búsqueda debe ser específica (por cliente o artículo)
+                return new List<VentaDTO>();
+            }
         }
         public List<VentaDTO> ListarVentasMenu(string criterioOrden)
         {
