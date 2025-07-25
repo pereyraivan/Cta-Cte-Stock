@@ -22,20 +22,22 @@ DELETE FROM [dbo].[Cuota]
 DBCC CHECKIDENT ('Cuota', RESEED, 0)
 PRINT '- Tabla Cuota limpiada'
 
--- Limpiar tabla DetalleVenta (si existe - depende de Venta y Articulo)
+-- Limpiar tabla DetalleVenta (si existe - NO SE USA en el sistema actual)
 IF OBJECT_ID('dbo.DetalleVenta', 'U') IS NOT NULL
 BEGIN
-    DELETE FROM [dbo].[DetalleVenta]
-    DBCC CHECKIDENT ('DetalleVenta', RESEED, 0)
-    PRINT '- Tabla DetalleVenta limpiada'
+    PRINT 'NOTA: La tabla DetalleVenta no se está usando en el sistema actual'
+    PRINT 'Se recomienda eliminarla para limpiar la base de datos'
+    -- DELETE FROM [dbo].[DetalleVenta]
+    -- DBCC CHECKIDENT ('DetalleVenta', RESEED, 0)
+    -- PRINT '- Tabla DetalleVenta limpiada'
 END
 
--- Limpiar tabla MovimientoStock (si existe - depende de Articulo)
+-- Limpiar tabla MovimientoStock (SÍ SE USA - se limpia para instalación)
 IF OBJECT_ID('dbo.MovimientoStock', 'U') IS NOT NULL
 BEGIN
     DELETE FROM [dbo].[MovimientoStock]
     DBCC CHECKIDENT ('MovimientoStock', RESEED, 0)
-    PRINT '- Tabla MovimientoStock limpiada'
+    PRINT '- Tabla MovimientoStock limpiada (historial de movimientos)'
 END
 
 -- Limpiar tabla Venta
@@ -127,10 +129,10 @@ PRINT '- Cliente: ' + CAST((SELECT COUNT(*) FROM Cliente) AS VARCHAR(10)) + ' re
 PRINT '- ReciboControl: ' + CAST((SELECT COUNT(*) FROM ReciboControl) AS VARCHAR(10)) + ' registros'
 
 IF OBJECT_ID('dbo.DetalleVenta', 'U') IS NOT NULL
-    PRINT '- DetalleVenta: ' + CAST((SELECT COUNT(*) FROM DetalleVenta) AS VARCHAR(10)) + ' registros'
+    PRINT '- DetalleVenta: ' + CAST((SELECT COUNT(*) FROM DetalleVenta) AS VARCHAR(10)) + ' registros (NO SE USA - considerar eliminar tabla)'
 
 IF OBJECT_ID('dbo.MovimientoStock', 'U') IS NOT NULL
-    PRINT '- MovimientoStock: ' + CAST((SELECT COUNT(*) FROM MovimientoStock) AS VARCHAR(10)) + ' registros'
+    PRINT '- MovimientoStock: ' + CAST((SELECT COUNT(*) FROM MovimientoStock) AS VARCHAR(10)) + ' registros (historial limpiado)'
 
 IF OBJECT_ID('dbo.Articulo', 'U') IS NOT NULL
     PRINT '- Articulo: ' + CAST((SELECT COUNT(*) FROM Articulo) AS VARCHAR(10)) + ' registros'
