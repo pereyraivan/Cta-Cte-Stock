@@ -30,9 +30,9 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMenu));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pTituloSistema = new System.Windows.Forms.Panel();
             this.button1 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
@@ -81,7 +81,7 @@
             this.pTituloSistema.Dock = System.Windows.Forms.DockStyle.Top;
             this.pTituloSistema.Location = new System.Drawing.Point(0, 0);
             this.pTituloSistema.Name = "pTituloSistema";
-            this.pTituloSistema.Size = new System.Drawing.Size(1282, 54);
+            this.pTituloSistema.Size = new System.Drawing.Size(1185, 48);
             this.pTituloSistema.TabIndex = 1;
             // 
             // button1
@@ -94,9 +94,9 @@
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("OCR A Extended", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.button1.Location = new System.Drawing.Point(1207, 0);
+            this.button1.Location = new System.Drawing.Point(1110, 0);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 54);
+            this.button1.Size = new System.Drawing.Size(75, 48);
             this.button1.TabIndex = 10;
             this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.TTAyudaMenu.SetToolTip(this.button1, "Seleccione una venta para imprimir el historial del cliente.");
@@ -109,7 +109,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("OCR A Extended", 20F);
             this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(164)))), ((int)(((byte)(196)))), ((int)(((byte)(231)))), ((int)(((byte)(255)))));
-            this.label2.Location = new System.Drawing.Point(257, 13);
+            this.label2.Location = new System.Drawing.Point(208, 10);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(797, 29);
@@ -133,17 +133,17 @@
             this.pMenuLateral.Controls.Add(this.panel1);
             this.pMenuLateral.Controls.Add(this.btnNuevaVenta);
             this.pMenuLateral.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pMenuLateral.Location = new System.Drawing.Point(0, 54);
+            this.pMenuLateral.Location = new System.Drawing.Point(0, 48);
             this.pMenuLateral.Name = "pMenuLateral";
-            this.pMenuLateral.Size = new System.Drawing.Size(248, 788);
+            this.pMenuLateral.Size = new System.Drawing.Size(248, 645);
             this.pMenuLateral.TabIndex = 2;
             // 
             // panel11
             // 
             this.panel11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(52)))), ((int)(((byte)(108)))));
-            this.panel11.Location = new System.Drawing.Point(2, 432);
+            this.panel11.Location = new System.Drawing.Point(2, 325);
             this.panel11.Name = "panel11";
-            this.panel11.Size = new System.Drawing.Size(10, 93);
+            this.panel11.Size = new System.Drawing.Size(10, 72);
             this.panel11.TabIndex = 13;
             // 
             // button2
@@ -155,9 +155,9 @@
             this.button2.Font = new System.Drawing.Font("OCR A Extended", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button2.Image = global::VentaCredimax.Properties.Resources.productos;
             this.button2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button2.Location = new System.Drawing.Point(12, 434);
+            this.button2.Location = new System.Drawing.Point(12, 327);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(234, 93);
+            this.button2.Size = new System.Drawing.Size(234, 72);
             this.button2.TabIndex = 12;
             this.button2.Text = "Gestion \rArticulos";
             this.button2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -168,9 +168,9 @@
             // panel9
             // 
             this.panel9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(52)))), ((int)(((byte)(108)))));
-            this.panel9.Location = new System.Drawing.Point(2, 327);
+            this.panel9.Location = new System.Drawing.Point(2, 251);
             this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(10, 93);
+            this.panel9.Size = new System.Drawing.Size(10, 69);
             this.panel9.TabIndex = 11;
             // 
             // btnGestionVendedor
@@ -182,9 +182,9 @@
             this.btnGestionVendedor.Font = new System.Drawing.Font("OCR A Extended", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnGestionVendedor.Image = global::VentaCredimax.Properties.Resources.entrevista;
             this.btnGestionVendedor.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnGestionVendedor.Location = new System.Drawing.Point(13, 329);
+            this.btnGestionVendedor.Location = new System.Drawing.Point(13, 253);
             this.btnGestionVendedor.Name = "btnGestionVendedor";
-            this.btnGestionVendedor.Size = new System.Drawing.Size(234, 93);
+            this.btnGestionVendedor.Size = new System.Drawing.Size(234, 72);
             this.btnGestionVendedor.TabIndex = 10;
             this.btnGestionVendedor.Text = "   Ventas    por Fecha";
             this.btnGestionVendedor.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -199,7 +199,7 @@
             this.pSubMenuInformes.Controls.Add(this.panel5);
             this.pSubMenuInformes.Controls.Add(this.btnInformeVentas);
             this.pSubMenuInformes.Controls.Add(this.btnInformeCuotas);
-            this.pSubMenuInformes.Location = new System.Drawing.Point(35, 633);
+            this.pSubMenuInformes.Location = new System.Drawing.Point(35, 473);
             this.pSubMenuInformes.Name = "pSubMenuInformes";
             this.pSubMenuInformes.Size = new System.Drawing.Size(213, 134);
             this.pSubMenuInformes.TabIndex = 9;
@@ -276,9 +276,9 @@
             this.btnInformes.Font = new System.Drawing.Font("OCR A Extended", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnInformes.Image = ((System.Drawing.Image)(resources.GetObject("btnInformes.Image")));
             this.btnInformes.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnInformes.Location = new System.Drawing.Point(13, 538);
+            this.btnInformes.Location = new System.Drawing.Point(13, 401);
             this.btnInformes.Name = "btnInformes";
-            this.btnInformes.Size = new System.Drawing.Size(235, 93);
+            this.btnInformes.Size = new System.Drawing.Size(234, 72);
             this.btnInformes.TabIndex = 8;
             this.btnInformes.Text = "&Informes";
             this.btnInformes.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -288,9 +288,9 @@
             // panel4
             // 
             this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(52)))), ((int)(((byte)(108)))));
-            this.panel4.Location = new System.Drawing.Point(2, 538);
+            this.panel4.Location = new System.Drawing.Point(2, 401);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(10, 93);
+            this.panel4.Size = new System.Drawing.Size(10, 74);
             this.panel4.TabIndex = 7;
             // 
             // btnGestionPagos
@@ -302,9 +302,9 @@
             this.btnGestionPagos.Font = new System.Drawing.Font("OCR A Extended", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnGestionPagos.Image = ((System.Drawing.Image)(resources.GetObject("btnGestionPagos.Image")));
             this.btnGestionPagos.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnGestionPagos.Location = new System.Drawing.Point(14, 122);
+            this.btnGestionPagos.Location = new System.Drawing.Point(14, 98);
             this.btnGestionPagos.Name = "btnGestionPagos";
-            this.btnGestionPagos.Size = new System.Drawing.Size(234, 93);
+            this.btnGestionPagos.Size = new System.Drawing.Size(234, 72);
             this.btnGestionPagos.TabIndex = 6;
             this.btnGestionPagos.Text = "Gestion \r\nPagos";
             this.btnGestionPagos.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -315,9 +315,9 @@
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(52)))), ((int)(((byte)(108)))));
-            this.panel3.Location = new System.Drawing.Point(2, 223);
+            this.panel3.Location = new System.Drawing.Point(2, 175);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(10, 93);
+            this.panel3.Size = new System.Drawing.Size(10, 71);
             this.panel3.TabIndex = 5;
             // 
             // btnGestionCliente
@@ -329,9 +329,9 @@
             this.btnGestionCliente.Font = new System.Drawing.Font("OCR A Extended", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnGestionCliente.Image = ((System.Drawing.Image)(resources.GetObject("btnGestionCliente.Image")));
             this.btnGestionCliente.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnGestionCliente.Location = new System.Drawing.Point(14, 225);
+            this.btnGestionCliente.Location = new System.Drawing.Point(14, 177);
             this.btnGestionCliente.Name = "btnGestionCliente";
-            this.btnGestionCliente.Size = new System.Drawing.Size(234, 93);
+            this.btnGestionCliente.Size = new System.Drawing.Size(234, 72);
             this.btnGestionCliente.TabIndex = 4;
             this.btnGestionCliente.Text = "Gestion \r\nClientes";
             this.btnGestionCliente.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -342,17 +342,17 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(52)))), ((int)(((byte)(108)))));
-            this.panel2.Location = new System.Drawing.Point(2, 122);
+            this.panel2.Location = new System.Drawing.Point(2, 98);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(10, 93);
+            this.panel2.Size = new System.Drawing.Size(10, 72);
             this.panel2.TabIndex = 3;
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(52)))), ((int)(((byte)(108)))));
-            this.panel1.Location = new System.Drawing.Point(2, 21);
+            this.panel1.Location = new System.Drawing.Point(2, 20);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(10, 93);
+            this.panel1.Size = new System.Drawing.Size(10, 73);
             this.panel1.TabIndex = 2;
             // 
             // btnNuevaVenta
@@ -366,7 +366,7 @@
             this.btnNuevaVenta.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnNuevaVenta.Location = new System.Drawing.Point(13, 21);
             this.btnNuevaVenta.Name = "btnNuevaVenta";
-            this.btnNuevaVenta.Size = new System.Drawing.Size(235, 93);
+            this.btnNuevaVenta.Size = new System.Drawing.Size(234, 72);
             this.btnNuevaVenta.TabIndex = 0;
             this.btnNuevaVenta.Text = "Gestion \r\nVent/Prest";
             this.btnNuevaVenta.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -383,9 +383,9 @@
             this.panel7.Controls.Add(this.txtBuscar);
             this.panel7.Controls.Add(this.label5);
             this.panel7.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel7.Location = new System.Drawing.Point(1282, 54);
+            this.panel7.Location = new System.Drawing.Point(1185, 48);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(0, 788);
+            this.panel7.Size = new System.Drawing.Size(0, 645);
             this.panel7.TabIndex = 3;
             // 
             // btnActualizarVentas
@@ -466,38 +466,38 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvVentasMenu.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvVentasMenu.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.LightSkyBlue;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvVentasMenu.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.LightSkyBlue;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvVentasMenu.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvVentasMenu.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.LightSkyBlue;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvVentasMenu.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.LightSkyBlue;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvVentasMenu.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvVentasMenu.Location = new System.Drawing.Point(13, 10);
             this.dgvVentasMenu.Margin = new System.Windows.Forms.Padding(10);
             this.dgvVentasMenu.Name = "dgvVentasMenu";
             this.dgvVentasMenu.ReadOnly = true;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvVentasMenu.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvVentasMenu.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvVentasMenu.RowHeadersWidth = 51;
             this.dgvVentasMenu.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvVentasMenu.Size = new System.Drawing.Size(1010, 768);
+            this.dgvVentasMenu.Size = new System.Drawing.Size(913, 603);
             this.dgvVentasMenu.TabIndex = 36;
             this.dgvVentasMenu.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvVentasMenu_CellDoubleClick);
             // 
@@ -505,16 +505,16 @@
             // 
             this.panel8.Controls.Add(this.dgvVentasMenu);
             this.panel8.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel8.Location = new System.Drawing.Point(248, 54);
+            this.panel8.Location = new System.Drawing.Point(248, 48);
             this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(1034, 788);
+            this.panel8.Size = new System.Drawing.Size(937, 645);
             this.panel8.TabIndex = 37;
             // 
             // frmMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1282, 842);
+            this.ClientSize = new System.Drawing.Size(1185, 693);
             this.Controls.Add(this.panel8);
             this.Controls.Add(this.panel7);
             this.Controls.Add(this.pMenuLateral);
