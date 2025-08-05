@@ -8,7 +8,7 @@
         }
 
         .container {
-            max-width: 42rem;
+            max-width: 55rem; /* Aumenta el ancho máximo */
             margin: 0 auto;
             border: 1px solid black;
             padding: 1rem;
@@ -38,17 +38,34 @@
         table {
             width: 100%;
             border-collapse: collapse;
+            table-layout: fixed; /* Fija el ancho de las columnas */
         }
 
         th, td {
             border: 1px solid #ddd;
-            padding: 8px;
+            padding: 6px;
             text-align: left;
+            word-wrap: break-word; /* Permite que el texto se ajuste */
+            overflow-wrap: break-word;
+            font-size: 11px; /* Reduce el tamaño de fuente para más espacio */
         }
 
         th {
             background-color: #f2f2f2;
+            font-weight: bold;
+            font-size: 10px; /* Encabezados más pequeños */
         }
+
+        /* Ajustar anchos específicos para cada columna */
+        th:nth-child(1), td:nth-child(1) { width: 12%; } /* Articulo */
+        th:nth-child(2), td:nth-child(2) { width: 10%; } /* Marca */
+        th:nth-child(3), td:nth-child(3) { width: 10%; } /* Medida */
+        th:nth-child(4), td:nth-child(4) { width: 12%; } /* Tipo Conector */
+        th:nth-child(5), td:nth-child(5) { width: 10%; } /* Precio */
+        th:nth-child(6), td:nth-child(6) { width: 8%; }  /* Cantidad */
+        th:nth-child(7), td:nth-child(7) { width: 12%; } /* Subtotal */
+        th:nth-child(8), td:nth-child(8) { width: 12%; } /* Anticipo */
+        th:nth-child(9), td:nth-child(9) { width: 14%; } /* Total */
 
         .total {
             text-align: right;
@@ -97,18 +114,28 @@
         <table>
             <thead>
                 <tr>
-                    <th>Cantidad</th>
                     <th>Articulo</th>
-                    <th>Talle</th>
+                    <th>Marca</th>
+                    <th>Medida</th>
+                    <th>Tipo Conector</th>
                     <th>Precio</th>
+                    <th>Cantidad</th>
+                    <th>Subtotal</th>
+                    <th>Anticipo</th>
+                    <th>Total</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td>@cantidad</td>
                     <td>@articulo</td>
-                    <td>@talle</td>
+                    <td>@marca</td>
+                    <td>@medida</td>
+                    <td>@tipoconector</td>
                     <td>@precio</td>
+                    <td>@cantidad</td>
+                    <td>@subtotal</td>
+                    <td>@anticipo</td>
+                    <td>@total</td>
                 </tr>
             </tbody>
         </table>

@@ -13,42 +13,7 @@ namespace CDatos
     {
         
         // Método obsoleto para filtrar ventas por día de la semana
-        public List<VentaDTO> FiltrarVentasPorDiaSemana(int idDiaSemana)
-        {
-            List<VentaDTO> ventas = null;
-            try
-            {
-                using (ventas_cta_cteEntities db = new ventas_cta_cteEntities())
-                {
-                    ventas = (from v in db.Venta
-                              join c in db.Cliente on v.ClientId equals c.ClientId
-                              join fp in db.FormaDePago on v.FormaDePagoId equals fp.FormaDePagoId
-                              join a in db.Articulo on v.IdArticulo equals a.ArticuloId
-                              orderby v.FechaDeInicio descending
-                              select new VentaDTO
-                              {
-                                  VentaId = v.VentaId,
-                                  IdCliente = c.ClientId,
-                                  NombreCliente = c.Apellido + " " + c.Nombre,
-                                  IdArticulo = v.IdArticulo,
-                                  Articulo = a.Descripcion,
-                                  FormaDePago = fp.Nombre,
-                                  Precio = v.Precio,
-                                  Cuotas = v.Cuotas,
-                                  FechaDeInicio = v.FechaDeInicio,
-                                  FechaDeCancelacion = v.FechaDeCancelacion,
-                                  Cantidad = v.Cantidad,
-                                  Total = v.Total,
-                                  FechaAnulacion = v.FechaAnulacion
-                              }).ToList();
-                }
-            }
-            catch (Exception ex)
-            {
-                respuesta = ex.Message;
-            }
-            return ventas;
-        }
+       
         private string respuesta = "";
         public void RegistrarVenta(Venta venta)
         {
@@ -61,51 +26,58 @@ namespace CDatos
 
                     if (venta.Cuotas > 0)
                     {
-                        decimal montoPorCuota = (decimal)(venta.Precio / venta.Cuotas);
-                        List<Cuota> cuotas = new List<Cuota>();
-                        DateTime fechaVencimiento = (DateTime)venta.FechaDeInicio;
-
-                        // Determinar el incremento de la fecha basado en el FormaDePagoId
-                        int incrementoDias = 0;
-                        switch (venta.FormaDePagoId)
+                        // El Total ya viene calculado como Subtotal - Anticipo desde el formulario
+                        decimal montoAFinanciar = venta.Total ?? 0;
+                        
+                        // Si el monto a financiar es mayor a 0, generar cuotas
+                        if (montoAFinanciar > 0)
                         {
-                            case 1: // Mensual
-                                incrementoDias = 30;
-                                break;
-                            case 2: // Quincenal
-                                incrementoDias = 15;
-                                break;
-                            case 3: // Semanal
-                                incrementoDias = 7;
-                                break;
-                            default:
-                                incrementoDias = 0;
-                                break;
-                        }
+                            decimal montoPorCuota = montoAFinanciar / (decimal)venta.Cuotas;
+                            List<Cuota> cuotas = new List<Cuota>();
+                            DateTime fechaVencimiento = (DateTime)venta.FechaDeInicio;
 
-                        for (int i = 1; i <= venta.Cuotas; i++)
-                        {
-                            // Calcular la fecha de vencimiento según la frecuencia
-                            if (venta.FormaDePagoId == 1) // Mensual
-                                fechaVencimiento = venta.FechaDeInicio.AddMonths(i);
-                            else
-                                fechaVencimiento = venta.FechaDeInicio.AddDays(incrementoDias * i);
-
-                            Cuota nuevaCuota = new Cuota
+                            // Determinar el incremento de la fecha basado en el FormaDePagoId
+                            int incrementoDias = 0;
+                            switch (venta.FormaDePagoId)
                             {
-                                VentaId = venta.VentaId,
-                                MontoCuota = montoPorCuota,
-                                NumeroDeCuota = i,
-                                FechaProgramada = fechaVencimiento,
-                                Estado = false
-                            };
+                                case 1: // Mensual
+                                    incrementoDias = 30;
+                                    break;
+                                case 2: // Quincenal
+                                    incrementoDias = 15;
+                                    break;
+                                case 3: // Semanal
+                                    incrementoDias = 7;
+                                    break;
+                                default:
+                                    incrementoDias = 0;
+                                    break;
+                            }
 
-                            cuotas.Add(nuevaCuota);
+                            for (int i = 1; i <= venta.Cuotas; i++)
+                            {
+                                // Calcular la fecha de vencimiento según la frecuencia
+                                if (venta.FormaDePagoId == 1) // Mensual
+                                    fechaVencimiento = venta.FechaDeInicio.AddMonths(i);
+                                else
+                                    fechaVencimiento = venta.FechaDeInicio.AddDays(incrementoDias * i);
+
+                                Cuota nuevaCuota = new Cuota
+                                {
+                                    VentaId = venta.VentaId,
+                                    MontoCuota = montoPorCuota,
+                                    NumeroDeCuota = i,
+                                    FechaProgramada = fechaVencimiento,
+                                    Estado = false
+                                };
+
+                                cuotas.Add(nuevaCuota);
+                            }
+
+                            // Agregar las cuotas a la base de datos
+                            db.Cuota.AddRange(cuotas);
+                            db.SaveChanges();
                         }
-
-                        // Agregar las cuotas a la base de datos
-                        db.Cuota.AddRange(cuotas);
-                        db.SaveChanges();
                     }
                 }
             }
@@ -143,6 +115,8 @@ namespace CDatos
                                   FechaDeInicio = v.FechaDeInicio,
                                   FechaDeCancelacion = v.FechaDeCancelacion,
                                   Cantidad = v.Cantidad,
+                                  Subtotal = v.Precio * v.Cantidad,
+                                  Anticipo = v.Anticipo,
                                   Total = v.Total,
                                   FechaAnulacion = v.FechaAnulacion,
                                   CuotasVencidas = db.Cuota.Any(cuota => cuota.VentaId == v.VentaId && cuota.FechaProgramada < DateTime.Now && cuota.FechaPago == null)
@@ -210,6 +184,8 @@ namespace CDatos
                                   FechaDeCancelacion = v.FechaDeCancelacion,
                                   FechaAnulacion = v.FechaAnulacion,
                                   Cantidad = v.Cantidad,
+                                  Subtotal = v.Precio * v.Cantidad,
+                                  Anticipo = v.Anticipo,
                                   Total = v.Total,
                                   CuotasVencidas = db.Cuota.Any(cuota => cuota.VentaId == v.VentaId && cuota.FechaProgramada < DateTime.Now && cuota.FechaPago == null)
                               })
@@ -271,6 +247,8 @@ namespace CDatos
                                   FechaDeInicio = v.FechaDeInicio,
                                   FechaDeCancelacion = v.FechaDeCancelacion,
                                   Cantidad = v.Cantidad,
+                                  Subtotal = v.Precio * v.Cantidad,
+                                  Anticipo = v.Anticipo,
                                   Total = v.Total,
                                   FechaAnulacion = v.FechaAnulacion
                               }).ToList();
@@ -310,6 +288,8 @@ namespace CDatos
                                   FechaDeInicio = v.FechaDeInicio,
                                   FechaDeCancelacion = v.FechaDeCancelacion,
                                   Cantidad = v.Cantidad,
+                                  Subtotal = v.Precio * v.Cantidad,
+                                  Anticipo = v.Anticipo,
                                   Total = v.Total,
                                   FechaAnulacion = v.FechaAnulacion
                               }).ToList();
@@ -349,6 +329,8 @@ namespace CDatos
                                   FechaDeInicio = v.FechaDeInicio,
                                   FechaDeCancelacion = v.FechaDeCancelacion,
                                   Cantidad = v.Cantidad,
+                                  Subtotal = v.Precio * v.Cantidad,
+                                  Anticipo = v.Anticipo,
                                   Total = v.Total,
                                   FechaAnulacion = v.FechaAnulacion
                               }).ToList();
@@ -372,6 +354,7 @@ namespace CDatos
                     bool editarTablaCuotas = editarVenta.Cuotas != venta.Cuotas
                                              || editarVenta.Precio != venta.Precio
                                              || editarVenta.Total != venta.Total
+                                             || editarVenta.Anticipo != venta.Anticipo
                                              || editarVenta.FormaDePagoId != venta.FormaDePagoId;
                     // Eliminar cuotas existentes solo si no hay cuotas pagadas
                     bool tieneCuotaPagada = db.Cuota.Any(c => c.VentaId == venta.VentaId && c.Estado == true);
@@ -389,9 +372,15 @@ namespace CDatos
                         db.Cuota.RemoveRange(cuotasExistentes);
 
                         // Recalcular y agregar nuevas cuotas
-                        decimal montoPorCuota = (decimal)(venta.Total / venta.Cuotas);
-                        List<Cuota> nuevasCuotas = new List<Cuota>();
-                        DateTime fechaVencimiento = (DateTime)venta.FechaDeInicio;
+                        // El Total ya viene calculado como Subtotal - Anticipo desde el formulario
+                        decimal montoAFinanciar = venta.Total ?? 0;
+                        
+                        // Solo generar cuotas si hay monto a financiar
+                        if (montoAFinanciar > 0 && venta.Cuotas > 0)
+                        {
+                            decimal montoPorCuota = montoAFinanciar / (decimal)venta.Cuotas;
+                            List<Cuota> nuevasCuotas = new List<Cuota>();
+                            DateTime fechaVencimiento = (DateTime)venta.FechaDeInicio;
 
                         int incrementoDias = 0;
                         switch (venta.FormaDePagoId)
@@ -431,6 +420,7 @@ namespace CDatos
                         // Agregar las cuotas a la base de datos
                         db.Cuota.AddRange(nuevasCuotas);
                         db.SaveChanges();
+                        }
 
                     }
 
@@ -443,6 +433,8 @@ namespace CDatos
                     editarVenta.Precio = venta.Precio;
                     editarVenta.Cuotas = venta.Cuotas;
                     editarVenta.Cantidad = venta.Cantidad;
+                    editarVenta.Subtotal = venta.Subtotal;
+                    editarVenta.Anticipo = venta.Anticipo;
                     editarVenta.Total = venta.Total;
 
                     db.SaveChanges();

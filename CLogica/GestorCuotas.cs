@@ -22,9 +22,19 @@ namespace CLogica
             return _repositorioCuotas.RegistrarPago(cuotaId);
         }
 
+        public bool RegistrarPago(int cuotaId, int idMetodoPago)
+        {
+            return _repositorioCuotas.RegistrarPago(cuotaId, idMetodoPago);
+        }
+
         public decimal ObtenerTotalCuotasPagadasPorFecha(DateTime fechaDesde, DateTime fechaHasta)
         {
             return _repositorioCuotas.ObtenerTotalCuotasPagadasPorFecha(fechaDesde, fechaHasta);
+        }
+
+        public List<MetodoDePago> ObtenerMetodosDePago()
+        {
+            return _repositorioCuotas.ObtenerMetodosDePago();
         }
     }
 }

@@ -35,17 +35,12 @@ namespace CDatos
         public virtual DbSet<DetalleVenta> DetalleVenta { get; set; }
         public virtual DbSet<FormaDePago> FormaDePago { get; set; }
         public virtual DbSet<MovimientoStock> MovimientoStock { get; set; }
-        public virtual DbSet<Venta> Venta { get; set; }
         public virtual DbSet<ReciboControl> ReciboControl { get; set; }
-    
-        public virtual ObjectResult<ComprobanteDePago_Result> ComprobanteDePago(Nullable<int> ventaId)
-        {
-            var ventaIdParameter = ventaId.HasValue ?
-                new ObjectParameter("VentaId", ventaId) :
-                new ObjectParameter("VentaId", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ComprobanteDePago_Result>("ComprobanteDePago", ventaIdParameter);
-        }
+        public virtual DbSet<Marca> Marca { get; set; }
+        public virtual DbSet<Medida> Medida { get; set; }
+        public virtual DbSet<TipoConector> TipoConector { get; set; }
+        public virtual DbSet<Venta> Venta { get; set; }
+        public virtual DbSet<MetodoDePago> MetodoDePago { get; set; }
     
         public virtual ObjectResult<ReciboDePago_Result> ReciboDePago(Nullable<int> ventaId, Nullable<int> numeroDeCuota)
         {
@@ -89,6 +84,15 @@ namespace CDatos
                 new ObjectParameter("FechaHasta", typeof(System.DateTime));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_ReporteVentas_Result>("sp_ReporteVentas", fechaDesdeParameter, fechaHastaParameter);
+        }
+    
+        public virtual ObjectResult<ComprobanteDePago_Result> ComprobanteDePago(Nullable<int> ventaId)
+        {
+            var ventaIdParameter = ventaId.HasValue ?
+                new ObjectParameter("VentaId", ventaId) :
+                new ObjectParameter("VentaId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ComprobanteDePago_Result>("ComprobanteDePago", ventaIdParameter);
         }
     }
 }

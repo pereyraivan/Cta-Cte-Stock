@@ -13,15 +13,17 @@ namespace CEntidades.DTOs
         public string NombreCliente { get; set; } 
         public int IdArticulo { get; set; }
         public string Articulo { get; set; }
-        public string FormaDePago { get; set; } 
-        public decimal? Precio { get; set; }
+        public string FormaDePago { get; set; }
         public int? Cuotas { get; set; }
+        public decimal? Precio { get; set; }
+        public int? Cantidad { get; set; }
+        public bool CuotasVencidas { get; set; }
+        public decimal? Subtotal { get; set; }
+        public decimal? Anticipo { get; set; }
+        public decimal? Total { get; set; }
         public DateTime? FechaDeInicio { get; set; }
         public DateTime? FechaDeCancelacion { get; set; }
         public DateTime? FechaAnulacion { get; set; }
-        public bool CuotasVencidas { get; set; }
-        public int? Cantidad { get; set; }
-        public decimal? Total { get; set; }
 
     }
 }

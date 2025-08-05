@@ -13,6 +13,8 @@ namespace CDatos
             using (ventas_cta_cteEntities db = new ventas_cta_cteEntities())
             {
                 var cuotas = (from c in db.Cuota
+                              join mp in db.MetodoDePago on c.IdMetodoDePago equals mp.IdMetodoPago into mpGroup
+                              from mp in mpGroup.DefaultIfEmpty()
                               where c.VentaId == ventaId
                               select new
                               {
@@ -22,7 +24,9 @@ namespace CDatos
                                   c.MontoCuota,
                                   c.FechaProgramada,
                                   c.FechaPago,
-                                  c.Estado
+                                  c.Estado,
+                                  c.IdMetodoDePago,
+                                  MetodoDePago = mp != null ? mp.Descripcion : "No definido"
                               }).ToList();
 
                 return cuotas.Select(c => new CuotaDTO
@@ -33,11 +37,18 @@ namespace CDatos
                     MontoCuota = c.MontoCuota,
                     FechaProgramada = c.FechaProgramada.ToString("dd/MM/yyyy"),
                     FechaPago = c.FechaPago.HasValue ? c.FechaPago.Value.ToString("dd/MM/yyyy") : "No pagada",
-                    Estado = (c.Estado ?? false) ? "Pagada" : "Pendiente"
+                    Estado = (c.Estado ?? false) ? "Pagada" : "Pendiente",
+                    IdMetodoDePago = c.IdMetodoDePago,
+                    MetodoDePago = c.MetodoDePago
                 }).ToList();
             }
         }
         public bool RegistrarPago(int cuotaId)
+        {
+            return RegistrarPago(cuotaId, null);
+        }
+
+        public bool RegistrarPago(int cuotaId, int? idMetodoPago)
         {
             try
             {
@@ -48,6 +59,7 @@ namespace CDatos
                     {
                         cuota.Estado = true; // Marcar como pagada
                         cuota.FechaPago = DateTime.Now; // Registrar la fecha de pago
+                        cuota.IdMetodoDePago = idMetodoPago; // Registrar el método de pago
 
                         db.SaveChanges();
 
@@ -97,6 +109,21 @@ namespace CDatos
             catch
             {
                 return 0;
+            }
+        }
+
+        public List<MetodoDePago> ObtenerMetodosDePago()
+        {
+            try
+            {
+                using (ventas_cta_cteEntities db = new ventas_cta_cteEntities())
+                {
+                    return db.MetodoDePago.ToList();
+                }
+            }
+            catch
+            {
+                return new List<MetodoDePago>();
             }
         }
     }

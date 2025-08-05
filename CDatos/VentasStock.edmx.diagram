@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="4f17bf5895a542018ddf74812ace59bb" Name="Diagram1">
+      <Diagram DiagramId="4f17bf5895a542018ddf74812ace59bb" Name="Diagram1" ZoomLevel="86">
         <EntityTypeShape EntityType="ventas_cta_cteModel.Articulo" Width="1.5" PointX="0.75" PointY="2.5" IsExpanded="true" />
         <EntityTypeShape EntityType="ventas_cta_cteModel.Cliente" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ventas_cta_cteModel.Configuracion" Width="1.5" PointX="5.75" PointY="4.75" IsExpanded="true" />
@@ -12,11 +12,15 @@
         <EntityTypeShape EntityType="ventas_cta_cteModel.DetalleVenta" Width="1.5" PointX="3" PointY="2.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ventas_cta_cteModel.FormaDePago" Width="1.5" PointX="5.75" PointY="7.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ventas_cta_cteModel.MovimientoStock" Width="1.5" PointX="3" PointY="6.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="ventas_cta_cteModel.Venta" Width="1.5" PointX="0.75" PointY="8.125" IsExpanded="true" />
         <EntityTypeShape EntityType="ventas_cta_cteModel.ReciboControl" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
         <AssociationConnector Association="ventas_cta_cteModel.FK_DetalleVenta_Articulo" ManuallyRouted="false" />
         <AssociationConnector Association="ventas_cta_cteModel.FK_MovimientoStock_Articulo" ManuallyRouted="false" />
-        <AssociationConnector Association="ventas_cta_cteModel.FK_DetalleVenta_Venta" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="ventas_cta_cteModel.Marca" Width="1.5" PointX="8.375" PointY="4.75" />
+        <EntityTypeShape EntityType="ventas_cta_cteModel.Medida" Width="1.5" PointX="8.375" PointY="7.75" />
+        <EntityTypeShape EntityType="ventas_cta_cteModel.TipoConector" Width="1.5" PointX="10.375" PointY="3.75" />
+        <EntityTypeShape EntityType="ventas_cta_cteModel.Venta" Width="1.5" PointX="0.75" PointY="10" />
+        <AssociationConnector Association="ventas_cta_cteModel.FK_DetalleVenta_Venta" />
+        <EntityTypeShape EntityType="ventas_cta_cteModel.MetodoDePago" Width="1.5" PointX="3.375" PointY="10.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

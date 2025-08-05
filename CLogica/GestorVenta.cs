@@ -68,11 +68,5 @@ namespace CLogica
         {
             return _repositorioVenta.EsDemo();
         }
-
-        // Nuevo método para filtrar ventas por día de la semana
-        public List<VentaDTO> FiltrarVentasPorDiaSemana(int idDiaSemana)
-        {
-            return _repositorioVenta.FiltrarVentasPorDiaSemana(idDiaSemana);
-        }
     }
 }

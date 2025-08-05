@@ -28,7 +28,7 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ProductName>Control-C</ProductName>
     <PublisherName>Control-C</PublisherName>
-    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationRevision>2</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -329,6 +329,24 @@
     <Compile Include="Formularios\frmControlPagos.Designer.cs">
       <DependentUpon>frmControlPagos.cs</DependentUpon>
     </Compile>
+    <Compile Include="Formularios\frmGestionMarca.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\frmGestionMarca.Designer.cs">
+      <DependentUpon>frmGestionMarca.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\frmGestionMedida.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\frmGestionMedida.Designer.cs">
+      <DependentUpon>frmGestionMedida.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\frmGestionTipoConector.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\frmGestionTipoConector.Designer.cs">
+      <DependentUpon>frmGestionTipoConector.cs</DependentUpon>
+    </Compile>
     <Compile Include="Formularios\frmListaArticulos.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -382,6 +400,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\frmControlPagos.resx">
       <DependentUpon>frmControlPagos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\frmGestionMarca.resx">
+      <DependentUpon>frmGestionMarca.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\frmGestionMedida.resx">
+      <DependentUpon>frmGestionMedida.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\frmGestionTipoConector.resx">
+      <DependentUpon>frmGestionTipoConector.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\frmListaArticulos.resx">
       <DependentUpon>frmListaArticulos.cs</DependentUpon>

@@ -66,6 +66,15 @@
     <Compile Include="FormaDePago.cs">
       <DependentUpon>VentasStock.tt</DependentUpon>
     </Compile>
+    <Compile Include="Marca.cs">
+      <DependentUpon>VentasStock.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Medida.cs">
+      <DependentUpon>VentasStock.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MetodoDePago.cs">
+      <DependentUpon>VentasStock.tt</DependentUpon>
+    </Compile>
     <Compile Include="MovimientoStock.cs">
       <DependentUpon>VentasStock.tt</DependentUpon>
     </Compile>
@@ -83,6 +92,9 @@
       <DependentUpon>VentasStock.tt</DependentUpon>
     </Compile>
     <Compile Include="sp_ReporteVentas_Result.cs">
+      <DependentUpon>VentasStock.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TipoConector.cs">
       <DependentUpon>VentasStock.tt</DependentUpon>
     </Compile>
     <Compile Include="Venta.cs">

@@ -30,6 +30,9 @@ namespace CEntidades
         public int StockMinimo { get; set; }
         public System.DateTime FechaAlta { get; set; }
         public Nullable<System.DateTime> FechaAnulacion { get; set; }
+        public Nullable<int> IdMarca { get; set; }
+        public Nullable<int> IdMedida { get; set; }
+        public Nullable<int> IdTipoConector { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DetalleVenta> DetalleVenta { get; set; }

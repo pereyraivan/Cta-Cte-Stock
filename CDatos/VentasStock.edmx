@@ -18,6 +18,9 @@
           <Property Name="StockMinimo" Type="int" Nullable="false" />
           <Property Name="FechaAlta" Type="datetime" Nullable="false" />
           <Property Name="FechaAnulacion" Type="datetime" />
+          <Property Name="IdMarca" Type="int" />
+          <Property Name="IdMedida" Type="int" />
+          <Property Name="IdTipoConector" Type="int" />
         </EntityType>
         <EntityType Name="Cliente">
           <Key>
@@ -49,6 +52,7 @@
           <Property Name="FechaProgramada" Type="datetime" Nullable="false" />
           <Property Name="FechaPago" Type="datetime" />
           <Property Name="Estado" Type="bit" />
+          <Property Name="IdMetodoDePago" Type="int" />
         </EntityType>
         <EntityType Name="DetalleVenta">
           <Key>
@@ -67,6 +71,27 @@
           </Key>
           <Property Name="FormaDePagoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Nombre" Type="nvarchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Marca">
+          <Key>
+            <PropertyRef Name="IdMarca" />
+          </Key>
+          <Property Name="IdMarca" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NombreMarca" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Medida">
+          <Key>
+            <PropertyRef Name="IdMedida" />
+          </Key>
+          <Property Name="IdMedida" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NombreMedida" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="MetodoDePago">
+          <Key>
+            <PropertyRef Name="IdMetodoPago" />
+          </Key>
+          <Property Name="IdMetodoPago" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="MovimientoStock">
           <Key>
@@ -90,6 +115,13 @@ warning 6002: The table/view 'ventas_cta_cte.dbo.ReciboControl' does not have a 
           <Property Name="Serie" Type="int" Nullable="false" />
           <Property Name="NumeroSecuencial" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="TipoConector">
+          <Key>
+            <PropertyRef Name="IdTipoConector" />
+          </Key>
+          <Property Name="IdTipoConector" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NombreTipoConector" Type="nvarchar" MaxLength="100" />
+        </EntityType>
         <EntityType Name="Venta">
           <Key>
             <PropertyRef Name="VentaId" />
@@ -104,6 +136,8 @@ warning 6002: The table/view 'ventas_cta_cte.dbo.ReciboControl' does not have a 
           <Property Name="Precio" Type="decimal" Precision="18" Scale="2" />
           <Property Name="Cuotas" Type="int" />
           <Property Name="Cantidad" Type="int" />
+          <Property Name="Subtotal" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Anticipo" Type="decimal" Precision="18" Scale="2" />
           <Property Name="Total" Type="decimal" Precision="18" Scale="2" />
         </EntityType>
         <Association Name="FK_DetalleVenta_Articulo">
@@ -166,7 +200,11 @@ warning 6002: The table/view 'ventas_cta_cte.dbo.ReciboControl' does not have a 
           <EntitySet Name="Cuota" EntityType="Self.Cuota" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DetalleVenta" EntityType="Self.DetalleVenta" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FormaDePago" EntityType="Self.FormaDePago" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Marca" EntityType="Self.Marca" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Medida" EntityType="Self.Medida" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MetodoDePago" EntityType="Self.MetodoDePago" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MovimientoStock" EntityType="Self.MovimientoStock" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoConector" EntityType="Self.TipoConector" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Venta" EntityType="Self.Venta" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ReciboControl" EntityType="Self.ReciboControl" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -206,6 +244,9 @@ warning 6002: The table/view 'ventas_cta_cte.dbo.ReciboControl' does not have a 
           <Property Name="FechaAnulacion" Type="DateTime" Precision="3" />
           <NavigationProperty Name="DetalleVenta" Relationship="Self.FK_DetalleVenta_Articulo" FromRole="Articulo" ToRole="DetalleVenta" />
           <NavigationProperty Name="MovimientoStock" Relationship="Self.FK_MovimientoStock_Articulo" FromRole="Articulo" ToRole="MovimientoStock" />
+          <Property Name="IdMarca" Type="Int32" />
+          <Property Name="IdMedida" Type="Int32" />
+          <Property Name="IdTipoConector" Type="Int32" />
         </EntityType>
         <EntityType Name="Cliente">
           <Key>
@@ -237,6 +278,7 @@ warning 6002: The table/view 'ventas_cta_cte.dbo.ReciboControl' does not have a 
           <Property Name="FechaProgramada" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="FechaPago" Type="DateTime" Precision="3" />
           <Property Name="Estado" Type="Boolean" />
+          <Property Name="IdMetodoDePago" Type="Int32" />
         </EntityType>
         <EntityType Name="DetalleVenta">
           <Key>
@@ -249,7 +291,7 @@ warning 6002: The table/view 'ventas_cta_cte.dbo.ReciboControl' does not have a 
           <Property Name="PrecioUnitario" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="Subtotal" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
           <NavigationProperty Name="Articulo" Relationship="Self.FK_DetalleVenta_Articulo" FromRole="DetalleVenta" ToRole="Articulo" />
-          <NavigationProperty Name="Venta" Relationship="Self.FK_DetalleVenta_Venta" FromRole="DetalleVenta" ToRole="Venta" />
+          <NavigationProperty Name="Venta" Relationship="ventas_cta_cteModel.FK_DetalleVenta_Venta" FromRole="DetalleVenta" ToRole="Venta" />
         </EntityType>
         <EntityType Name="FormaDePago">
           <Key>
@@ -270,23 +312,6 @@ warning 6002: The table/view 'ventas_cta_cte.dbo.ReciboControl' does not have a 
           <Property Name="StockNuevo" Type="Int32" Nullable="false" />
           <Property Name="Observaciones" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Articulo" Relationship="Self.FK_MovimientoStock_Articulo" FromRole="MovimientoStock" ToRole="Articulo" />
-        </EntityType>
-        <EntityType Name="Venta">
-          <Key>
-            <PropertyRef Name="VentaId" />
-          </Key>
-          <Property Name="VentaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ClientId" Type="Int32" Nullable="false" />
-          <Property Name="IdArticulo" Type="Int32" Nullable="false" />
-          <Property Name="FormaDePagoId" Type="Int32" Nullable="false" />
-          <Property Name="FechaDeInicio" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="FechaDeCancelacion" Type="DateTime" Precision="0" />
-          <Property Name="FechaAnulacion" Type="DateTime" Precision="3" />
-          <Property Name="Precio" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="Cuotas" Type="Int32" />
-          <Property Name="Cantidad" Type="Int32" />
-          <Property Name="Total" Type="Decimal" Precision="18" Scale="2" />
-          <NavigationProperty Name="DetalleVenta" Relationship="Self.FK_DetalleVenta_Venta" FromRole="Venta" ToRole="DetalleVenta" />
         </EntityType>
         <EntityType Name="ReciboControl">
           <Key>
@@ -320,18 +345,6 @@ warning 6002: The table/view 'ventas_cta_cte.dbo.ReciboControl' does not have a 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_DetalleVenta_Venta">
-          <End Role="Venta" Type="Self.Venta" Multiplicity="1" />
-          <End Role="DetalleVenta" Type="Self.DetalleVenta" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Venta">
-              <PropertyRef Name="VentaId" />
-            </Principal>
-            <Dependent Role="DetalleVenta">
-              <PropertyRef Name="VentaId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="ventas_cta_cteEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Articulo" EntityType="Self.Articulo" />
           <EntitySet Name="Cliente" EntityType="Self.Cliente" />
@@ -340,7 +353,6 @@ warning 6002: The table/view 'ventas_cta_cte.dbo.ReciboControl' does not have a 
           <EntitySet Name="DetalleVenta" EntityType="Self.DetalleVenta" />
           <EntitySet Name="FormaDePago" EntityType="Self.FormaDePago" />
           <EntitySet Name="MovimientoStock" EntityType="Self.MovimientoStock" />
-          <EntitySet Name="Venta" EntityType="Self.Venta" />
           <EntitySet Name="ReciboControl" EntityType="Self.ReciboControl" />
           <AssociationSet Name="FK_DetalleVenta_Articulo" Association="Self.FK_DetalleVenta_Articulo">
             <End Role="Articulo" EntitySet="Articulo" />
@@ -350,13 +362,6 @@ warning 6002: The table/view 'ventas_cta_cte.dbo.ReciboControl' does not have a 
             <End Role="Articulo" EntitySet="Articulo" />
             <End Role="MovimientoStock" EntitySet="MovimientoStock" />
           </AssociationSet>
-          <AssociationSet Name="FK_DetalleVenta_Venta" Association="Self.FK_DetalleVenta_Venta">
-            <End Role="Venta" EntitySet="Venta" />
-            <End Role="DetalleVenta" EntitySet="DetalleVenta" />
-          </AssociationSet>
-          <FunctionImport Name="ComprobanteDePago" ReturnType="Collection(ventas_cta_cteModel.ComprobanteDePago_Result)">
-          <Parameter Name="VentaId" Mode="In" Type="Int32" />
-          </FunctionImport>
           <FunctionImport Name="ReciboDePago" ReturnType="Collection(ventas_cta_cteModel.ReciboDePago_Result)">
             <Parameter Name="VentaId" Mode="In" Type="Int32" />
             <Parameter Name="NumeroDeCuota" Mode="In" Type="Int32" />
@@ -371,21 +376,19 @@ warning 6002: The table/view 'ventas_cta_cte.dbo.ReciboControl' does not have a 
             <Parameter Name="FechaDesde" Mode="In" Type="DateTime" />
             <Parameter Name="FechaHasta" Mode="In" Type="DateTime" />
           </FunctionImport>
+          <EntitySet Name="Marca" EntityType="ventas_cta_cteModel.Marca" />
+          <EntitySet Name="Medida" EntityType="ventas_cta_cteModel.Medida" />
+          <EntitySet Name="TipoConector" EntityType="ventas_cta_cteModel.TipoConector" />
+          <EntitySet Name="Venta" EntityType="ventas_cta_cteModel.Venta" />
+          <AssociationSet Name="FK_DetalleVenta_Venta" Association="ventas_cta_cteModel.FK_DetalleVenta_Venta">
+            <End Role="Venta" EntitySet="Venta" />
+            <End Role="DetalleVenta" EntitySet="DetalleVenta" />
+          </AssociationSet>
+          <FunctionImport Name="ComprobanteDePago" ReturnType="Collection(ventas_cta_cteModel.ComprobanteDePago_Result)">
+          <Parameter Name="VentaId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="MetodoDePago" EntityType="ventas_cta_cteModel.MetodoDePago" />
         </EntityContainer>
-        <ComplexType Name="ComprobanteDePago_Result">
-          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="Apellido" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="Telefono" Nullable="true" MaxLength="15" />
-          <Property Type="String" Name="Direccion" Nullable="true" MaxLength="150" />
-          <Property Type="Int32" Name="DNI" Nullable="true" />
-          <Property Type="Int32" Name="VentaId" Nullable="false" />
-          <Property Type="Int32" Name="ClientId" Nullable="false" />
-          <Property Type="String" Name="Articulo" Nullable="false" MaxLength="100" />
-          <Property Type="DateTime" Name="FechaDeInicio" Nullable="false" />
-          <Property Type="Decimal" Name="Precio" Nullable="true" Precision="18" Scale="2" />
-          <Property Type="Int32" Name="Cantidad" Nullable="true" />
-          <Property Type="Decimal" Name="Total" Nullable="true" Precision="18" Scale="2" />
-        </ComplexType>
         <ComplexType Name="ReciboDePago_Result">
           <Property Type="Int32" Name="VentaId" Nullable="false" />
           <Property Type="DateTime" Name="FechaPago" Nullable="false" Precision="23" />
@@ -463,6 +466,84 @@ warning 6002: The table/view 'ventas_cta_cte.dbo.ReciboControl' does not have a 
           <Property Type="Decimal" Name="Total" Nullable="true" Precision="18" Scale="2" />
           <Property Type="String" Name="Estado" Nullable="false" MaxLength="42" />
         </ComplexType>
+        <EntityType Name="Marca">
+          <Key>
+            <PropertyRef Name="IdMarca" />
+          </Key>
+          <Property Name="IdMarca" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombreMarca" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Medida">
+          <Key>
+            <PropertyRef Name="IdMedida" />
+          </Key>
+          <Property Name="IdMedida" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombreMedida" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="TipoConector">
+          <Key>
+            <PropertyRef Name="IdTipoConector" />
+          </Key>
+          <Property Name="IdTipoConector" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombreTipoConector" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Venta">
+          <Key>
+            <PropertyRef Name="VentaId" />
+          </Key>
+          <Property Name="VentaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClientId" Type="Int32" Nullable="false" />
+          <Property Name="IdArticulo" Type="Int32" Nullable="false" />
+          <Property Name="FormaDePagoId" Type="Int32" Nullable="false" />
+          <Property Name="FechaDeInicio" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="FechaDeCancelacion" Type="DateTime" Precision="0" />
+          <Property Name="FechaAnulacion" Type="DateTime" Precision="3" />
+          <Property Name="Precio" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Cuotas" Type="Int32" />
+          <Property Name="Cantidad" Type="Int32" />
+          <Property Name="Subtotal" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Anticipo" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Total" Type="Decimal" Precision="18" Scale="2" />
+          <NavigationProperty Name="DetalleVenta" Relationship="ventas_cta_cteModel.FK_DetalleVenta_Venta" FromRole="Venta" ToRole="DetalleVenta" />
+        </EntityType>
+        <Association Name="FK_DetalleVenta_Venta">
+          <End Type="ventas_cta_cteModel.Venta" Role="Venta" Multiplicity="1" />
+          <End Type="ventas_cta_cteModel.DetalleVenta" Role="DetalleVenta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Venta">
+              <PropertyRef Name="VentaId" />
+            </Principal>
+            <Dependent Role="DetalleVenta">
+              <PropertyRef Name="VentaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="ComprobanteDePago_Result">
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Apellido" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Telefono" Nullable="true" MaxLength="15" />
+          <Property Type="String" Name="Direccion" Nullable="true" MaxLength="150" />
+          <Property Type="Int32" Name="DNI" Nullable="true" />
+          <Property Type="Int32" Name="VentaId" Nullable="false" />
+          <Property Type="Int32" Name="ClientId" Nullable="false" />
+          <Property Type="String" Name="Articulo" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Marca" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Medida" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="TipoConector" Nullable="true" MaxLength="100" />
+          <Property Type="DateTime" Name="FechaDeInicio" Nullable="false" />
+          <Property Type="Decimal" Name="Precio" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Int32" Name="Cantidad" Nullable="true" />
+          <Property Type="Decimal" Name="Subtotal" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="Anticipo" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="Total" Nullable="true" Precision="18" Scale="2" />
+        </ComplexType>
+        <EntityType Name="MetodoDePago">
+          <Key>
+            <PropertyRef Name="IdMetodoPago" />
+          </Key>
+          <Property Name="IdMetodoPago" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -472,6 +553,9 @@ warning 6002: The table/view 'ventas_cta_cte.dbo.ReciboControl' does not have a 
           <EntitySetMapping Name="Articulo">
             <EntityTypeMapping TypeName="ventas_cta_cteModel.Articulo">
               <MappingFragment StoreEntitySet="Articulo">
+                <ScalarProperty Name="IdTipoConector" ColumnName="IdTipoConector" />
+                <ScalarProperty Name="IdMedida" ColumnName="IdMedida" />
+                <ScalarProperty Name="IdMarca" ColumnName="IdMarca" />
                 <ScalarProperty Name="ArticuloId" ColumnName="ArticuloId" />
                 <ScalarProperty Name="Codigo" ColumnName="Codigo" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
@@ -508,6 +592,7 @@ warning 6002: The table/view 'ventas_cta_cte.dbo.ReciboControl' does not have a 
           <EntitySetMapping Name="Cuota">
             <EntityTypeMapping TypeName="ventas_cta_cteModel.Cuota">
               <MappingFragment StoreEntitySet="Cuota">
+                <ScalarProperty Name="IdMetodoDePago" ColumnName="IdMetodoDePago" />
                 <ScalarProperty Name="CuotaId" ColumnName="CuotaId" />
                 <ScalarProperty Name="VentaId" ColumnName="VentaId" />
                 <ScalarProperty Name="MontoCuota" ColumnName="MontoCuota" />
@@ -551,23 +636,6 @@ warning 6002: The table/view 'ventas_cta_cte.dbo.ReciboControl' does not have a 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Venta">
-            <EntityTypeMapping TypeName="ventas_cta_cteModel.Venta">
-              <MappingFragment StoreEntitySet="Venta">
-                <ScalarProperty Name="IdArticulo" ColumnName="IdArticulo" />
-                <ScalarProperty Name="VentaId" ColumnName="VentaId" />
-                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
-                <ScalarProperty Name="FormaDePagoId" ColumnName="FormaDePagoId" />
-                <ScalarProperty Name="FechaDeInicio" ColumnName="FechaDeInicio" />
-                <ScalarProperty Name="FechaDeCancelacion" ColumnName="FechaDeCancelacion" />
-                <ScalarProperty Name="FechaAnulacion" ColumnName="FechaAnulacion" />
-                <ScalarProperty Name="Precio" ColumnName="Precio" />
-                <ScalarProperty Name="Cuotas" ColumnName="Cuotas" />
-                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
-                <ScalarProperty Name="Total" ColumnName="Total" />
-                </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="ReciboControl">
             <EntityTypeMapping TypeName="ventas_cta_cteModel.ReciboControl">
               <MappingFragment StoreEntitySet="ReciboControl">
@@ -576,24 +644,6 @@ warning 6002: The table/view 'ventas_cta_cte.dbo.ReciboControl' does not have a 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="ComprobanteDePago" FunctionName="ventas_cta_cteModel.Store.ComprobanteDePago">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ventas_cta_cteModel.ComprobanteDePago_Result">
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
-                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
-                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
-                <ScalarProperty Name="DNI" ColumnName="DNI" />
-                <ScalarProperty Name="VentaId" ColumnName="VentaId" />
-                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
-                <ScalarProperty Name="Articulo" ColumnName="Articulo" />
-                <ScalarProperty Name="FechaDeInicio" ColumnName="FechaDeInicio" />
-                <ScalarProperty Name="Precio" ColumnName="Precio" />
-                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
-                <ScalarProperty Name="Total" ColumnName="Total" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="ReciboDePago" FunctionName="ventas_cta_cteModel.Store.ReciboDePago">
             <ResultMapping>
               <ComplexTypeMapping TypeName="ventas_cta_cteModel.ReciboDePago_Result">
@@ -687,6 +737,80 @@ warning 6002: The table/view 'ventas_cta_cte.dbo.ReciboControl' does not have a 
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="Marca">
+            <EntityTypeMapping TypeName="ventas_cta_cteModel.Marca">
+              <MappingFragment StoreEntitySet="Marca">
+                <ScalarProperty Name="NombreMarca" ColumnName="NombreMarca" />
+                <ScalarProperty Name="IdMarca" ColumnName="IdMarca" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Medida">
+            <EntityTypeMapping TypeName="ventas_cta_cteModel.Medida">
+              <MappingFragment StoreEntitySet="Medida">
+                <ScalarProperty Name="NombreMedida" ColumnName="NombreMedida" />
+                <ScalarProperty Name="IdMedida" ColumnName="IdMedida" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoConector">
+            <EntityTypeMapping TypeName="ventas_cta_cteModel.TipoConector">
+              <MappingFragment StoreEntitySet="TipoConector">
+                <ScalarProperty Name="NombreTipoConector" ColumnName="NombreTipoConector" />
+                <ScalarProperty Name="IdTipoConector" ColumnName="IdTipoConector" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Venta">
+            <EntityTypeMapping TypeName="ventas_cta_cteModel.Venta">
+              <MappingFragment StoreEntitySet="Venta">
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="Anticipo" ColumnName="Anticipo" />
+                <ScalarProperty Name="Subtotal" ColumnName="Subtotal" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="Cuotas" ColumnName="Cuotas" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="FechaAnulacion" ColumnName="FechaAnulacion" />
+                <ScalarProperty Name="FechaDeCancelacion" ColumnName="FechaDeCancelacion" />
+                <ScalarProperty Name="FechaDeInicio" ColumnName="FechaDeInicio" />
+                <ScalarProperty Name="FormaDePagoId" ColumnName="FormaDePagoId" />
+                <ScalarProperty Name="IdArticulo" ColumnName="IdArticulo" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="VentaId" ColumnName="VentaId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="ComprobanteDePago" FunctionName="ventas_cta_cteModel.Store.ComprobanteDePago">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ventas_cta_cteModel.ComprobanteDePago_Result">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="DNI" ColumnName="DNI" />
+                <ScalarProperty Name="VentaId" ColumnName="VentaId" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="Articulo" ColumnName="Articulo" />
+                <ScalarProperty Name="Marca" ColumnName="Marca" />
+                <ScalarProperty Name="Medida" ColumnName="Medida" />
+                <ScalarProperty Name="TipoConector" ColumnName="TipoConector" />
+                <ScalarProperty Name="FechaDeInicio" ColumnName="FechaDeInicio" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="Subtotal" ColumnName="Subtotal" />
+                <ScalarProperty Name="Anticipo" ColumnName="Anticipo" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="MetodoDePago">
+            <EntityTypeMapping TypeName="ventas_cta_cteModel.MetodoDePago">
+              <MappingFragment StoreEntitySet="MetodoDePago">
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="IdMetodoPago" ColumnName="IdMetodoPago" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

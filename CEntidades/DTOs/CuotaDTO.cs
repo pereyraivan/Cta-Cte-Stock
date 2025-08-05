@@ -15,5 +15,7 @@ namespace CEntidades.DTOs
         public string FechaProgramada { get; set; }     
         public string FechaPago { get; set; }           
         public string Estado { get; set; }
+        public int? IdMetodoDePago { get; set; }
+        public string MetodoDePago { get; set; }
     }
 }

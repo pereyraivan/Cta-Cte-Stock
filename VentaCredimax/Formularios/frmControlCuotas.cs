@@ -26,6 +26,7 @@ namespace VentaCredimax.Formularios
         private void frmControlCuotas_Load(object sender, EventArgs e)
         {
             CargarCuotas();
+            CargarComboMetodoPago();
             EstiloDataGridView();
             PintarFilaPorEstado();
         }
@@ -34,11 +35,26 @@ namespace VentaCredimax.Formularios
             List<CuotaDTO> cuotas = _gestorCuotas.ObtenerCuotasPorVenta(VentaId);
             dgvCuotas.DataSource = cuotas;
         }
+
+        private void CargarComboMetodoPago()
+        {
+            List<MetodoDePago> metodosPago = _gestorCuotas.ObtenerMetodosDePago();
+            cbMetodoPago.DataSource = metodosPago;
+            cbMetodoPago.DisplayMember = "Descripcion";
+            cbMetodoPago.ValueMember = "IdMetodoPago";
+            cbMetodoPago.SelectedIndex = -1; // No seleccionar ningún elemento por defecto
+        }
         private void RegistrarPago()
         {
             if (dgvCuotas.CurrentRow == null)
             {
                 MessageBox.Show("Seleccione una cuota para registrar el pago.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (cbMetodoPago.SelectedIndex == -1)
+            {
+                MessageBox.Show("Debe seleccionar un método de pago.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -62,16 +78,18 @@ namespace VentaCredimax.Formularios
                 return;
             }
 
-            // Obtener el ID de la cuota seleccionada
+            // Obtener el ID de la cuota seleccionada y el método de pago
             int idCuota = Convert.ToInt32(dgvCuotas.CurrentRow.Cells["CuotaId"].Value);
+            int idMetodoPago = Convert.ToInt32(cbMetodoPago.SelectedValue);
 
             // Registrar el pago a través del gestor
-            bool resultado = _gestorCuotas.RegistrarPago(idCuota);
+            bool resultado = _gestorCuotas.RegistrarPago(idCuota, idMetodoPago);
 
             if (resultado)
             {
                 MessageBox.Show("Pago registrado con éxito.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 CargarCuotas(); // Recargar cuotas
+                cbMetodoPago.SelectedIndex = -1; // Limpiar selección del combo
             }
             else
             {
@@ -90,10 +108,12 @@ namespace VentaCredimax.Formularios
             {
                 dgvCuotas.Columns["CuotaId"].Visible = false;
                 dgvCuotas.Columns["VentaId"].Visible = false;
+                dgvCuotas.Columns["IdMetodoDePago"].Visible = false;
                 dgvCuotas.Columns["NumeroDeCuota"].HeaderText = "Nro de Cuota";
                 dgvCuotas.Columns["MontoCuota"].HeaderText = "Monto Cuota";
                 dgvCuotas.Columns["FechaProgramada"].HeaderText = "Vencimiento";
                 dgvCuotas.Columns["FechaPago"].HeaderText = "Fecha de Pago";
+                dgvCuotas.Columns["MetodoDePago"].HeaderText = "Método de Pago";
             }
         }
 
@@ -106,12 +126,26 @@ namespace VentaCredimax.Formularios
                 {
                     string estado = row.Cells["Estado"].Value.ToString(); // Verifica si está pagada
                     DateTime fechaVencimiento = Convert.ToDateTime(row.Cells["FechaProgramada"].Value);
+                    string metodoPago = row.Cells["MetodoDePago"].Value?.ToString();
 
                     if (estado == "Pagada")
                     {
-                        // Pagada: Color verde
-                        row.DefaultCellStyle.BackColor = Color.LightGreen;
-
+                        // Color por método de pago para cuotas pagadas
+                        switch (metodoPago?.ToLower())
+                        {
+                            case "efectivo":
+                                row.DefaultCellStyle.BackColor = Color.LightSalmon;
+                                break;
+                            case "transferencia":
+                                row.DefaultCellStyle.BackColor = Color.Yellow;
+                                break;
+                            case "tarjeta":
+                                row.DefaultCellStyle.BackColor = Color.LightGreen;
+                                break;
+                            default:
+                                row.DefaultCellStyle.BackColor = Color.LightBlue; // Para métodos no definidos
+                                break;
+                        }
                     }
                     else if (estado == "Pendiente")
                     {

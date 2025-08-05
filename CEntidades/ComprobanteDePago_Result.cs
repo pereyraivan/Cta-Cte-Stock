@@ -21,9 +21,14 @@ namespace CEntidades
         public int VentaId { get; set; }
         public int ClientId { get; set; }
         public string Articulo { get; set; }
+        public string Marca { get; set; }
+        public string Medida { get; set; }
+        public string TipoConector { get; set; }
         public System.DateTime FechaDeInicio { get; set; }
         public Nullable<decimal> Precio { get; set; }
         public Nullable<int> Cantidad { get; set; }
+        public Nullable<decimal> Subtotal { get; set; }
+        public Nullable<decimal> Anticipo { get; set; }
         public Nullable<decimal> Total { get; set; }
     }
 }

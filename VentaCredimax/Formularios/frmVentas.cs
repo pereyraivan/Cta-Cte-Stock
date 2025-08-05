@@ -159,13 +159,46 @@ namespace VentaCredimax.Formularios
             venta.FechaDeInicio = dtfechaVenta.Value;
             venta.FechaDeCancelacion = dtpFechaCancelacion.Value;
             venta.Cantidad = Convert.ToInt32(txtCantidad.Text);
+            
+            // Procesar el anticipo
+            decimal anticipo = 0;
+            if (!string.IsNullOrEmpty(txtAnticipo.Text))
+            {
+                if (decimal.TryParse(txtAnticipo.Text, out anticipo))
+                {
+                    venta.Anticipo = anticipo;
+                }
+                else
+                {
+                    MessageBox.Show("Por favor, ingresa un valor válido para el anticipo.");
+                    return;
+                }
+            }
+            else
+            {
+                venta.Anticipo = 0; // Si no hay anticipo, asignar 0
+            }
+            
             if (decimal.TryParse(txtPrecio.Text, out precio) && int.TryParse(txtCantidad.Text, out cantidad))
             {
-                venta.Total = precio * cantidad;
+                decimal subtotal = precio * cantidad;
+                venta.Subtotal = subtotal; // Ahora el campo existe en la tabla
+                
+                // Validar que el anticipo no sea mayor al subtotal
+                if (anticipo > subtotal)
+                {
+                    MessageBox.Show($"El anticipo no puede ser mayor al subtotal de la venta. Subtotal: {subtotal:C2}", "Error de Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                
+                // Calcular el total como Subtotal - Anticipo
+                decimal total = subtotal - anticipo;
+                venta.Total = total;
             }
             else
             {
                 MessageBox.Show("Por favor, ingresa valores válidos en los campos de precio y cantidad.");
+                return;
             }
             venta.FechaAnulacion = null;
 
@@ -236,6 +269,7 @@ namespace VentaCredimax.Formularios
             cbFormaPago.SelectedIndex = -1;
             txtPrecio.Text = "";
             txtCuotas.Text = "";
+            txtAnticipo.Text = "";
             dtpFechaCancelacion.Value = DateTime.Now;
             dtfechaVenta.Value = DateTime.Now;
             txtCantidad.Text = "";
@@ -287,7 +321,22 @@ namespace VentaCredimax.Formularios
                 txtPrecio.Text = Convert.ToDecimal(dgvVentas.CurrentRow.Cells["Precio"].Value).ToString("N2", new System.Globalization.CultureInfo("es-AR"));
                 txtCuotas.Text = dgvVentas.CurrentRow.Cells["Cuotas"].Value?.ToString();
                 txtCantidad.Text = dgvVentas.CurrentRow.Cells["Cantidad"].Value?.ToString();
-                lblTotal.Text = Convert.ToDecimal(dgvVentas.CurrentRow.Cells["Total"].Value).ToString("N2", new System.Globalization.CultureInfo("es-AR"));
+                
+                // Cargar el anticipo si existe
+                decimal anticipo = 0;
+                if (dgvVentas.Columns.Contains("Anticipo") && dgvVentas.CurrentRow.Cells["Anticipo"].Value != null)
+                {
+                    anticipo = Convert.ToDecimal(dgvVentas.CurrentRow.Cells["Anticipo"].Value);
+                    txtAnticipo.Text = anticipo.ToString("N2", new System.Globalization.CultureInfo("es-AR"));
+                }
+                else
+                {
+                    txtAnticipo.Text = "0,00";
+                }
+                
+                // El Total del grid ya es Subtotal - Anticipo, mostrar directamente
+                decimal totalFinal = Convert.ToDecimal(dgvVentas.CurrentRow.Cells["Total"].Value);
+                lblTotal.Text = totalFinal.ToString("N2", new System.Globalization.CultureInfo("es-AR"));
                 dtpFechaCancelacion.Value = DateTime.Parse(dgvVentas.CurrentRow.Cells["FechaDeCancelacion"].Value?.ToString() ?? DateTime.Now.ToString());
                 dtfechaVenta.Value = DateTime.Parse(dgvVentas.CurrentRow.Cells["FechaDeInicio"].Value?.ToString() ?? DateTime.Now.ToString());
 
@@ -325,10 +374,47 @@ namespace VentaCredimax.Formularios
                         }
                     }
                     venta.FormaDePagoId = (int)cbFormaPago.SelectedValue;
+                    
                     venta.Precio = string.IsNullOrEmpty(txtPrecio.Text) ? (decimal?)null : Convert.ToDecimal(txtPrecio.Text);
                     venta.Cuotas = Convert.ToInt32(txtCuotas.Text);
                     venta.Cantidad = Convert.ToInt32(txtCantidad.Text);
-                    venta.Total = Convert.ToDecimal(lblTotal.Text);
+                    
+                    // Procesar el anticipo en la modificación
+                    decimal anticipo = 0;
+                    if (!string.IsNullOrEmpty(txtAnticipo.Text))
+                    {
+                        if (decimal.TryParse(txtAnticipo.Text, out anticipo))
+                        {
+                            venta.Anticipo = anticipo;
+                        }
+                        else
+                        {
+                            MessageBox.Show("Por favor, ingresa un valor válido para el anticipo.");
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        venta.Anticipo = 0;
+                    }
+                    
+                    // Calcular subtotal y total
+                    decimal precio = Convert.ToDecimal(txtPrecio.Text);
+                    int cantidad = Convert.ToInt32(txtCantidad.Text);
+                    decimal subtotal = precio * cantidad;
+                    venta.Subtotal = subtotal; // Ahora el campo existe en la tabla
+                    
+                    // Validar que el anticipo no sea mayor al subtotal
+                    if (anticipo > subtotal)
+                    {
+                        MessageBox.Show($"El anticipo no puede ser mayor al subtotal de la venta. Subtotal: {subtotal:C2}", "Error de Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+                    
+                    // Calcular el total como Subtotal - Anticipo
+                    decimal total = subtotal - anticipo;
+                    venta.Total = total;
+                    
                     venta.FechaDeInicio = dtfechaVenta.Value;
                     venta.FechaDeCancelacion = dtpFechaCancelacion.Value;
                     venta.FechaAnulacion = null;
@@ -440,6 +526,16 @@ namespace VentaCredimax.Formularios
             // dgvVentas.Columns["DiaSemanaNombre"].HeaderText = "Dia Pago"; // Obsoleto
             if (dgvVentas.Columns.Contains("Precio"))
                 dgvVentas.Columns["Precio"].DefaultCellStyle.Format = "N2";
+            if (dgvVentas.Columns.Contains("Subtotal"))
+            {
+                dgvVentas.Columns["Subtotal"].HeaderText = "Subtotal";
+                dgvVentas.Columns["Subtotal"].DefaultCellStyle.Format = "N2";
+            }
+            if (dgvVentas.Columns.Contains("Anticipo"))
+            {
+                dgvVentas.Columns["Anticipo"].HeaderText = "Anticipo";
+                dgvVentas.Columns["Anticipo"].DefaultCellStyle.Format = "N2";
+            }
             if (dgvVentas.Columns.Contains("Total"))
                 dgvVentas.Columns["Total"].DefaultCellStyle.Format = "N2";
             
@@ -460,6 +556,10 @@ namespace VentaCredimax.Formularios
                 dgvVentas.Columns["FormaDePago"].FillWeight = 80;
             if (dgvVentas.Columns.Contains("Precio"))
                 dgvVentas.Columns["Precio"].FillWeight = 70;
+            if (dgvVentas.Columns.Contains("Subtotal"))
+                dgvVentas.Columns["Subtotal"].FillWeight = 75;
+            if (dgvVentas.Columns.Contains("Anticipo"))
+                dgvVentas.Columns["Anticipo"].FillWeight = 70;
             if (dgvVentas.Columns.Contains("Total"))
                 dgvVentas.Columns["Total"].FillWeight = 70;
             if (dgvVentas.Columns.Contains("Cuotas"))
@@ -595,16 +695,39 @@ namespace VentaCredimax.Formularios
             }
             esModificacion = false;
         }
-        private decimal CalcularTotal()
+        private decimal CalcularSubtotal()
         {
             decimal precio = 0;
             int cantidad;
-            decimal total = 0;
+            decimal subtotal = 0;
             if (decimal.TryParse(txtPrecio.Text, out precio) && int.TryParse(txtCantidad.Text, out cantidad))
             {
-                total = precio * cantidad;
+                subtotal = precio * cantidad;
             }
-            return total;
+            return subtotal;
+        }
+        
+        private void ActualizarTotalConAnticipo()
+        {
+            decimal subtotal = CalcularSubtotal();
+            decimal anticipo = 0;
+            
+            if (!string.IsNullOrEmpty(txtAnticipo.Text))
+            {
+                decimal.TryParse(txtAnticipo.Text, out anticipo);
+            }
+            
+            // Validar que el anticipo no sea mayor al subtotal
+            if (anticipo > subtotal && subtotal > 0)
+            {
+                MessageBox.Show($"El anticipo no puede ser mayor al subtotal de la venta. Subtotal: {subtotal:C2}", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtAnticipo.Focus();
+                return;
+            }
+            
+            // Mostrar el total final (Subtotal - Anticipo)
+            decimal totalFinal = subtotal - anticipo;
+            lblTotal.Text = totalFinal.ToString("N2");
         }
         private void frmVentas_Load(object sender, EventArgs e)
         {
@@ -615,15 +738,16 @@ namespace VentaCredimax.Formularios
             ListarVentas();
             btnEditarVenta.Enabled = false;
             
-            // Suscribir el evento para establecer automáticamente el precio cuando se selecciona un artículo
+            // Suscribir eventos
             cbArticulo.SelectedIndexChanged += cbArticulo_SelectedIndexChanged;
+            txtAnticipo.Leave += txtAnticipo_Leave;
         }
 
         private void txtCantidad_Leave(object sender, EventArgs e)
         {
             if (txtPrecio.Text != "" && txtCantidad.Text != "")
             {
-                lblTotal.Text = CalcularTotal().ToString("N2");
+                ActualizarTotalConAnticipo();
             }
         }
 
@@ -631,8 +755,13 @@ namespace VentaCredimax.Formularios
         {
             if (txtPrecio.Text != "" && txtCantidad.Text != "")
             {
-                lblTotal.Text = CalcularTotal().ToString("N2");
+                ActualizarTotalConAnticipo();
             }
+        }
+
+        private void txtAnticipo_Leave(object sender, EventArgs e)
+        {
+            ActualizarTotalConAnticipo();
         }
 
         private void ImprimirReporteComprobanteDeVenta(int ventaId)
@@ -654,13 +783,27 @@ namespace VentaCredimax.Formularios
 
                 //tabla
                 textoHtml = textoHtml.Replace("@cantidad", listaComprobanteDeVenta.FirstOrDefault().Cantidad.ToString());
-                textoHtml = textoHtml.Replace("@articulo", listaComprobanteDeVenta.FirstOrDefault().Articulo);          
+                textoHtml = textoHtml.Replace("@articulo", listaComprobanteDeVenta.FirstOrDefault().Articulo);
+                textoHtml = textoHtml.Replace("@marca", listaComprobanteDeVenta.FirstOrDefault().Marca ?? "");
+                textoHtml = textoHtml.Replace("@medida", listaComprobanteDeVenta.FirstOrDefault().Medida ?? "");
+                textoHtml = textoHtml.Replace("@tipoconector", listaComprobanteDeVenta.FirstOrDefault().TipoConector ?? "");
 
                 decimal precio = listaComprobanteDeVenta.FirstOrDefault().Precio.Value;
                 string montoPrecioFormateado = string.Format("{0:#,##0.00}", precio).Replace(",", "X").Replace(".", ",").Replace("X", ".");
                 textoHtml = textoHtml.Replace("@precio", montoPrecioFormateado);
 
-                decimal total = listaComprobanteDeVenta.FirstOrDefault().Total.Value;
+                // Manejar Subtotal - si es null, calcularlo como precio * cantidad
+                decimal subtotal = listaComprobanteDeVenta.FirstOrDefault().Subtotal ?? 
+                                  (precio * (listaComprobanteDeVenta.FirstOrDefault().Cantidad ?? 1));
+                string subtotalFormateado = string.Format("{0:#,##0.00}", subtotal).Replace(",", "X").Replace(".", ",").Replace("X", ".");
+                textoHtml = textoHtml.Replace("@subtotal", subtotalFormateado);
+
+                decimal anticipo = listaComprobanteDeVenta.FirstOrDefault().Anticipo ?? 0;
+                string anticipoFormateado = string.Format("{0:#,##0.00}", anticipo).Replace(",", "X").Replace(".", ",").Replace("X", ".");
+                textoHtml = textoHtml.Replace("@anticipo", anticipoFormateado);
+
+                // Manejar Total - si es null, calcularlo como subtotal - anticipo
+                decimal total = listaComprobanteDeVenta.FirstOrDefault().Total ?? (subtotal - anticipo);
                 string totalFormateado = string.Format("{0:#,##0.00}", total).Replace(",", "X").Replace(".", ",").Replace("X", ".");
                 textoHtml = textoHtml.Replace("@total", totalFormateado);
 

@@ -12,15 +12,9 @@ namespace CEntidades
     using System;
     using System.Collections.Generic;
     
-    public partial class Cuota
+    public partial class Marca
     {
-        public int CuotaId { get; set; }
-        public int VentaId { get; set; }
-        public decimal MontoCuota { get; set; }
-        public int NumeroDeCuota { get; set; }
-        public System.DateTime FechaProgramada { get; set; }
-        public Nullable<System.DateTime> FechaPago { get; set; }
-        public Nullable<bool> Estado { get; set; }
-        public Nullable<int> IdMetodoDePago { get; set; }
+        public int IdMarca { get; set; }
+        public string NombreMarca { get; set; }
     }
 }
