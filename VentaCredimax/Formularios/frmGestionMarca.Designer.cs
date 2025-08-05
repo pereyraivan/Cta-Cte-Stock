@@ -144,10 +144,10 @@
             this.txtNombreMarca.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtNombreMarca.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtNombreMarca.Location = new System.Drawing.Point(258, 73);
+            this.txtNombreMarca.Location = new System.Drawing.Point(264, 73);
             this.txtNombreMarca.Margin = new System.Windows.Forms.Padding(4);
             this.txtNombreMarca.Name = "txtNombreMarca";
-            this.txtNombreMarca.Size = new System.Drawing.Size(518, 34);
+            this.txtNombreMarca.Size = new System.Drawing.Size(512, 34);
             this.txtNombreMarca.TabIndex = 66;
             // 
             // label5

@@ -33,6 +33,7 @@ namespace VentaCredimax.Formularios
             ConfigurarComboBox();
             CargarDatos();
             CargarComboBoxes();
+            ConfigurarComboFiltro();
             
             // Suscribirse al evento para pintar las filas
             dgvArticulos.DataBindingComplete += DgvArticulos_DataBindingComplete;
@@ -42,6 +43,9 @@ namespace VentaCredimax.Formularios
             
             // Suscribirse al evento de búsqueda en tiempo real
             textBox1.TextChanged += textBox1_TextChanged;
+            
+            // Suscribirse al evento de cambio de filtro (agregar después de crear cbFiltrar)
+            // cbFiltrar.SelectedIndexChanged += cbFiltrar_SelectedIndexChanged;
             
             // Configurar estado inicial de los botones
             ConfigurarEstadoBotones();
@@ -73,6 +77,17 @@ namespace VentaCredimax.Formularios
             cbTipoConector.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             cbTipoConector.AutoCompleteSource = AutoCompleteSource.ListItems;
             cbTipoConector.DropDownStyle = ComboBoxStyle.DropDown;
+        }
+
+        private void ConfigurarComboFiltro()
+        {
+            // Configurar el ComboBox de filtros
+            cbFiltrar.Items.Clear();
+            cbFiltrar.Items.Add("Descripción"); // Filtro por defecto
+            cbFiltrar.Items.Add("Marca");
+            cbFiltrar.Items.Add("Medida");
+            cbFiltrar.Items.Add("Tipo Conector");
+            cbFiltrar.SelectedIndex = 0; // Seleccionar "Descripción" por defecto
         }
 
         private void CargarComboBoxes()
@@ -421,63 +436,7 @@ namespace VentaCredimax.Formularios
             // La medida y el tipo de conector no son obligatorios
             // Dependiendo del tipo de artículo, se puede usar uno u otro o ambos
 
-            // Validar que no exista un artículo duplicado
-            if (!ValidarArticuloNoDuplicado())
-            {
-                return false;
-            }
-
             return true;
-        }
-
-        private bool ValidarArticuloNoDuplicado()
-        {
-            try
-            {
-                // Obtener los valores actuales del formulario
-                string descripcion = txtArticulo.Text.Trim();
-                int? idMarca = cbMarca.SelectedIndex != -1 ? (int?)cbMarca.SelectedValue : null;
-                int? idMedida = cbMedida.SelectedIndex != -1 ? (int?)cbMedida.SelectedValue : null;
-                int? idTipoConector = cbTipoConector.SelectedIndex != -1 ? (int?)cbTipoConector.SelectedValue : null;
-
-                // Buscar artículos existentes con la misma combinación
-                var articulosExistentes = _gestorArticulo.Listar();
-                
-                var articuloDuplicado = articulosExistentes.FirstOrDefault(a =>
-                    a.Descripcion.Trim().Equals(descripcion, StringComparison.OrdinalIgnoreCase) &&
-                    a.IdMarca == idMarca &&
-                    a.IdMedida == idMedida &&
-                    a.IdTipoConector == idTipoConector &&
-                    a.FechaAnulacion == null && // Solo considerar artículos activos
-                    (!articuloIdSeleccionado.HasValue || a.ArticuloId != articuloIdSeleccionado.Value) // Excluir el artículo actual si estamos editando
-                );
-
-                if (articuloDuplicado != null)
-                {
-                    string marcaNombre = idMarca.HasValue ? ObtenerNombreMarca(idMarca) : "Sin marca";
-                    string medidaNombre = idMedida.HasValue ? ObtenerNombreMedida(idMedida) : "Sin medida";
-                    string tipoConectorNombre = idTipoConector.HasValue ? ObtenerNombreTipoConector(idTipoConector) : "Sin tipo conector";
-                    
-                    string mensaje = $"Ya existe un artículo con la siguiente combinación:\n\n" +
-                                   $"Descripción: {descripcion}\n" +
-                                   $"Marca: {marcaNombre}\n" +
-                                   $"Medida: {medidaNombre}\n" +
-                                   $"Tipo Conector: {tipoConectorNombre}\n\n" +
-                                   $"Código existente: {articuloDuplicado.Codigo}\n\n" +
-                                   $"Por favor, modifique alguno de estos valores para crear un artículo único.";
-                    
-                    MessageBox.Show(mensaje, "Artículo Duplicado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    txtArticulo.Focus();
-                    return false;
-                }
-
-                return true;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error al validar duplicados: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
-            }
         }
 
         private void frmArticulo_Load(object sender, EventArgs e)
@@ -494,7 +453,7 @@ namespace VentaCredimax.Formularios
                 var articulo = new Articulo
                 {
                     Descripcion = txtArticulo.Text.Trim(),
-                    Codigo = txtCodigo.Text.Trim(),
+                    Codigo = string.IsNullOrEmpty(txtCodigo.Text.Trim()) ? null : txtCodigo.Text.Trim(),
                     PrecioCompra = decimal.Parse(txtPrecioCompra.Text),
                     PrecioVenta = decimal.Parse(txtPrecioVenta.Text),
                     Stock = int.Parse(txtStock.Text),
@@ -502,7 +461,8 @@ namespace VentaCredimax.Formularios
                     FechaAlta = DateTime.Now,
                     IdMarca = (int)cbMarca.SelectedValue,
                     IdMedida = cbMedida.SelectedIndex != -1 ? (int?)cbMedida.SelectedValue : null,
-                    IdTipoConector = cbTipoConector.SelectedIndex != -1 ? (int?)cbTipoConector.SelectedValue : null
+                    IdTipoConector = cbTipoConector.SelectedIndex != -1 ? (int?)cbTipoConector.SelectedValue : null,
+                    FechaAnulacion = null
                 };
 
                 _gestorArticulo.Guardar(articulo);
@@ -533,7 +493,7 @@ namespace VentaCredimax.Formularios
                 {
                     ArticuloId = articuloIdSeleccionado.Value,
                     Descripcion = txtArticulo.Text.Trim(),
-                    Codigo = txtCodigo.Text.Trim(),
+                    Codigo = string.IsNullOrEmpty(txtCodigo.Text.Trim()) ? null : txtCodigo.Text.Trim(),
                     PrecioCompra = decimal.Parse(txtPrecioCompra.Text),
                     PrecioVenta = decimal.Parse(txtPrecioVenta.Text),
                     Stock = int.Parse(txtStock.Text),
@@ -654,6 +614,12 @@ namespace VentaCredimax.Formularios
             FiltrarArticulos();
         }
 
+        private void cbFiltrar_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Aplicar filtro inmediatamente cuando cambia el criterio
+            FiltrarArticulos();
+        }
+
         private void FiltrarArticulos()
         {
             try
@@ -670,11 +636,44 @@ namespace VentaCredimax.Formularios
                 }
                 else
                 {
-                    // Filtrar por código o descripción
-                    var articulosFiltrados = _articulosCompletos.Where(a =>
-                        (a.Codigo != null && a.Codigo.ToLower().Contains(filtro)) ||
-                        (a.Descripcion != null && a.Descripcion.ToLower().Contains(filtro))
-                    ).ToList();
+                    List<Articulo> articulosFiltrados = new List<Articulo>();
+                    
+                    // Determinar el criterio de filtrado seleccionado
+                    string criterioFiltro = "Descripción"; // Valor por defecto
+                    try
+                    {
+                        if (cbFiltrar != null && cbFiltrar.SelectedItem != null)
+                        {
+                            criterioFiltro = cbFiltrar.SelectedItem.ToString();
+                        }
+                    }
+                    catch
+                    {
+                        // Si hay error con cbFiltrar, usar filtro por defecto
+                        criterioFiltro = "Descripción";
+                    }
+
+                    // Aplicar filtro según el criterio seleccionado
+                    switch (criterioFiltro)
+                    {
+                        case "Marca":
+                            articulosFiltrados = FiltrarPorMarca(filtro);
+                            break;
+                        case "Medida":
+                            articulosFiltrados = FiltrarPorMedida(filtro);
+                            break;
+                        case "Tipo Conector":
+                            articulosFiltrados = FiltrarPorTipoConector(filtro);
+                            break;
+                        case "Descripción":
+                        default:
+                            // Filtrar por código o descripción (comportamiento original)
+                            articulosFiltrados = _articulosCompletos.Where(a =>
+                                (a.Codigo != null && a.Codigo.ToLower().Contains(filtro)) ||
+                                (a.Descripcion != null && a.Descripcion.ToLower().Contains(filtro))
+                            ).ToList();
+                            break;
+                    }
 
                     // Crear lista con datos extendidos para los artículos filtrados
                     var articulosParaGrilla = articulosFiltrados.Select(a => new
@@ -707,6 +706,63 @@ namespace VentaCredimax.Formularios
             catch (Exception ex)
             {
                 MessageBox.Show($"Error al filtrar los datos: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private List<Articulo> FiltrarPorMarca(string filtro)
+        {
+            try
+            {
+                var marcas = _gestorMarca.ListarMarcas();
+                var marcasFiltradas = marcas.Where(m => 
+                    m.NombreMarca != null && m.NombreMarca.ToLower().Contains(filtro)
+                ).Select(m => m.IdMarca).ToList();
+
+                return _articulosCompletos.Where(a => 
+                    a.IdMarca.HasValue && marcasFiltradas.Contains(a.IdMarca.Value)
+                ).ToList();
+            }
+            catch
+            {
+                return new List<Articulo>();
+            }
+        }
+
+        private List<Articulo> FiltrarPorMedida(string filtro)
+        {
+            try
+            {
+                var medidas = _gestorMedida.ListarMedidas();
+                var medidasFiltradas = medidas.Where(m => 
+                    m.NombreMedida != null && m.NombreMedida.ToLower().Contains(filtro)
+                ).Select(m => m.IdMedida).ToList();
+
+                return _articulosCompletos.Where(a => 
+                    a.IdMedida.HasValue && medidasFiltradas.Contains(a.IdMedida.Value)
+                ).ToList();
+            }
+            catch
+            {
+                return new List<Articulo>();
+            }
+        }
+
+        private List<Articulo> FiltrarPorTipoConector(string filtro)
+        {
+            try
+            {
+                var tiposConector = _gestorTipoConector.ListarTipoConectores();
+                var tiposConectorFiltrados = tiposConector.Where(tc => 
+                    tc.NombreTipoConector != null && tc.NombreTipoConector.ToLower().Contains(filtro)
+                ).Select(tc => tc.IdTipoConector).ToList();
+
+                return _articulosCompletos.Where(a => 
+                    a.IdTipoConector.HasValue && tiposConectorFiltrados.Contains(a.IdTipoConector.Value)
+                ).ToList();
+            }
+            catch
+            {
+                return new List<Articulo>();
             }
         }
 

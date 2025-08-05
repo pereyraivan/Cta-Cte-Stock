@@ -30,9 +30,13 @@ namespace CLogica
             if (articulo.PrecioVenta <= 0)
                 throw new Exception("El precio de venta debe ser mayor a 0");
 
-            // Verificar que el código no exista
-            if (_repositorioArticulo.ExisteCodigo(articulo.Codigo))
-                throw new Exception($"Ya existe un artículo con el código '{articulo.Codigo}'");
+            // Verificar que el código no exista (incluyendo anulados, por restricción de BD)
+            if (_repositorioArticulo.ExisteCodigoCompleto(articulo.Codigo))
+                throw new Exception($"Ya existe un artículo con el código '{articulo.Codigo}' (puede estar anulado)");
+
+            // Validar duplicados por descripción, marca, medida y tipo conector
+            if (ExisteArticuloDuplicado(articulo.Descripcion, articulo.IdMarca, articulo.IdMedida, articulo.IdTipoConector))
+                throw new Exception("Ya existe un artículo con la misma combinación de descripción, marca, medida y tipo de conector");
 
             _repositorioArticulo.Guardar(articulo);
         }
@@ -55,9 +59,13 @@ namespace CLogica
             if (articulo.PrecioVenta <= 0)
                 throw new Exception("El precio de venta debe ser mayor a 0");
 
-            // Verificar que el código no exista en otro artículo
-            if (_repositorioArticulo.ExisteCodigo(articulo.Codigo, articulo.ArticuloId))
-                throw new Exception($"Ya existe otro artículo con el código '{articulo.Codigo}'");
+            // Verificar que el código no exista en otros artículos (incluyendo anulados)
+            if (_repositorioArticulo.ExisteCodigoCompleto(articulo.Codigo, articulo.ArticuloId))
+                throw new Exception($"Ya existe otro artículo con el código '{articulo.Codigo}' (puede estar anulado)");
+
+            // Validar duplicados por descripción, marca, medida y tipo conector
+            if (ExisteArticuloDuplicado(articulo.Descripcion, articulo.IdMarca, articulo.IdMedida, articulo.IdTipoConector, articulo.ArticuloId))
+                throw new Exception("Ya existe un artículo con la misma combinación de descripción, marca, medida y tipo de conector");
 
             _repositorioArticulo.Modificar(articulo);
         }
@@ -76,6 +84,16 @@ namespace CLogica
         public List<Articulo> Listar()
         {
             return _repositorioArticulo.Listar();
+        }
+
+        public List<dynamic> ListarConDetalles()
+        {
+            return _repositorioArticulo.ListarConDetalles();
+        }
+
+        public List<dynamic> BuscarConDetalles(string textoBusqueda)
+        {
+            return _repositorioArticulo.BuscarConDetalles(textoBusqueda);
         }
 
         public List<Articulo> BuscarPorCodigo(string codigo)
@@ -103,6 +121,23 @@ namespace CLogica
         public string ObtenerProximoCodigo()
         {
             return _repositorioArticulo.ObtenerProximoCodigo();
+        }
+
+        public bool ExisteArticuloDuplicado(string descripcion, int? idMarca, int? idMedida, int? idTipoConector, int? articuloIdExcluir = null)
+        {
+            var articulos = _repositorioArticulo.Listar();
+            
+            var duplicado = articulos.FirstOrDefault(a =>
+                a.Descripcion != null &&
+                a.Descripcion.Trim().Equals(descripcion.Trim(), StringComparison.OrdinalIgnoreCase) &&
+                a.IdMarca == idMarca &&
+                a.IdMedida == idMedida &&
+                a.IdTipoConector == idTipoConector &&
+                a.FechaAnulacion == null &&
+                (articuloIdExcluir == null || a.ArticuloId != articuloIdExcluir.Value)
+            );
+
+            return duplicado != null;
         }
     }
 }

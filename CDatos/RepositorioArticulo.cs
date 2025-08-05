@@ -1,6 +1,7 @@
 ﻿using CEntidades;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -49,6 +50,9 @@ namespace CDatos
                         articuloExistente.PrecioVenta = articulo.PrecioVenta;
                         articuloExistente.Stock = articulo.Stock;
                         articuloExistente.StockMinimo = articulo.StockMinimo;
+                        articuloExistente.IdMarca = articulo.IdMarca;
+                        articuloExistente.IdMedida = articulo.IdMedida;
+                        articuloExistente.IdTipoConector = articulo.IdTipoConector;
                         db.SaveChanges();
                     }
                     else
@@ -112,7 +116,7 @@ namespace CDatos
                     // Deshabilitar lazy loading para evitar problemas con ObjectContext dispuesto
                     db.Configuration.LazyLoadingEnabled = false;
                     
-                    // Materializar los datos primero con ToList() y luego hacer cualquier proyección si es necesaria
+                    // Obtener artículos con consulta simple
                     articulos = db.Articulo
                         .Where(x => x.FechaAnulacion == null)
                         .ToList();
@@ -123,6 +127,47 @@ namespace CDatos
                 respuesta = e.Message;
             }
             return articulos;
+        }
+
+        public List<dynamic> ListarConDetalles()
+        {
+            List<dynamic> articulosConDetalles = new List<dynamic>();
+            try
+            {
+                using (ventas_cta_cteEntities db = new ventas_cta_cteEntities())
+                {
+                    // LINQ con joins directos - mucho más simple
+                    var query = from a in db.Articulo
+                               join m in db.Marca on a.IdMarca equals m.IdMarca into marcaJoin
+                               from marca in marcaJoin.DefaultIfEmpty()
+                               join med in db.Medida on a.IdMedida equals med.IdMedida into medidaJoin
+                               from medida in medidaJoin.DefaultIfEmpty()
+                               join tc in db.TipoConector on a.IdTipoConector equals tc.IdTipoConector into tipoJoin
+                               from tipoConector in tipoJoin.DefaultIfEmpty()
+                               where a.FechaAnulacion == null
+                               select new
+                               {
+                                   a.ArticuloId,
+                                   a.Codigo,
+                                   a.Descripcion,
+                                   Marca = marca != null ? marca.NombreMarca : "Sin marca",
+                                   Medida = medida != null ? medida.NombreMedida : "Sin medida",
+                                   TipoConector = tipoConector != null ? tipoConector.NombreTipoConector : "Sin tipo",
+                                   a.PrecioCompra,
+                                   a.PrecioVenta,
+                                   a.Stock,
+                                   a.StockMinimo,
+                                   a.FechaAlta
+                               };
+
+                    articulosConDetalles = query.ToList<dynamic>();
+                }
+            }
+            catch (Exception e)
+            {
+                respuesta = e.Message;
+            }
+            return articulosConDetalles;
         }
 
         public List<Articulo> BuscarPorCodigo(string codigo)
@@ -215,6 +260,71 @@ namespace CDatos
             }
         }
 
+        public bool ExisteCodigoCompleto(string codigo, int? articuloIdExcluir = null)
+        {
+            try
+            {
+                using (ventas_cta_cteEntities db = new ventas_cta_cteEntities())
+                {
+                    var query = db.Articulo.Where(x => x.Codigo == codigo);
+                    
+                    if (articuloIdExcluir.HasValue)
+                    {
+                        query = query.Where(x => x.ArticuloId != articuloIdExcluir.Value);
+                    }
+                    
+                    return query.Any();
+                }
+            }
+            catch (Exception e)
+            {
+                respuesta = e.Message;
+                return false;
+            }
+        }
+
+        public List<dynamic> BuscarConDetalles(string textoBusqueda)
+        {
+            List<dynamic> articulosConDetalles = new List<dynamic>();
+            try
+            {
+                using (ventas_cta_cteEntities db = new ventas_cta_cteEntities())
+                {
+                    // LINQ con joins directos para búsqueda
+                    var query = from a in db.Articulo
+                               join m in db.Marca on a.IdMarca equals m.IdMarca into marcaJoin
+                               from marca in marcaJoin.DefaultIfEmpty()
+                               join med in db.Medida on a.IdMedida equals med.IdMedida into medidaJoin
+                               from medida in medidaJoin.DefaultIfEmpty()
+                               join tc in db.TipoConector on a.IdTipoConector equals tc.IdTipoConector into tipoJoin
+                               from tipoConector in tipoJoin.DefaultIfEmpty()
+                               where a.FechaAnulacion == null && 
+                                     (a.Codigo.Contains(textoBusqueda) || a.Descripcion.Contains(textoBusqueda))
+                               select new
+                               {
+                                   a.ArticuloId,
+                                   a.Codigo,
+                                   a.Descripcion,
+                                   Marca = marca != null ? marca.NombreMarca : "Sin marca",
+                                   Medida = medida != null ? medida.NombreMedida : "Sin medida",
+                                   TipoConector = tipoConector != null ? tipoConector.NombreTipoConector : "Sin tipo",
+                                   a.PrecioCompra,
+                                   a.PrecioVenta,
+                                   a.Stock,
+                                   a.StockMinimo,
+                                   a.FechaAlta
+                               };
+
+                    articulosConDetalles = query.ToList<dynamic>();
+                }
+            }
+            catch (Exception e)
+            {
+                respuesta = e.Message;
+            }
+            return articulosConDetalles;
+        }
+
         public string ObtenerProximoCodigo()
         {
             try
@@ -223,7 +333,7 @@ namespace CDatos
                 {
                     // Buscar el último código numérico
                     var ultimoCodigo = db.Articulo
-                        .Where(x => x.FechaAnulacion == null && x.Codigo != null)
+                        .Where(x => x.Codigo != null)
                         .AsEnumerable() // Ejecutar en memoria para usar funciones de .NET
                         .Where(x => x.Codigo.All(char.IsDigit)) // Solo códigos numéricos
                         .Select(x => int.TryParse(x.Codigo, out int codigo) ? codigo : 0)

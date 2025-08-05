@@ -23,20 +23,10 @@ namespace VentaCredimax.Formularios
             ConfigurarEstadoInicial();
         }
 
-        private void frmGestionTipoConector_Load(object sender, EventArgs e)
-        {
-            CargarTiposConector();
-            EstiloDataGridView();
-            ConfigurarEventos();
-        }
-
         private void ConfigurarEventos()
         {
-            btnGuardar.Click += btnGuardar_Click;
-            btnEditar.Click += btnEditar_Click;
-            btnEliminar.Click += btnEliminar_Click;
             dgvTipoConector.DataBindingComplete += dgvTipoConector_DataBindingComplete;
-            dgvTipoConector.CellDoubleClick += dgvTipoConector_CellDoubleClick;
+
             dgvTipoConector.SelectionChanged += dgvTipoConector_SelectionChanged;
             
             // Configurar tecla ESC para cancelar edición
@@ -115,7 +105,26 @@ namespace VentaCredimax.Formularios
             return true;
         }
 
-        private void btnGuardar_Click(object sender, EventArgs e)
+        private void dgvTipoConector_SelectionChanged(object sender, EventArgs e)
+        {
+            // Solo habilitar el botón eliminar si hay una fila seleccionada y no estamos en modo edición
+            if (!tipoConectorIdSeleccionado.HasValue)
+            {
+                btnEliminar.Enabled = dgvTipoConector.SelectedRows.Count > 0;
+            }
+        }
+
+        private void dgvTipoConector_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            // Solo limpiar selección si no estamos en modo edición
+            if (!tipoConectorIdSeleccionado.HasValue)
+            {
+                dgvTipoConector.ClearSelection();
+                btnEliminar.Enabled = false;
+            }
+        }
+
+        private void btnGuardar_Click_1(object sender, EventArgs e)
         {
             try
             {
@@ -128,7 +137,7 @@ namespace VentaCredimax.Formularios
 
                 _gestorTipoConector.RegistrarTipoConector(tipoConector);
                 MessageBox.Show("Tipo de conector registrado exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                
+
                 EstablecerModoNuevo();
                 CargarTiposConector();
             }
@@ -136,9 +145,8 @@ namespace VentaCredimax.Formularios
             {
                 MessageBox.Show($"Error al guardar el tipo de conector: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
-
-        private void btnEditar_Click(object sender, EventArgs e)
+        }     
+        private void btnEditar_Click_1(object sender, EventArgs e)
         {
             try
             {
@@ -158,7 +166,7 @@ namespace VentaCredimax.Formularios
 
                 _gestorTipoConector.ModificarTipoConector(tipoConector);
                 MessageBox.Show("Tipo de conector modificado exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                
+
                 EstablecerModoNuevo();
                 CargarTiposConector();
             }
@@ -168,12 +176,12 @@ namespace VentaCredimax.Formularios
             }
         }
 
-        private void btnEliminar_Click(object sender, EventArgs e)
+        private void btnEliminar_Click_1(object sender, EventArgs e)
         {
             try
             {
                 int? tipoConectorIdAEliminar = null;
-                
+
                 // Si estamos en modo edición, usar el tipo de conector seleccionado
                 if (tipoConectorIdSeleccionado.HasValue)
                 {
@@ -185,25 +193,25 @@ namespace VentaCredimax.Formularios
                     var tipoConector = (TipoConector)dgvTipoConector.SelectedRows[0].DataBoundItem;
                     tipoConectorIdAEliminar = tipoConector.IdTipoConector;
                 }
-                
+
                 if (!tipoConectorIdAEliminar.HasValue)
                 {
                     MessageBox.Show("Debe seleccionar un tipo de conector para eliminar", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
-                var tipoConectorAEliminar = dgvTipoConector.SelectedRows.Count > 0 ? 
-                    (TipoConector)dgvTipoConector.SelectedRows[0].DataBoundItem : 
+                var tipoConectorAEliminar = dgvTipoConector.SelectedRows.Count > 0 ?
+                    (TipoConector)dgvTipoConector.SelectedRows[0].DataBoundItem :
                     ((List<TipoConector>)dgvTipoConector.DataSource).FirstOrDefault(tc => tc.IdTipoConector == tipoConectorIdAEliminar.Value);
 
                 string nombreTipoConector = tipoConectorAEliminar?.NombreTipoConector ?? "este tipo de conector";
 
-                if (MessageBox.Show($"¿Está seguro de eliminar el tipo de conector '{nombreTipoConector}'?", 
+                if (MessageBox.Show($"¿Está seguro de eliminar el tipo de conector '{nombreTipoConector}'?",
                     "Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     _gestorTipoConector.EliminarTipoConector(tipoConectorIdAEliminar.Value);
                     MessageBox.Show("Tipo de conector eliminado exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    
+
                     EstablecerModoNuevo();
                     CargarTiposConector();
                 }
@@ -223,7 +231,7 @@ namespace VentaCredimax.Formularios
                     var tipoConector = (TipoConector)dgvTipoConector.Rows[e.RowIndex].DataBoundItem;
                     tipoConectorIdSeleccionado = tipoConector.IdTipoConector;
                     txtNombreConector.Text = tipoConector.NombreTipoConector;
-                    
+
                     // Establecer modo edición
                     EstablecerModoEdicion();
                 }
@@ -234,23 +242,11 @@ namespace VentaCredimax.Formularios
             }
         }
 
-        private void dgvTipoConector_SelectionChanged(object sender, EventArgs e)
+        private void frmGestionTipoConector_Load_1(object sender, EventArgs e)
         {
-            // Solo habilitar el botón eliminar si hay una fila seleccionada y no estamos en modo edición
-            if (!tipoConectorIdSeleccionado.HasValue)
-            {
-                btnEliminar.Enabled = dgvTipoConector.SelectedRows.Count > 0;
-            }
-        }
-
-        private void dgvTipoConector_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
-        {
-            // Solo limpiar selección si no estamos en modo edición
-            if (!tipoConectorIdSeleccionado.HasValue)
-            {
-                dgvTipoConector.ClearSelection();
-                btnEliminar.Enabled = false;
-            }
+            CargarTiposConector();
+            EstiloDataGridView();
+            ConfigurarEventos();
         }
     }
 }

@@ -33,9 +33,10 @@ namespace VentaCredimax.Formularios
         {
             try
             {
-                var articulos = _gestorArticulo.Listar();
+                // Usar el nuevo método que incluye los nombres
+                var articulosVista = _gestorArticulo.ListarConDetalles();
 
-                dgvArticulos.DataSource = articulos;
+                dgvArticulos.DataSource = articulosVista;
                 PintarFilasStockMinimo();
             }
             catch (Exception ex)
@@ -61,6 +62,15 @@ namespace VentaCredimax.Formularios
                     if (dgvArticulos.Columns["Descripcion"] != null)
                         dgvArticulos.Columns["Descripcion"].HeaderText = "Descripción";
 
+                    if (dgvArticulos.Columns["Marca"] != null)
+                        dgvArticulos.Columns["Marca"].HeaderText = "Marca";
+
+                    if (dgvArticulos.Columns["Medida"] != null)
+                        dgvArticulos.Columns["Medida"].HeaderText = "Medida";
+
+                    if (dgvArticulos.Columns["TipoConector"] != null)
+                        dgvArticulos.Columns["TipoConector"].HeaderText = "Tipo Conector";
+
                     if (dgvArticulos.Columns["PrecioCompra"] != null)
                     {
                         dgvArticulos.Columns["PrecioCompra"].HeaderText = "Precio Compra";
@@ -85,44 +95,47 @@ namespace VentaCredimax.Formularios
                         dgvArticulos.Columns["FechaAlta"].DefaultCellStyle.Format = "dd/MM/yyyy";
                     }
 
-                    // Ocultar columnas no necesarias
-                    if (dgvArticulos.Columns["FechaAnulacion"] != null)
-                        dgvArticulos.Columns["FechaAnulacion"].Visible = false;
+                    // Configurar scroll y ajuste de columnas
+                    dgvArticulos.ScrollBars = ScrollBars.Both;
+                    dgvArticulos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
 
-                    // Ocultar columnas de relaciones (DetalleVenta y MovimientoStock)
-                    if (dgvArticulos.Columns["DetalleVenta"] != null)
-                        dgvArticulos.Columns["DetalleVenta"].Visible = false;
+                    // Permitir que el usuario redimensione las columnas
+                    dgvArticulos.AllowUserToResizeColumns = true;
+                    dgvArticulos.AllowUserToResizeRows = false;
 
-                    if (dgvArticulos.Columns["MovimientoStock"] != null)
-                        dgvArticulos.Columns["MovimientoStock"].Visible = false;
-
-                    // Configurar que las columnas ocupen todo el ancho del DataGridView
-                    dgvArticulos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-
-                    // Configurar anchos específicos para columnas principales
+                    // Configurar anchos mínimos para columnas principales
                     if (dgvArticulos.Columns["ArticuloId"] != null)
-                        dgvArticulos.Columns["ArticuloId"].FillWeight = 10; // ID más estrecho
+                        dgvArticulos.Columns["ArticuloId"].MinimumWidth = 50;
 
                     if (dgvArticulos.Columns["Codigo"] != null)
-                        dgvArticulos.Columns["Codigo"].FillWeight = 20; // Código estrecho
+                        dgvArticulos.Columns["Codigo"].MinimumWidth = 80;
 
                     if (dgvArticulos.Columns["Descripcion"] != null)
-                        dgvArticulos.Columns["Descripcion"].FillWeight = 50; // Descripción más ancha
+                        dgvArticulos.Columns["Descripcion"].MinimumWidth = 200;
+
+                    if (dgvArticulos.Columns["Marca"] != null)
+                        dgvArticulos.Columns["Marca"].MinimumWidth = 100;
+
+                    if (dgvArticulos.Columns["Medida"] != null)
+                        dgvArticulos.Columns["Medida"].MinimumWidth = 80;
+
+                    if (dgvArticulos.Columns["TipoConector"] != null)
+                        dgvArticulos.Columns["TipoConector"].MinimumWidth = 120;
 
                     if (dgvArticulos.Columns["PrecioCompra"] != null)
-                        dgvArticulos.Columns["PrecioCompra"].FillWeight = 30;
+                        dgvArticulos.Columns["PrecioCompra"].MinimumWidth = 100;
                     
                     if (dgvArticulos.Columns["PrecioVenta"] != null)
-                        dgvArticulos.Columns["PrecioVenta"].FillWeight = 30;
+                        dgvArticulos.Columns["PrecioVenta"].MinimumWidth = 100;
                     
                     if (dgvArticulos.Columns["Stock"] != null)
-                        dgvArticulos.Columns["Stock"].FillWeight = 10;
+                        dgvArticulos.Columns["Stock"].MinimumWidth = 60;
 
                     if (dgvArticulos.Columns["StockMinimo"] != null)
-                        dgvArticulos.Columns["StockMinimo"].FillWeight = 25;
+                        dgvArticulos.Columns["StockMinimo"].MinimumWidth = 90;
 
                     if (dgvArticulos.Columns["FechaAlta"] != null)
-                        dgvArticulos.Columns["FechaAlta"].FillWeight = 25;
+                        dgvArticulos.Columns["FechaAlta"].MinimumWidth = 100;
 
                 }
 
@@ -143,10 +156,14 @@ namespace VentaCredimax.Formularios
             {
                 foreach (DataGridViewRow row in dgvArticulos.Rows)
                 {
-                    if (row.DataBoundItem is Articulo articulo)
+                    if (row.DataBoundItem != null)
                     {
+                        // Obtener los valores de Stock y StockMinimo del objeto anónimo
+                        var stock = Convert.ToInt32(row.Cells["Stock"].Value);
+                        var stockMinimo = Convert.ToInt32(row.Cells["StockMinimo"].Value);
+
                         // Pintar de rojo si el stock actual es menor o igual al stock mínimo
-                        if (articulo.Stock <= articulo.StockMinimo)
+                        if (stock <= stockMinimo)
                         {
                             row.DefaultCellStyle.BackColor = Color.LightCoral;
                             row.DefaultCellStyle.ForeColor = Color.DarkRed;
@@ -176,26 +193,19 @@ namespace VentaCredimax.Formularios
             try
             {
                 var textoBusqueda = txtBuscar.Text.Trim();
-                List<Articulo> articulosFiltrados;
 
                 if (string.IsNullOrEmpty(textoBusqueda))
                 {
-                    // Si no hay texto de búsqueda, mostrar todos los artículos activos
-                    articulosFiltrados = _gestorArticulo.Listar();
+                    // Si no hay texto de búsqueda, cargar todos los artículos con detalles
+                    CargarArticulos();
                 }
                 else
                 {
-                    // Buscar por código o descripción
-                    var articulosPorCodigo = _gestorArticulo.BuscarPorCodigo(textoBusqueda);
-                    var articulosPorDescripcion = _gestorArticulo.BuscarPorNombre(textoBusqueda);
-
-                    // Combinar resultados y eliminar duplicados
-                    articulosFiltrados = articulosPorCodigo
-                        .Union(articulosPorDescripcion)
-                        .ToList();
+                    // Usar el método de búsqueda con detalles
+                    var articulosVista = _gestorArticulo.BuscarConDetalles(textoBusqueda);
+                    dgvArticulos.DataSource = articulosVista;
                 }
 
-                dgvArticulos.DataSource = articulosFiltrados;
                 PintarFilasStockMinimo();
             }
             catch (Exception ex)
@@ -214,9 +224,23 @@ namespace VentaCredimax.Formularios
         {
             if (dgvArticulos.SelectedRows.Count > 0)
             {
-                ArticuloSeleccionado = (Articulo)dgvArticulos.SelectedRows[0].DataBoundItem;
-                this.DialogResult = DialogResult.OK;
-                this.Close();
+                // Obtener el ID del artículo seleccionado
+                var articuloId = Convert.ToInt32(dgvArticulos.SelectedRows[0].Cells["ArticuloId"].Value);
+                
+                // Buscar el artículo completo en la lista
+                var articulos = _gestorArticulo.Listar();
+                ArticuloSeleccionado = articulos.FirstOrDefault(a => a.ArticuloId == articuloId);
+                
+                if (ArticuloSeleccionado != null)
+                {
+                    this.DialogResult = DialogResult.OK;
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("No se pudo obtener el artículo seleccionado.", "Error", 
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
             else
             {

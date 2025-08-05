@@ -80,6 +80,7 @@
             this.btnEliminar.TabIndex = 63;
             this.btnEliminar.Text = "Eliminar";
             this.btnEliminar.UseVisualStyleBackColor = false;
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click_1);
             // 
             // btnEditar
             // 
@@ -93,6 +94,7 @@
             this.btnEditar.TabIndex = 62;
             this.btnEditar.Text = "Editar";
             this.btnEditar.UseVisualStyleBackColor = false;
+            this.btnEditar.Click += new System.EventHandler(this.btnEditar_Click_1);
             // 
             // btnGuardar
             // 
@@ -106,6 +108,7 @@
             this.btnGuardar.TabIndex = 61;
             this.btnGuardar.Text = "Guardar";
             this.btnGuardar.UseVisualStyleBackColor = false;
+            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click_1);
             // 
             // dgvTipoConector
             // 
@@ -138,16 +141,17 @@
             this.dgvTipoConector.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvTipoConector.Size = new System.Drawing.Size(753, 324);
             this.dgvTipoConector.TabIndex = 60;
+            this.dgvTipoConector.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvTipoConector_CellDoubleClick);
             // 
             // txtNombreConector
             // 
             this.txtNombreConector.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtNombreConector.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtNombreConector.Location = new System.Drawing.Point(258, 77);
+            this.txtNombreConector.Location = new System.Drawing.Point(283, 77);
             this.txtNombreConector.Margin = new System.Windows.Forms.Padding(4);
             this.txtNombreConector.Name = "txtNombreConector";
-            this.txtNombreConector.Size = new System.Drawing.Size(518, 34);
+            this.txtNombreConector.Size = new System.Drawing.Size(493, 34);
             this.txtNombreConector.TabIndex = 64;
             // 
             // label5
@@ -177,6 +181,7 @@
             this.Name = "frmGestionTipoConector";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Gestion tipo de conector";
+            this.Load += new System.EventHandler(this.frmGestionTipoConector_Load_1);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTipoConector)).EndInit();
