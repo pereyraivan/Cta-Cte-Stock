@@ -97,6 +97,9 @@
     <Compile Include="TipoConector.cs">
       <DependentUpon>VentasStock.tt</DependentUpon>
     </Compile>
+    <Compile Include="TrabajoAireAcondicionado.cs">
+      <DependentUpon>VentasStock.tt</DependentUpon>
+    </Compile>
     <Compile Include="Venta.cs">
       <DependentUpon>VentasStock.tt</DependentUpon>
     </Compile>

@@ -61,6 +61,16 @@ namespace VentaCredimax.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap aire_acondicionado {
+            get {
+                object obj = ResourceManager.GetObject("aire-acondicionado", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &lt;!DOCTYPE html&gt;
         ///&lt;html&gt;
         ///&lt;head&gt;
@@ -71,7 +81,7 @@ namespace VentaCredimax.Properties {
         ///        }
         ///
         ///        .container {
-        ///            max-width: 42rem;
+        ///            max-width: 55rem; /* Aumenta el ancho mÃ¡ximo */
         ///            margin: 0 auto;
         ///            border: 1px solid black;
         ///            padding: 1rem;
@@ -84,8 +94,7 @@ namespace VentaCredimax.Properties {
         ///
         ///        .header h1 {
         ///            color: #1D4ED8;
-        ///            text-align: center;
-        ///       [rest of string was truncated]&quot;;.
+        ///         [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string ComprobanteDeVenta {
             get {

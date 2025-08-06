@@ -41,6 +41,7 @@ namespace CDatos
         public virtual DbSet<TipoConector> TipoConector { get; set; }
         public virtual DbSet<Venta> Venta { get; set; }
         public virtual DbSet<MetodoDePago> MetodoDePago { get; set; }
+        public virtual DbSet<TrabajoAireAcondicionado> TrabajoAireAcondicionado { get; set; }
     
         public virtual ObjectResult<ReciboDePago_Result> ReciboDePago(Nullable<int> ventaId, Nullable<int> numeroDeCuota)
         {

@@ -287,5 +287,11 @@ namespace VentaCredimax.Formularios
             frmVerVentasPorFecha verVentasPorFecha = new frmVerVentasPorFecha();
             verVentasPorFecha.ShowDialog();
         }
+
+        private void btnAiresAcondicionados_Click(object sender, EventArgs e)
+        {
+            frmAireAcondicionado frmAireAcondicionado = new frmAireAcondicionado();
+            frmAireAcondicionado.ShowDialog();
+        }
     }
 }

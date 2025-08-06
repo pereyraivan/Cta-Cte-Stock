@@ -21,6 +21,7 @@
         <EntityTypeShape EntityType="ventas_cta_cteModel.Venta" Width="1.5" PointX="0.75" PointY="10" />
         <AssociationConnector Association="ventas_cta_cteModel.FK_DetalleVenta_Venta" />
         <EntityTypeShape EntityType="ventas_cta_cteModel.MetodoDePago" Width="1.5" PointX="3.375" PointY="10.75" />
+        <EntityTypeShape EntityType="ventas_cta_cteModel.TrabajoAireAcondicionado" Width="1.5" PointX="5.375" PointY="10.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
