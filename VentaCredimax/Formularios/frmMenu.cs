@@ -293,5 +293,11 @@ namespace VentaCredimax.Formularios
             frmAireAcondicionado frmAireAcondicionado = new frmAireAcondicionado();
             frmAireAcondicionado.ShowDialog();
         }
+
+        private void btnGestionCompras_Click(object sender, EventArgs e)
+        {
+            frmCompras frmCompras = new frmCompras();
+            frmCompras.ShowDialog();
+        }
     }
 }

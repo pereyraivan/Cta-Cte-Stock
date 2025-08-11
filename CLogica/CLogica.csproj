@@ -44,6 +44,7 @@
     <Compile Include="GestorAireAcondicionado.cs" />
     <Compile Include="GestorArticulo.cs" />
     <Compile Include="GestorCliente.cs" />
+    <Compile Include="GestorCompra.cs" />
     <Compile Include="GestorCuotas.cs" />
     <Compile Include="GestorMarca.cs" />
     <Compile Include="GestorMedida.cs" />

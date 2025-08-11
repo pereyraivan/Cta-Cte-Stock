@@ -483,6 +483,8 @@
     <None Include="Resources\productos.png" />
     <None Include="Resources\entrevista.png" />
     <None Include="Resources\aire-acondicionado.png" />
+    <None Include="Resources\salir.png" />
+    <None Include="Resources\documento.png" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

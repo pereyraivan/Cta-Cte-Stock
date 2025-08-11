@@ -34,6 +34,16 @@
           <Property Name="Telefono" Type="nvarchar" MaxLength="15" />
           <Property Name="FechaAnulacion" Type="datetime" />
         </EntityType>
+        <EntityType Name="Compra">
+          <Key>
+            <PropertyRef Name="IdCompra" />
+          </Key>
+          <Property Name="IdCompra" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdArticulo" Type="int" Nullable="false" />
+          <Property Name="Precio" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Cantidad" Type="int" Nullable="false" />
+          <Property Name="FechaCompra" Type="datetime" />
+        </EntityType>
         <EntityType Name="Configuracion">
           <Key>
             <PropertyRef Name="Id" />
@@ -206,6 +216,7 @@ warning 6002: The table/view 'ventas_cta_cte.dbo.ReciboControl' does not have a 
         <EntityContainer Name="ventas_cta_cteModelStoreContainer">
           <EntitySet Name="Articulo" EntityType="Self.Articulo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Cliente" EntityType="Self.Cliente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Compra" EntityType="Self.Compra" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Configuracion" EntityType="Self.Configuracion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Cuota" EntityType="Self.Cuota" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DetalleVenta" EntityType="Self.DetalleVenta" Schema="dbo" store:Type="Tables" />
@@ -400,6 +411,7 @@ warning 6002: The table/view 'ventas_cta_cte.dbo.ReciboControl' does not have a 
           </FunctionImport>
           <EntitySet Name="MetodoDePago" EntityType="ventas_cta_cteModel.MetodoDePago" />
           <EntitySet Name="TrabajoAireAcondicionado" EntityType="ventas_cta_cteModel.TrabajoAireAcondicionado" />
+          <EntitySet Name="Compra" EntityType="ventas_cta_cteModel.Compra" />
         </EntityContainer>
         <ComplexType Name="ReciboDePago_Result">
           <Property Type="Int32" Name="VentaId" Nullable="false" />
@@ -565,6 +577,16 @@ warning 6002: The table/view 'ventas_cta_cte.dbo.ReciboControl' does not have a 
           <Property Name="Precio" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="Cliente" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="FechaTrabajo" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Compra">
+          <Key>
+            <PropertyRef Name="IdCompra" />
+          </Key>
+          <Property Name="IdCompra" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdArticulo" Type="Int32" Nullable="false" />
+          <Property Name="Precio" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Cantidad" Type="Int32" Nullable="false" />
+          <Property Name="FechaCompra" Type="DateTime" Precision="3" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -841,6 +863,17 @@ warning 6002: The table/view 'ventas_cta_cte.dbo.ReciboControl' does not have a 
                 <ScalarProperty Name="Precio" ColumnName="Precio" />
                 <ScalarProperty Name="DescripcionTrabajo" ColumnName="DescripcionTrabajo" />
                 <ScalarProperty Name="IdTrabajo" ColumnName="IdTrabajo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Compra">
+            <EntityTypeMapping TypeName="ventas_cta_cteModel.Compra">
+              <MappingFragment StoreEntitySet="Compra">
+                <ScalarProperty Name="FechaCompra" ColumnName="FechaCompra" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="IdArticulo" ColumnName="IdArticulo" />
+                <ScalarProperty Name="IdCompra" ColumnName="IdCompra" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

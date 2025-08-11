@@ -48,6 +48,9 @@
     <Compile Include="Cliente.cs">
       <DependentUpon>VentasStock.tt</DependentUpon>
     </Compile>
+    <Compile Include="Compra.cs">
+      <DependentUpon>VentasStock.tt</DependentUpon>
+    </Compile>
     <Compile Include="ComprobanteDePago_Result.cs">
       <DependentUpon>VentasStock.tt</DependentUpon>
     </Compile>

@@ -30,15 +30,17 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMenu));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pTituloSistema = new System.Windows.Forms.Panel();
             this.button1 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.pMenuLateral = new System.Windows.Forms.Panel();
             this.panel12 = new System.Windows.Forms.Panel();
             this.btnAiresAcondicionados = new System.Windows.Forms.Button();
+            this.panel13 = new System.Windows.Forms.Panel();
+            this.btnGestionCompras = new System.Windows.Forms.Button();
             this.panel11 = new System.Windows.Forms.Panel();
             this.button2 = new System.Windows.Forms.Button();
             this.panel9 = new System.Windows.Forms.Panel();
@@ -124,6 +126,8 @@
             this.pMenuLateral.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(164)))), ((int)(((byte)(196)))), ((int)(((byte)(231)))), ((int)(((byte)(255)))));
             this.pMenuLateral.Controls.Add(this.panel12);
             this.pMenuLateral.Controls.Add(this.btnAiresAcondicionados);
+            this.pMenuLateral.Controls.Add(this.panel13);
+            this.pMenuLateral.Controls.Add(this.btnGestionCompras);
             this.pMenuLateral.Controls.Add(this.panel11);
             this.pMenuLateral.Controls.Add(this.button2);
             this.pMenuLateral.Controls.Add(this.panel9);
@@ -141,7 +145,7 @@
             this.pMenuLateral.Location = new System.Drawing.Point(0, 59);
             this.pMenuLateral.Margin = new System.Windows.Forms.Padding(4);
             this.pMenuLateral.Name = "pMenuLateral";
-            this.pMenuLateral.Size = new System.Drawing.Size(331, 794);
+            this.pMenuLateral.Size = new System.Drawing.Size(331, 880);
             this.pMenuLateral.TabIndex = 2;
             // 
             // panel12
@@ -172,6 +176,35 @@
             this.TTAyudaMenu.SetToolTip(this.btnAiresAcondicionados, "Trabajos de aire acondicionados");
             this.btnAiresAcondicionados.UseVisualStyleBackColor = true;
             this.btnAiresAcondicionados.Click += new System.EventHandler(this.btnAiresAcondicionados_Click);
+            // 
+            // panel13
+            // 
+            this.panel13.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(52)))), ((int)(((byte)(108)))));
+            this.panel13.Location = new System.Drawing.Point(3, 534);
+            this.panel13.Margin = new System.Windows.Forms.Padding(4);
+            this.panel13.Name = "panel13";
+            this.panel13.Size = new System.Drawing.Size(16, 78);
+            this.panel13.TabIndex = 15;
+            // 
+            // btnGestionCompras
+            // 
+            this.btnGestionCompras.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnGestionCompras.FlatAppearance.BorderSize = 0;
+            this.btnGestionCompras.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Highlight;
+            this.btnGestionCompras.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnGestionCompras.Font = new System.Drawing.Font("OCR A Extended", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnGestionCompras.Image = global::VentaCredimax.Properties.Resources.salir;
+            this.btnGestionCompras.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnGestionCompras.Location = new System.Drawing.Point(15, 534);
+            this.btnGestionCompras.Margin = new System.Windows.Forms.Padding(4);
+            this.btnGestionCompras.Name = "btnGestionCompras";
+            this.btnGestionCompras.Size = new System.Drawing.Size(312, 80);
+            this.btnGestionCompras.TabIndex = 16;
+            this.btnGestionCompras.Text = "Gestion \rCompras";
+            this.btnGestionCompras.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.TTAyudaMenu.SetToolTip(this.btnGestionCompras, "Gestión de compras de mercaderías");
+            this.btnGestionCompras.UseVisualStyleBackColor = true;
+            this.btnGestionCompras.Click += new System.EventHandler(this.btnGestionCompras_Click);
             // 
             // panel11
             // 
@@ -238,7 +271,7 @@
             this.pSubMenuInformes.Controls.Add(this.panel5);
             this.pSubMenuInformes.Controls.Add(this.btnInformeVentas);
             this.pSubMenuInformes.Controls.Add(this.btnInformeCuotas);
-            this.pSubMenuInformes.Location = new System.Drawing.Point(47, 651);
+            this.pSubMenuInformes.Location = new System.Drawing.Point(47, 701);
             this.pSubMenuInformes.Margin = new System.Windows.Forms.Padding(4);
             this.pSubMenuInformes.Name = "pSubMenuInformes";
             this.pSubMenuInformes.Size = new System.Drawing.Size(276, 138);
@@ -319,9 +352,9 @@
             this.btnInformes.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Highlight;
             this.btnInformes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnInformes.Font = new System.Drawing.Font("OCR A Extended", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnInformes.Image = ((System.Drawing.Image)(resources.GetObject("btnInformes.Image")));
+            this.btnInformes.Image = global::VentaCredimax.Properties.Resources.documento;
             this.btnInformes.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnInformes.Location = new System.Drawing.Point(17, 568);
+            this.btnInformes.Location = new System.Drawing.Point(17, 619);
             this.btnInformes.Margin = new System.Windows.Forms.Padding(4);
             this.btnInformes.Name = "btnInformes";
             this.btnInformes.Size = new System.Drawing.Size(312, 80);
@@ -334,7 +367,7 @@
             // panel4
             // 
             this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(52)))), ((int)(((byte)(108)))));
-            this.panel4.Location = new System.Drawing.Point(3, 568);
+            this.panel4.Location = new System.Drawing.Point(3, 619);
             this.panel4.Margin = new System.Windows.Forms.Padding(4);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(16, 80);
@@ -439,7 +472,7 @@
             this.panel7.Location = new System.Drawing.Point(1580, 59);
             this.panel7.Margin = new System.Windows.Forms.Padding(4);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(0, 794);
+            this.panel7.Size = new System.Drawing.Size(0, 880);
             this.panel7.TabIndex = 3;
             // 
             // btnActualizarVentas
@@ -526,38 +559,38 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvVentasMenu.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvVentasMenu.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.LightSkyBlue;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvVentasMenu.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.LightSkyBlue;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvVentasMenu.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvVentasMenu.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.LightSkyBlue;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvVentasMenu.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.LightSkyBlue;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvVentasMenu.DefaultCellStyle = dataGridViewCellStyle5;
             this.dgvVentasMenu.Location = new System.Drawing.Point(17, 33);
             this.dgvVentasMenu.Margin = new System.Windows.Forms.Padding(13, 12, 13, 12);
             this.dgvVentasMenu.Name = "dgvVentasMenu";
             this.dgvVentasMenu.ReadOnly = true;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvVentasMenu.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvVentasMenu.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.dgvVentasMenu.RowHeadersWidth = 51;
             this.dgvVentasMenu.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvVentasMenu.Size = new System.Drawing.Size(1217, 742);
+            this.dgvVentasMenu.Size = new System.Drawing.Size(1217, 828);
             this.dgvVentasMenu.TabIndex = 36;
             this.dgvVentasMenu.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvVentasMenu_CellDoubleClick);
             // 
@@ -568,14 +601,14 @@
             this.panel8.Location = new System.Drawing.Point(331, 59);
             this.panel8.Margin = new System.Windows.Forms.Padding(4);
             this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(1249, 794);
+            this.panel8.Size = new System.Drawing.Size(1249, 880);
             this.panel8.TabIndex = 37;
             // 
             // frmMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1580, 853);
+            this.ClientSize = new System.Drawing.Size(1580, 939);
             this.Controls.Add(this.panel8);
             this.Controls.Add(this.panel7);
             this.Controls.Add(this.pMenuLateral);
@@ -634,5 +667,7 @@
         private System.Windows.Forms.Panel panel10;
         private System.Windows.Forms.Panel panel12;
         private System.Windows.Forms.Button btnAiresAcondicionados;
+        private System.Windows.Forms.Panel panel13;
+        private System.Windows.Forms.Button btnGestionCompras;
     }
 }

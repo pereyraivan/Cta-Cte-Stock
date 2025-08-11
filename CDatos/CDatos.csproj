@@ -59,6 +59,7 @@
     <Compile Include="RepositorioAireAcondicionado.cs" />
     <Compile Include="RepositorioArticulo.cs" />
     <Compile Include="RepositorioCliente.cs" />
+    <Compile Include="RepositorioCompra.cs" />
     <Compile Include="RepositorioCuotas.cs" />
     <Compile Include="RepositorioMarca.cs" />
     <Compile Include="RepositorioMedida.cs" />
