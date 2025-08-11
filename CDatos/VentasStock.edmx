@@ -130,6 +130,7 @@ warning 6002: The table/view 'ventas_cta_cte.dbo.ReciboControl' does not have a 
           <Property Name="DescripcionTrabajo" Type="nvarchar" MaxLength="150" />
           <Property Name="Cliente" Type="nvarchar" MaxLength="50" />
           <Property Name="Precio" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="FechaTrabajo" Type="datetime" />
         </EntityType>
         <EntityType Name="Venta">
           <Key>
@@ -563,6 +564,7 @@ warning 6002: The table/view 'ventas_cta_cte.dbo.ReciboControl' does not have a 
           <Property Name="DescripcionTrabajo" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="Precio" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="Cliente" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FechaTrabajo" Type="DateTime" Precision="3" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -834,6 +836,7 @@ warning 6002: The table/view 'ventas_cta_cte.dbo.ReciboControl' does not have a 
           <EntitySetMapping Name="TrabajoAireAcondicionado">
             <EntityTypeMapping TypeName="ventas_cta_cteModel.TrabajoAireAcondicionado">
               <MappingFragment StoreEntitySet="TrabajoAireAcondicionado">
+                <ScalarProperty Name="FechaTrabajo" ColumnName="FechaTrabajo" />
                 <ScalarProperty Name="Cliente" ColumnName="Cliente" />
                 <ScalarProperty Name="Precio" ColumnName="Precio" />
                 <ScalarProperty Name="DescripcionTrabajo" ColumnName="DescripcionTrabajo" />

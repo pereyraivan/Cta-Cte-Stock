@@ -33,6 +33,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btnAnularCompra = new System.Windows.Forms.Button();
             this.lblTotal = new System.Windows.Forms.Label();
+            this.lblTotalTrabajos = new System.Windows.Forms.Label();
             this.dtpFechaHasta = new System.Windows.Forms.DateTimePicker();
             this.dtpFechaDesde = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
@@ -65,23 +66,36 @@
             // 
             // lblTotal
             // 
-            this.lblTotal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblTotal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblTotal.AutoSize = true;
             this.lblTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTotal.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(56)))), ((int)(((byte)(87)))));
-            this.lblTotal.Location = new System.Drawing.Point(760, 800);
+            this.lblTotal.Location = new System.Drawing.Point(40, 774);
             this.lblTotal.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblTotal.Name = "lblTotal";
             this.lblTotal.Size = new System.Drawing.Size(42, 42);
             this.lblTotal.TabIndex = 103;
             this.lblTotal.Text = "T";
             // 
+            // lblTotalTrabajos
+            // 
+            this.lblTotalTrabajos.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblTotalTrabajos.AutoSize = true;
+            this.lblTotalTrabajos.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotalTrabajos.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(139)))), ((int)(((byte)(34)))));
+            this.lblTotalTrabajos.Location = new System.Drawing.Point(40, 826);
+            this.lblTotalTrabajos.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblTotalTrabajos.Name = "lblTotalTrabajos";
+            this.lblTotalTrabajos.Size = new System.Drawing.Size(42, 42);
+            this.lblTotalTrabajos.TabIndex = 106;
+            this.lblTotalTrabajos.Text = "T";
+            // 
             // dtpFechaHasta
             // 
             this.dtpFechaHasta.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpFechaHasta.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpFechaHasta.Location = new System.Drawing.Point(823, 78);
-            this.dtpFechaHasta.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dtpFechaHasta.Margin = new System.Windows.Forms.Padding(4);
             this.dtpFechaHasta.Name = "dtpFechaHasta";
             this.dtpFechaHasta.Size = new System.Drawing.Size(265, 30);
             this.dtpFechaHasta.TabIndex = 102;
@@ -91,7 +105,7 @@
             this.dtpFechaDesde.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpFechaDesde.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpFechaDesde.Location = new System.Drawing.Point(277, 78);
-            this.dtpFechaDesde.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dtpFechaDesde.Margin = new System.Windows.Forms.Padding(4);
             this.dtpFechaDesde.Name = "dtpFechaDesde";
             this.dtpFechaDesde.Size = new System.Drawing.Size(265, 30);
             this.dtpFechaDesde.TabIndex = 101;
@@ -148,7 +162,7 @@
             this.dgvVentasPorFecha.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvVentasPorFecha.GridColor = System.Drawing.SystemColors.Control;
             this.dgvVentasPorFecha.Location = new System.Drawing.Point(47, 144);
-            this.dgvVentasPorFecha.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dgvVentasPorFecha.Margin = new System.Windows.Forms.Padding(4);
             this.dgvVentasPorFecha.Name = "dgvVentasPorFecha";
             this.dgvVentasPorFecha.ReadOnly = true;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -161,16 +175,16 @@
             this.dgvVentasPorFecha.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvVentasPorFecha.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.dgvVentasPorFecha.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvVentasPorFecha.Size = new System.Drawing.Size(1500, 631);
+            this.dgvVentasPorFecha.Size = new System.Drawing.Size(1500, 610);
             this.dgvVentasPorFecha.TabIndex = 98;
             // 
             // lblTotalPagado
             // 
-            this.lblTotalPagado.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblTotalPagado.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblTotalPagado.AutoSize = true;
             this.lblTotalPagado.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTotalPagado.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(56)))), ((int)(((byte)(87)))));
-            this.lblTotalPagado.Location = new System.Drawing.Point(760, 862);
+            this.lblTotalPagado.Location = new System.Drawing.Point(40, 878);
             this.lblTotalPagado.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblTotalPagado.Name = "lblTotalPagado";
             this.lblTotalPagado.Size = new System.Drawing.Size(42, 42);
@@ -184,6 +198,7 @@
             this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.ClientSize = new System.Drawing.Size(1588, 940);
             this.Controls.Add(this.lblTotalPagado);
+            this.Controls.Add(this.lblTotalTrabajos);
             this.Controls.Add(this.btnAnularCompra);
             this.Controls.Add(this.lblTotal);
             this.Controls.Add(this.dtpFechaHasta);
@@ -191,7 +206,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.dgvVentasPorFecha);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frmVerVentasPorFecha";
             this.Text = "Ventas Por Fecha";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
@@ -204,6 +219,7 @@
         #endregion
         private System.Windows.Forms.Button btnAnularCompra;
         private System.Windows.Forms.Label lblTotal;
+        private System.Windows.Forms.Label lblTotalTrabajos;
         private System.Windows.Forms.DateTimePicker dtpFechaHasta;
         private System.Windows.Forms.DateTimePicker dtpFechaDesde;
         private System.Windows.Forms.Label label1;

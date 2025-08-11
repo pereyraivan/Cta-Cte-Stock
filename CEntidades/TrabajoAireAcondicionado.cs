@@ -16,8 +16,8 @@ namespace CEntidades
     {
         public int IdTrabajo { get; set; }
         public string DescripcionTrabajo { get; set; }
-        public string Cliente { get; set; }
         public Nullable<decimal> Precio { get; set; }
-       
+        public string Cliente { get; set; }
+        public Nullable<System.DateTime> FechaTrabajo { get; set; }
     }
 }

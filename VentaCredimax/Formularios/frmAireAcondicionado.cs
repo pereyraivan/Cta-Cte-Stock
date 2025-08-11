@@ -28,6 +28,10 @@ namespace VentaCredimax.Formularios
             gestor = new GestorAireAcondicionado();
             CargarGrilla();
             LimpiarCampos();
+            
+            // Habilitar eventos de teclas para el formulario
+            this.KeyPreview = true;
+            this.KeyDown += frmAireAcondicionado_KeyDown;
         }
 
         private void CargarGrilla()
@@ -42,16 +46,18 @@ namespace VentaCredimax.Formularios
             {
                 var trabajo = new TrabajoAireAcondicionado
                 {
-                    IdTrabajo = modoEdicion ? trabajoSeleccionado.IdTrabajo : 0,
+                    IdTrabajo = 0,
                     DescripcionTrabajo = txtDescripcion.Text.Trim(),
-                    Precio = string.IsNullOrEmpty(txtPrecio.Text) ? (decimal?)null : Convert.ToDecimal(txtPrecio.Text)
+                    Cliente = txtCliente.Text,
+                    Precio = string.IsNullOrEmpty(txtPrecio.Text) ? (decimal?)null : Convert.ToDecimal(txtPrecio.Text),
+                    FechaTrabajo = DateTime.Now.Date
                 };
 
-                bool resultado = modoEdicion ? gestor.ModificarTrabajo(trabajo) : gestor.GuardarTrabajo(trabajo);
+                bool resultado = gestor.GuardarTrabajo(trabajo);
                 
                 if (resultado)
                 {
-                    MessageBox.Show("Trabajo " + (modoEdicion ? "modificado" : "guardado") + " exitosamente");
+                    MessageBox.Show("Trabajo guardado exitosamente");
                     CargarGrilla();
                     LimpiarCampos();
                 }
@@ -68,16 +74,56 @@ namespace VentaCredimax.Formularios
 
         private void btnEditar_Click(object sender, EventArgs e)
         {
-            if (dgvTrabajos.SelectedRows.Count > 0)
+            if (!modoEdicion)
             {
-                trabajoSeleccionado = (TrabajoAireAcondicionado)dgvTrabajos.SelectedRows[0].DataBoundItem;
-                txtDescripcion.Text = trabajoSeleccionado.DescripcionTrabajo;
-                txtCliente.Text = trabajoSeleccionado.Cliente ?? "";
-                txtPrecio.Text = trabajoSeleccionado.Precio?.ToString() ?? "";
+                // Entrar en modo edición
+                if (dgvTrabajos.SelectedRows.Count > 0)
+                {
+                    trabajoSeleccionado = (TrabajoAireAcondicionado)dgvTrabajos.SelectedRows[0].DataBoundItem;
+                    txtDescripcion.Text = trabajoSeleccionado.DescripcionTrabajo;
+                    txtCliente.Text = trabajoSeleccionado.Cliente ?? "";
+                    txtPrecio.Text = trabajoSeleccionado.Precio?.ToString() ?? "";
+                    
+                    modoEdicion = true;
+                    btnEditar.Text = "Confirmar Edición";
+                    btnGuardar.Enabled = false; // Deshabilitar guardar en modo edición
+                }
+                else
+                {
+                    MessageBox.Show("Debe seleccionar un trabajo para editar");
+                }
             }
             else
             {
-                MessageBox.Show("Debe seleccionar un trabajo para editar");
+                // Confirmar edición
+                try
+                {
+                    var trabajo = new TrabajoAireAcondicionado
+                    {
+                        IdTrabajo = trabajoSeleccionado.IdTrabajo,
+                        DescripcionTrabajo = txtDescripcion.Text.Trim(),
+                        Cliente = txtCliente.Text.Trim(),
+                        Precio = string.IsNullOrEmpty(txtPrecio.Text) ? (decimal?)null : Convert.ToDecimal(txtPrecio.Text),
+                        FechaTrabajo = trabajoSeleccionado.FechaTrabajo // Mantener la fecha original en edición
+                    };
+
+                    bool resultado = gestor.ModificarTrabajo(trabajo);
+                    
+                    if (resultado)
+                    {
+                        MessageBox.Show("Trabajo modificado exitosamente");
+                        CargarGrilla();
+                        LimpiarCampos();
+                    }
+                    else
+                    {
+                        MessageBox.Show(gestor.GetUltimoError(), "Error");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: " + ex.Message);
+                }
             }
         }
 
@@ -113,8 +159,24 @@ namespace VentaCredimax.Formularios
             txtDescripcion.Clear();
             txtPrecio.Clear();
             txtCliente.Clear();
-            btnGuardar.Text = "Guardar";
+            btnEditar.Text = "Editar";
+            btnGuardar.Enabled = true;
+            modoEdicion = false;
             trabajoSeleccionado = null;
+        }
+
+        private void CancelarEdicion()
+        {
+            LimpiarCampos();
+            MessageBox.Show("Edición cancelada");
+        }
+
+        private void frmAireAcondicionado_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape && modoEdicion)
+            {
+                CancelarEdicion();
+            }
         }
 
         private void ConfigurarGrilla()
@@ -126,10 +188,21 @@ namespace VentaCredimax.Formularios
                 dgvTrabajos.Columns["Cliente"].HeaderText = "Cliente";
                 dgvTrabajos.Columns["Precio"].HeaderText = "Precio";
                 
+                // Verificar si existe la columna FechaTrabajo
+                if (dgvTrabajos.Columns["FechaTrabajo"] != null)
+                {
+                    dgvTrabajos.Columns["FechaTrabajo"].HeaderText = "Fecha";
+                    dgvTrabajos.Columns["FechaTrabajo"].Width = 100;
+                    dgvTrabajos.Columns["FechaTrabajo"].DefaultCellStyle.Format = "dd/MM/yyyy";
+                }
+                
                 dgvTrabajos.Columns["IdTrabajo"].Width = 30;
-                dgvTrabajos.Columns["DescripcionTrabajo"].Width = 300;
+                dgvTrabajos.Columns["DescripcionTrabajo"].Width = 250;
                 dgvTrabajos.Columns["Cliente"].Width = 100; 
                 dgvTrabajos.Columns["Precio"].Width = 100;
+                
+                // Formatear la columna de precio
+                dgvTrabajos.Columns["Precio"].DefaultCellStyle.Format = "C";
             }
         }
 
@@ -143,7 +216,8 @@ namespace VentaCredimax.Formularios
                 txtPrecio.Text = trabajoSeleccionado.Precio?.ToString() ?? "";
                 
                 modoEdicion = true;
-              
+                btnEditar.Text = "Confirmar Edición";
+                btnGuardar.Enabled = false;
                 
                 txtDescripcion.Focus();
             }

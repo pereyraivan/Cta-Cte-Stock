@@ -29,24 +29,36 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMenu));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMenu));
             this.pTituloSistema = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.pMenuLateral = new System.Windows.Forms.Panel();
+            this.panel12 = new System.Windows.Forms.Panel();
+            this.btnAiresAcondicionados = new System.Windows.Forms.Button();
             this.panel11 = new System.Windows.Forms.Panel();
+            this.button2 = new System.Windows.Forms.Button();
             this.panel9 = new System.Windows.Forms.Panel();
+            this.btnGestionVendedor = new System.Windows.Forms.Button();
             this.pSubMenuInformes = new System.Windows.Forms.Panel();
             this.panel6 = new System.Windows.Forms.Panel();
             this.panel10 = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.btnInformeVentas = new System.Windows.Forms.Button();
+            this.btnInformeCuotas = new System.Windows.Forms.Button();
+            this.btnInformes = new System.Windows.Forms.Button();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.btnGestionPagos = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.btnGestionCliente = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnNuevaVenta = new System.Windows.Forms.Button();
             this.panel7 = new System.Windows.Forms.Panel();
+            this.btnActualizarVentas = new System.Windows.Forms.Button();
             this.cbOrdenarPor = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.cbBuscarPor = new System.Windows.Forms.ComboBox();
@@ -55,18 +67,6 @@
             this.dgvVentasMenu = new System.Windows.Forms.DataGridView();
             this.TTAyudaMenu = new System.Windows.Forms.ToolTip(this.components);
             this.panel8 = new System.Windows.Forms.Panel();
-            this.panel12 = new System.Windows.Forms.Panel();
-            this.btnActualizarVentas = new System.Windows.Forms.Button();
-            this.btnAiresAcondicionados = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.btnGestionVendedor = new System.Windows.Forms.Button();
-            this.btnInformeVentas = new System.Windows.Forms.Button();
-            this.btnInformeCuotas = new System.Windows.Forms.Button();
-            this.btnInformes = new System.Windows.Forms.Button();
-            this.btnGestionPagos = new System.Windows.Forms.Button();
-            this.btnGestionCliente = new System.Windows.Forms.Button();
-            this.btnNuevaVenta = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
             this.pTituloSistema.SuspendLayout();
             this.pMenuLateral.SuspendLayout();
             this.pSubMenuInformes.SuspendLayout();
@@ -86,6 +86,26 @@
             this.pTituloSistema.Name = "pTituloSistema";
             this.pTituloSistema.Size = new System.Drawing.Size(1580, 59);
             this.pTituloSistema.TabIndex = 1;
+            // 
+            // button1
+            // 
+            this.button1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button1.BackgroundImage")));
+            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button1.Dock = System.Windows.Forms.DockStyle.Right;
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Highlight;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("OCR A Extended", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.ForeColor = System.Drawing.SystemColors.ActiveCaption;
+            this.button1.Location = new System.Drawing.Point(1480, 0);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(100, 59);
+            this.button1.TabIndex = 10;
+            this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.TTAyudaMenu.SetToolTip(this.button1, "Seleccione una venta para imprimir el historial del cliente.");
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // label2
             // 
@@ -124,6 +144,35 @@
             this.pMenuLateral.Size = new System.Drawing.Size(331, 794);
             this.pMenuLateral.TabIndex = 2;
             // 
+            // panel12
+            // 
+            this.panel12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(52)))), ((int)(((byte)(108)))));
+            this.panel12.Location = new System.Drawing.Point(2, 447);
+            this.panel12.Margin = new System.Windows.Forms.Padding(4);
+            this.panel12.Name = "panel12";
+            this.panel12.Size = new System.Drawing.Size(16, 78);
+            this.panel12.TabIndex = 15;
+            // 
+            // btnAiresAcondicionados
+            // 
+            this.btnAiresAcondicionados.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnAiresAcondicionados.FlatAppearance.BorderSize = 0;
+            this.btnAiresAcondicionados.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Highlight;
+            this.btnAiresAcondicionados.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAiresAcondicionados.Font = new System.Drawing.Font("OCR A Extended", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAiresAcondicionados.Image = global::VentaCredimax.Properties.Resources.aire_acondicionado;
+            this.btnAiresAcondicionados.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnAiresAcondicionados.Location = new System.Drawing.Point(15, 446);
+            this.btnAiresAcondicionados.Margin = new System.Windows.Forms.Padding(4);
+            this.btnAiresAcondicionados.Name = "btnAiresAcondicionados";
+            this.btnAiresAcondicionados.Size = new System.Drawing.Size(312, 80);
+            this.btnAiresAcondicionados.TabIndex = 14;
+            this.btnAiresAcondicionados.Text = "Gestion \rAire acond.";
+            this.btnAiresAcondicionados.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.TTAyudaMenu.SetToolTip(this.btnAiresAcondicionados, "Trabajos de aire acondicionados");
+            this.btnAiresAcondicionados.UseVisualStyleBackColor = true;
+            this.btnAiresAcondicionados.Click += new System.EventHandler(this.btnAiresAcondicionados_Click);
+            // 
             // panel11
             // 
             this.panel11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(52)))), ((int)(((byte)(108)))));
@@ -133,6 +182,26 @@
             this.panel11.Size = new System.Drawing.Size(16, 78);
             this.panel11.TabIndex = 13;
             // 
+            // button2
+            // 
+            this.button2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button2.FlatAppearance.BorderSize = 0;
+            this.button2.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Highlight;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.Font = new System.Drawing.Font("OCR A Extended", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button2.Image = global::VentaCredimax.Properties.Resources.productos;
+            this.button2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button2.Location = new System.Drawing.Point(16, 359);
+            this.button2.Margin = new System.Windows.Forms.Padding(4);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(312, 80);
+            this.button2.TabIndex = 12;
+            this.button2.Text = "Gestion \rArticulos";
+            this.button2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.TTAyudaMenu.SetToolTip(this.button2, "Alta, Baja y modificacion de clientes");
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // panel9
             // 
             this.panel9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(52)))), ((int)(((byte)(108)))));
@@ -141,6 +210,26 @@
             this.panel9.Name = "panel9";
             this.panel9.Size = new System.Drawing.Size(16, 74);
             this.panel9.TabIndex = 11;
+            // 
+            // btnGestionVendedor
+            // 
+            this.btnGestionVendedor.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnGestionVendedor.FlatAppearance.BorderSize = 0;
+            this.btnGestionVendedor.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Highlight;
+            this.btnGestionVendedor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnGestionVendedor.Font = new System.Drawing.Font("OCR A Extended", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnGestionVendedor.Image = global::VentaCredimax.Properties.Resources.entrevista;
+            this.btnGestionVendedor.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnGestionVendedor.Location = new System.Drawing.Point(17, 278);
+            this.btnGestionVendedor.Margin = new System.Windows.Forms.Padding(4);
+            this.btnGestionVendedor.Name = "btnGestionVendedor";
+            this.btnGestionVendedor.Size = new System.Drawing.Size(312, 80);
+            this.btnGestionVendedor.TabIndex = 10;
+            this.btnGestionVendedor.Text = "   Ventas por Fecha";
+            this.btnGestionVendedor.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.TTAyudaMenu.SetToolTip(this.btnGestionVendedor, "Consulta ventas por fecha");
+            this.btnGestionVendedor.UseVisualStyleBackColor = true;
+            this.btnGestionVendedor.Click += new System.EventHandler(this.btnGestionVendedor_Click);
             // 
             // pSubMenuInformes
             // 
@@ -183,6 +272,65 @@
             this.panel5.Size = new System.Drawing.Size(10, 65);
             this.panel5.TabIndex = 11;
             // 
+            // btnInformeVentas
+            // 
+            this.btnInformeVentas.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnInformeVentas.FlatAppearance.BorderSize = 0;
+            this.btnInformeVentas.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Highlight;
+            this.btnInformeVentas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnInformeVentas.Font = new System.Drawing.Font("OCR A Extended", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnInformeVentas.Image = ((System.Drawing.Image)(resources.GetObject("btnInformeVentas.Image")));
+            this.btnInformeVentas.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnInformeVentas.Location = new System.Drawing.Point(16, 73);
+            this.btnInformeVentas.Margin = new System.Windows.Forms.Padding(4);
+            this.btnInformeVentas.Name = "btnInformeVentas";
+            this.btnInformeVentas.Size = new System.Drawing.Size(256, 54);
+            this.btnInformeVentas.TabIndex = 10;
+            this.btnInformeVentas.Text = "    Ventas por fecha";
+            this.btnInformeVentas.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.TTAyudaMenu.SetToolTip(this.btnInformeVentas, "Imprime ventas por fechas ");
+            this.btnInformeVentas.UseVisualStyleBackColor = true;
+            this.btnInformeVentas.Click += new System.EventHandler(this.btnInformeVentas_Click);
+            // 
+            // btnInformeCuotas
+            // 
+            this.btnInformeCuotas.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnInformeCuotas.FlatAppearance.BorderSize = 0;
+            this.btnInformeCuotas.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Highlight;
+            this.btnInformeCuotas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnInformeCuotas.Font = new System.Drawing.Font("OCR A Extended", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnInformeCuotas.Image = ((System.Drawing.Image)(resources.GetObject("btnInformeCuotas.Image")));
+            this.btnInformeCuotas.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnInformeCuotas.Location = new System.Drawing.Point(17, 7);
+            this.btnInformeCuotas.Margin = new System.Windows.Forms.Padding(4);
+            this.btnInformeCuotas.Name = "btnInformeCuotas";
+            this.btnInformeCuotas.Size = new System.Drawing.Size(255, 54);
+            this.btnInformeCuotas.TabIndex = 9;
+            this.btnInformeCuotas.Text = "  Ventas por cliente";
+            this.btnInformeCuotas.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.TTAyudaMenu.SetToolTip(this.btnInformeCuotas, "Seleccione una venta para imprimir el historial del cliente.");
+            this.btnInformeCuotas.UseVisualStyleBackColor = true;
+            this.btnInformeCuotas.Click += new System.EventHandler(this.btnInformeCuotas_Click);
+            // 
+            // btnInformes
+            // 
+            this.btnInformes.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnInformes.FlatAppearance.BorderSize = 0;
+            this.btnInformes.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Highlight;
+            this.btnInformes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnInformes.Font = new System.Drawing.Font("OCR A Extended", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnInformes.Image = ((System.Drawing.Image)(resources.GetObject("btnInformes.Image")));
+            this.btnInformes.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnInformes.Location = new System.Drawing.Point(17, 568);
+            this.btnInformes.Margin = new System.Windows.Forms.Padding(4);
+            this.btnInformes.Name = "btnInformes";
+            this.btnInformes.Size = new System.Drawing.Size(312, 80);
+            this.btnInformes.TabIndex = 8;
+            this.btnInformes.Text = "&Informes";
+            this.btnInformes.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnInformes.UseVisualStyleBackColor = true;
+            this.btnInformes.Click += new System.EventHandler(this.btnInformes_Click);
+            // 
             // panel4
             // 
             this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(52)))), ((int)(((byte)(108)))));
@@ -192,6 +340,26 @@
             this.panel4.Size = new System.Drawing.Size(16, 80);
             this.panel4.TabIndex = 7;
             // 
+            // btnGestionPagos
+            // 
+            this.btnGestionPagos.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnGestionPagos.FlatAppearance.BorderSize = 0;
+            this.btnGestionPagos.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Highlight;
+            this.btnGestionPagos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnGestionPagos.Font = new System.Drawing.Font("OCR A Extended", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnGestionPagos.Image = ((System.Drawing.Image)(resources.GetObject("btnGestionPagos.Image")));
+            this.btnGestionPagos.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnGestionPagos.Location = new System.Drawing.Point(19, 111);
+            this.btnGestionPagos.Margin = new System.Windows.Forms.Padding(4);
+            this.btnGestionPagos.Name = "btnGestionPagos";
+            this.btnGestionPagos.Size = new System.Drawing.Size(312, 80);
+            this.btnGestionPagos.TabIndex = 6;
+            this.btnGestionPagos.Text = "Gestion \r\nPagos";
+            this.btnGestionPagos.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.TTAyudaMenu.SetToolTip(this.btnGestionPagos, "Gestionar pagos de clientes ");
+            this.btnGestionPagos.UseVisualStyleBackColor = true;
+            this.btnGestionPagos.Click += new System.EventHandler(this.btnGestionPagos_Click);
+            // 
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(52)))), ((int)(((byte)(108)))));
@@ -200,6 +368,26 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(16, 76);
             this.panel3.TabIndex = 5;
+            // 
+            // btnGestionCliente
+            // 
+            this.btnGestionCliente.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnGestionCliente.FlatAppearance.BorderSize = 0;
+            this.btnGestionCliente.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Highlight;
+            this.btnGestionCliente.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnGestionCliente.Font = new System.Drawing.Font("OCR A Extended", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnGestionCliente.Image = ((System.Drawing.Image)(resources.GetObject("btnGestionCliente.Image")));
+            this.btnGestionCliente.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnGestionCliente.Location = new System.Drawing.Point(19, 196);
+            this.btnGestionCliente.Margin = new System.Windows.Forms.Padding(4);
+            this.btnGestionCliente.Name = "btnGestionCliente";
+            this.btnGestionCliente.Size = new System.Drawing.Size(312, 80);
+            this.btnGestionCliente.TabIndex = 4;
+            this.btnGestionCliente.Text = "Gestion \r\nClientes";
+            this.btnGestionCliente.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.TTAyudaMenu.SetToolTip(this.btnGestionCliente, "Alta, Baja y modificacion de clientes");
+            this.btnGestionCliente.UseVisualStyleBackColor = true;
+            this.btnGestionCliente.Click += new System.EventHandler(this.btnGestionCliente_Click);
             // 
             // panel2
             // 
@@ -219,6 +407,26 @@
             this.panel1.Size = new System.Drawing.Size(16, 79);
             this.panel1.TabIndex = 2;
             // 
+            // btnNuevaVenta
+            // 
+            this.btnNuevaVenta.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnNuevaVenta.FlatAppearance.BorderSize = 0;
+            this.btnNuevaVenta.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Highlight;
+            this.btnNuevaVenta.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnNuevaVenta.Font = new System.Drawing.Font("OCR A Extended", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnNuevaVenta.Image = ((System.Drawing.Image)(resources.GetObject("btnNuevaVenta.Image")));
+            this.btnNuevaVenta.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnNuevaVenta.Location = new System.Drawing.Point(17, 26);
+            this.btnNuevaVenta.Margin = new System.Windows.Forms.Padding(4);
+            this.btnNuevaVenta.Name = "btnNuevaVenta";
+            this.btnNuevaVenta.Size = new System.Drawing.Size(312, 80);
+            this.btnNuevaVenta.TabIndex = 0;
+            this.btnNuevaVenta.Text = "Gestion \r\nVentas";
+            this.btnNuevaVenta.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.TTAyudaMenu.SetToolTip(this.btnNuevaVenta, "Gestionar Venta o prestamo");
+            this.btnNuevaVenta.UseVisualStyleBackColor = true;
+            this.btnNuevaVenta.Click += new System.EventHandler(this.btnNuevaVenta_Click);
+            // 
             // panel7
             // 
             this.panel7.Controls.Add(this.btnActualizarVentas);
@@ -233,6 +441,21 @@
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(0, 794);
             this.panel7.TabIndex = 3;
+            // 
+            // btnActualizarVentas
+            // 
+            this.btnActualizarVentas.BackColor = System.Drawing.Color.Azure;
+            this.btnActualizarVentas.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnActualizarVentas.BackgroundImage")));
+            this.btnActualizarVentas.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnActualizarVentas.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnActualizarVentas.Location = new System.Drawing.Point(1547, 20);
+            this.btnActualizarVentas.Margin = new System.Windows.Forms.Padding(4);
+            this.btnActualizarVentas.Name = "btnActualizarVentas";
+            this.btnActualizarVentas.Size = new System.Drawing.Size(84, 65);
+            this.btnActualizarVentas.TabIndex = 42;
+            this.TTAyudaMenu.SetToolTip(this.btnActualizarVentas, "Actualizar Ventas");
+            this.btnActualizarVentas.UseVisualStyleBackColor = false;
+            this.btnActualizarVentas.Click += new System.EventHandler(this.btnSeleccionarVenta_Click);
             // 
             // cbOrdenarPor
             // 
@@ -320,7 +543,7 @@
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvVentasMenu.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dgvVentasMenu.Location = new System.Drawing.Point(17, 111);
+            this.dgvVentasMenu.Location = new System.Drawing.Point(17, 33);
             this.dgvVentasMenu.Margin = new System.Windows.Forms.Padding(13, 12, 13, 12);
             this.dgvVentasMenu.Name = "dgvVentasMenu";
             this.dgvVentasMenu.ReadOnly = true;
@@ -347,229 +570,6 @@
             this.panel8.Name = "panel8";
             this.panel8.Size = new System.Drawing.Size(1249, 794);
             this.panel8.TabIndex = 37;
-            // 
-            // panel12
-            // 
-            this.panel12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(52)))), ((int)(((byte)(108)))));
-            this.panel12.Location = new System.Drawing.Point(2, 447);
-            this.panel12.Margin = new System.Windows.Forms.Padding(4);
-            this.panel12.Name = "panel12";
-            this.panel12.Size = new System.Drawing.Size(16, 78);
-            this.panel12.TabIndex = 15;
-            // 
-            // btnActualizarVentas
-            // 
-            this.btnActualizarVentas.BackColor = System.Drawing.Color.Azure;
-            this.btnActualizarVentas.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnActualizarVentas.BackgroundImage")));
-            this.btnActualizarVentas.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnActualizarVentas.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnActualizarVentas.Location = new System.Drawing.Point(1547, 20);
-            this.btnActualizarVentas.Margin = new System.Windows.Forms.Padding(4);
-            this.btnActualizarVentas.Name = "btnActualizarVentas";
-            this.btnActualizarVentas.Size = new System.Drawing.Size(84, 65);
-            this.btnActualizarVentas.TabIndex = 42;
-            this.TTAyudaMenu.SetToolTip(this.btnActualizarVentas, "Actualizar Ventas");
-            this.btnActualizarVentas.UseVisualStyleBackColor = false;
-            this.btnActualizarVentas.Click += new System.EventHandler(this.btnSeleccionarVenta_Click);
-            // 
-            // btnAiresAcondicionados
-            // 
-            this.btnAiresAcondicionados.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnAiresAcondicionados.FlatAppearance.BorderSize = 0;
-            this.btnAiresAcondicionados.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Highlight;
-            this.btnAiresAcondicionados.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAiresAcondicionados.Font = new System.Drawing.Font("OCR A Extended", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAiresAcondicionados.Image = global::VentaCredimax.Properties.Resources.aire_acondicionado;
-            this.btnAiresAcondicionados.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAiresAcondicionados.Location = new System.Drawing.Point(15, 446);
-            this.btnAiresAcondicionados.Margin = new System.Windows.Forms.Padding(4);
-            this.btnAiresAcondicionados.Name = "btnAiresAcondicionados";
-            this.btnAiresAcondicionados.Size = new System.Drawing.Size(312, 80);
-            this.btnAiresAcondicionados.TabIndex = 14;
-            this.btnAiresAcondicionados.Text = "Gestion \rAire acond.";
-            this.btnAiresAcondicionados.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.TTAyudaMenu.SetToolTip(this.btnAiresAcondicionados, "Trabajos de aire acondicionados");
-            this.btnAiresAcondicionados.UseVisualStyleBackColor = true;
-            this.btnAiresAcondicionados.Click += new System.EventHandler(this.btnAiresAcondicionados_Click);
-            // 
-            // button2
-            // 
-            this.button2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button2.FlatAppearance.BorderSize = 0;
-            this.button2.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Highlight;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Font = new System.Drawing.Font("OCR A Extended", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Image = global::VentaCredimax.Properties.Resources.productos;
-            this.button2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button2.Location = new System.Drawing.Point(16, 359);
-            this.button2.Margin = new System.Windows.Forms.Padding(4);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(312, 80);
-            this.button2.TabIndex = 12;
-            this.button2.Text = "Gestion \rArticulos";
-            this.button2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.TTAyudaMenu.SetToolTip(this.button2, "Alta, Baja y modificacion de clientes");
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // btnGestionVendedor
-            // 
-            this.btnGestionVendedor.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnGestionVendedor.FlatAppearance.BorderSize = 0;
-            this.btnGestionVendedor.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Highlight;
-            this.btnGestionVendedor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnGestionVendedor.Font = new System.Drawing.Font("OCR A Extended", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGestionVendedor.Image = global::VentaCredimax.Properties.Resources.entrevista;
-            this.btnGestionVendedor.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnGestionVendedor.Location = new System.Drawing.Point(17, 278);
-            this.btnGestionVendedor.Margin = new System.Windows.Forms.Padding(4);
-            this.btnGestionVendedor.Name = "btnGestionVendedor";
-            this.btnGestionVendedor.Size = new System.Drawing.Size(312, 80);
-            this.btnGestionVendedor.TabIndex = 10;
-            this.btnGestionVendedor.Text = "   Ventas por Fecha";
-            this.btnGestionVendedor.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.TTAyudaMenu.SetToolTip(this.btnGestionVendedor, "Consulta ventas por fecha");
-            this.btnGestionVendedor.UseVisualStyleBackColor = true;
-            this.btnGestionVendedor.Click += new System.EventHandler(this.btnGestionVendedor_Click);
-            // 
-            // btnInformeVentas
-            // 
-            this.btnInformeVentas.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnInformeVentas.FlatAppearance.BorderSize = 0;
-            this.btnInformeVentas.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Highlight;
-            this.btnInformeVentas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnInformeVentas.Font = new System.Drawing.Font("OCR A Extended", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnInformeVentas.Image = ((System.Drawing.Image)(resources.GetObject("btnInformeVentas.Image")));
-            this.btnInformeVentas.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnInformeVentas.Location = new System.Drawing.Point(16, 73);
-            this.btnInformeVentas.Margin = new System.Windows.Forms.Padding(4);
-            this.btnInformeVentas.Name = "btnInformeVentas";
-            this.btnInformeVentas.Size = new System.Drawing.Size(256, 54);
-            this.btnInformeVentas.TabIndex = 10;
-            this.btnInformeVentas.Text = "    Ventas por fecha";
-            this.btnInformeVentas.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.TTAyudaMenu.SetToolTip(this.btnInformeVentas, "Imprime ventas por fechas ");
-            this.btnInformeVentas.UseVisualStyleBackColor = true;
-            this.btnInformeVentas.Click += new System.EventHandler(this.btnInformeVentas_Click);
-            // 
-            // btnInformeCuotas
-            // 
-            this.btnInformeCuotas.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnInformeCuotas.FlatAppearance.BorderSize = 0;
-            this.btnInformeCuotas.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Highlight;
-            this.btnInformeCuotas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnInformeCuotas.Font = new System.Drawing.Font("OCR A Extended", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnInformeCuotas.Image = ((System.Drawing.Image)(resources.GetObject("btnInformeCuotas.Image")));
-            this.btnInformeCuotas.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnInformeCuotas.Location = new System.Drawing.Point(17, 7);
-            this.btnInformeCuotas.Margin = new System.Windows.Forms.Padding(4);
-            this.btnInformeCuotas.Name = "btnInformeCuotas";
-            this.btnInformeCuotas.Size = new System.Drawing.Size(255, 54);
-            this.btnInformeCuotas.TabIndex = 9;
-            this.btnInformeCuotas.Text = "  Ventas por cliente";
-            this.btnInformeCuotas.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.TTAyudaMenu.SetToolTip(this.btnInformeCuotas, "Seleccione una venta para imprimir el historial del cliente.");
-            this.btnInformeCuotas.UseVisualStyleBackColor = true;
-            this.btnInformeCuotas.Click += new System.EventHandler(this.btnInformeCuotas_Click);
-            // 
-            // btnInformes
-            // 
-            this.btnInformes.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnInformes.FlatAppearance.BorderSize = 0;
-            this.btnInformes.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Highlight;
-            this.btnInformes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnInformes.Font = new System.Drawing.Font("OCR A Extended", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnInformes.Image = ((System.Drawing.Image)(resources.GetObject("btnInformes.Image")));
-            this.btnInformes.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnInformes.Location = new System.Drawing.Point(17, 568);
-            this.btnInformes.Margin = new System.Windows.Forms.Padding(4);
-            this.btnInformes.Name = "btnInformes";
-            this.btnInformes.Size = new System.Drawing.Size(312, 80);
-            this.btnInformes.TabIndex = 8;
-            this.btnInformes.Text = "&Informes";
-            this.btnInformes.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnInformes.UseVisualStyleBackColor = true;
-            this.btnInformes.Click += new System.EventHandler(this.btnInformes_Click);
-            // 
-            // btnGestionPagos
-            // 
-            this.btnGestionPagos.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnGestionPagos.FlatAppearance.BorderSize = 0;
-            this.btnGestionPagos.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Highlight;
-            this.btnGestionPagos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnGestionPagos.Font = new System.Drawing.Font("OCR A Extended", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGestionPagos.Image = ((System.Drawing.Image)(resources.GetObject("btnGestionPagos.Image")));
-            this.btnGestionPagos.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnGestionPagos.Location = new System.Drawing.Point(19, 111);
-            this.btnGestionPagos.Margin = new System.Windows.Forms.Padding(4);
-            this.btnGestionPagos.Name = "btnGestionPagos";
-            this.btnGestionPagos.Size = new System.Drawing.Size(312, 80);
-            this.btnGestionPagos.TabIndex = 6;
-            this.btnGestionPagos.Text = "Gestion \r\nPagos";
-            this.btnGestionPagos.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.TTAyudaMenu.SetToolTip(this.btnGestionPagos, "Gestionar pagos de clientes ");
-            this.btnGestionPagos.UseVisualStyleBackColor = true;
-            this.btnGestionPagos.Click += new System.EventHandler(this.btnGestionPagos_Click);
-            // 
-            // btnGestionCliente
-            // 
-            this.btnGestionCliente.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnGestionCliente.FlatAppearance.BorderSize = 0;
-            this.btnGestionCliente.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Highlight;
-            this.btnGestionCliente.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnGestionCliente.Font = new System.Drawing.Font("OCR A Extended", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGestionCliente.Image = ((System.Drawing.Image)(resources.GetObject("btnGestionCliente.Image")));
-            this.btnGestionCliente.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnGestionCliente.Location = new System.Drawing.Point(19, 196);
-            this.btnGestionCliente.Margin = new System.Windows.Forms.Padding(4);
-            this.btnGestionCliente.Name = "btnGestionCliente";
-            this.btnGestionCliente.Size = new System.Drawing.Size(312, 80);
-            this.btnGestionCliente.TabIndex = 4;
-            this.btnGestionCliente.Text = "Gestion \r\nClientes";
-            this.btnGestionCliente.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.TTAyudaMenu.SetToolTip(this.btnGestionCliente, "Alta, Baja y modificacion de clientes");
-            this.btnGestionCliente.UseVisualStyleBackColor = true;
-            this.btnGestionCliente.Click += new System.EventHandler(this.btnGestionCliente_Click);
-            // 
-            // btnNuevaVenta
-            // 
-            this.btnNuevaVenta.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnNuevaVenta.FlatAppearance.BorderSize = 0;
-            this.btnNuevaVenta.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Highlight;
-            this.btnNuevaVenta.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnNuevaVenta.Font = new System.Drawing.Font("OCR A Extended", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnNuevaVenta.Image = ((System.Drawing.Image)(resources.GetObject("btnNuevaVenta.Image")));
-            this.btnNuevaVenta.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnNuevaVenta.Location = new System.Drawing.Point(17, 26);
-            this.btnNuevaVenta.Margin = new System.Windows.Forms.Padding(4);
-            this.btnNuevaVenta.Name = "btnNuevaVenta";
-            this.btnNuevaVenta.Size = new System.Drawing.Size(312, 80);
-            this.btnNuevaVenta.TabIndex = 0;
-            this.btnNuevaVenta.Text = "Gestion \r\nVentas";
-            this.btnNuevaVenta.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.TTAyudaMenu.SetToolTip(this.btnNuevaVenta, "Gestionar Venta o prestamo");
-            this.btnNuevaVenta.UseVisualStyleBackColor = true;
-            this.btnNuevaVenta.Click += new System.EventHandler(this.btnNuevaVenta_Click);
-            // 
-            // button1
-            // 
-            this.button1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button1.BackgroundImage")));
-            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Highlight;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("OCR A Extended", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.button1.Location = new System.Drawing.Point(1480, 0);
-            this.button1.Margin = new System.Windows.Forms.Padding(4);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(100, 59);
-            this.button1.TabIndex = 10;
-            this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.TTAyudaMenu.SetToolTip(this.button1, "Seleccione una venta para imprimir el historial del cliente.");
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // frmMenu
             // 

@@ -163,5 +163,17 @@ namespace CLogica
                 return false;
             }
         }
+
+        public List<CEntidades.TrabajoAireAcondicionado> ListarTrabajosPorFecha(DateTime fechaDesde, DateTime fechaHasta)
+        {
+            try
+            {
+                return repositorio.ListarPorFecha(fechaDesde, fechaHasta);
+            }
+            catch (Exception)
+            {
+                return new List<CEntidades.TrabajoAireAcondicionado>();
+            }
+        }
     }
 }
