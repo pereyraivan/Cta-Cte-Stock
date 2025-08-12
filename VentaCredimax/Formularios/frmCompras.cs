@@ -17,8 +17,6 @@ namespace VentaCredimax.Formularios
         private GestorCompra gestorCompra;
         private GestorArticulo gestorArticulo;
         private Compra compraSeleccionada;
-        private bool modoEdicion = false;
-
         public frmCompras()
         {
             InitializeComponent();
@@ -147,6 +145,9 @@ namespace VentaCredimax.Formularios
         {
             btnEditar.Enabled = false;
             btnEliminar.Enabled = false;
+            btnGuardar.Enabled = true;
+            btnEditar.Text = "Editar";
+            compraSeleccionada = null;
             // txtBuscar.PlaceholderText = "Buscar por nombre de artículo..."; // Comentado porque no está disponible en todas las versiones
         }
 
@@ -266,48 +267,9 @@ namespace VentaCredimax.Formularios
 
         private void btnEditar_Click(object sender, EventArgs e)
         {
-            if (!modoEdicion)
+            // Editar directamente si hay una compra seleccionada
+            if (compraSeleccionada != null)
             {
-                // Entrar en modo edición
-                if (dgvCompras.SelectedRows.Count > 0)
-                {
-                    try
-                    {
-                        int idCompra = Convert.ToInt32(dgvCompras.SelectedRows[0].Cells["IdCompra"].Value);
-                        compraSeleccionada = gestorCompra.ObtenerCompraPorId(idCompra);
-                        
-                        if (compraSeleccionada != null)
-                        {
-                            // Cargar datos en el formulario
-                            cbArticulo.SelectedValue = compraSeleccionada.IdArticulo;
-                            txtPrecio.Text = compraSeleccionada.Precio.ToString("F2");
-                            txtCantidad.Text = compraSeleccionada.Cantidad.ToString();
-                            dtpFechaCompra.Value = compraSeleccionada.FechaCompra ?? DateTime.Now;
-                            
-                            modoEdicion = true;
-                            btnEditar.Text = "Confirmar Edición";
-                            btnGuardar.Enabled = false; // Deshabilitar guardar en modo edición
-                            btnEliminar.Enabled = false; // Deshabilitar eliminar en modo edición
-                            
-                            // Enfocar el primer control editable
-                            cbArticulo.Focus();
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show($"Error al cargar la compra para editar: {ex.Message}", "Error", 
-                            MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("Debe seleccionar una compra para editar", "Aviso", 
-                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
-            }
-            else
-            {
-                // Confirmar edición
                 try
                 {
                     if (!ValidarDatos())
@@ -322,12 +284,12 @@ namespace VentaCredimax.Formularios
 
                     if (resultado == "OK")
                     {
-                        MessageBox.Show("Compra modificada exitosamente", "Éxito", 
+                        MessageBox.Show("Edición exitosa", "Éxito", 
                             MessageBoxButtons.OK, MessageBoxIcon.Information);
                         
                         LimpiarFormulario();
                         CargarCompras();
-                        CancelarEdicion();
+                        ConfigurarControles();
                     }
                     else
                     {
@@ -339,6 +301,11 @@ namespace VentaCredimax.Formularios
                     MessageBox.Show($"Error al modificar la compra: {ex.Message}", "Error", 
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+            }
+            else
+            {
+                MessageBox.Show("Debe hacer doble clic sobre una fila de la grilla para seleccionar la compra a editar", "Aviso", 
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -415,16 +382,17 @@ namespace VentaCredimax.Formularios
         {
             try
             {
-                if (dgvCompras.SelectedRows.Count > 0 && !modoEdicion && dgvCompras.DataSource != null)
+                // Solo habilitar eliminar cuando hay una fila seleccionada
+                if (dgvCompras.SelectedRows.Count > 0 && dgvCompras.DataSource != null)
                 {
-                    btnEditar.Enabled = true;
                     btnEliminar.Enabled = true;
                 }
-                else if (!modoEdicion)
+                else
                 {
-                    btnEditar.Enabled = false;
                     btnEliminar.Enabled = false;
                 }
+                
+                // El botón editar solo se habilita con doble clic, no con selección simple
             }
             catch (Exception ex)
             {
@@ -433,17 +401,9 @@ namespace VentaCredimax.Formularios
             }
         }
 
-        private void CancelarEdicion()
-        {
-            LimpiarFormulario();
-            ConfigurarControles();
-            MessageBox.Show("Edición cancelada", "Información", 
-                MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
-
         private void dgvCompras_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0 && !modoEdicion)
+            if (e.RowIndex >= 0)
             {
                 try
                 {
@@ -462,21 +422,17 @@ namespace VentaCredimax.Formularios
                         txtCantidad.Text = compraSeleccionada.Cantidad.ToString();
                         dtpFechaCompra.Value = compraSeleccionada.FechaCompra ?? DateTime.Now;
                         
-                        // Activar modo edición
-                        modoEdicion = true;
-                        btnGuardar.Text = "Modificar";
-                        btnEditar.Enabled = false;
-                        btnEliminar.Enabled = false;
+                        // Configurar botones para edición
+                        btnEditar.Enabled = true;      // Habilitar editar solo con doble clic
+                        btnGuardar.Enabled = false;    // Deshabilitar guardar al cargar para editar
+                        btnEliminar.Enabled = true;    // Mantener eliminar habilitado
                         
-                        // Enfocar el primer control editable
-                        cbArticulo.Focus();
-                        
-                     
+                       
                     }
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"Error al cargar la compra para editar: {ex.Message}", "Error", 
+                    MessageBox.Show($"Error al cargar la compra: {ex.Message}", "Error", 
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
@@ -486,22 +442,9 @@ namespace VentaCredimax.Formularios
         {
             if (e.KeyCode == Keys.Escape)
             {
-                if (modoEdicion)
-                {
-                    DialogResult result = MessageBox.Show(
-                        "¿Está seguro que desea cancelar la edición? Se perderán los cambios no guardados.", 
-                        "Cancelar Edición", 
-                        MessageBoxButtons.YesNo, 
-                        MessageBoxIcon.Question);
-                    
-                    if (result == DialogResult.Yes)
-                    {
-                        LimpiarFormulario();
-                        CancelarEdicion();
-                        MessageBox.Show("Edición cancelada", "Información", 
-                            MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                }
+                // Limpiar formulario al presionar Escape
+                LimpiarFormulario();
+                ConfigurarControles();
             }
         }
 
