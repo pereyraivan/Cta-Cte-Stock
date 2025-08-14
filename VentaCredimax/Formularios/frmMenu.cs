@@ -221,19 +221,57 @@ namespace VentaCredimax.Formularios
                 // Generar las filas de la tabla agrupando por VentaId
                 string filasTabla = string.Join("", listaVentasPorCliente
                     .GroupBy(v => v.VentaId) // Agrupar por VentaId
-                    .SelectMany(grupo => grupo.Select((venta, index) => $@"
-                    <tr>
+                    .SelectMany(grupo => grupo.Select((venta, index) => 
+                    {
+                        // Determinar el estado de la cuota y su clase CSS
+                        string claseEstado = "";
+                        if (venta.FechaQuePagoCuota.HasValue)
+                        {
+                            claseEstado = "pagada"; // Cuota pagada
+                        }
+                        else if (venta.FechaProgramadaDeCuota < DateTime.Now)
+                        {
+                            claseEstado = "vencida"; // Cuota vencida
+                        }
+                        else
+                        {
+                            claseEstado = "pendiente"; // Cuota pendiente
+                        }
+
+                        return $@"
+                    <tr class='{claseEstado}'>
                         {(index == 0 ? $"<td rowspan='{grupo.Count()}'>{venta.Articulo}</td>" : "")}
                         {(index == 0 ? $"<td rowspan='{grupo.Count()}'>{string.Format("{0:#,##0.00}", venta.Precio).Replace(",", "X").Replace(".", ",").Replace("X", ".")}</td>" : "")}
                         {(index == 0 ? $"<td rowspan='{grupo.Count()}'>{venta.Cuotas}</td>" : "")}                   
                         <td>{venta.FechaDeVenta.ToString("dd/MM/yyyy")}</td>
                         <td>{venta.NumeroDeCuota}</td>
                         <td>{string.Format("{0:#,##0.00}", venta.MontoCuota).Replace(",", "X").Replace(".", ",").Replace("X", ".")}</td>
+                        <td>{venta.FechaProgramadaDeCuota.ToString("dd/MM/yyyy")}</td>
                         <td>{(venta.FechaQuePagoCuota.HasValue ? venta.FechaQuePagoCuota.Value.ToString("dd/MM/yyyy") : "")}</td>
-                    </tr>")));
+                    </tr>";
+                    })));
 
                 // Reemplazar en la plantilla HTML
                 textoHtml = textoHtml.Replace("@filasTabla", filasTabla);
+
+                // Calcular estadísticas de cuotas
+                var totalCuotas = listaVentasPorCliente.Count;
+                var cuotasPagadas = listaVentasPorCliente.Count(c => c.FechaQuePagoCuota.HasValue);
+                var cuotasVencidas = listaVentasPorCliente.Count(c => !c.FechaQuePagoCuota.HasValue && c.FechaProgramadaDeCuota < DateTime.Now);
+                var cuotasPendientes = listaVentasPorCliente.Count(c => !c.FechaQuePagoCuota.HasValue && c.FechaProgramadaDeCuota >= DateTime.Now);
+
+                // Crear resumen de estadísticas
+                string resumenEstadisticas = $@"
+                <div style='margin-top: 20px; padding: 10px; border: 1px solid #ccc; background-color: #f9f9f9;'>
+                    <h3>Resumen de Cuotas:</h3>
+                    <p><strong>Total de cuotas:</strong> {totalCuotas}</p>
+                    <p><strong>Cuotas pagadas:</strong> {cuotasPagadas} ({(totalCuotas > 0 ? (cuotasPagadas * 100.0 / totalCuotas).ToString("F1") : "0")}%)</p>
+                    <p><strong>Cuotas vencidas:</strong> {cuotasVencidas} ({(totalCuotas > 0 ? (cuotasVencidas * 100.0 / totalCuotas).ToString("F1") : "0")}%)</p>
+                    <p><strong>Cuotas pendientes:</strong> {cuotasPendientes} ({(totalCuotas > 0 ? (cuotasPendientes * 100.0 / totalCuotas).ToString("F1") : "0")}%)</p>
+                </div>";
+
+                // Insertar el resumen antes de la leyenda
+                textoHtml = textoHtml.Replace("<div class=\"divider\" style=\"margin-top: 20px;\"></div>", resumenEstadisticas + "\n        <div class=\"divider\" style=\"margin-top: 20px;\"></div>");
        
                 textoHtml = textoHtml.Replace("@fecha-cancelacion-cuota", listaVentasPorCliente.FirstOrDefault()?.FechaCancelacionCuotas?.ToString("dd/MM/yyyy") ?? "");
                 textoHtml = textoHtml.Replace("@fecha-programada-cuota", listaVentasPorCliente.FirstOrDefault()?.FechaProgramadaDeCuota.ToString("dd/MM/yyyy"));

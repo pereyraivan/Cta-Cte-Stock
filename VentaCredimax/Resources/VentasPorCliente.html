@@ -48,6 +48,18 @@
             background-color: rgb(230, 230, 230);
         }
 
+        .vencida {
+            background-color: #ffcccb; /* Rojo claro para cuotas vencidas */
+        }
+
+        .pagada {
+            background-color: #90ee90; /* Verde claro para cuotas pagadas */
+        }
+
+        .pendiente {
+            background-color: #ffffe0; /* Amarillo claro para cuotas pendientes */
+        }
+
         .total {
             text-align: right;
             margin-top: 30px
@@ -104,6 +116,7 @@
                     <th>Fecha Venta</th> 
                     <th>Nro. Cuota</th>
                     <th>Monto Cuota</th>
+                    <th>Fecha Vencimiento</th>
                     <th>Fecha Pago Cuota</th>
                 </tr>
             </thead>
@@ -111,6 +124,14 @@
                 @filasTabla
             </tbody>          
         </table>
+        
+        <div class="divider" style="margin-top: 20px;"></div>
+        <div style="margin-top: 10px; font-size: 12px;">
+            <p><strong>Leyenda de Estados:</strong></p>
+            <p style="margin: 5px 0;"><span style="background-color: #90ee90; padding: 2px 5px;">Verde</span> - Cuota pagada</p>
+            <p style="margin: 5px 0;"><span style="background-color: #ffcccb; padding: 2px 5px;">Rojo</span> - Cuota vencida (no pagada)</p>
+            <p style="margin: 5px 0;"><span style="background-color: #ffffe0; padding: 2px 5px;">Amarillo</span> - Cuota pendiente</p>
+        </div>
     </div>
 </body>
 </html>
