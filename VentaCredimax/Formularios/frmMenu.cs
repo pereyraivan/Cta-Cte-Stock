@@ -299,5 +299,11 @@ namespace VentaCredimax.Formularios
             frmCompras frmCompras = new frmCompras();
             frmCompras.ShowDialog();
         }
+
+        private void btnIngresosEgresos_Click(object sender, EventArgs e)
+        {
+            frmIngresosEgresos frmIngresosEgresos = new frmIngresosEgresos();
+            frmIngresosEgresos.ShowDialog();
+        }
     }
 }

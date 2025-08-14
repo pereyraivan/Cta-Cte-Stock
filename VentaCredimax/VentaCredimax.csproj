@@ -359,6 +359,12 @@
     <Compile Include="Formularios\frmGestionTipoConector.Designer.cs">
       <DependentUpon>frmGestionTipoConector.cs</DependentUpon>
     </Compile>
+    <Compile Include="Formularios\frmIngresosEgresos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\frmIngresosEgresos.Designer.cs">
+      <DependentUpon>frmIngresosEgresos.cs</DependentUpon>
+    </Compile>
     <Compile Include="Formularios\frmListaArticulos.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -428,6 +434,9 @@
     <EmbeddedResource Include="Formularios\frmGestionTipoConector.resx">
       <DependentUpon>frmGestionTipoConector.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\frmIngresosEgresos.resx">
+      <DependentUpon>frmIngresosEgresos.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Formularios\frmListaArticulos.resx">
       <DependentUpon>frmListaArticulos.cs</DependentUpon>
     </EmbeddedResource>
@@ -485,6 +494,7 @@
     <None Include="Resources\aire-acondicionado.png" />
     <None Include="Resources\salir.png" />
     <None Include="Resources\documento.png" />
+    <None Include="Resources\flujo-de-ingresos.png" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
