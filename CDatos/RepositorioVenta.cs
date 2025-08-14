@@ -512,5 +512,27 @@ namespace CDatos
             // Método obsoleto: La tabla Vendedor ya no se usa
             return new List<VentaDTO>();
         }
+
+        public decimal ObtenerTotalVentasPorFecha(DateTime fechaDesde, DateTime fechaHasta)
+        {
+            try
+            {
+                using (ventas_cta_cteEntities db = new ventas_cta_cteEntities())
+                {
+                    var totalVentas = db.Venta
+                        .Where(v => v.FechaDeInicio >= fechaDesde && 
+                                   v.FechaDeInicio <= fechaHasta &&
+                                   v.FechaAnulacion == null &&
+                                   v.Anticipo.HasValue)
+                        .Sum(v => v.Anticipo) ?? 0;
+
+                    return totalVentas;
+                }
+            }
+            catch
+            {
+                return 0;
+            }
+        }
     }
 }

@@ -55,7 +55,7 @@
             this.btnAnularCompra.Font = new System.Drawing.Font("Malgun Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAnularCompra.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(56)))), ((int)(((byte)(87)))));
             this.btnAnularCompra.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAnularCompra.Location = new System.Drawing.Point(1340, 66);
+            this.btnAnularCompra.Location = new System.Drawing.Point(1337, 31);
             this.btnAnularCompra.Margin = new System.Windows.Forms.Padding(1);
             this.btnAnularCompra.Name = "btnAnularCompra";
             this.btnAnularCompra.Size = new System.Drawing.Size(160, 54);
@@ -94,7 +94,7 @@
             // 
             this.dtpFechaHasta.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpFechaHasta.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dtpFechaHasta.Location = new System.Drawing.Point(823, 78);
+            this.dtpFechaHasta.Location = new System.Drawing.Point(820, 43);
             this.dtpFechaHasta.Margin = new System.Windows.Forms.Padding(4);
             this.dtpFechaHasta.Name = "dtpFechaHasta";
             this.dtpFechaHasta.Size = new System.Drawing.Size(265, 30);
@@ -104,7 +104,7 @@
             // 
             this.dtpFechaDesde.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpFechaDesde.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dtpFechaDesde.Location = new System.Drawing.Point(277, 78);
+            this.dtpFechaDesde.Location = new System.Drawing.Point(274, 43);
             this.dtpFechaDesde.Margin = new System.Windows.Forms.Padding(4);
             this.dtpFechaDesde.Name = "dtpFechaDesde";
             this.dtpFechaDesde.Size = new System.Drawing.Size(265, 30);
@@ -116,7 +116,7 @@
             this.label1.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.label1.Font = new System.Drawing.Font("Malgun Gothic", 14F, System.Drawing.FontStyle.Bold);
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(56)))), ((int)(((byte)(87)))));
-            this.label1.Location = new System.Drawing.Point(651, 78);
+            this.label1.Location = new System.Drawing.Point(648, 43);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(155, 32);
@@ -129,7 +129,7 @@
             this.label6.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.label6.Font = new System.Drawing.Font("Malgun Gothic", 14F, System.Drawing.FontStyle.Bold);
             this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(56)))), ((int)(((byte)(87)))));
-            this.label6.Location = new System.Drawing.Point(99, 78);
+            this.label6.Location = new System.Drawing.Point(96, 43);
             this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(161, 32);
@@ -161,7 +161,7 @@
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvVentasPorFecha.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvVentasPorFecha.GridColor = System.Drawing.SystemColors.Control;
-            this.dgvVentasPorFecha.Location = new System.Drawing.Point(47, 144);
+            this.dgvVentasPorFecha.Location = new System.Drawing.Point(47, 111);
             this.dgvVentasPorFecha.Margin = new System.Windows.Forms.Padding(4);
             this.dgvVentasPorFecha.Name = "dgvVentasPorFecha";
             this.dgvVentasPorFecha.ReadOnly = true;
@@ -175,7 +175,7 @@
             this.dgvVentasPorFecha.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvVentasPorFecha.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.dgvVentasPorFecha.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvVentasPorFecha.Size = new System.Drawing.Size(1500, 610);
+            this.dgvVentasPorFecha.Size = new System.Drawing.Size(1500, 643);
             this.dgvVentasPorFecha.TabIndex = 98;
             // 
             // lblTotalPagado

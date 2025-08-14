@@ -63,6 +63,7 @@
     <Compile Include="RepositorioCuotas.cs" />
     <Compile Include="RepositorioMarca.cs" />
     <Compile Include="RepositorioMedida.cs" />
+    <Compile Include="RepositorioMovimientos.cs" />
     <Compile Include="RepositorioReportes.cs" />
     <Compile Include="RepositorioTipoConector.cs" />
     <Compile Include="RepositorioVenta.cs" />

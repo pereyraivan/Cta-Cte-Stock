@@ -36,6 +36,11 @@
             this.pTituloSistema = new System.Windows.Forms.Panel();
             this.button1 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.configuracionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.marcasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.conectoresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.medidasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pMenuLateral = new System.Windows.Forms.Panel();
             this.panel12 = new System.Windows.Forms.Panel();
             this.btnAiresAcondicionados = new System.Windows.Forms.Button();
@@ -72,6 +77,7 @@
             this.TTAyudaMenu = new System.Windows.Forms.ToolTip(this.components);
             this.panel8 = new System.Windows.Forms.Panel();
             this.pTituloSistema.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             this.pMenuLateral.SuspendLayout();
             this.pSubMenuInformes.SuspendLayout();
             this.panel7.SuspendLayout();
@@ -84,6 +90,7 @@
             this.pTituloSistema.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(52)))), ((int)(((byte)(108)))));
             this.pTituloSistema.Controls.Add(this.button1);
             this.pTituloSistema.Controls.Add(this.label2);
+            this.pTituloSistema.Controls.Add(this.menuStrip1);
             this.pTituloSistema.Dock = System.Windows.Forms.DockStyle.Top;
             this.pTituloSistema.Location = new System.Drawing.Point(0, 0);
             this.pTituloSistema.Margin = new System.Windows.Forms.Padding(4);
@@ -101,10 +108,10 @@
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("OCR A Extended", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.button1.Location = new System.Drawing.Point(1480, 0);
+            this.button1.Location = new System.Drawing.Point(1480, 31);
             this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(100, 59);
+            this.button1.Size = new System.Drawing.Size(100, 28);
             this.button1.TabIndex = 10;
             this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.TTAyudaMenu.SetToolTip(this.button1, "Seleccione una venta para imprimir el historial del cliente.");
@@ -122,6 +129,51 @@
             this.label2.Size = new System.Drawing.Size(1044, 35);
             this.label2.TabIndex = 0;
             this.label2.Text = "Sistema de Ventas y Gestión de Cuentas Corrientes";
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(52)))), ((int)(((byte)(108)))));
+            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.configuracionToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(1580, 31);
+            this.menuStrip1.TabIndex = 11;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // configuracionToolStripMenuItem
+            // 
+            this.configuracionToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.marcasToolStripMenuItem,
+            this.conectoresToolStripMenuItem,
+            this.medidasToolStripMenuItem});
+            this.configuracionToolStripMenuItem.Font = new System.Drawing.Font("OCR A Extended", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.configuracionToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(164)))), ((int)(((byte)(196)))), ((int)(((byte)(231)))), ((int)(((byte)(255)))));
+            this.configuracionToolStripMenuItem.Name = "configuracionToolStripMenuItem";
+            this.configuracionToolStripMenuItem.Size = new System.Drawing.Size(193, 27);
+            this.configuracionToolStripMenuItem.Text = "Configuración";
+            // 
+            // marcasToolStripMenuItem
+            // 
+            this.marcasToolStripMenuItem.Name = "marcasToolStripMenuItem";
+            this.marcasToolStripMenuItem.Size = new System.Drawing.Size(224, 28);
+            this.marcasToolStripMenuItem.Text = "Marcas";
+            this.marcasToolStripMenuItem.Click += new System.EventHandler(this.marcasToolStripMenuItem_Click_1);
+            // 
+            // conectoresToolStripMenuItem
+            // 
+            this.conectoresToolStripMenuItem.Name = "conectoresToolStripMenuItem";
+            this.conectoresToolStripMenuItem.Size = new System.Drawing.Size(224, 28);
+            this.conectoresToolStripMenuItem.Text = "Conectores";
+            this.conectoresToolStripMenuItem.Click += new System.EventHandler(this.conectoresToolStripMenuItem_Click_1);
+            // 
+            // medidasToolStripMenuItem
+            // 
+            this.medidasToolStripMenuItem.Name = "medidasToolStripMenuItem";
+            this.medidasToolStripMenuItem.Size = new System.Drawing.Size(224, 28);
+            this.medidasToolStripMenuItem.Text = "Medidas";
+            this.medidasToolStripMenuItem.Click += new System.EventHandler(this.medidasToolStripMenuItem_Click_1);
             // 
             // pMenuLateral
             // 
@@ -305,9 +357,9 @@
             this.btnIngresosEgresos.Name = "btnIngresosEgresos";
             this.btnIngresosEgresos.Size = new System.Drawing.Size(256, 54);
             this.btnIngresosEgresos.TabIndex = 13;
-            this.btnIngresosEgresos.Text = "Inresos/Egresos por fecha";
+            this.btnIngresosEgresos.Text = "   Inresos  y  Egresos ";
             this.btnIngresosEgresos.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.TTAyudaMenu.SetToolTip(this.btnIngresosEgresos, "Imprime ventas por fechas ");
+            this.TTAyudaMenu.SetToolTip(this.btnIngresosEgresos, "muestra todos los ingresos y egresos por fecha");
             this.btnIngresosEgresos.UseVisualStyleBackColor = true;
             this.btnIngresosEgresos.Click += new System.EventHandler(this.btnIngresosEgresos_Click);
             // 
@@ -647,6 +699,7 @@
             this.Controls.Add(this.pMenuLateral);
             this.Controls.Add(this.pTituloSistema);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "frmMenu";
             this.Text = "Menu";
@@ -654,6 +707,8 @@
             this.Load += new System.EventHandler(this.frmMenu_Load);
             this.pTituloSistema.ResumeLayout(false);
             this.pTituloSistema.PerformLayout();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.pMenuLateral.ResumeLayout(false);
             this.pSubMenuInformes.ResumeLayout(false);
             this.panel7.ResumeLayout(false);
@@ -704,5 +759,10 @@
         private System.Windows.Forms.Button btnGestionCompras;
         private System.Windows.Forms.Panel panel14;
         private System.Windows.Forms.Button btnIngresosEgresos;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem configuracionToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem marcasToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem conectoresToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem medidasToolStripMenuItem;
     }
 }

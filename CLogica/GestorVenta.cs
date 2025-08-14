@@ -68,5 +68,10 @@ namespace CLogica
         {
             return _repositorioVenta.EsDemo();
         }
+
+        public decimal ObtenerTotalVentasPorFecha(DateTime fechaDesde, DateTime fechaHasta)
+        {
+            return _repositorioVenta.ObtenerTotalVentasPorFecha(fechaDesde, fechaHasta);
+        }
     }
 }

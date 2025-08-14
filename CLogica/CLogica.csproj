@@ -48,6 +48,7 @@
     <Compile Include="GestorCuotas.cs" />
     <Compile Include="GestorMarca.cs" />
     <Compile Include="GestorMedida.cs" />
+    <Compile Include="GestorMovimientos.cs" />
     <Compile Include="GestorReportes.cs" />
     <Compile Include="GestorTipoConector.cs" />
     <Compile Include="GestorVenta.cs" />

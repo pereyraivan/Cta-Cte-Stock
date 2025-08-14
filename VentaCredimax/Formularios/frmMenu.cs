@@ -18,7 +18,8 @@ namespace VentaCredimax.Formularios
         private GestorReportes _gestorReportes = new GestorReportes();
         public frmMenu()
         {
-            InitializeComponent();           
+            InitializeComponent();
+      
         }
         private void frmMenu_Load(object sender, EventArgs e)
         {
@@ -304,6 +305,23 @@ namespace VentaCredimax.Formularios
         {
             frmIngresosEgresos frmIngresosEgresos = new frmIngresosEgresos();
             frmIngresosEgresos.ShowDialog();
+        }   
+        private void marcasToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            frmGestionMarca frmGestionMarca = new frmGestionMarca();
+            frmGestionMarca.ShowDialog();
+        }
+
+        private void conectoresToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            frmGestionTipoConector frmGestionTipoConector = new frmGestionTipoConector();
+            frmGestionTipoConector.ShowDialog();
+        }
+
+        private void medidasToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            frmGestionMedida frmGestionMedida= new frmGestionMedida();
+            frmGestionMedida.ShowDialog();
         }
     }
 }

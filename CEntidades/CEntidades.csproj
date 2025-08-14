@@ -65,6 +65,8 @@
     </Compile>
     <Compile Include="DTOs\ClienteDTO.cs" />
     <Compile Include="DTOs\CuotaDTO.cs" />
+    <Compile Include="DTOs\MovimientoDTO.cs" />
+    <Compile Include="DTOs\ResumenMovimientosDTO.cs" />
     <Compile Include="DTOs\VentaDTO.cs" />
     <Compile Include="FormaDePago.cs">
       <DependentUpon>VentasStock.tt</DependentUpon>
