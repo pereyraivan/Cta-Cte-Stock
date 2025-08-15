@@ -116,11 +116,11 @@ namespace VentaCredimax.Formularios
                 {
                     if (movimiento.Tipo == "Ingreso")
                     {
-                        // Color especial para trabajos de A/A (más claro que el verde normal)
+                        // Color amarillo para trabajos de A/A
                         if (movimiento.Concepto == "Trabajo A/A")
                         {
-                            row.DefaultCellStyle.BackColor = Color.FromArgb(193, 255, 193); // Verde muy claro
-                            row.DefaultCellStyle.ForeColor = Color.FromArgb(60, 179, 113); // Verde medio mar
+                            row.DefaultCellStyle.BackColor = Color.FromArgb(255, 255, 204); // Amarillo claro
+                            row.DefaultCellStyle.ForeColor = Color.FromArgb(184, 134, 11); // Amarillo oscuro/dorado
                         }
                         else
                         {
@@ -231,7 +231,28 @@ namespace VentaCredimax.Formularios
             lblTotal.Text = $"Total Ventas: ${resumen.TotalVentas:N2}";
             lblTotal.ForeColor = Color.FromArgb(34, 139, 34); // Verde
 
-            lblTotalCuotas.Text = $"Total Cuotas Pagadas: ${resumen.TotalCuotas:N2}";
+            // Obtener desglose por método de pago
+            var totalesPorMetodo = _gestorMovimientos.ObtenerTotalCuotasPorMetodoPago(fechaDesde, fechaHasta);
+            
+            // Construir el texto del desglose
+            string desglose = "";
+            if (totalesPorMetodo.Any())
+            {
+                var detalles = totalesPorMetodo.Select(kvp => 
+                {
+                    // Abreviaturas más específicas para métodos de pago comunes
+                    string metodoAbrev = kvp.Key.ToLower().Contains("efectivo") || kvp.Key.ToLower().Contains("cash") ? "Efec" :
+                                       kvp.Key.ToLower().Contains("transferencia") || kvp.Key.ToLower().Contains("transfer") ? "Trans" :
+                                       kvp.Key.ToLower().Contains("tarjeta") || kvp.Key.ToLower().Contains("card") ? "Tarj" :
+                                       kvp.Key.ToLower().Contains("débito") || kvp.Key.ToLower().Contains("debit") ? "Déb" :
+                                       kvp.Key.ToLower().Contains("crédito") || kvp.Key.ToLower().Contains("credit") ? "Créd" :
+                                       kvp.Key.Length > 6 ? kvp.Key.Substring(0, 6) : kvp.Key;
+                    return $"{metodoAbrev}: ${kvp.Value:N0}";
+                });
+                desglose = $" ({string.Join(", ", detalles)})";
+            }
+
+            lblTotalCuotas.Text = $"Total Cuotas Pagadas: ${resumen.TotalCuotas:N2}{desglose}";
             lblTotalCuotas.ForeColor = Color.FromArgb(34, 139, 34); // Verde
 
             lblTotalTrabajos.Text = $"Total Trabajos A/A: ${totalTrabajosAA:N2}";

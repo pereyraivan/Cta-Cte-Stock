@@ -110,6 +110,12 @@ namespace VentaCredimax
         {
             // Este método se llama cuando el formulario ABM se cierra
             ListarCliente(); // Método que recarga el DataGridView con la lista actualizada de clientes
+            
+            // Notificar al formulario padre que se actualizaron los clientes
+            if (formularioVenta != null)
+            {
+                formularioVenta.CargarComboCliente();
+            }
         }
 
         private void dgvClientes_DoubleClick(object sender, EventArgs e)

@@ -308,5 +308,33 @@ namespace CDatos
                 return new ResumenMovimientosDTO();
             }
         }
+
+        public Dictionary<string, decimal> ObtenerTotalCuotasPorMetodoPago(DateTime fechaDesde, DateTime fechaHasta)
+        {
+            try
+            {
+                using (ventas_cta_cteEntities db = new ventas_cta_cteEntities())
+                {
+                    var totalesPorMetodo = (from c in db.Cuota
+                                          join mp in db.MetodoDePago on c.IdMetodoDePago equals mp.IdMetodoPago into mpJoin
+                                          from mp in mpJoin.DefaultIfEmpty()
+                                          where c.FechaPago.HasValue &&
+                                                c.FechaPago >= fechaDesde &&
+                                                c.FechaPago <= fechaHasta
+                                          group c by mp.Descripcion into g
+                                          select new
+                                          {
+                                              MetodoPago = g.Key ?? "Sin especificar",
+                                              Total = g.Sum(x => x.MontoCuota)
+                                          }).ToDictionary(x => x.MetodoPago, x => x.Total);
+
+                    return totalesPorMetodo;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error al obtener totales por método de pago: {ex.Message}", ex);
+            }
+        }
     }
 }

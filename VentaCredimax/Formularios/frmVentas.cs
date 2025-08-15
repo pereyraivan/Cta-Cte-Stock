@@ -26,7 +26,7 @@ namespace VentaCredimax.Formularios
         private void btnBuscarCliente_Click(object sender, EventArgs e)
         {
             frmSeleccionarCliente frmBusqueda = new frmSeleccionarCliente(this); // Pasa la referencia del formulario padre
-            //frmBusqueda.FormClosed += FrmSeleccionCliente_FormClosed;
+            frmBusqueda.FormClosed += FrmSeleccionCliente_FormClosed;
             frmBusqueda.ShowDialog();
         }
         public enum FormaDePago
@@ -35,7 +35,7 @@ namespace VentaCredimax.Formularios
             Quincenal = 2,
             Semanal = 3
         }
-        private void CargarComboCliente()
+        public void CargarComboCliente()
         {
             cbSeleccionCliente.DataSource = null; // Limpiar antes de asignar nuevos datos
             cbSeleccionCliente.DisplayMember = "NombreCompleto"; // Muestra Apellido, Nombre (DNI)
@@ -56,6 +56,7 @@ namespace VentaCredimax.Formularios
             // Formato: "Apellido, Nombre (DNI)"
             string clienteFormato = $"{apellidoCliente}, {nombreCliente} ({dni})";
 
+            // Recargar siempre el ComboBox para asegurar que tenga los datos más actuales
             CargarComboCliente();
 
             // Buscar el cliente por su Id en el DataSource

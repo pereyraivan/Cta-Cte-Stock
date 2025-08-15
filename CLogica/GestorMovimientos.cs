@@ -39,6 +39,11 @@ namespace CLogica
             return _repositorio.ObtenerResumenPorFecha(fechaDesde, fechaHasta);
         }
 
+        public Dictionary<string, decimal> ObtenerTotalCuotasPorMetodoPago(DateTime fechaDesde, DateTime fechaHasta)
+        {
+            return _repositorio.ObtenerTotalCuotasPorMetodoPago(fechaDesde, fechaHasta);
+        }
+
         // Método de prueba
         public string ObtenerEstadisticasBaseDatos()
         {
