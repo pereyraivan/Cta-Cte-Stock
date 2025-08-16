@@ -361,5 +361,87 @@ namespace VentaCredimax.Formularios
             frmGestionMedida frmGestionMedida= new frmGestionMedida();
             frmGestionMedida.ShowDialog();
         }
+
+        private void manualDeUsuarioToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            GenerarManualUsuarioPDF();
+        }
+
+        private void GenerarManualUsuarioPDF()
+        {
+            try
+            {
+                // Obtener el HTML del manual desde archivo
+                string htmlContent;
+                
+                // Intentar múltiples rutas posibles para encontrar el archivo
+                string[] rutasPosibles = {
+                    // Ruta desde el ejecutable en debug/release
+                    System.IO.Path.Combine(Application.StartupPath, "..", "..", "VentaCredimax", "Resources", "ManualDeUsuario.html"),
+                    // Ruta desde el directorio actual del proyecto
+                    System.IO.Path.Combine(System.IO.Directory.GetCurrentDirectory(), "..", "..", "VentaCredimax", "Resources", "ManualDeUsuario.html"),
+                    // Ruta relativa al directorio del proyecto
+                    System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..", "..", "VentaCredimax", "Resources", "ManualDeUsuario.html"),
+                    // Ruta absoluta conocida
+                    @"c:\Users\perey\Desktop\Cta-Cte-Stock\VentaCredimax\Resources\ManualDeUsuario.html"
+                };
+                
+                string rutaEncontrada = null;
+                foreach (string ruta in rutasPosibles)
+                {
+                    string rutaCompleta = System.IO.Path.GetFullPath(ruta);
+                    if (System.IO.File.Exists(rutaCompleta))
+                    {
+                        rutaEncontrada = rutaCompleta;
+                        break;
+                    }
+                }
+                
+                if (rutaEncontrada != null)
+                {
+                    htmlContent = System.IO.File.ReadAllText(rutaEncontrada, System.Text.Encoding.UTF8);
+                }
+                else
+                {
+                    MessageBox.Show($"No se encontró el archivo del manual de usuario.\nRutas buscadas:\n{string.Join("\n", rutasPosibles.Select(r => System.IO.Path.GetFullPath(r)))}", 
+                                  "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                SaveFileDialog saveFile = new SaveFileDialog();
+                saveFile.FileName = "Manual_de_Usuario.pdf";
+                saveFile.Filter = "Archivos PDF|*.pdf";
+                saveFile.Title = "Guardar Manual de Usuario";
+
+                if (saveFile.ShowDialog() == DialogResult.OK)
+                {
+                    // Crear el conversor de HTML a PDF
+                    SelectPdf.HtmlToPdf converter = new SelectPdf.HtmlToPdf();
+                    
+                    // Configurar opciones del PDF
+                    converter.Options.PdfPageSize = SelectPdf.PdfPageSize.A4;
+                    converter.Options.PdfPageOrientation = SelectPdf.PdfPageOrientation.Portrait;
+                    converter.Options.MarginTop = 10;
+                    converter.Options.MarginBottom = 10;
+                    converter.Options.MarginLeft = 10;
+                    converter.Options.MarginRight = 10;
+
+                    // Convertir el HTML a PDF
+                    SelectPdf.PdfDocument doc = converter.ConvertHtmlString(htmlContent);
+
+                    // Guardar el PDF
+                    doc.Save(saveFile.FileName);
+                    doc.Close();
+
+                    MessageBox.Show($"Manual de Usuario generado exitosamente en:\n{saveFile.FileName}", 
+                                  "Manual Generado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al generar el manual: {ex.Message}", 
+                              "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }

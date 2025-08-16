@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manual de Usuario - Sistema de Gestión de Ventas</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        .header {
+            text-align: center;
+            border-bottom: 3px solid #007bff;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            color: #007bff;
+            margin: 0;
+            font-size: 2.5em;
+        }
+        .header .subtitle {
+            color: #6c757d;
+            font-size: 1.2em;
+            margin-top: 10px;
+        }
+        .toc {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+        .toc h2 {
+            color: #007bff;
+            margin-top: 0;
+        }
+        .toc ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .toc li {
+            padding: 5px 0;
+            border-bottom: 1px dotted #dee2e6;
+        }
+        .toc a {
+            text-decoration: none;
+            color: #495057;
+        }
+        .toc a:hover {
+            color: #007bff;
+        }
+        h1, h2, h3 {
+            color: #007bff;
+        }
+        h2 {
+            border-left: 4px solid #007bff;
+            padding-left: 15px;
+            margin-top: 40px;
+        }
+        h3 {
+            color: #28a745;
+            margin-top: 25px;
+        }
+        .feature-box {
+            background: #e7f3ff;
+            border-left: 4px solid #007bff;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        .warning-box {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        .step-list {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+        .step-list ol {
+            margin: 0;
+            padding-left: 20px;
+        }
+        .color-indicator {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border-radius: 3px;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+        .green { background-color: #28a745; }
+        .yellow { background-color: #ffc107; }
+        .red { background-color: #dc3545; }
+        .blue { background-color: #007bff; }
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 2px solid #dee2e6;
+            color: #6c757d;
+        }
+        code {
+            background: #f8f9fa;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Manual de Usuario</h1>
+            <div class="subtitle">Sistema de Gestión de Ventas y Cuenta Corriente</div>
+            <div style="margin-top: 10px; color: #6c757d;">Versión 1.0 - 2025</div>
+        </div>
+
+        <div class="toc">
+            <h2>Índice de Contenidos</h2>
+            <ul>
+                <li><a href="#introduccion">1. Introducción</a></li>
+                <li><a href="#pantalla-principal">2. Pantalla Principal</a></li>
+                <li><a href="#gestion-clientes">3. Gestión de Clientes</a></li>
+                <li><a href="#gestion-articulos">4. Gestión de Artículos</a></li>
+                <li><a href="#registro-ventas">5. Registro de Ventas</a></li>
+                <li><a href="#gestion-cuotas">6. Gestión de Cuotas</a></li>
+                <li><a href="#trabajos-aa">7. Trabajos de Aire Acondicionado</a></li>
+                <li><a href="#configuracion">8. Configuración del Sistema</a></li>
+                <li><a href="#reportes">9. Reportes y PDFs</a></li>
+                <li><a href="#ingresos-egresos">10. Ingresos y Egresos</a></li>
+                <li><a href="#gestion-stock">11. Gestión de Stock</a></li>
+                <li><a href="#consejos">12. Consejos y Buenas Prácticas</a></li>
+            </ul>
+        </div>
+
+        <h2 id="introduccion">1. Introducción</h2>
+        <div class="feature-box">
+            <strong>Sistema de Gestión de Ventas y Cuenta Corriente</strong> es una aplicación integral diseñada para administrar ventas, clientes, stock, cuotas y trabajos especializados de aire acondicionado.
+        </div>
+
+        <h3>Características Principales:</h3>
+        <ul>
+            <li>✅ Gestión completa de clientes y artículos</li>
+            <li>✅ Ventas con sistema de cuotas flexibles</li>
+            <li>✅ Control automático de stock</li>
+            <li>✅ Gestión de trabajos de aire acondicionado</li>
+            <li>✅ Reportes en PDF personalizados</li>
+            <li>✅ Control financiero de ingresos y egresos</li>
+            <li>✅ Sistema de anticipos y métodos de pago</li>
+        </ul>
+
+        <h2 id="pantalla-principal">2. Pantalla Principal</h2>
+        <p>Al iniciar el sistema, se presenta el <strong>menú principal</strong> con acceso a todas las funcionalidades:</p>
+
+        <h3>Opciones del Menú:</h3>
+        <ul>
+            <li><strong>Ventas</strong>: Registro y gestión de ventas</li>
+            <li><strong>Cuotas</strong>: Administración de pagos y cuotas</li>
+            <li><strong>Clientes</strong>: ABM de clientes</li>
+            <li><strong>Artículos</strong>: Gestión de productos y stock</li>
+            <li><strong>Aire Acondicionado</strong>: Trabajos especializados</li>
+            <li><strong>Ingresos y Egresos</strong>: Control financiero</li>
+        </ul>
+
+        <h3>Barra de Configuración:</h3>
+        <p>En la parte superior encontrará el menú <strong>"Configuración"</strong> que incluye:</p>
+        <ul>
+            <li>Marcas</li>
+            <li>Conectores</li>
+            <li>Medidas</li>
+            <li>Manual de Usuario</li>
+        </ul>
+
+        <h2 id="gestion-clientes">3. Gestión de Clientes</h2>
+        
+        <h3>Agregar Nuevo Cliente</h3>
+        <div class="step-list">
+            <ol>
+                <li>Ir a <strong>Clientes</strong> desde el menú principal</li>
+                <li>Completar los campos obligatorios:
+                    <ul>
+                        <li><strong>Nombre</strong> (obligatorio)</li>
+                        <li><strong>Apellido</strong> (obligatorio)</li>
+                        <li><strong>DNI</strong> (obligatorio, solo números)</li>
+                        <li><strong>Dirección</strong> (opcional)</li>
+                        <li><strong>Teléfono</strong> (opcional)</li>
+                    </ul>
+                </li>
+                <li>Hacer clic en <strong>"Guardar"</strong></li>
+            </ol>
+        </div>
+
+        <h3>Buscar Clientes</h3>
+        <ul>
+            <li><strong>Por Apellido</strong>: Busca coincidencias en el apellido</li>
+            <li><strong>Por Nombre</strong>: Busca coincidencias en el nombre</li>
+            <li><strong>Por DNI</strong>: Busca por número de documento</li>
+        </ul>
+
+        <div class="warning-box">
+            <strong>⚠️ Importante:</strong> No se puede eliminar un cliente que tenga ventas o cuotas asociadas.
+        </div>
+
+        <h2 id="gestion-articulos">4. Gestión de Artículos</h2>
+        
+        <h3>Agregar Nuevo Artículo</h3>
+        <div class="step-list">
+            <ol>
+                <li>Ir a <strong>Artículos</strong> desde el menú principal</li>
+                <li>Completar la información:
+                    <ul>
+                        <li><strong>Descripción</strong> (obligatorio)</li>
+                        <li><strong>Precio de Venta</strong> (obligatorio)</li>
+                        <li><strong>Stock Inicial</strong></li>
+                        <li><strong>Marca</strong> (seleccionar desde combo)</li>
+                        <li><strong>Medida</strong> (opcional)</li>
+                        <li><strong>Tipo de Conector</strong> (opcional)</li>
+                    </ul>
+                </li>
+                <li>Hacer clic en <strong>"Guardar"</strong></li>
+            </ol>
+        </div>
+
+        <h3>Control de Stock</h3>
+        <ul>
+            <li>El sistema actualiza automáticamente el stock con cada venta</li>
+            <li>Se puede consultar el stock disponible en tiempo real</li>
+            <li>Alertas cuando el stock es insuficiente para una venta</li>
+        </ul>
+
+        <h2 id="registro-ventas">5. Registro de Ventas</h2>
+        
+        <h3>Crear Nueva Venta</h3>
+        <div class="step-list">
+            <ol>
+                <li>Ir a <strong>Ventas</strong> desde el menú principal</li>
+                <li><strong>Seleccionar Cliente</strong>:
+                    <ul>
+                        <li>Usar el combo desplegable, o</li>
+                        <li>Hacer clic en <strong>"Buscar Cliente"</strong> para abrir el selector</li>
+                        <li>Si el cliente no existe, se puede crear uno nuevo desde el selector</li>
+                    </ul>
+                </li>
+                <li><strong>Seleccionar Artículo</strong>:
+                    <ul>
+                        <li>Usar el combo desplegable, o</li>
+                        <li>Hacer clic en <strong>"Buscar Artículo"</strong> para abrir el selector</li>
+                        <li>El precio se completa automáticamente</li>
+                    </ul>
+                </li>
+                <li><strong>Configurar la Venta</strong>:
+                    <ul>
+                        <li><strong>Cantidad</strong>: Unidades a vender</li>
+                        <li><strong>Precio</strong>: Se completa automáticamente (editable)</li>
+                        <li><strong>Forma de Pago</strong>: Mensual, Quincenal, Semanal</li>
+                        <li><strong>Cuotas</strong>: Número de cuotas</li>
+                        <li><strong>Anticipo</strong>: Monto del anticipo (opcional)</li>
+                        <li><strong>Fecha de Venta</strong>: Se completa automáticamente</li>
+                    </ul>
+                </li>
+                <li>Hacer clic en <strong>"Registrar Venta"</strong></li>
+            </ol>
+        </div>
+
+        <h3>Cálculos Automáticos</h3>
+        <ul>
+            <li><strong>Subtotal</strong>: Cantidad × Precio</li>
+            <li><strong>Total Final</strong>: Subtotal - Anticipo</li>
+            <li><strong>Fecha de Cancelación</strong>: Se calcula automáticamente según la forma de pago</li>
+        </ul>
+
+        <h2 id="gestion-cuotas">6. Gestión de Cuotas</h2>
+        
+        <h3>Registrar Pago de Cuota</h3>
+        <div class="step-list">
+            <ol>
+                <li>Seleccionar la cuota en la grilla</li>
+                <li>Hacer clic en <strong>"Pagar Cuota"</strong></li>
+                <li>Seleccionar <strong>Método de Pago</strong>:
+                    <ul>
+                        <li>Efectivo</li>
+                        <li>Transferencia</li>
+                        <li>Tarjeta de Débito</li>
+                        <li>Tarjeta de Crédito</li>
+                    </ul>
+                </li>
+                <li>Confirmar el pago</li>
+            </ol>
+        </div>
+
+        <h3>Estados de Cuotas</h3>
+        <ul>
+            <li><span class="color-indicator red"></span><strong>Vencidas</strong>: Cuotas con fecha de vencimiento pasada</li>
+            <li><span class="color-indicator yellow"></span><strong>Próximas a vencer</strong>: Cuotas que vencen pronto</li>
+            <li><span class="color-indicator green"></span><strong>Pagadas</strong>: Cuotas ya abonadas</li>
+        </ul>
+
+        <h2 id="trabajos-aa">7. Trabajos de Aire Acondicionado</h2>
+        
+        <h3>Registrar Nuevo Trabajo</h3>
+        <div class="step-list">
+            <ol>
+                <li>Ir a <strong>Aire Acondicionado</strong> desde el menú principal</li>
+                <li>Completar la información:
+                    <ul>
+                        <li><strong>Cliente</strong> (buscar o seleccionar)</li>
+                        <li><strong>Descripción del Trabajo</strong></li>
+                        <li><strong>Monto</strong></li>
+                        <li><strong>Fecha del Trabajo</strong></li>
+                    </ul>
+                </li>
+                <li>Hacer clic en <strong>"Guardar"</strong></li>
+            </ol>
+        </div>
+
+        <div class="feature-box">
+            <strong>Características Especiales:</strong>
+            <ul>
+                <li>Los trabajos de A/A se registran como ingresos directos</li>
+                <li>No generan cuotas (son pagos únicos)</li>
+                <li>Aparecen destacados en <span class="color-indicator yellow"></span><strong>amarillo</strong> en el reporte de ingresos y egresos</li>
+            </ul>
+        </div>
+
+        <h2 id="configuracion">8. Configuración del Sistema</h2>
+        
+        <p>Hacer clic en <strong>"Configuración"</strong> en la barra superior del menú principal.</p>
+
+        <h3>Opciones Disponibles:</h3>
+        <ul>
+            <li><strong>Marcas</strong>: Agregar, editar o eliminar marcas de productos</li>
+            <li><strong>Conectores</strong>: Gestionar tipos de conectores para productos especializados</li>
+            <li><strong>Medidas</strong>: Administrar las medidas disponibles para productos</li>
+            <li><strong>Manual de Usuario</strong>: Descargar este manual en formato PDF</li>
+        </ul>
+
+        <h2 id="reportes">9. Reportes y PDFs</h2>
+        
+        <h3>Historial de Ventas por Cliente</h3>
+        <div class="step-list">
+            <ol>
+                <li>Ir a <strong>Cuotas</strong></li>
+                <li>Seleccionar un cliente</li>
+                <li>Hacer clic en <strong>"Historial PDF"</strong></li>
+            </ol>
+        </div>
+
+        <p>Se genera un reporte completo con:</p>
+        <ul>
+            <li>Datos del cliente</li>
+            <li>Historial de ventas</li>
+            <li>Estado de cuotas con fechas de vencimiento</li>
+            <li>Indicadores visuales de color</li>
+            <li>Estadísticas resumidas</li>
+        </ul>
+
+        <h2 id="ingresos-egresos">10. Ingresos y Egresos</h2>
+        
+        <h3>Acceder al Reporte Financiero</h3>
+        <div class="step-list">
+            <ol>
+                <li>Ir a <strong>"Ingresos y Egresos"</strong> desde el menú principal</li>
+                <li>Configurar el rango de fechas</li>
+                <li>Hacer clic en <strong>"Filtrar"</strong></li>
+            </ol>
+        </div>
+
+        <h3>Tipos de Movimientos</h3>
+        <h4>Ingresos <span class="color-indicator green"></span></h4>
+        <ul>
+            <li><strong>Ventas</strong>: Ingresos por ventas registradas</li>
+            <li><strong>Cuotas Pagadas</strong>: Pagos de cuotas recibidas</li>
+            <li><strong>Trabajos A/A</strong>: <span class="color-indicator yellow"></span> Trabajos de aire acondicionado</li>
+        </ul>
+
+        <h4>Egresos <span class="color-indicator red"></span></h4>
+        <ul>
+            <li><strong>Compras</strong>: Compras de mercadería</li>
+            <li><strong>Gastos</strong>: Otros gastos del negocio</li>
+        </ul>
+
+        <h3>Totales y Estadísticas</h3>
+        <ul>
+            <li><strong>Total Ventas</strong>: Suma de todas las ventas del período</li>
+            <li><strong>Total Cuotas Pagadas</strong>: Con desglose por método de pago<br>
+                <code>Ejemplo: Total Cuotas: $15,000 (Efec: $5,000, Trans: $7,000, Tarj: $3,000)</code>
+            </li>
+            <li><strong>Total Trabajos A/A</strong>: Ingresos por trabajos de aire acondicionado</li>
+            <li><strong>Total Egresos</strong>: Suma de todos los gastos</li>
+        </ul>
+
+        <h2 id="gestion-stock">11. Gestión de Stock</h2>
+        
+        <h3>Control Automático</h3>
+        <ul>
+            <li>El stock se actualiza automáticamente con cada venta</li>
+            <li>Se descuenta la cantidad vendida del stock disponible</li>
+            <li>Al eliminar una venta, el stock se restaura</li>
+        </ul>
+
+        <h3>Validaciones</h3>
+        <ul>
+            <li><strong>Stock insuficiente</strong>: El sistema alerta si no hay stock suficiente</li>
+            <li><strong>Control en tiempo real</strong>: Verificación antes de cada venta</li>
+        </ul>
+
+        <h2 id="consejos">12. Consejos y Buenas Prácticas</h2>
+        
+        <h3>🎯 Gestión de Clientes</h3>
+        <ul>
+            <li>Mantener siempre actualizada la información de contacto</li>
+            <li>Usar el DNI como identificador único</li>
+            <li>Verificar duplicados antes de crear nuevos clientes</li>
+        </ul>
+
+        <h3>💰 Gestión de Ventas</h3>
+        <ul>
+            <li>Verificar stock disponible antes de prometer productos</li>
+            <li>Configurar correctamente la forma de pago para cálculos precisos</li>
+            <li>Utilizar anticipos para mejorar el flujo de caja</li>
+        </ul>
+
+        <h3>📅 Gestión de Cuotas</h3>
+        <ul>
+            <li>Revisar regularmente las cuotas vencidas</li>
+            <li>Registrar los pagos inmediatamente cuando se reciben</li>
+            <li>Utilizar diferentes métodos de pago para mejor control</li>
+        </ul>
+
+        <h3>📊 Reportes Financieros</h3>
+        <ul>
+            <li>Revisar semanalmente el reporte de ingresos y egresos</li>
+            <li>Utilizar los filtros de fecha para análisis específicos</li>
+            <li>Generar PDFs para conservar registros históricos</li>
+        </ul>
+
+        <h3>🎨 Códigos de Color</h3>
+        <ul>
+            <li><span class="color-indicator green"></span><strong>Verde</strong>: Ingresos, cuotas pagadas</li>
+            <li><span class="color-indicator yellow"></span><strong>Amarillo</strong>: Trabajos de A/A, cuotas próximas a vencer</li>
+            <li><span class="color-indicator red"></span><strong>Rojo</strong>: Egresos, cuotas vencidas</li>
+            <li><span class="color-indicator blue"></span><strong>Azul</strong>: Encabezados de tablas</li>
+        </ul>
+
+        <div class="warning-box">
+            <h3>Versión Demo vs Versión Completa</h3>
+            <p><strong>Limitaciones de la Versión Demo:</strong></p>
+            <ul>
+                <li>Máximo 5 ventas registradas</li>
+                <li>Funcionalidades completas para evaluación</li>
+                <li>Mensaje de aviso al alcanzar el límite</li>
+            </ul>
+        </div>
+
+        <div class="footer">
+            <p><strong>© 2025 Sistema de Gestión de Ventas y Cuenta Corriente</strong></p>
+            <p><em>Manual de Usuario - Versión 1.0</em></p>
+            <p>Para soporte técnico, contactar al desarrollador del sistema</p>
+        </div>
+    </div>
+</body>
+</html>
