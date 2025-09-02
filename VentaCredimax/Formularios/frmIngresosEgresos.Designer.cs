@@ -55,7 +55,7 @@
             this.lblTotalPagado.Name = "lblTotalPagado";
             this.lblTotalPagado.Size = new System.Drawing.Size(42, 42);
             this.lblTotalPagado.TabIndex = 114;
-            this.lblTotalPagado.Text = "Total Egresos: $0.00";
+            this.lblTotalPagado.Text = "T";
             // 
             // lblTotalTrabajos
             // 
@@ -68,7 +68,7 @@
             this.lblTotalTrabajos.Name = "lblTotalTrabajos";
             this.lblTotalTrabajos.Size = new System.Drawing.Size(42, 42);
             this.lblTotalTrabajos.TabIndex = 115;
-            this.lblTotalTrabajos.Text = "Total Trabajos A/A: $0.00";
+            this.lblTotalTrabajos.Text = "T";
             // 
             // lblTotalCuotas
             // 
@@ -81,7 +81,7 @@
             this.lblTotalCuotas.Name = "lblTotalCuotas";
             this.lblTotalCuotas.Size = new System.Drawing.Size(42, 42);
             this.lblTotalCuotas.TabIndex = 116;
-            this.lblTotalCuotas.Text = "Total Cuotas Pagadas: $0.00";
+            this.lblTotalCuotas.Text = "T";
             // 
             // btnAnularCompra
             // 
@@ -114,7 +114,7 @@
             this.lblTotal.Name = "lblTotal";
             this.lblTotal.Size = new System.Drawing.Size(42, 42);
             this.lblTotal.TabIndex = 112;
-            this.lblTotal.Text = "Total Ventas: $0.00";
+            this.lblTotal.Text = "T";
             // 
             // dtpFechaHasta
             // 
