@@ -62,13 +62,12 @@
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvArticulos.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dgvArticulos.Location = new System.Drawing.Point(31, 108);
-            this.dgvArticulos.Margin = new System.Windows.Forms.Padding(4);
+            this.dgvArticulos.Location = new System.Drawing.Point(23, 88);
             this.dgvArticulos.Name = "dgvArticulos";
             this.dgvArticulos.ReadOnly = true;
             this.dgvArticulos.RowHeadersWidth = 51;
             this.dgvArticulos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvArticulos.Size = new System.Drawing.Size(1442, 546);
+            this.dgvArticulos.Size = new System.Drawing.Size(976, 444);
             this.dgvArticulos.TabIndex = 66;
             this.dgvArticulos.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvArticulos_CellDoubleClick);
             this.dgvArticulos.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvArticulos_DataBindingComplete);
@@ -76,10 +75,9 @@
             // txtBuscar
             // 
             this.txtBuscar.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBuscar.Location = new System.Drawing.Point(447, 44);
-            this.txtBuscar.Margin = new System.Windows.Forms.Padding(4);
+            this.txtBuscar.Location = new System.Drawing.Point(335, 36);
             this.txtBuscar.Name = "txtBuscar";
-            this.txtBuscar.Size = new System.Drawing.Size(619, 34);
+            this.txtBuscar.Size = new System.Drawing.Size(408, 29);
             this.txtBuscar.TabIndex = 67;
             this.txtBuscar.TextChanged += new System.EventHandler(this.txtBuscar_TextChanged);
             // 
@@ -87,10 +85,9 @@
             // 
             this.btnSeleccionar.BackColor = System.Drawing.Color.Azure;
             this.btnSeleccionar.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSeleccionar.Location = new System.Drawing.Point(1150, 36);
-            this.btnSeleccionar.Margin = new System.Windows.Forms.Padding(4);
+            this.btnSeleccionar.Location = new System.Drawing.Point(781, 32);
             this.btnSeleccionar.Name = "btnSeleccionar";
-            this.btnSeleccionar.Size = new System.Drawing.Size(323, 47);
+            this.btnSeleccionar.Size = new System.Drawing.Size(218, 38);
             this.btnSeleccionar.TabIndex = 69;
             this.btnSeleccionar.Text = "Seleccionar Articulo";
             this.btnSeleccionar.UseVisualStyleBackColor = false;
@@ -101,36 +98,33 @@
             this.cbFiltrar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbFiltrar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbFiltrar.FormattingEnabled = true;
-            this.cbFiltrar.Location = new System.Drawing.Point(206, 44);
-            this.cbFiltrar.Margin = new System.Windows.Forms.Padding(4);
+            this.cbFiltrar.Location = new System.Drawing.Point(163, 36);
             this.cbFiltrar.Name = "cbFiltrar";
-            this.cbFiltrar.Size = new System.Drawing.Size(207, 33);
+            this.cbFiltrar.Size = new System.Drawing.Size(156, 28);
             this.cbFiltrar.TabIndex = 70;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(34, 44);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(26, 36);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(164, 31);
+            this.label1.Size = new System.Drawing.Size(133, 25);
             this.label1.TabIndex = 71;
             this.label1.Text = "Buscar por:";
             this.label1.Visible = false;
             // 
             // frmListaArticulos
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.ClientSize = new System.Drawing.Size(1514, 694);
+            this.ClientSize = new System.Drawing.Size(1028, 564);
             this.Controls.Add(this.btnSeleccionar);
             this.Controls.Add(this.cbFiltrar);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtBuscar);
             this.Controls.Add(this.dgvArticulos);
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frmListaArticulos";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Seleccionar Articulo";

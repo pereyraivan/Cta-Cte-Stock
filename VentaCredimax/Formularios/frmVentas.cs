@@ -14,10 +14,14 @@ namespace VentaCredimax.Formularios
         private string id = null;
         private bool esModificacion;
         private int idCliente;
+        private int? idArticuloSeleccionado = null; // Para almacenar el ID del artículo seleccionado
         GestorCliente _gestorCliente = new GestorCliente();
         GestorVenta _gestorVenta = new GestorVenta();
         GestorArticulo _gestorArticulo = new GestorArticulo();
         private GestorReportes _gestorReportes = new GestorReportes();
+        private GestorMarca _gestorMarca = new GestorMarca();
+        private GestorMedida _gestorMedida = new GestorMedida();
+        private GestorTipoConector _gestorTipoConector = new GestorTipoConector();
         public frmVentas()
         {
             InitializeComponent();
@@ -44,13 +48,7 @@ namespace VentaCredimax.Formularios
             // CargarVendedores(); // Obsoleto - Los vendedores ya no se usan
         }
 
-        private void CargarComboArticulos()
-        {
-            cbArticulo.DataSource = null; // Limpiar antes de asignar nuevos datos
-            cbArticulo.DisplayMember = "Descripcion"; // Muestra la descripción del artículo
-            cbArticulo.ValueMember = "ArticuloId"; // Identificador real del artículo
-            cbArticulo.DataSource = _gestorArticulo.Listar().Where(a => a.FechaAnulacion == null).ToList();
-        }
+
         public void ClienteSeleccionado(string nombreCliente, string apellidoCliente, int idClienteSeleccionado, int dni)
         {
             // Formato: "Apellido, Nombre (DNI)"
@@ -84,28 +82,75 @@ namespace VentaCredimax.Formularios
 
         public void ArticuloSeleccionado(string descripcionArticulo, int idArticuloSeleccionado, decimal precioVenta)
         {
-            // Cargar los artículos en el ComboBox si no están cargados
-            CargarComboArticulos();
+            // Almacenar el ID del artículo seleccionado
+            this.idArticuloSeleccionado = idArticuloSeleccionado;
 
-            // Buscar el artículo por su Id en el DataSource
-            var articulos = (List<Articulo>)cbArticulo.DataSource;
-
-            // Encontrar el artículo en la lista del ComboBox
+            // Obtener información completa del artículo
+            var articulos = _gestorArticulo.Listar();
             var articulo = articulos.FirstOrDefault(a => a.ArticuloId == idArticuloSeleccionado);
 
             if (articulo != null)
             {
-                // Selecciona el artículo en el ComboBox
-                cbArticulo.SelectedValue = articulo.ArticuloId;
+                // Construir la descripción completa del artículo
+                string descripcionCompleta = ConstruirDescripcionCompletaArticulo(articulo);
+                
+                // Mostrar la descripción completa en el TextBox
+                txtArticulo.Text = descripcionCompleta;
             }
             else
             {
-                // Si no está en la lista, simplemente establecer el texto
-                cbArticulo.Text = descripcionArticulo;
+                // Si no se encuentra el artículo, mostrar solo la descripción básica
+                txtArticulo.Text = descripcionArticulo;
             }
 
             // Establecer automáticamente el precio de venta
             txtPrecio.Text = precioVenta.ToString("N2", new System.Globalization.CultureInfo("es-AR"));
+        }
+
+        private string ConstruirDescripcionCompletaArticulo(Articulo articulo)
+        {
+            var descripcion = articulo.Descripcion ?? "";
+            
+            // Obtener información de marca, medida y tipo conector
+            var marcas = _gestorMarca.ListarMarcas();
+            var medidas = _gestorMedida.ListarMedidas();
+            var tiposConector = _gestorTipoConector.ListarTipoConectores();
+            
+            string marca = "";
+            string medida = "";
+            string tipoConector = "";
+            
+            if (articulo.IdMarca.HasValue)
+            {
+                var marcaEncontrada = marcas.FirstOrDefault(m => m.IdMarca == articulo.IdMarca.Value);
+                marca = marcaEncontrada?.NombreMarca ?? "";
+            }
+            
+            if (articulo.IdMedida.HasValue)
+            {
+                var medidaEncontrada = medidas.FirstOrDefault(m => m.IdMedida == articulo.IdMedida.Value);
+                medida = medidaEncontrada?.NombreMedida ?? "";
+            }
+            
+            if (articulo.IdTipoConector.HasValue)
+            {
+                var tipoEncontrado = tiposConector.FirstOrDefault(tc => tc.IdTipoConector == articulo.IdTipoConector.Value);
+                tipoConector = tipoEncontrado?.NombreTipoConector ?? "";
+            }
+            
+            // Construir la descripción completa con el nuevo formato
+            var partes = new List<string> { descripcion };
+            
+            if (!string.IsNullOrEmpty(marca))
+                partes.Add(marca);
+                
+            // Usar medida o conector (priorizar medida si ambos existen)
+            if (!string.IsNullOrEmpty(medida))
+                partes.Add(medida);
+            else if (!string.IsNullOrEmpty(tipoConector))
+                partes.Add(tipoConector);
+            
+            return string.Join(" - ", partes);
         }
 
         private void RegistrarVenta()
@@ -113,12 +158,12 @@ namespace VentaCredimax.Formularios
             decimal precio;
             int cantidad;
 
-            if (cbSeleccionCliente.Text == "" || cbArticulo.Text == "" || txtPrecio.Text == "" || txtCantidad.Text == "" || txtCuotas.Text == "")
+            if (cbSeleccionCliente.Text == "" || txtArticulo.Text == "" || txtPrecio.Text == "" || txtCantidad.Text == "" || txtCuotas.Text == "")
             {
                 if (cbSeleccionCliente.Text == "")
                     errorProvider1.SetError(cbSeleccionCliente, "Campo obligatorio");
-                if (cbArticulo.Text == "")
-                    errorProvider1.SetError(cbArticulo, "Campo obligatorio");
+                if (txtArticulo.Text == "")
+                    errorProvider1.SetError(txtArticulo, "Campo obligatorio");
                 if (txtPrecio.Text == "")
                     errorProvider1.SetError(txtPrecio, "Campo obligatorio");
                 if (txtCantidad.Text == "")
@@ -132,25 +177,16 @@ namespace VentaCredimax.Formularios
             var venta = new Venta();
 
             venta.ClientId = (int)cbSeleccionCliente.SelectedValue;
-            // Buscar el ID del artículo por su descripción
-            if (cbArticulo.SelectedValue != null)
+            
+            // Usar el ID del artículo seleccionado
+            if (idArticuloSeleccionado.HasValue)
             {
-                venta.IdArticulo = (int)cbArticulo.SelectedValue;
+                venta.IdArticulo = idArticuloSeleccionado.Value;
             }
             else
             {
-                // Si no se seleccionó de la lista, buscar por texto
-                var gestorArticulo = new GestorArticulo();
-                var articulosBusqueda = gestorArticulo.BuscarPorNombre(cbArticulo.Text);
-                if (articulosBusqueda.Any())
-                {
-                    venta.IdArticulo = articulosBusqueda.First().ArticuloId;
-                }
-                else
-                {
-                    MessageBox.Show("No se encontró el artículo especificado.");
-                    return;
-                }
+                MessageBox.Show("No se ha seleccionado un artículo válido.");
+                return;
             }
             FormaDePago formaDePagoSeleccionada = (FormaDePago)cbFormaPago.SelectedItem;
             venta.FormaDePagoId = (int)formaDePagoSeleccionada;
@@ -263,10 +299,10 @@ namespace VentaCredimax.Formularios
         private void LimpiarCampos()
         {
             cbFormaPago.SelectedIndexChanged -= cbFormaPago_SelectedIndexChanged;
-            cbArticulo.SelectedIndexChanged -= cbArticulo_SelectedIndexChanged;
 
             cbSeleccionCliente.SelectedIndex = -1;
-            cbArticulo.Text = "";
+            txtArticulo.Text = "";
+            idArticuloSeleccionado = null; // Limpiar el ID del artículo seleccionado
             cbFormaPago.SelectedIndex = -1;
             txtPrecio.Text = "";
             txtCuotas.Text = "";
@@ -277,7 +313,6 @@ namespace VentaCredimax.Formularios
             lblTotal.Text = "";
 
             cbFormaPago.SelectedIndexChanged += cbFormaPago_SelectedIndexChanged;
-            cbArticulo.SelectedIndexChanged += cbArticulo_SelectedIndexChanged;
         }
         private void ListarVentas()
         {
@@ -313,11 +348,23 @@ namespace VentaCredimax.Formularios
                 // Asignar el valor al ComboBox
                 cbSeleccionCliente.SelectedValue = idCliente;
                 cbSeleccionCliente.Text = dgvVentas.CurrentRow.Cells["NombreCliente"].Value?.ToString();
-                // Seleccionar el artículo por su ID
+                // Cargar el artículo seleccionado
                 int idArticulo = (int)dgvVentas.CurrentRow.Cells["IdArticulo"].Value;
-                cbArticulo.SelectedValue = idArticulo;
-                // También establecer el texto del artículo para que sea visible
-                cbArticulo.Text = dgvVentas.CurrentRow.Cells["Articulo"].Value?.ToString();
+                idArticuloSeleccionado = idArticulo;
+                
+                // Obtener información completa del artículo para mostrar en el TextBox
+                var articulos = _gestorArticulo.Listar();
+                var articulo = articulos.FirstOrDefault(a => a.ArticuloId == idArticulo);
+                
+                if (articulo != null)
+                {
+                    string descripcionCompleta = ConstruirDescripcionCompletaArticulo(articulo);
+                    txtArticulo.Text = descripcionCompleta;
+                }
+                else
+                {
+                    txtArticulo.Text = dgvVentas.CurrentRow.Cells["Articulo"].Value?.ToString();
+                }
                 cbFormaPago.Text = dgvVentas.CurrentRow.Cells["FormaDePago"].Value?.ToString();
                 txtPrecio.Text = Convert.ToDecimal(dgvVentas.CurrentRow.Cells["Precio"].Value).ToString("N2", new System.Globalization.CultureInfo("es-AR"));
                 txtCuotas.Text = dgvVentas.CurrentRow.Cells["Cuotas"].Value?.ToString();
@@ -347,32 +394,23 @@ namespace VentaCredimax.Formularios
         }
         private void ModificarVenta()
         {
-            if (cbSeleccionCliente.Text != "" && cbArticulo.Text != "")
+            if (cbSeleccionCliente.Text != "" && txtArticulo.Text != "")
             {
                 try
                 {
                     var venta = new Venta();
                     venta.VentaId = Convert.ToInt32(id);
                     venta.ClientId = (int)cbSeleccionCliente.SelectedValue; // Tomar el cliente seleccionado actualmente en el ComboBox
-                    // Buscar el ID del artículo por su descripción
-                    if (cbArticulo.SelectedValue != null)
+                    
+                    // Usar el ID del artículo seleccionado
+                    if (idArticuloSeleccionado.HasValue)
                     {
-                        venta.IdArticulo = (int)cbArticulo.SelectedValue;
+                        venta.IdArticulo = idArticuloSeleccionado.Value;
                     }
                     else
                     {
-                        // Si no se seleccionó de la lista, buscar por texto
-                        var gestorArticulo = new GestorArticulo();
-                        var articulosModificacion = gestorArticulo.BuscarPorNombre(cbArticulo.Text);
-                        if (articulosModificacion.Any())
-                        {
-                            venta.IdArticulo = articulosModificacion.First().ArticuloId;
-                        }
-                        else
-                        {
-                            MessageBox.Show("No se encontró el artículo especificado.");
-                            return;
-                        }
+                        MessageBox.Show("No se ha seleccionado un artículo válido.");
+                        return;
                     }
                     venta.FormaDePagoId = (int)cbFormaPago.SelectedValue;
                     
@@ -440,9 +478,9 @@ namespace VentaCredimax.Formularios
                 {
                     errorProvider1.SetError(cbSeleccionCliente, "Campo obligatorio");
                 }
-                if (cbArticulo.Text == "")
+                if (txtArticulo.Text == "")
                 {
-                    errorProvider1.SetError(cbArticulo, "Campo obligatorio");
+                    errorProvider1.SetError(txtArticulo, "Campo obligatorio");
                 }
             }
         }
@@ -734,13 +772,11 @@ namespace VentaCredimax.Formularios
         {
             // CargarComboDiasSemana(); // Obsoleto - Los días de semana ya no se usan
             CargarComboCliente();
-            CargarComboArticulos();
             CargarFormaDePagoComboBox();
             ListarVentas();
             btnEditarVenta.Enabled = false;
             
             // Suscribir eventos
-            cbArticulo.SelectedIndexChanged += cbArticulo_SelectedIndexChanged;
             txtAnticipo.Leave += txtAnticipo_Leave;
         }
 
@@ -856,30 +892,6 @@ namespace VentaCredimax.Formularios
             }
         }
 
-        private void cbArticulo_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            // Solo procesar si hay un artículo seleccionado y no es durante la carga
-            if (cbArticulo.SelectedValue != null && cbArticulo.DataSource != null)
-            {
-                try
-                {
-                    int articuloId = (int)cbArticulo.SelectedValue;
-                    
-                    // Buscar el artículo en el DataSource para obtener su precio
-                    var articulos = (List<Articulo>)cbArticulo.DataSource;
-                    var articuloSeleccionado = articulos.FirstOrDefault(a => a.ArticuloId == articuloId);
-                    
-                    if (articuloSeleccionado != null)
-                    {
-                        // Establecer automáticamente el precio de venta
-                        txtPrecio.Text = articuloSeleccionado.PrecioVenta.ToString("N2", new System.Globalization.CultureInfo("es-AR"));
-                    }
-                }
-                catch
-                {
-                    // Si hay algún error, no hacer nada para evitar excepciones durante la carga
-                }
-            }
-        }
+
     }
 }

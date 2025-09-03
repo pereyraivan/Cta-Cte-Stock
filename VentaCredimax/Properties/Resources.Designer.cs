@@ -71,6 +71,26 @@ namespace VentaCredimax.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap aire_acondicionado1 {
+            get {
+                object obj = ResourceManager.GetObject("aire-acondicionado1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap auto {
+            get {
+                object obj = ResourceManager.GetObject("auto", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &lt;!DOCTYPE html&gt;
         ///&lt;html&gt;
         ///&lt;head&gt;
@@ -99,6 +119,26 @@ namespace VentaCredimax.Properties {
         internal static string ComprobanteDeVenta {
             get {
                 return ResourceManager.GetString("ComprobanteDeVenta", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap contrato {
+            get {
+                object obj = ResourceManager.GetObject("contrato", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap customer_relationship_management {
+            get {
+                object obj = ResourceManager.GetObject("customer-relationship-management", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -163,6 +203,61 @@ namespace VentaCredimax.Properties {
         internal static System.Drawing.Bitmap flujo_de_ingresos {
             get {
                 object obj = ResourceManager.GetObject("flujo-de-ingresos", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap informe_de_venta {
+            get {
+                object obj = ResourceManager.GetObject("informe-de-venta", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;!DOCTYPE html&gt;
+        ///&lt;html lang=&quot;es&quot;&gt;
+        ///&lt;head&gt;
+        ///    &lt;meta charset=&quot;UTF-8&quot;&gt;
+        ///    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+        ///    &lt;title&gt;Manual de Usuario - Sistema de Gestión de Ventas&lt;/title&gt;
+        ///    &lt;style&gt;
+        ///        body {
+        ///            font-family: &apos;Segoe UI&apos;, Tahoma, Geneva, Verdana, sans-serif;
+        ///            line-height: 1.6;
+        ///            margin: 0;
+        ///            padding: 20px;
+        ///            color: #333;
+        ///            background-color: #f8f9fa;
+        ///        }
+        ///        .container {
+        ///           [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string ManualDeUsuario {
+            get {
+                return ResourceManager.GetString("ManualDeUsuario", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap metodo_de_pago {
+            get {
+                object obj = ResourceManager.GetObject("metodo-de-pago", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap orden_de_compra {
+            get {
+                object obj = ResourceManager.GetObject("orden-de-compra", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

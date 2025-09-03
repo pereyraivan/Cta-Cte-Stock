@@ -229,25 +229,64 @@ namespace VentaCredimax.Formularios
             {
                 try
                 {
-                    var stock = Convert.ToInt32(row.Cells["Stock"].Value);
-                    var stockMinimo = Convert.ToInt32(row.Cells["StockMinimo"].Value);
-
-                    if (stock <= stockMinimo)
+                    // Obtener el objeto de datos de la fila
+                    var dataItem = row.DataBoundItem;
+                    if (dataItem != null)
                     {
-                        row.DefaultCellStyle.BackColor = Color.LightCoral;
-                        row.DefaultCellStyle.ForeColor = Color.White;
+                        // Usar reflexión para obtener los valores de Stock y StockMinimo
+                        var stockProperty = dataItem.GetType().GetProperty("Stock");
+                        var stockMinimoProperty = dataItem.GetType().GetProperty("StockMinimo");
+                        
+                        if (stockProperty != null && stockMinimoProperty != null)
+                        {
+                            var stockValue = stockProperty.GetValue(dataItem);
+                            var stockMinimoValue = stockMinimoProperty.GetValue(dataItem);
+                            
+                            if (stockValue != null && stockMinimoValue != null)
+                            {
+                                var stock = Convert.ToInt32(stockValue);
+                                var stockMinimo = Convert.ToInt32(stockMinimoValue);
+
+                                if (stock <= stockMinimo)
+                                {
+                                    row.DefaultCellStyle.BackColor = Color.LightCoral;
+                                    row.DefaultCellStyle.ForeColor = Color.White;
+                                }
+                                else
+                                {
+                                    row.DefaultCellStyle.BackColor = Color.White;
+                                    row.DefaultCellStyle.ForeColor = Color.Black;
+                                }
+                            }
+                            else
+                            {
+                                // Si los valores son nulos, usar estilo por defecto
+                                row.DefaultCellStyle.BackColor = Color.White;
+                                row.DefaultCellStyle.ForeColor = Color.Black;
+                            }
+                        }
+                        else
+                        {
+                            // Si las propiedades no existen, usar estilo por defecto
+                            row.DefaultCellStyle.BackColor = Color.White;
+                            row.DefaultCellStyle.ForeColor = Color.Black;
+                        }
                     }
                     else
                     {
+                        // Si no hay objeto de datos, usar estilo por defecto
                         row.DefaultCellStyle.BackColor = Color.White;
                         row.DefaultCellStyle.ForeColor = Color.Black;
                     }
                 }
-                catch
+                catch (Exception ex)
                 {
-                    // En caso de error, usar estilo por defecto
+                    // En caso de error, usar estilo por defecto y registrar el error
                     row.DefaultCellStyle.BackColor = Color.White;
                     row.DefaultCellStyle.ForeColor = Color.Black;
+                    
+                    // Opcional: Log del error para debugging
+                    System.Diagnostics.Debug.WriteLine($"Error en DgvArticulos_DataBindingComplete: {ex.Message}");
                 }
             }
         }

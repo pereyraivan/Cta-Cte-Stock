@@ -55,7 +55,6 @@
             this.panel14 = new System.Windows.Forms.Panel();
             this.btnIngresosEgresos = new System.Windows.Forms.Button();
             this.panel6 = new System.Windows.Forms.Panel();
-            this.panel10 = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
             this.btnInformeVentas = new System.Windows.Forms.Button();
             this.btnInformeCuotas = new System.Windows.Forms.Button();
@@ -94,9 +93,8 @@
             this.pTituloSistema.Controls.Add(this.menuStrip1);
             this.pTituloSistema.Dock = System.Windows.Forms.DockStyle.Top;
             this.pTituloSistema.Location = new System.Drawing.Point(0, 0);
-            this.pTituloSistema.Margin = new System.Windows.Forms.Padding(4);
             this.pTituloSistema.Name = "pTituloSistema";
-            this.pTituloSistema.Size = new System.Drawing.Size(1580, 59);
+            this.pTituloSistema.Size = new System.Drawing.Size(1155, 48);
             this.pTituloSistema.TabIndex = 1;
             // 
             // button1
@@ -109,10 +107,9 @@
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("OCR A Extended", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.button1.Location = new System.Drawing.Point(1480, 31);
-            this.button1.Margin = new System.Windows.Forms.Padding(4);
+            this.button1.Location = new System.Drawing.Point(1080, 0);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(100, 28);
+            this.button1.Size = new System.Drawing.Size(75, 48);
             this.button1.TabIndex = 10;
             this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.TTAyudaMenu.SetToolTip(this.button1, "Seleccione una venta para imprimir el historial del cliente.");
@@ -125,21 +122,24 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("OCR A Extended", 20F);
             this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(164)))), ((int)(((byte)(196)))), ((int)(((byte)(231)))), ((int)(((byte)(255)))));
-            this.label2.Location = new System.Drawing.Point(277, 12);
+            this.label2.Location = new System.Drawing.Point(193, 10);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(1044, 35);
+            this.label2.Size = new System.Drawing.Size(797, 29);
             this.label2.TabIndex = 0;
             this.label2.Text = "Sistema de Ventas y Gestión de Cuentas Corrientes";
             // 
             // menuStrip1
             // 
             this.menuStrip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(52)))), ((int)(((byte)(108)))));
+            this.menuStrip1.Dock = System.Windows.Forms.DockStyle.Left;
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.configuracionToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1580, 31);
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
+            this.menuStrip1.Size = new System.Drawing.Size(167, 48);
             this.menuStrip1.TabIndex = 11;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -153,34 +153,34 @@
             this.configuracionToolStripMenuItem.Font = new System.Drawing.Font("OCR A Extended", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.configuracionToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(164)))), ((int)(((byte)(196)))), ((int)(((byte)(231)))), ((int)(((byte)(255)))));
             this.configuracionToolStripMenuItem.Name = "configuracionToolStripMenuItem";
-            this.configuracionToolStripMenuItem.Size = new System.Drawing.Size(193, 27);
+            this.configuracionToolStripMenuItem.Size = new System.Drawing.Size(158, 21);
             this.configuracionToolStripMenuItem.Text = "Configuración";
             // 
             // marcasToolStripMenuItem
             // 
             this.marcasToolStripMenuItem.Name = "marcasToolStripMenuItem";
-            this.marcasToolStripMenuItem.Size = new System.Drawing.Size(224, 28);
+            this.marcasToolStripMenuItem.Size = new System.Drawing.Size(263, 22);
             this.marcasToolStripMenuItem.Text = "Marcas";
             this.marcasToolStripMenuItem.Click += new System.EventHandler(this.marcasToolStripMenuItem_Click_1);
             // 
             // conectoresToolStripMenuItem
             // 
             this.conectoresToolStripMenuItem.Name = "conectoresToolStripMenuItem";
-            this.conectoresToolStripMenuItem.Size = new System.Drawing.Size(224, 28);
+            this.conectoresToolStripMenuItem.Size = new System.Drawing.Size(263, 22);
             this.conectoresToolStripMenuItem.Text = "Conectores";
             this.conectoresToolStripMenuItem.Click += new System.EventHandler(this.conectoresToolStripMenuItem_Click_1);
             // 
             // medidasToolStripMenuItem
             // 
             this.medidasToolStripMenuItem.Name = "medidasToolStripMenuItem";
-            this.medidasToolStripMenuItem.Size = new System.Drawing.Size(224, 28);
+            this.medidasToolStripMenuItem.Size = new System.Drawing.Size(263, 22);
             this.medidasToolStripMenuItem.Text = "Medidas";
             this.medidasToolStripMenuItem.Click += new System.EventHandler(this.medidasToolStripMenuItem_Click_1);
             // 
             // manualDeUsuarioToolStripMenuItem
             // 
             this.manualDeUsuarioToolStripMenuItem.Name = "manualDeUsuarioToolStripMenuItem";
-            this.manualDeUsuarioToolStripMenuItem.Size = new System.Drawing.Size(224, 28);
+            this.manualDeUsuarioToolStripMenuItem.Size = new System.Drawing.Size(263, 22);
             this.manualDeUsuarioToolStripMenuItem.Text = "Manual de Usuario";
             this.manualDeUsuarioToolStripMenuItem.Click += new System.EventHandler(this.manualDeUsuarioToolStripMenuItem_Click);
             // 
@@ -205,19 +205,17 @@
             this.pMenuLateral.Controls.Add(this.panel1);
             this.pMenuLateral.Controls.Add(this.btnNuevaVenta);
             this.pMenuLateral.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pMenuLateral.Location = new System.Drawing.Point(0, 59);
-            this.pMenuLateral.Margin = new System.Windows.Forms.Padding(4);
+            this.pMenuLateral.Location = new System.Drawing.Point(0, 48);
             this.pMenuLateral.Name = "pMenuLateral";
-            this.pMenuLateral.Size = new System.Drawing.Size(331, 934);
+            this.pMenuLateral.Size = new System.Drawing.Size(220, 701);
             this.pMenuLateral.TabIndex = 2;
             // 
             // panel12
             // 
             this.panel12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(52)))), ((int)(((byte)(108)))));
-            this.panel12.Location = new System.Drawing.Point(2, 447);
-            this.panel12.Margin = new System.Windows.Forms.Padding(4);
+            this.panel12.Location = new System.Drawing.Point(2, 291);
             this.panel12.Name = "panel12";
-            this.panel12.Size = new System.Drawing.Size(16, 78);
+            this.panel12.Size = new System.Drawing.Size(10, 49);
             this.panel12.TabIndex = 15;
             // 
             // btnAiresAcondicionados
@@ -226,13 +224,12 @@
             this.btnAiresAcondicionados.FlatAppearance.BorderSize = 0;
             this.btnAiresAcondicionados.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Highlight;
             this.btnAiresAcondicionados.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAiresAcondicionados.Font = new System.Drawing.Font("OCR A Extended", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAiresAcondicionados.Image = global::VentaCredimax.Properties.Resources.aire_acondicionado;
+            this.btnAiresAcondicionados.Font = new System.Drawing.Font("OCR A Extended", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAiresAcondicionados.Image = global::VentaCredimax.Properties.Resources.aire_acondicionado1;
             this.btnAiresAcondicionados.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAiresAcondicionados.Location = new System.Drawing.Point(15, 446);
-            this.btnAiresAcondicionados.Margin = new System.Windows.Forms.Padding(4);
+            this.btnAiresAcondicionados.Location = new System.Drawing.Point(11, 290);
             this.btnAiresAcondicionados.Name = "btnAiresAcondicionados";
-            this.btnAiresAcondicionados.Size = new System.Drawing.Size(312, 80);
+            this.btnAiresAcondicionados.Size = new System.Drawing.Size(198, 49);
             this.btnAiresAcondicionados.TabIndex = 14;
             this.btnAiresAcondicionados.Text = "Gestion \rAire acond.";
             this.btnAiresAcondicionados.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -243,10 +240,9 @@
             // panel13
             // 
             this.panel13.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(52)))), ((int)(((byte)(108)))));
-            this.panel13.Location = new System.Drawing.Point(3, 534);
-            this.panel13.Margin = new System.Windows.Forms.Padding(4);
+            this.panel13.Location = new System.Drawing.Point(2, 345);
             this.panel13.Name = "panel13";
-            this.panel13.Size = new System.Drawing.Size(16, 78);
+            this.panel13.Size = new System.Drawing.Size(10, 49);
             this.panel13.TabIndex = 15;
             // 
             // btnGestionCompras
@@ -255,13 +251,12 @@
             this.btnGestionCompras.FlatAppearance.BorderSize = 0;
             this.btnGestionCompras.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Highlight;
             this.btnGestionCompras.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnGestionCompras.Font = new System.Drawing.Font("OCR A Extended", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGestionCompras.Image = global::VentaCredimax.Properties.Resources.salir;
+            this.btnGestionCompras.Font = new System.Drawing.Font("OCR A Extended", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnGestionCompras.Image = global::VentaCredimax.Properties.Resources.orden_de_compra;
             this.btnGestionCompras.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnGestionCompras.Location = new System.Drawing.Point(15, 534);
-            this.btnGestionCompras.Margin = new System.Windows.Forms.Padding(4);
+            this.btnGestionCompras.Location = new System.Drawing.Point(11, 345);
             this.btnGestionCompras.Name = "btnGestionCompras";
-            this.btnGestionCompras.Size = new System.Drawing.Size(312, 80);
+            this.btnGestionCompras.Size = new System.Drawing.Size(198, 49);
             this.btnGestionCompras.TabIndex = 16;
             this.btnGestionCompras.Text = "Gestion \rCompras";
             this.btnGestionCompras.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -272,10 +267,9 @@
             // panel11
             // 
             this.panel11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(52)))), ((int)(((byte)(108)))));
-            this.panel11.Location = new System.Drawing.Point(3, 360);
-            this.panel11.Margin = new System.Windows.Forms.Padding(4);
+            this.panel11.Location = new System.Drawing.Point(2, 235);
             this.panel11.Name = "panel11";
-            this.panel11.Size = new System.Drawing.Size(16, 78);
+            this.panel11.Size = new System.Drawing.Size(10, 49);
             this.panel11.TabIndex = 13;
             // 
             // button2
@@ -284,13 +278,12 @@
             this.button2.FlatAppearance.BorderSize = 0;
             this.button2.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Highlight;
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Font = new System.Drawing.Font("OCR A Extended", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Image = global::VentaCredimax.Properties.Resources.productos;
+            this.button2.Font = new System.Drawing.Font("OCR A Extended", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button2.Image = global::VentaCredimax.Properties.Resources.auto;
             this.button2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button2.Location = new System.Drawing.Point(16, 359);
-            this.button2.Margin = new System.Windows.Forms.Padding(4);
+            this.button2.Location = new System.Drawing.Point(12, 235);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(312, 80);
+            this.button2.Size = new System.Drawing.Size(198, 49);
             this.button2.TabIndex = 12;
             this.button2.Text = "Gestion \rArticulos";
             this.button2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -301,10 +294,9 @@
             // panel9
             // 
             this.panel9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(52)))), ((int)(((byte)(108)))));
-            this.panel9.Location = new System.Drawing.Point(3, 278);
-            this.panel9.Margin = new System.Windows.Forms.Padding(4);
+            this.panel9.Location = new System.Drawing.Point(2, 181);
             this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(16, 74);
+            this.panel9.Size = new System.Drawing.Size(10, 49);
             this.panel9.TabIndex = 11;
             // 
             // btnGestionVendedor
@@ -313,13 +305,12 @@
             this.btnGestionVendedor.FlatAppearance.BorderSize = 0;
             this.btnGestionVendedor.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Highlight;
             this.btnGestionVendedor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnGestionVendedor.Font = new System.Drawing.Font("OCR A Extended", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGestionVendedor.Image = global::VentaCredimax.Properties.Resources.entrevista;
+            this.btnGestionVendedor.Font = new System.Drawing.Font("OCR A Extended", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnGestionVendedor.Image = global::VentaCredimax.Properties.Resources.informe_de_venta;
             this.btnGestionVendedor.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnGestionVendedor.Location = new System.Drawing.Point(17, 278);
-            this.btnGestionVendedor.Margin = new System.Windows.Forms.Padding(4);
+            this.btnGestionVendedor.Location = new System.Drawing.Point(13, 181);
             this.btnGestionVendedor.Name = "btnGestionVendedor";
-            this.btnGestionVendedor.Size = new System.Drawing.Size(312, 80);
+            this.btnGestionVendedor.Size = new System.Drawing.Size(198, 49);
             this.btnGestionVendedor.TabIndex = 10;
             this.btnGestionVendedor.Text = "   Ventas por Fecha";
             this.btnGestionVendedor.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -332,24 +323,21 @@
             this.pSubMenuInformes.Controls.Add(this.panel14);
             this.pSubMenuInformes.Controls.Add(this.btnIngresosEgresos);
             this.pSubMenuInformes.Controls.Add(this.panel6);
-            this.pSubMenuInformes.Controls.Add(this.panel10);
             this.pSubMenuInformes.Controls.Add(this.panel5);
             this.pSubMenuInformes.Controls.Add(this.btnInformeVentas);
             this.pSubMenuInformes.Controls.Add(this.btnInformeCuotas);
-            this.pSubMenuInformes.Location = new System.Drawing.Point(47, 701);
-            this.pSubMenuInformes.Margin = new System.Windows.Forms.Padding(4);
+            this.pSubMenuInformes.Location = new System.Drawing.Point(35, 451);
             this.pSubMenuInformes.Name = "pSubMenuInformes";
-            this.pSubMenuInformes.Size = new System.Drawing.Size(276, 191);
+            this.pSubMenuInformes.Size = new System.Drawing.Size(173, 144);
             this.pSubMenuInformes.TabIndex = 9;
             this.pSubMenuInformes.Visible = false;
             // 
             // panel14
             // 
             this.panel14.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(52)))), ((int)(((byte)(108)))));
-            this.panel14.Location = new System.Drawing.Point(1, 132);
-            this.panel14.Margin = new System.Windows.Forms.Padding(4);
+            this.panel14.Location = new System.Drawing.Point(1, 99);
             this.panel14.Name = "panel14";
-            this.panel14.Size = new System.Drawing.Size(10, 56);
+            this.panel14.Size = new System.Drawing.Size(10, 42);
             this.panel14.TabIndex = 14;
             // 
             // btnIngresosEgresos
@@ -358,13 +346,12 @@
             this.btnIngresosEgresos.FlatAppearance.BorderSize = 0;
             this.btnIngresosEgresos.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Highlight;
             this.btnIngresosEgresos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnIngresosEgresos.Font = new System.Drawing.Font("OCR A Extended", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnIngresosEgresos.Font = new System.Drawing.Font("OCR A Extended", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnIngresosEgresos.Image = global::VentaCredimax.Properties.Resources.flujo_de_ingresos;
             this.btnIngresosEgresos.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnIngresosEgresos.Location = new System.Drawing.Point(16, 132);
-            this.btnIngresosEgresos.Margin = new System.Windows.Forms.Padding(4);
+            this.btnIngresosEgresos.Location = new System.Drawing.Point(12, 99);
             this.btnIngresosEgresos.Name = "btnIngresosEgresos";
-            this.btnIngresosEgresos.Size = new System.Drawing.Size(256, 54);
+            this.btnIngresosEgresos.Size = new System.Drawing.Size(158, 42);
             this.btnIngresosEgresos.TabIndex = 13;
             this.btnIngresosEgresos.Text = "   Inresos  y  Egresos ";
             this.btnIngresosEgresos.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -375,28 +362,17 @@
             // panel6
             // 
             this.panel6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(52)))), ((int)(((byte)(108)))));
-            this.panel6.Location = new System.Drawing.Point(1, 73);
-            this.panel6.Margin = new System.Windows.Forms.Padding(4);
+            this.panel6.Location = new System.Drawing.Point(1, 54);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(10, 56);
+            this.panel6.Size = new System.Drawing.Size(10, 40);
             this.panel6.TabIndex = 12;
-            // 
-            // panel10
-            // 
-            this.panel10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(52)))), ((int)(((byte)(108)))));
-            this.panel10.Location = new System.Drawing.Point(1, 4);
-            this.panel10.Margin = new System.Windows.Forms.Padding(4);
-            this.panel10.Name = "panel10";
-            this.panel10.Size = new System.Drawing.Size(10, 57);
-            this.panel10.TabIndex = 11;
             // 
             // panel5
             // 
             this.panel5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(52)))), ((int)(((byte)(108)))));
-            this.panel5.Location = new System.Drawing.Point(1, 4);
-            this.panel5.Margin = new System.Windows.Forms.Padding(4);
+            this.panel5.Location = new System.Drawing.Point(1, 3);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(10, 65);
+            this.panel5.Size = new System.Drawing.Size(10, 47);
             this.panel5.TabIndex = 11;
             // 
             // btnInformeVentas
@@ -405,13 +381,12 @@
             this.btnInformeVentas.FlatAppearance.BorderSize = 0;
             this.btnInformeVentas.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Highlight;
             this.btnInformeVentas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnInformeVentas.Font = new System.Drawing.Font("OCR A Extended", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnInformeVentas.Font = new System.Drawing.Font("OCR A Extended", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnInformeVentas.Image = ((System.Drawing.Image)(resources.GetObject("btnInformeVentas.Image")));
             this.btnInformeVentas.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnInformeVentas.Location = new System.Drawing.Point(16, 73);
-            this.btnInformeVentas.Margin = new System.Windows.Forms.Padding(4);
+            this.btnInformeVentas.Location = new System.Drawing.Point(12, 54);
             this.btnInformeVentas.Name = "btnInformeVentas";
-            this.btnInformeVentas.Size = new System.Drawing.Size(256, 54);
+            this.btnInformeVentas.Size = new System.Drawing.Size(158, 40);
             this.btnInformeVentas.TabIndex = 10;
             this.btnInformeVentas.Text = "    Ventas por fecha";
             this.btnInformeVentas.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -425,13 +400,12 @@
             this.btnInformeCuotas.FlatAppearance.BorderSize = 0;
             this.btnInformeCuotas.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Highlight;
             this.btnInformeCuotas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnInformeCuotas.Font = new System.Drawing.Font("OCR A Extended", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnInformeCuotas.Font = new System.Drawing.Font("OCR A Extended", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnInformeCuotas.Image = ((System.Drawing.Image)(resources.GetObject("btnInformeCuotas.Image")));
             this.btnInformeCuotas.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnInformeCuotas.Location = new System.Drawing.Point(17, 7);
-            this.btnInformeCuotas.Margin = new System.Windows.Forms.Padding(4);
+            this.btnInformeCuotas.Location = new System.Drawing.Point(13, 6);
             this.btnInformeCuotas.Name = "btnInformeCuotas";
-            this.btnInformeCuotas.Size = new System.Drawing.Size(255, 54);
+            this.btnInformeCuotas.Size = new System.Drawing.Size(157, 44);
             this.btnInformeCuotas.TabIndex = 9;
             this.btnInformeCuotas.Text = "  Ventas por cliente";
             this.btnInformeCuotas.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -445,13 +419,12 @@
             this.btnInformes.FlatAppearance.BorderSize = 0;
             this.btnInformes.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Highlight;
             this.btnInformes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnInformes.Font = new System.Drawing.Font("OCR A Extended", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnInformes.Image = global::VentaCredimax.Properties.Resources.documento;
+            this.btnInformes.Font = new System.Drawing.Font("OCR A Extended", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnInformes.Image = global::VentaCredimax.Properties.Resources.informe_de_venta;
             this.btnInformes.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnInformes.Location = new System.Drawing.Point(17, 619);
-            this.btnInformes.Margin = new System.Windows.Forms.Padding(4);
+            this.btnInformes.Location = new System.Drawing.Point(13, 398);
             this.btnInformes.Name = "btnInformes";
-            this.btnInformes.Size = new System.Drawing.Size(312, 80);
+            this.btnInformes.Size = new System.Drawing.Size(198, 49);
             this.btnInformes.TabIndex = 8;
             this.btnInformes.Text = "&Informes";
             this.btnInformes.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -461,10 +434,9 @@
             // panel4
             // 
             this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(52)))), ((int)(((byte)(108)))));
-            this.panel4.Location = new System.Drawing.Point(3, 619);
-            this.panel4.Margin = new System.Windows.Forms.Padding(4);
+            this.panel4.Location = new System.Drawing.Point(2, 398);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(16, 80);
+            this.panel4.Size = new System.Drawing.Size(10, 49);
             this.panel4.TabIndex = 7;
             // 
             // btnGestionPagos
@@ -473,13 +445,12 @@
             this.btnGestionPagos.FlatAppearance.BorderSize = 0;
             this.btnGestionPagos.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Highlight;
             this.btnGestionPagos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnGestionPagos.Font = new System.Drawing.Font("OCR A Extended", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGestionPagos.Image = ((System.Drawing.Image)(resources.GetObject("btnGestionPagos.Image")));
+            this.btnGestionPagos.Font = new System.Drawing.Font("OCR A Extended", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnGestionPagos.Image = global::VentaCredimax.Properties.Resources.metodo_de_pago;
             this.btnGestionPagos.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnGestionPagos.Location = new System.Drawing.Point(19, 111);
-            this.btnGestionPagos.Margin = new System.Windows.Forms.Padding(4);
+            this.btnGestionPagos.Location = new System.Drawing.Point(14, 73);
             this.btnGestionPagos.Name = "btnGestionPagos";
-            this.btnGestionPagos.Size = new System.Drawing.Size(312, 80);
+            this.btnGestionPagos.Size = new System.Drawing.Size(198, 49);
             this.btnGestionPagos.TabIndex = 6;
             this.btnGestionPagos.Text = "Gestion \r\nPagos";
             this.btnGestionPagos.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -490,10 +461,9 @@
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(52)))), ((int)(((byte)(108)))));
-            this.panel3.Location = new System.Drawing.Point(3, 195);
-            this.panel3.Margin = new System.Windows.Forms.Padding(4);
+            this.panel3.Location = new System.Drawing.Point(2, 128);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(16, 76);
+            this.panel3.Size = new System.Drawing.Size(10, 49);
             this.panel3.TabIndex = 5;
             // 
             // btnGestionCliente
@@ -502,13 +472,12 @@
             this.btnGestionCliente.FlatAppearance.BorderSize = 0;
             this.btnGestionCliente.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Highlight;
             this.btnGestionCliente.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnGestionCliente.Font = new System.Drawing.Font("OCR A Extended", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGestionCliente.Image = ((System.Drawing.Image)(resources.GetObject("btnGestionCliente.Image")));
+            this.btnGestionCliente.Font = new System.Drawing.Font("OCR A Extended", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnGestionCliente.Image = global::VentaCredimax.Properties.Resources.customer_relationship_management;
             this.btnGestionCliente.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnGestionCliente.Location = new System.Drawing.Point(19, 196);
-            this.btnGestionCliente.Margin = new System.Windows.Forms.Padding(4);
+            this.btnGestionCliente.Location = new System.Drawing.Point(14, 129);
             this.btnGestionCliente.Name = "btnGestionCliente";
-            this.btnGestionCliente.Size = new System.Drawing.Size(312, 80);
+            this.btnGestionCliente.Size = new System.Drawing.Size(198, 49);
             this.btnGestionCliente.TabIndex = 4;
             this.btnGestionCliente.Text = "Gestion \r\nClientes";
             this.btnGestionCliente.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -519,19 +488,17 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(52)))), ((int)(((byte)(108)))));
-            this.panel2.Location = new System.Drawing.Point(3, 111);
-            this.panel2.Margin = new System.Windows.Forms.Padding(4);
+            this.panel2.Location = new System.Drawing.Point(2, 73);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(16, 78);
+            this.panel2.Size = new System.Drawing.Size(10, 49);
             this.panel2.TabIndex = 3;
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(52)))), ((int)(((byte)(108)))));
-            this.panel1.Location = new System.Drawing.Point(3, 25);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4);
+            this.panel1.Location = new System.Drawing.Point(2, 20);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(16, 79);
+            this.panel1.Size = new System.Drawing.Size(10, 49);
             this.panel1.TabIndex = 2;
             // 
             // btnNuevaVenta
@@ -540,13 +507,12 @@
             this.btnNuevaVenta.FlatAppearance.BorderSize = 0;
             this.btnNuevaVenta.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Highlight;
             this.btnNuevaVenta.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnNuevaVenta.Font = new System.Drawing.Font("OCR A Extended", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnNuevaVenta.Image = ((System.Drawing.Image)(resources.GetObject("btnNuevaVenta.Image")));
+            this.btnNuevaVenta.Font = new System.Drawing.Font("OCR A Extended", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnNuevaVenta.Image = global::VentaCredimax.Properties.Resources.contrato;
             this.btnNuevaVenta.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnNuevaVenta.Location = new System.Drawing.Point(17, 26);
-            this.btnNuevaVenta.Margin = new System.Windows.Forms.Padding(4);
+            this.btnNuevaVenta.Location = new System.Drawing.Point(13, 21);
             this.btnNuevaVenta.Name = "btnNuevaVenta";
-            this.btnNuevaVenta.Size = new System.Drawing.Size(312, 80);
+            this.btnNuevaVenta.Size = new System.Drawing.Size(198, 49);
             this.btnNuevaVenta.TabIndex = 0;
             this.btnNuevaVenta.Text = "Gestion \r\nVentas";
             this.btnNuevaVenta.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -563,10 +529,9 @@
             this.panel7.Controls.Add(this.txtBuscar);
             this.panel7.Controls.Add(this.label5);
             this.panel7.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel7.Location = new System.Drawing.Point(1580, 59);
-            this.panel7.Margin = new System.Windows.Forms.Padding(4);
+            this.panel7.Location = new System.Drawing.Point(1155, 48);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(0, 934);
+            this.panel7.Size = new System.Drawing.Size(0, 701);
             this.panel7.TabIndex = 3;
             // 
             // btnActualizarVentas
@@ -575,10 +540,9 @@
             this.btnActualizarVentas.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnActualizarVentas.BackgroundImage")));
             this.btnActualizarVentas.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnActualizarVentas.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnActualizarVentas.Location = new System.Drawing.Point(1547, 20);
-            this.btnActualizarVentas.Margin = new System.Windows.Forms.Padding(4);
+            this.btnActualizarVentas.Location = new System.Drawing.Point(1160, 16);
             this.btnActualizarVentas.Name = "btnActualizarVentas";
-            this.btnActualizarVentas.Size = new System.Drawing.Size(84, 65);
+            this.btnActualizarVentas.Size = new System.Drawing.Size(63, 53);
             this.btnActualizarVentas.TabIndex = 42;
             this.TTAyudaMenu.SetToolTip(this.btnActualizarVentas, "Actualizar Ventas");
             this.btnActualizarVentas.UseVisualStyleBackColor = false;
@@ -588,14 +552,13 @@
             // 
             this.cbOrdenarPor.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbOrdenarPor.FormattingEnabled = true;
-            this.cbOrdenarPor.ItemHeight = 29;
+            this.cbOrdenarPor.ItemHeight = 22;
             this.cbOrdenarPor.Items.AddRange(new object[] {
             "Fecha ",
             "Cuotas Vencidas "});
-            this.cbOrdenarPor.Location = new System.Drawing.Point(1259, 32);
-            this.cbOrdenarPor.Margin = new System.Windows.Forms.Padding(4);
+            this.cbOrdenarPor.Location = new System.Drawing.Point(944, 26);
             this.cbOrdenarPor.Name = "cbOrdenarPor";
-            this.cbOrdenarPor.Size = new System.Drawing.Size(245, 37);
+            this.cbOrdenarPor.Size = new System.Drawing.Size(185, 30);
             this.cbOrdenarPor.TabIndex = 41;
             this.cbOrdenarPor.SelectedIndexChanged += new System.EventHandler(this.cbOrdenarPor_SelectedIndexChanged);
             // 
@@ -603,10 +566,9 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(961, 37);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(721, 30);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(244, 29);
+            this.label1.Size = new System.Drawing.Size(196, 24);
             this.label1.TabIndex = 40;
             this.label1.Text = "Ordenar ventas por:";
             // 
@@ -614,24 +576,22 @@
             // 
             this.cbBuscarPor.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbBuscarPor.FormattingEnabled = true;
-            this.cbBuscarPor.ItemHeight = 29;
+            this.cbBuscarPor.ItemHeight = 22;
             this.cbBuscarPor.Items.AddRange(new object[] {
             "Cliente",
             "Articulo"});
-            this.cbBuscarPor.Location = new System.Drawing.Point(221, 32);
-            this.cbBuscarPor.Margin = new System.Windows.Forms.Padding(4);
+            this.cbBuscarPor.Location = new System.Drawing.Point(166, 26);
             this.cbBuscarPor.Name = "cbBuscarPor";
-            this.cbBuscarPor.Size = new System.Drawing.Size(208, 37);
+            this.cbBuscarPor.Size = new System.Drawing.Size(157, 30);
             this.cbBuscarPor.TabIndex = 37;
             // 
             // txtBuscar
             // 
             this.txtBuscar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtBuscar.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBuscar.Location = new System.Drawing.Point(444, 33);
-            this.txtBuscar.Margin = new System.Windows.Forms.Padding(4);
+            this.txtBuscar.Location = new System.Drawing.Point(333, 27);
             this.txtBuscar.Name = "txtBuscar";
-            this.txtBuscar.Size = new System.Drawing.Size(491, 34);
+            this.txtBuscar.Size = new System.Drawing.Size(369, 28);
             this.txtBuscar.TabIndex = 38;
             this.txtBuscar.TextChanged += new System.EventHandler(this.txtBuscar_TextChanged);
             // 
@@ -639,10 +599,9 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(37, 37);
-            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label5.Location = new System.Drawing.Point(28, 30);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(146, 29);
+            this.label5.Size = new System.Drawing.Size(117, 24);
             this.label5.TabIndex = 39;
             this.label5.Text = "Buscar por:";
             // 
@@ -670,8 +629,8 @@
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvVentasMenu.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dgvVentasMenu.Location = new System.Drawing.Point(17, 33);
-            this.dgvVentasMenu.Margin = new System.Windows.Forms.Padding(13, 12, 13, 12);
+            this.dgvVentasMenu.Location = new System.Drawing.Point(13, 27);
+            this.dgvVentasMenu.Margin = new System.Windows.Forms.Padding(10);
             this.dgvVentasMenu.Name = "dgvVentasMenu";
             this.dgvVentasMenu.ReadOnly = true;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -684,7 +643,7 @@
             this.dgvVentasMenu.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvVentasMenu.RowHeadersWidth = 51;
             this.dgvVentasMenu.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvVentasMenu.Size = new System.Drawing.Size(1217, 882);
+            this.dgvVentasMenu.Size = new System.Drawing.Size(911, 659);
             this.dgvVentasMenu.TabIndex = 36;
             this.dgvVentasMenu.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvVentasMenu_CellDoubleClick);
             // 
@@ -692,24 +651,23 @@
             // 
             this.panel8.Controls.Add(this.dgvVentasMenu);
             this.panel8.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel8.Location = new System.Drawing.Point(331, 59);
-            this.panel8.Margin = new System.Windows.Forms.Padding(4);
+            this.panel8.Location = new System.Drawing.Point(220, 48);
             this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(1249, 934);
+            this.panel8.Size = new System.Drawing.Size(935, 701);
             this.panel8.TabIndex = 37;
             // 
             // frmMenu
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1580, 993);
+            this.ClientSize = new System.Drawing.Size(1155, 749);
             this.Controls.Add(this.panel8);
             this.Controls.Add(this.panel7);
             this.Controls.Add(this.pMenuLateral);
             this.Controls.Add(this.pTituloSistema);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "frmMenu";
             this.Text = "Menu";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
@@ -761,7 +719,6 @@
         private System.Windows.Forms.Button btnGestionVendedor;
         private System.Windows.Forms.Panel panel11;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Panel panel10;
         private System.Windows.Forms.Panel panel12;
         private System.Windows.Forms.Button btnAiresAcondicionados;
         private System.Windows.Forms.Panel panel13;

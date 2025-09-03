@@ -39,7 +39,8 @@ namespace VentaCredimax.Formularios
 
         private void btnInformes_Click(object sender, EventArgs e)
         {
-            pSubMenuInformes.Visible = true;
+            // Alternar la visibilidad del submenú
+            pSubMenuInformes.Visible = !pSubMenuInformes.Visible;
         }
 
         private void btnInformeCuotas_Click(object sender, EventArgs e)
